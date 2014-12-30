@@ -33,6 +33,7 @@ gem 'hydra-head', :github => "projecthydra/hydra-head"
 # Blacklight
 gem 'blacklight'
 
+
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -53,9 +54,9 @@ group :test do
   gem 'bogus'
 end
 
-
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
 group :development, :test do
-  gem 'jettywrapper'
+  # jettywrapper
+  gem 'jettywrapper', :github => "projecthydra/jettywrapper"
 end
