@@ -33,6 +33,12 @@ gem 'hydra-head', :github => "projecthydra/hydra-head"
 # Blacklight
 gem 'blacklight'
 
+# NOID for IDs
+gem 'noid'
+
+# Constantinople for config values
+gem 'constantinople'
+
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
