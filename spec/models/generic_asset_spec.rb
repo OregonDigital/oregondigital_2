@@ -9,6 +9,18 @@ RSpec.describe GenericAsset do
     expect{ GenericAsset.new }.not_to raise_error
   end
 
+  describe "load from solr" do
+    context "when it's loaded from solr" do
+      let(:asset) { described_class.create(:title => ["bla"]) }
+      subject {described_class.load_instance_from_solr(asset.id)}
+      # Can't use Bogus here.
+      before { Bogus.reset_overwritten_classes }
+      it "should respond to all attributes" do
+        expect(subject.title).to eq asset.title
+      end
+    end
+  end
+
   describe 'id assignment' do
     context 'before the object is saved' do
       it 'should be nil' do
