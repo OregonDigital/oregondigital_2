@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GenericAsset do
+  verify_contract(:generic_asset)
+
   let(:generic_asset) { GenericAsset.new(:id => id) }
   let(:id) {}
   it "should initialize" do
@@ -39,6 +41,21 @@ RSpec.describe GenericAsset do
           expect(generic_asset.id).to eq id
         end
       end
+    end
+  end
+
+  describe "permissions" do
+    it "should use hydra access controls" do
+      expect(described_class.ancestors).to include Hydra::AccessControls::Permissions
+    end
+  end
+
+  describe "#title" do
+    before do
+      generic_asset.title << "Title"
+    end
+    it "should be gettable" do
+      expect(generic_asset.title).to eq ["Title"]
     end
   end
 end
