@@ -455,7 +455,7 @@ module OregonDigital::Vocabularies
       type: "http://purl.org/NET/mediatype#MediaType".freeze
     term :"application/pidf+xml",
       label: "application/pidf+xml".freeze,
-      "rdfs:seeAlso" => [%(http://www.iana.orghttp:/www.iana.org/assignments/media-types/application/pidfxml).freeze, %(http://www.rfc-editor.org/rfc/rfc3863.txt).freeze],
+      "rdfs:seeAlso" => [%(http://www.rfc-editor.org/rfc/rfc3863.txt).freeze, %(http://www.iana.orghttp:/www.iana.org/assignments/media-types/application/pidfxml).freeze],
       type: "http://purl.org/NET/mediatype#MediaType".freeze
     term :"application/pidf-diff+xml",
       label: "application/pidf-diff+xml".freeze,
@@ -3775,7 +3775,7 @@ module OregonDigital::Vocabularies
       type: "http://purl.org/NET/mediatype#MediaType".freeze
     term :"image/jpm",
       label: "image/jpm".freeze,
-      "rdfs:seeAlso" => [%(http://www.iana.orgjpm).freeze, %(http://www.rfc-editor.org/rfc/rfc3745.txt).freeze],
+      "rdfs:seeAlso" => [%(http://www.rfc-editor.org/rfc/rfc3745.txt).freeze, %(http://www.iana.orgjpm).freeze],
       type: "http://purl.org/NET/mediatype#MediaType".freeze
     term :"image/jpx",
       label: "image/jpx".freeze,
@@ -3943,7 +3943,7 @@ module OregonDigital::Vocabularies
       type: "http://purl.org/NET/mediatype#MediaType".freeze
     term :"message/news",
       label: "message/news".freeze,
-      "rdfs:seeAlso" => [%(http://www.iana.org/assignments/media-types/message/news).freeze, %(http://tools.ietf.org/html/draft-ietf-usefor-usepro).freeze],
+      "rdfs:seeAlso" => [%(http://tools.ietf.org/html/draft-ietf-usefor-usepro).freeze, %(http://www.iana.org/assignments/media-types/message/news).freeze],
       type: "http://purl.org/NET/mediatype#MediaType".freeze
     term :"message/partial",
       label: "message/partial".freeze,

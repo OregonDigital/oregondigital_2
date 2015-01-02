@@ -46,5 +46,7 @@ RDF_VOCABS = {
   :ccrel                =>  { :uri => 'http://creativecommons.org/ns#', :strict => false, :fetch => false },
   :mods                 =>  { :uri => 'http://www.loc.gov/standards/mods/modsrdf/v1/#', :strict => false, :fetch => false },
   :exif                 =>  { :uri => 'http://www.w3.org/2003/12/exif/ns#', :strict => false, :fetch => false},
-  :schema               =>  { :uri => 'https://schema.org', :strict => false, :fetch => false}
+  :schema               =>  { :uri => 'https://schema.org', :strict => false, :fetch => false},
+  :vra                  =>  { :uri => 'http://opaquenamespace.org/ns/vra/', :strict => false, :fetch => false},
+  :sheetmusic           =>  { :uri => 'http://opaquenamespace.org/ns/sheetmusic/', :strict => false, :fetch => false}
 }

@@ -306,7 +306,7 @@ module OregonDigital::Models
       end
 
       # Types
-      property :type, :predicate => RDF::DC.type do |index|
+      property :dc_type, :predicate => RDF::DC.type do |index|
         index.as :facetable, :displayable
       end
 
@@ -410,7 +410,7 @@ module OregonDigital::Models
       end
 
       # Darwin Core
-      property :taxonClass, :predicate => OregonDigital::Vocabularies::DWC.class do |index|
+      property :taxonClass, :predicate => OregonDigital::Vocabularies::DWC.Class do |index|
         index.as :searchable, :facetable, :displayable
       end
       property :order, :predicate => OregonDigital::Vocabularies::DWC.order do |index|
