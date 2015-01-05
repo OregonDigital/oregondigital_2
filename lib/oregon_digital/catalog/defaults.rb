@@ -8,7 +8,7 @@ module OregonDigital
               :qt => 'search',
               :rows => 10,
               :hl => true,
-              :"hl.fl" => "desc_metadata__full_text_tsimv",
+              :"hl.fl" => "full_text_tsimv",
               :"hl.useFastVectorHighlighter" => true
           }
         end

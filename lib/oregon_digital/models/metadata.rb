@@ -4,7 +4,7 @@ module OregonDigital::Models
     included do
       # Titles
       property :title, :predicate => RDF::DC.title do |index|
-        index.as :searchable, :displayable, :symbol, :facetable, :stored_searchable
+        index.as :searchable, :displayable
       end
       property :alternative, :predicate => RDF::DC.alternative do |index|
         index.as :searchable, :displayable
@@ -514,7 +514,6 @@ module OregonDigital::Models
       property :hasNumber, :predicate => RDF::URI('http://sw-portal.deri.org/ontologies/swportal#hasNumber') do |index|
         index.as :displayable
       end
-      property :title, :predicate => RDF::DC.title
     end
   end
 end

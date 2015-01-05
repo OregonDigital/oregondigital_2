@@ -30,7 +30,7 @@ module OregonDigital
           end
           %w{title description creator lcsubject date institution}.each do |field_name|
             config.add_search_field(field_name) do |field|
-              field.solr_parameters = {:qf => Solrizer.solr_name("desc_metadata__#{field_name}", :searchable)}
+              field.solr_parameters = {:qf => Solrizer.solr_name("#{field_name}", :searchable)}
             end
           end
         end
