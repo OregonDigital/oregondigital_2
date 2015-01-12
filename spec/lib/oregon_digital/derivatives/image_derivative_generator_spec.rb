@@ -37,6 +37,9 @@ RSpec.describe OregonDigital::Derivatives::ImageDerivativeGenerator do
     it "should set has_thumbnail" do
       expect(image).to have_received(:has_thumbnail=, true)
     end
+    it "should set thumbnail_path" do
+      expect(image).to have_received(:thumbnail_path=, path)
+    end
   end
 
   describe "#medium_success" do
@@ -46,6 +49,9 @@ RSpec.describe OregonDigital::Derivatives::ImageDerivativeGenerator do
     end
     it "should set has_medium" do
       expect(image).to have_received(:has_medium=, true)
+    end
+    it "should set medium_path" do
+      expect(image).to have_received(:medium_path=, path)
     end
   end
 end

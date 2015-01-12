@@ -15,10 +15,12 @@ module OregonDigital::Derivatives
 
     def thumbnail_success(path)
       asset.has_thumbnail = true
+      asset.thumbnail_path = path
     end
 
     def medium_success(path)
       asset.has_medium = true
+      asset.medium_path = path
     end
 
     private

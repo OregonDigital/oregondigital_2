@@ -20,6 +20,17 @@ RSpec.describe Image do
     end
   end
 
+  describe "#thumbnail_path=" do
+    let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
+    before do
+      subject.thumbnail_path = path
+    end
+    it "should set it on workflow metadata" do
+      expect(subject.thumbnail_path).to eq path
+      expect(subject.workflow_metadata.thumbnail_path).to eq path
+    end
+  end
+
   describe "#has_medium=" do
     before do
       subject.has_medium = true
@@ -27,6 +38,17 @@ RSpec.describe Image do
     it "should set it on workflow metadata" do
       expect(subject.workflow_metadata.has_medium).to eq true
       expect(subject.has_medium).to eq true
+    end
+  end
+
+  describe "#medium_path=" do
+    let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
+    before do
+      subject.medium_path = path
+    end
+    it "should set it on workflow metadata" do
+      expect(subject.medium_path).to eq path
+      expect(subject.workflow_metadata.medium_path).to eq path
     end
   end
 
