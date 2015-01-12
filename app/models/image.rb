@@ -1,10 +1,7 @@
 class Image < GenericAsset
   contains "thumbnail", :class_name => 'FileContent'
-  delegate :has_thumbnail, :to => :workflow_metadata, :allow_nil => true
-
-  def has_thumbnail=(value)
-    workflow_metadata.has_thumbnail = value
-  end
+  delegate :has_thumbnail, :has_medium, :to => :workflow_metadata, :allow_nil => true
+  delegate :has_medium=, :has_thumbnail=, :to => :workflow_metadata
 
   private
 

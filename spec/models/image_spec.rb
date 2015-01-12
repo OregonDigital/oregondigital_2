@@ -20,6 +20,16 @@ RSpec.describe Image do
     end
   end
 
+  describe "#has_medium=" do
+    before do
+      subject.has_medium = true
+    end
+    it "should set it on workflow metadata" do
+      expect(subject.workflow_metadata.has_medium).to eq true
+      expect(subject.has_medium).to eq true
+    end
+  end
+
   describe "derivatives" do
     fake(:image_derivative_generator) { OregonDigital::Derivatives::ImageDerivativeGenerator }
     let(:new_image_generator) { fake(:image_derivative_generator) { OregonDigital::Derivatives::ImageDerivativeGenerator } }
