@@ -1,6 +1,6 @@
 module OregonDigital::Derivatives
   class ImageDerivativeGenerator
-    attr_accessor :asset, :file, :injector
+    attr_accessor :asset, :file
     delegate :thumbnail_path, :to => :injector
 
     def initialize(asset, file)
