@@ -21,6 +21,30 @@ RSpec.describe GenericAsset do
     end
   end
 
+  describe "#content" do
+    context "when there's no content" do
+      it "should return a blank content item" do
+        expect(generic_asset.content).to be_kind_of FileContent
+        expect(generic_asset.content.content).to be_blank
+      end
+    end
+    context "when content is assigned" do
+      let(:file) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb') }
+      before do
+        generic_asset.add_file_datastream(file, :dsid => "content")
+      end
+      it "should work" do
+        expect(generic_asset.content.content).not_to be_blank
+      end
+    end
+  end
+
+  describe "#workflow_metadata" do
+    it "should be a yml file" do
+      expect(subject.workflow_metadata).to be_kind_of(Files::YmlFile)
+    end
+  end
+
   describe 'id assignment' do
     context 'before the object is saved' do
       it 'should be nil' do

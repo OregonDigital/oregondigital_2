@@ -42,6 +42,10 @@ gem 'constantinople'
 # Blacklight Advanced
 gem 'blacklight_advanced_search'
 
+gem 'mini_magick'
+# Recursive open-struct for YAML Datastream
+gem 'recursive-open-struct'
+
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views

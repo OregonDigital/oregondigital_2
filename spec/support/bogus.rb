@@ -4,4 +4,7 @@ Bogus.configure do |c|
   c.search_modules = [OregonDigital]
 end
 Bogus.fakes do
+  fake(:injector, :class => proc{OregonDigital::Injector}) do
+    thumbnail_path Rails.root.join("tmp", "1.jpg").to_s
+  end
 end
