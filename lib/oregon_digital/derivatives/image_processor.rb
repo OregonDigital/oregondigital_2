@@ -27,9 +27,14 @@ module OregonDigital::Derivatives
       stream = StringIO.new
       image_transformer.write(stream)
       stream.rewind
+      create_path
       File.open(path, 'wb') do |f|
         f.write stream.read
       end
+    end
+
+    def create_path
+      FileUtils.mkdir_p(Pathname.new(path).dirname)
     end
 
     def convert_file

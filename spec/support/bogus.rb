@@ -5,6 +5,6 @@ Bogus.configure do |c|
 end
 Bogus.fakes do
   fake(:injector, :class => proc{OregonDigital::Injector}) do
-    thumbnail_path Rails.root.join("tmp", "1.jpg").to_s
+    thumbnail_path Rails.root.join("media", "1", "0", "1.jpg").to_s
   end
 end
