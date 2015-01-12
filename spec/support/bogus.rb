@@ -8,3 +8,8 @@ Bogus.fakes do
     thumbnail_path Rails.root.join("media", "1", "0", "1.jpg").to_s
   end
 end
+RSpec.configure do |c|
+  c.before do
+    stub(OregonDigital).inject { fake(:injector) }
+  end
+end

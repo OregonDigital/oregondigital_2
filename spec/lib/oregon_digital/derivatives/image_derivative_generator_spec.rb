@@ -7,9 +7,8 @@ RSpec.describe OregonDigital::Derivatives::ImageDerivativeGenerator do
   fake(:file_io) { FileContent }
   fake(:thumbnail_derivative_runner) { OregonDigital::Derivatives::ThumbnailDerivativeRunner }
   let(:real_file_content) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb').read }
-  fake(:injector)
+  let(:injector) { OregonDigital.inject }
   before do
-    stub(OregonDigital::Injector).new { injector }
     stub(file_io).content { real_file_content }
     stub(OregonDigital::Derivatives::ThumbnailDerivativeRunner).new(any(StringIO), injector.thumbnail_path(image.id), subject) { thumbnail_derivative_runner }
   end

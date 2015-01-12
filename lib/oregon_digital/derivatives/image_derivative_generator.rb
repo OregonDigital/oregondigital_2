@@ -27,7 +27,7 @@ module OregonDigital::Derivatives
     end
 
     def injector
-      @injector ||= OregonDigital::Injector.new
+      @injector ||= OregonDigital.inject
     end
 
   end
