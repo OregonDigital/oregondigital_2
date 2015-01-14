@@ -20,9 +20,13 @@ class GenericAsset < ActiveFedora::Base
   def create_derivatives
     @needs_derivatives = false
     begin
-      derivative_class.new(self, content).run
+      derivative_creator.run
     rescue NotImplementedError
     end
+  end
+
+  def derivative_creator
+    derivative_class.new(self, content)
   end
 
   def derivative_class

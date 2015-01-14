@@ -1,11 +1,12 @@
 module OregonDigital::Derivatives
   class ImageDerivativeGenerator
-    attr_accessor :asset, :file
-    delegate :thumbnail_path, :medium_path, :to => :injector
+    attr_accessor :asset, :file, :thumbnail_path, :medium_path
 
-    def initialize(asset, file)
+    def initialize(asset, file, thumbnail_path, medium_path)
       @asset = asset
       @file = file
+      @thumbnail_path = thumbnail_path
+      @medium_path = medium_path
     end
 
     def run
@@ -30,11 +31,11 @@ module OregonDigital::Derivatives
     end
 
     def create_thumbnail
-      ThumbnailDerivativeRunner.new(stream_content, thumbnail_path(asset.id), self).run
+      ThumbnailDerivativeRunner.new(stream_content, thumbnail_path, self).run
     end
 
     def create_medium
-      MediumImageDerivativeRunner.new(stream_content, medium_path(asset.id), self).run
+      MediumImageDerivativeRunner.new(stream_content, medium_path, self).run
     end
 
     def injector

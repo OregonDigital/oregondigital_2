@@ -64,7 +64,7 @@ group :test do
   gem 'webmock'
   gem 'timecop'
   gem 'database_cleaner'
-  gem 'bogus'
+  gem 'bogus', :github => "terrellt/bogus", :branch => "fake_comparisons"
 end
 
 gem 'devise'

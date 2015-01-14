@@ -30,6 +30,14 @@ GIT
       logger
 
 GIT
+  remote: git://github.com/terrellt/bogus.git
+  revision: 2cd401328e39f3b7372faee5220c81ca26c7000c
+  branch: fake_comparisons
+  specs:
+    bogus (0.1.5)
+      dependor (>= 0.0.4)
+
+GIT
   remote: git://github.com/terrellt/jazz_hands.git
   revision: d5829e6119671b2ff5fe6098846764084f2ab562
   specs:
@@ -120,8 +128,6 @@ GEM
     blankslate (3.1.3)
     block_helpers (0.3.3)
       activesupport (>= 2.0)
-    bogus (0.1.5)
-      dependor (>= 0.0.4)
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     builder (3.2.2)
@@ -465,7 +471,7 @@ PLATFORMS
 DEPENDENCIES
   blacklight
   blacklight_advanced_search
-  bogus
+  bogus!
   capybara
   coffee-rails (~> 4.1.0)
   constantinople

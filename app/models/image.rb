@@ -8,4 +8,12 @@ class Image < GenericAsset
   def derivative_class
     OregonDigital::Derivatives::ImageDerivativeGenerator
   end
+
+  def derivative_creator
+    derivative_class.new(self, content, injector.thumbnail_path(id), injector.medium_path(id))
+  end
+
+  def injector
+    @injector ||= OregonDigital.inject
+  end
 end
