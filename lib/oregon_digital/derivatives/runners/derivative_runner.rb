@@ -1,4 +1,4 @@
-module OregonDigital::Derivatives
+module OregonDigital::Derivatives::Runners
   class DerivativeRunner
     attr_accessor :source, :path, :callbacks
     def initialize(source, path, callbacks=[])

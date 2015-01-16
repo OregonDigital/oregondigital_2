@@ -1,4 +1,4 @@
-module OregonDigital::Derivatives
+module OregonDigital::Derivatives::Runners
   class MediumImageDerivativeRunner < ImageDerivativeRunner
 
     private

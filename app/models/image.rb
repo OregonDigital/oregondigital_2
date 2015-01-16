@@ -8,7 +8,7 @@ class Image < GenericAsset
   private
 
   def derivative_class
-    OregonDigital::Derivatives::ImageDerivativeGenerator
+    OregonDigital::Derivatives::Generators::ImageDerivativeGenerator
   end
 
   def derivative_creator

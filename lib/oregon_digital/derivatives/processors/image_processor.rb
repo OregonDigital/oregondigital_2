@@ -1,4 +1,4 @@
-module OregonDigital::Derivatives
+module OregonDigital::Derivatives::Processors
   class ImageProcessor
     attr_accessor :file, :size, :format, :quality, :path
     def initialize(file, options={})

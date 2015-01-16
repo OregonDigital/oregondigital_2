@@ -1,4 +1,4 @@
-module OregonDigital::Derivatives
+module OregonDigital::Derivatives::Processors
   class PyramidalProcessor
     attr_accessor :file, :quality, :tile_size, :path
     def initialize(file, opts={})
