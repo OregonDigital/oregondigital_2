@@ -12,7 +12,7 @@ class Image < GenericAsset
   end
 
   def derivative_creator
-    derivative_class.new(self, content, injector.thumbnail_path(id), injector.medium_path(id), injector.pyramidal_path(id))
+    derivative_class.new(self, content, injector.thumbnail_runner(id), injector.medium_runner(id), injector.pyramidal_runner(id))
   end
 
   def injector

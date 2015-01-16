@@ -1,11 +1,11 @@
 module OregonDigital::Derivatives::Runners
   class ImageDerivativeRunner < DerivativeRunner
-    def run
-      OregonDigital::Derivatives::Processors::ImageProcessor.new(source, options).run
-      notify_callbacks
-    end
 
     private
+
+    def create_derivatives
+      OregonDigital::Derivatives::Processors::ImageProcessor.new(source, options).run
+    end
 
     def options
       {

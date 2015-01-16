@@ -1,13 +1,13 @@
 module OregonDigital::Derivatives::Generators
   class ImageDerivativeGenerator
-    attr_accessor :asset, :file, :thumbnail_path, :medium_path, :pyramidal_path
+    attr_accessor :asset, :file, :thumbnail_runner, :medium_runner, :pyramidal_runner
 
-    def initialize(asset, file, thumbnail_path, medium_path, pyramidal_path)
+    def initialize(asset, file, thumbnail_runner, medium_runner, pyramidal_runner)
       @asset = asset
       @file = file
-      @thumbnail_path = thumbnail_path
-      @medium_path = medium_path
-      @pyramidal_path = pyramidal_path
+      @thumbnail_runner = thumbnail_runner
+      @medium_runner = medium_runner
+      @pyramidal_runner = pyramidal_runner
     end
 
     def run
@@ -38,19 +38,15 @@ module OregonDigital::Derivatives::Generators
     end
 
     def create_thumbnail
-      OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner.new(stream_content, thumbnail_path, self).run
+      thumbnail_runner.run(stream_content, self)
     end
 
     def create_medium
-      OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner.new(stream_content, medium_path, self).run
+      medium_runner.run(stream_content, self)
     end
 
     def create_pyramidal
-      OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner.new(stream_content, pyramidal_path, self).run
-    end
-
-    def injector
-      @injector ||= OregonDigital.inject
+      pyramidal_runner.run(stream_content, self)
     end
 
   end

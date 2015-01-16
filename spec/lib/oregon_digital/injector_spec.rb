@@ -5,6 +5,45 @@ RSpec.describe OregonDigital::Injector do
   let(:resource) { OregonDigital::Injector.new }
   let(:id) { "1" }
 
+  describe "#thumbnail_runner" do
+    fake(:thumbnail_runner) { OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner }
+    before do
+      stub(OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner).new(resource.thumbnail_path(id)) { thumbnail_runner }
+    end
+    context "when given an id" do
+      let(:result) { resource.thumbnail_runner(id) }
+      it "should create a thumbnail runner" do
+        expect(result).to eql thumbnail_runner
+      end
+    end
+  end
+
+  describe "#medium_runner" do
+    fake(:medium_runner) { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner }
+    before do
+      stub(OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner).new(resource.medium_path(id)) { medium_runner }
+    end
+    context "when given an id" do
+      let(:result) { resource.medium_runner(id) }
+      it "should create a medium runner" do
+        expect(result).to eql medium_runner
+      end
+    end
+  end
+
+  describe "#pyramidal_runner" do
+    fake(:pyramidal_runner) { OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner }
+    before do
+      stub(OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner).new(resource.pyramidal_path(id)) { pyramidal_runner }
+    end
+    context "when given an id" do
+      let(:result) { resource.pyramidal_runner(id) }
+      it "should create a pyramidal runner" do
+        expect(result).to eql pyramidal_runner
+      end
+    end
+  end
+
   describe "#thumbnail_path" do
     context "when given an id" do
       let(:result) { resource.thumbnail_path(id) }

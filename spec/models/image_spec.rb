@@ -34,14 +34,14 @@ RSpec.describe Image do
   end
 
   describe "derivatives" do
-    fake(:image_derivative_generator) { OregonDigital::Derivatives::ImageDerivativeGenerator }
-    let(:new_image_generator) { fake(:image_derivative_generator) { OregonDigital::Derivatives::ImageDerivativeGenerator } }
+    fake(:image_derivative_generator) { OregonDigital::Derivatives::Generators::ImageDerivativeGenerator }
+    let(:new_image_generator) { fake(:image_derivative_generator) { OregonDigital::Derivatives::Generators::ImageDerivativeGenerator } }
     fake(:injector)
-    let(:thumbnail_path) { injector.thumbnail_path(subject.id) }
-    let(:medium_path) { injector.medium_path(subject.id) }
-    let(:pyramidal_path) { injector.pyramidal_path(subject.id) }
+    let(:thumbnail_runner) { injector.thumbnail_runner(subject.id)}
+    let(:medium_runner) { injector.medium_runner(subject.id) }
+    let(:pyramidal_runner) { injector.pyramidal_runner(subject.id) }
     before do
-      stub(OregonDigital::Derivatives::ImageDerivativeGenerator).new(subject, subject.content, thumbnail_path, medium_path, pyramidal_path) { image_derivative_generator }
+      stub(OregonDigital::Derivatives::Generators::ImageDerivativeGenerator).new(subject, subject.content, thumbnail_runner, medium_runner, pyramidal_runner) { image_derivative_generator }
     end
     let(:assign_content) {}
     context "when saved" do
@@ -69,7 +69,7 @@ RSpec.describe Image do
           subject.save
           subject.reload
           subject.content.content = nil
-          stub(OregonDigital::Derivatives::ImageDerivativeGenerator).new(any_args) { new_image_generator }
+          stub(OregonDigital::Derivatives::Generators::ImageDerivativeGenerator).new(any_args) { new_image_generator }
           subject.save
         end
         it "should not try to run derivatives again" do

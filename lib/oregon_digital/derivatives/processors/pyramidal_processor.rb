@@ -1,3 +1,4 @@
+require 'vips'
 module OregonDigital::Derivatives::Processors
   class PyramidalProcessor
     attr_accessor :file, :quality, :tile_size, :path

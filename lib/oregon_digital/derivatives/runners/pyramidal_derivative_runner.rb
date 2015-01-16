@@ -1,11 +1,11 @@
 module OregonDigital::Derivatives::Runners
   class PyramidalDerivativeRunner < DerivativeRunner
-    def run
-      OregonDigital::Derivatives::Processors::PyramidalProcessor.new(source, options).run
-      notify_callbacks
-    end
 
     private
+
+    def create_derivatives
+      OregonDigital::Derivatives::Processors::PyramidalProcessor.new(source, options).run
+    end
 
     def options
       {

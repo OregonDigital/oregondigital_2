@@ -1,5 +1,18 @@
 module OregonDigital
   class Injector
+
+    def thumbnail_runner(id)
+      OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner.new(thumbnail_path(id))
+    end
+
+    def medium_runner(id)
+      OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner.new(medium_path(id))
+    end
+
+    def pyramidal_runner(id)
+      OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner.new(pyramidal_path(id))
+    end
+
     def thumbnail_path(id)
       thumbnail_base = Rails.root.join("media", "thumbnails")
       distributor_path(id, '.jpg', thumbnail_base)

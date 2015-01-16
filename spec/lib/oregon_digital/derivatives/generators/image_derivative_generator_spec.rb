@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::Generators::ImageDerivativeGenerator do
   verify_contract :image_derivative_generator
-  subject { OregonDigital::Derivatives::Generators::ImageDerivativeGenerator.new(image, file_io, thumbnail_path, medium_path, pyramidal_path) }
+  subject { OregonDigital::Derivatives::Generators::ImageDerivativeGenerator.new(image, file_io, thumbnail_derivative_runner, medium_derivative_runner, pyramidal_derivative_runner) }
   fake(:image, :id => "1")
   fake(:file_io) { FileContent }
   fake(:thumbnail_derivative_runner) { OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner }
@@ -10,14 +10,11 @@ RSpec.describe OregonDigital::Derivatives::Generators::ImageDerivativeGenerator 
   fake(:pyramidal_derivative_runner) { OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner }
   let(:real_file_content) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb').read }
   let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
-  let(:thumbnail_path) { path }
-  let(:medium_path) { path }
-  let(:pyramidal_path) { path }
   before do
     stub(file_io).content { real_file_content }
-    stub(OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner).new(any(StringIO), thumbnail_path, subject) { thumbnail_derivative_runner }
-    stub(OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner).new(any(StringIO), medium_path, subject) { medium_derivative_runner }
-    stub(OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner).new(any(StringIO), pyramidal_path, subject) { pyramidal_derivative_runner }
+    # Required for contracts.
+    make_equal_to_fakes(subject.stream_content)
+    make_equal_to_fakes(subject)
   end
 
   describe "#run" do
@@ -26,13 +23,13 @@ RSpec.describe OregonDigital::Derivatives::Generators::ImageDerivativeGenerator 
       result
     end
     it "should generate thumbnail derivatives" do
-      expect(thumbnail_derivative_runner).to have_received.run
+      expect(thumbnail_derivative_runner).to have_received.run(subject.stream_content, subject)
     end
     it "should generate medium derivatives" do
-      expect(medium_derivative_runner).to have_received.run
+      expect(medium_derivative_runner).to have_received.run(subject.stream_content, subject)
     end
     it "should generate pyramidal derivatives" do
-      expect(pyramidal_derivative_runner).to have_received.run
+      expect(pyramidal_derivative_runner).to have_received.run(subject.stream_content, subject)
     end
   end
 

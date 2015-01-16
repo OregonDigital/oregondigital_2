@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner do
   verify_contract :medium_derivative_runner
-  subject { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner.new(file, path, callback) }
+  subject { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner.new(path) }
   let(:file) { fake(:file) { File } }
   let(:callback) { fake(:image_derivative_generator) { OregonDigital::Derivatives::Generators::ImageDerivativeGenerator } }
   let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
   fake(:image_processor) { OregonDigital::Derivatives::Processors::ImageProcessor }
   describe "#run" do
-    let(:result) { subject.run }
+    let(:result) { subject.run(file, callback) }
     let(:default_options) do
       {
         :size => "680x680>",
