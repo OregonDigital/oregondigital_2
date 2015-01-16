@@ -10,45 +10,26 @@ RSpec.describe Image do
     end
   end
 
-  describe "#has_thumbnail=" do
-    before do
-      subject.has_thumbnail = true
+  [:thumbnail, :medium, :pyramidal].each do |derivative|
+    describe "#has_#{derivative}" do
+      before do
+        eval "subject.has_#{derivative}=true"
+      end
+      it "should set it on workflow metadata" do
+        expect(subject.workflow_metadata.send(:"has_#{derivative}")).to eq true
+        expect(subject.send(:"has_#{derivative}")).to eq true
+      end
     end
-    it "should set it on workflow metadata" do
-      expect(subject.workflow_metadata.has_thumbnail).to eq true
-      expect(subject.has_thumbnail).to eq true
-    end
-  end
-
-  describe "#thumbnail_path=" do
-    let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
-    before do
-      subject.thumbnail_path = path
-    end
-    it "should set it on workflow metadata" do
-      expect(subject.thumbnail_path).to eq path
-      expect(subject.workflow_metadata.thumbnail_path).to eq path
-    end
-  end
-
-  describe "#has_medium=" do
-    before do
-      subject.has_medium = true
-    end
-    it "should set it on workflow metadata" do
-      expect(subject.workflow_metadata.has_medium).to eq true
-      expect(subject.has_medium).to eq true
-    end
-  end
-
-  describe "#medium_path=" do
-    let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
-    before do
-      subject.medium_path = path
-    end
-    it "should set it on workflow metadata" do
-      expect(subject.medium_path).to eq path
-      expect(subject.workflow_metadata.medium_path).to eq path
+    describe "#{derivative}_path=" do
+      let(:path) { Rails.root.join("tmp", "1.#{extension}").to_s }
+      let(:extension) { derivative == :pyramidal ? "tiff" : "jpg" }
+      before do
+        eval "subject.#{derivative}_path=path"
+      end
+      it "should set it on workflow metadata" do
+        expect(subject.workflow_metadata.send(:"#{derivative}_path")).to eq path
+        expect(subject.send(:"#{derivative}_path")).to eq path
+      end
     end
   end
 
@@ -58,8 +39,9 @@ RSpec.describe Image do
     fake(:injector)
     let(:thumbnail_path) { injector.thumbnail_path(subject.id) }
     let(:medium_path) { injector.medium_path(subject.id) }
+    let(:pyramidal_path) { injector.pyramidal_path(subject.id) }
     before do
-      stub(OregonDigital::Derivatives::ImageDerivativeGenerator).new(subject, subject.content, thumbnail_path, medium_path) { image_derivative_generator }
+      stub(OregonDigital::Derivatives::ImageDerivativeGenerator).new(subject, subject.content, thumbnail_path, medium_path, pyramidal_path) { image_derivative_generator }
     end
     let(:assign_content) {}
     context "when saved" do
@@ -87,7 +69,7 @@ RSpec.describe Image do
           subject.save
           subject.reload
           subject.content.content = nil
-          stub(OregonDigital::Derivatives::ImageDerivativeGenerator).new(subject, subject.content, thumbnail_path, medium_path) { new_image_generator }
+          stub(OregonDigital::Derivatives::ImageDerivativeGenerator).new(any_args) { new_image_generator }
           subject.save
         end
         it "should not try to run derivatives again" do

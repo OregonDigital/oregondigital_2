@@ -1,28 +1,11 @@
 module OregonDigital::Derivatives
-  class ImageDerivativeRunner
-    attr_accessor :source, :path, :callbacks
-    def initialize(source, path, callbacks=[])
-      @source = source
-      @path = path
-      @callbacks = Array.wrap(callbacks)
-    end
-
+  class ImageDerivativeRunner < DerivativeRunner
     def run
       ImageProcessor.new(source, options).run
       notify_callbacks
     end
 
     private
-
-    def notify_callbacks
-      callbacks.each do |callback|
-        callback.send(success_method, path)
-      end
-    end
-
-    def success_method
-      raise NotImplementedError
-    end
 
     def options
       {

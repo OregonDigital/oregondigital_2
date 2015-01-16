@@ -2,19 +2,22 @@ require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::ImageDerivativeGenerator do
   verify_contract :image_derivative_generator
-  subject { OregonDigital::Derivatives::ImageDerivativeGenerator.new(image, file_io, thumbnail_path, medium_path) }
+  subject { OregonDigital::Derivatives::ImageDerivativeGenerator.new(image, file_io, thumbnail_path, medium_path, pyramidal_path) }
   fake(:image, :id => "1")
   fake(:file_io) { FileContent }
   fake(:thumbnail_derivative_runner) { OregonDigital::Derivatives::ThumbnailDerivativeRunner }
   fake(:medium_derivative_runner) { OregonDigital::Derivatives::MediumImageDerivativeRunner }
+  fake(:pyramidal_derivative_runner) { OregonDigital::Derivatives::PyramidalDerivativeRunner }
   let(:real_file_content) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb').read }
   let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
   let(:thumbnail_path) { path }
   let(:medium_path) { path }
+  let(:pyramidal_path) { path }
   before do
     stub(file_io).content { real_file_content }
     stub(OregonDigital::Derivatives::ThumbnailDerivativeRunner).new(any(StringIO), thumbnail_path, subject) { thumbnail_derivative_runner }
     stub(OregonDigital::Derivatives::MediumImageDerivativeRunner).new(any(StringIO), medium_path, subject) { medium_derivative_runner }
+    stub(OregonDigital::Derivatives::PyramidalDerivativeRunner).new(any(StringIO), pyramidal_path, subject) { pyramidal_derivative_runner }
   end
 
   describe "#run" do
@@ -28,6 +31,9 @@ RSpec.describe OregonDigital::Derivatives::ImageDerivativeGenerator do
     it "should generate medium derivatives" do
       expect(medium_derivative_runner).to have_received.run
     end
+    it "should generate pyramidal derivatives" do
+      expect(pyramidal_derivative_runner).to have_received.run
+    end
   end
 
   describe "#thumbnail_success" do
@@ -40,6 +46,20 @@ RSpec.describe OregonDigital::Derivatives::ImageDerivativeGenerator do
     end
     it "should set thumbnail_path" do
       expect(image).to have_received(:thumbnail_path=, path)
+    end
+  end
+
+  describe "#pyramidal_success" do
+    let(:path) { Rails.root.join("tmp", "1.tiff").to_s }
+    let(:result) { subject.pyramidal_success(path) }
+    before do
+      result
+    end
+    it "should set has_pyramidal" do
+      expect(image).to have_received(:has_pyramidal=, true)
+    end
+    it "should set pyramidal_path" do
+      expect(image).to have_received(:pyramidal_path=, path)
     end
   end
 

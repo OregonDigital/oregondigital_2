@@ -22,4 +22,13 @@ RSpec.describe OregonDigital::Injector do
       end
     end
   end
+
+  describe "#pyramidal_path" do
+    context "when given an id" do
+      let(:result) { resource.pyramidal_path(id) }
+      it "should return a good path" do
+        expect(result).to eq Rails.root.join("media", "pyramidal", "1", "0", "1.tiff").to_s
+      end
+    end
+  end
 end

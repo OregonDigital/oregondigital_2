@@ -46,6 +46,9 @@ gem 'mini_magick'
 # Recursive open-struct for YAML Datastream
 gem 'recursive-open-struct'
 
+#Vips for pyramidal processing.
+gem 'ruby-vips'
+
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views

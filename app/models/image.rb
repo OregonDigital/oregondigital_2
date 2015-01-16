@@ -1,7 +1,9 @@
 class Image < GenericAsset
   contains "thumbnail", :class_name => 'FileContent'
-  delegate :has_thumbnail, :has_thumbnail=, :has_medium, :has_medium=, :to => :workflow_metadata, :allow_nil => true
-  delegate :thumbnail_path, :thumbnail_path=, :medium_path, :medium_path=, :to => :workflow_metadata
+  [:thumbnail, :medium, :pyramidal].each do |derivative|
+    delegate :"has_#{derivative}", :"has_#{derivative}=", :to => :workflow_metadata, :allow_nil => true
+    delegate :"#{derivative}_path", :"#{derivative}_path=", :to => :workflow_metadata, :allow_nil => true
+  end
 
   private
 
@@ -10,7 +12,7 @@ class Image < GenericAsset
   end
 
   def derivative_creator
-    derivative_class.new(self, content, injector.thumbnail_path(id), injector.medium_path(id))
+    derivative_class.new(self, content, injector.thumbnail_path(id), injector.medium_path(id), injector.pyramidal_path(id))
   end
 
   def injector
