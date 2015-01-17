@@ -2,9 +2,7 @@ module OregonDigital::Derivatives::Runners
   class DerivativeRunner
     attr_accessor :source, :path, :callbacks
     def initialize(path)
-      @source = source
       @path = path
-      @callbacks = Array.wrap(callbacks)
     end
 
     def run(source, callbacks)

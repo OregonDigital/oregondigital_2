@@ -44,6 +44,19 @@ RSpec.describe OregonDigital::Injector do
     end
   end
 
+  describe "#pdf_runner" do
+    fake(:pdf_runner) { OregonDigital::Derivatives::Runners::PdfRunner }
+    before do
+      stub(OregonDigital::Derivatives::Runners::PdfRunner).new(resource.pdf_path(id)) { pdf_runner }
+    end
+    context "when given an id" do
+      let(:result) { resource.pdf_runner(id) }
+      it "should create a pdf runner" do
+        expect(result).to eql pdf_runner
+      end
+    end
+  end
+
   describe "#thumbnail_path" do
     context "when given an id" do
       let(:result) { resource.thumbnail_path(id) }
@@ -67,6 +80,15 @@ RSpec.describe OregonDigital::Injector do
       let(:result) { resource.pyramidal_path(id) }
       it "should return a good path" do
         expect(result).to eq Rails.root.join("media", "pyramidal", "1", "0", "1.tiff").to_s
+      end
+    end
+  end
+
+  describe "#pdf_path" do
+    context "when given an id" do
+      let(:result) { resource.pdf_path(id) }
+      it "should return a good path" do
+        expect(result).to eq Rails.root.join("media", "documents", "1", "0", "1").to_s
       end
     end
   end

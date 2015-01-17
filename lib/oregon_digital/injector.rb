@@ -13,6 +13,10 @@ module OregonDigital
       OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner.new(pyramidal_path(id))
     end
 
+    def pdf_runner(id)
+      OregonDigital::Derivatives::Runners::PdfRunner.new(pdf_path(id))
+    end
+
     def thumbnail_path(id)
       thumbnail_base = Rails.root.join("media", "thumbnails")
       distributor_path(id, '.jpg', thumbnail_base)
@@ -26,6 +30,11 @@ module OregonDigital
     def pyramidal_path(id)
       pyramidal_base = Rails.root.join("media", "pyramidal")
       distributor_path(id, '.tiff', pyramidal_base)
+    end
+
+    def pdf_path(id)
+      pdf_base = Rails.root.join("media", "documents")
+      distributor_path(id, '', pdf_base)
     end
 
     private

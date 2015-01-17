@@ -49,6 +49,8 @@ gem 'recursive-open-struct'
 #Vips for pyramidal processing.
 gem 'ruby-vips'
 
+gem 'docsplit'
+
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views

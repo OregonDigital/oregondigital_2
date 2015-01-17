@@ -178,6 +178,7 @@ GEM
       devise
     diff-lcs (1.2.5)
     diffy (3.0.7)
+    docsplit (0.7.6)
     ebnf (0.3.6)
       haml (~> 4.0)
       rdf (~> 1.1)
@@ -479,6 +480,7 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-guests (~> 0.3)
+  docsplit
   factory_girl_rails
   hydra-head!
   jazz_hands!

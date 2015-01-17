@@ -1,5 +1,4 @@
 class Image < GenericAsset
-  contains "thumbnail", :class_name => 'FileContent'
   [:thumbnail, :medium, :pyramidal].each do |derivative|
     delegate :"has_#{derivative}", :"has_#{derivative}=", :to => :workflow_metadata, :allow_nil => true
     delegate :"#{derivative}_path", :"#{derivative}_path=", :to => :workflow_metadata, :allow_nil => true
