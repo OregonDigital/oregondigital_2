@@ -83,6 +83,7 @@ module OregonDigital::Derivatives::Processors
 
     def temporary_file
       tempfile = Tempfile.new('document_tmp')
+      tempfile.binmode
       begin
         tempfile.write(file.read)
         yield tempfile
