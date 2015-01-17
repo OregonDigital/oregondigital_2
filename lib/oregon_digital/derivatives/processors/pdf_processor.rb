@@ -21,31 +21,27 @@ module OregonDigital::Derivatives::Processors
     private
 
     def create_images
-      create_first_size
-      create_extra_sizes
+      Docsplit.extract_images(disk_file.path, :size => sizes.values, :rolling => true, :format => format, :output => path)
+      rename_files
+      cleanup_directories
     end
 
-    def create_first_size
-      create_size(*sizes.first)
-    end
-
-    def create_extra_sizes
-      sizes.to_a[1..-1].each do |name, size|
-        create_size_from_xl(name, size)
+    def rename_files
+      files = Dir[File.join(path, "**", "*")]
+      files.each do |file|
+        next if File.directory?(file)
+        page = Pathname.new(file.split('_').last).sub_ext('').to_s
+        page_path = Pathname.new(file)
+        size_name = page_path.dirname.basename.to_s
+        name = sizes.find{|k, v| v == size_name}.first
+        new_path = new_path_name(name, page, page_path.extname)
+        File.rename(file, new_path.to_s)
       end
     end
 
-    def create_size(name, size)
-      Docsplit.extract_images(disk_file.path, :size => size, :format => format, :output => path)
-      rename_path_files(name)
-    end
-
-    def create_size_from_xl(name, size)
-      xl_pages.each do |xl_page|
-        page = page_number(xl_page)
-        extension = Pathname.new(xl_page).extname
-        target = new_path_name(name, page, extension)
-        ImageProcessor.new(File.open(xl_page), :size => size, :path => target).run
+    def cleanup_directories
+      Dir[File.join(path, "*")].select{|x| File.directory?(x)}.each do |dir|
+        FileUtils.rm_rf(dir)
       end
     end
 
@@ -60,24 +56,6 @@ module OregonDigital::Derivatives::Processors
 
     def new_path_name(name, page, extension)
       File.join(path, "#{name}-page-#{page}#{extension}")
-    end
-
-    def page_number(page)
-      page.split("-").last.split(".").first
-    end
-
-    def xl_pages
-      @xl_pages ||= Dir[File.join(path, "#{sizes.keys.first}*")]
-    end
-
-    def rename_path_files(name)
-      Dir["#{Pathname.new(path).join('*')}"].each do |file|
-        next if file.include?("page-")
-        page = Pathname.new(file.split('_').last).sub_ext('').to_s
-        page_path = Pathname.new(file)
-        new_path = new_path_name(name, page, page_path.extname)
-        File.rename(file, new_path.to_s)
-      end
     end
 
     def create_output_directory

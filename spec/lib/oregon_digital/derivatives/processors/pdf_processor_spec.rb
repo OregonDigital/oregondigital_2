@@ -14,8 +14,8 @@ RSpec.describe OregonDigital::Derivatives::Processors::PdfProcessor do
   end
   let(:sizes) do
     {
-      "x-large" => "50>",
-      "large" => "5>"
+      "x-large" => "50x",
+      "large" => "5x"
     }
   end
   let(:path) { Rails.root.join("tmp", "documents").to_s }
