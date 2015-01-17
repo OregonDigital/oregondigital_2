@@ -1,6 +1,6 @@
 require 'vips'
 module OregonDigital::Derivatives::Processors
-  class PyramidalProcessor
+  class PyramidalProcessor < Processor
     attr_accessor :file, :quality, :tile_size, :path
     def initialize(file, opts={})
       @file = file
@@ -34,16 +34,5 @@ module OregonDigital::Derivatives::Processors
       [tile_size, tile_size]
     end
 
-    def temporary_file
-      tempfile = Tempfile.new('pyramidal_tmp')
-      tempfile.binmode
-      begin
-        tempfile.write(file.read)
-        yield tempfile
-      ensure
-        tempfile.close
-        tempfile.unlink
-      end
-    end
   end
 end

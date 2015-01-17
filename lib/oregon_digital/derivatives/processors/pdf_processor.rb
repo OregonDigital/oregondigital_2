@@ -1,5 +1,5 @@
 module OregonDigital::Derivatives::Processors
-  class PdfProcessor
+  class PdfProcessor < Processor
     attr_accessor :file, :path, :disk_file, :format, :sizes
     def initialize(file, options={})
       @file = file
@@ -35,6 +35,11 @@ module OregonDigital::Derivatives::Processors
       end
     end
 
+    def create_size(name, size)
+      Docsplit.extract_images(disk_file.path, :size => size, :format => format, :output => path)
+      rename_path_files(name)
+    end
+
     def create_size_from_xl(name, size)
       xl_pages.each do |xl_page|
         page = page_number(xl_page)
@@ -65,11 +70,6 @@ module OregonDigital::Derivatives::Processors
       @xl_pages ||= Dir[File.join(path, "#{sizes.keys.first}*")]
     end
 
-    def create_size(name, size)
-      Docsplit.extract_images(disk_file.path, :size => size, :format => format, :output => path)
-      rename_path_files(name)
-    end
-
     def rename_path_files(name)
       Dir["#{Pathname.new(path).join('*')}"].each do |file|
         next if file.include?("page-")
@@ -77,19 +77,6 @@ module OregonDigital::Derivatives::Processors
         page_path = Pathname.new(file)
         new_path = new_path_name(name, page, page_path.extname)
         File.rename(file, new_path.to_s)
-      end
-    end
-
-
-    def temporary_file
-      tempfile = Tempfile.new('document_tmp')
-      tempfile.binmode
-      begin
-        tempfile.write(file.read)
-        yield tempfile
-      ensure
-        tempfile.close
-        tempfile.unlink
       end
     end
 
