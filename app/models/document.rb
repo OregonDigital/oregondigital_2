@@ -3,8 +3,8 @@ class Document < GenericAsset
 
   private
 
-  def derivative_creator
-    derivative_class.new(self, content, injector.pdf_runner(id))
+  def runners
+    [injector.pdf_runner(id)]
   end
 
   def derivative_class

@@ -21,7 +21,11 @@ module OregonDigital::Derivatives
     end
 
     def derivative_creator
-      derivative_class.new(self, content)
+      derivative_class.new(self, content, *runners)
+    end
+
+    def runners
+      nil
     end
 
     def derivative_class
