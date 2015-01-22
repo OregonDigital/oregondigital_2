@@ -11,7 +11,7 @@ class Image < GenericAsset
     [
       injector.thumbnail_runner(id),
       injector.medium_runner(id),
-      injector.pyramidal_runner(id),
+      injector.pyramidal_runner(id)
     ]
   end
 

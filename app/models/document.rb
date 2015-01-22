@@ -4,7 +4,9 @@ class Document < GenericAsset
   private
 
   def runners
-    [injector.pdf_runner(id)]
+    [
+      injector.pdf_runner(id)
+    ]
   end
 
   def derivative_class
