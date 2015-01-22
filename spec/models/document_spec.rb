@@ -10,27 +10,13 @@ RSpec.describe Document do
     end
   end
 
-  [:pdf_pages].each do |derivative|
-    describe "#has_#{derivative}" do
-      before do
-        subject.__send__(:"has_#{derivative}=", true)
-      end
-      it "should set it on workflow metadata" do
-        expect(subject.workflow_metadata.send(:"has_#{derivative}")).to eq true
-        expect(subject.send(:"has_#{derivative}")).to eq true
-      end
-    end
-    describe "#{derivative}_path=" do
-      let(:path) { Rails.root.join("tmp", "documents").to_s }
-      before do
-        subject.__send__(:"#{derivative}_path=", path)
-      end
-      it "should set it on workflow metadata" do
-        expect(subject.workflow_metadata.send(:"#{derivative}_path")).to eq path
-        expect(subject.send(:"#{derivative}_path")).to eq path
-      end
+  describe "#pdf_pages" do
+    let(:path) { Rails.root.join("tmp", "documents").to_s }
+    it "should have derivative accessors for pdf_pages" do
+      expect(subject).to have_derivative_accessors_for(:pdf_pages, [true, path])
     end
   end
+
   describe "derivatives" do
     fake(:document_generator) { OregonDigital::Derivatives::Generators::DocumentDerivativeGenerator}
     fake(:injector)

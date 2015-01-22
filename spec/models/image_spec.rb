@@ -10,26 +10,12 @@ RSpec.describe Image do
     end
   end
 
+
   [:thumbnail, :medium, :pyramidal].each do |derivative|
-    describe "#has_#{derivative}" do
-      before do
-        eval "subject.has_#{derivative}=true"
-      end
-      it "should set it on workflow metadata" do
-        expect(subject.workflow_metadata.send(:"has_#{derivative}")).to eq true
-        expect(subject.send(:"has_#{derivative}")).to eq true
-      end
-    end
-    describe "#{derivative}_path=" do
-      let(:path) { Rails.root.join("tmp", "1.#{extension}").to_s }
-      let(:extension) { derivative == :pyramidal ? "tiff" : "jpg" }
-      before do
-        eval "subject.#{derivative}_path=path"
-      end
-      it "should set it on workflow metadata" do
-        expect(subject.workflow_metadata.send(:"#{derivative}_path")).to eq path
-        expect(subject.send(:"#{derivative}_path")).to eq path
-      end
+    it "should have derivative accessors for #{derivative}" do
+      extension = derivative == :pyramidal ? "tiff" : "jpg" 
+      path = Rails.root.join("tmp", "1.#{extension}").to_s 
+      expect(subject).to have_derivative_accessors_for derivative, [true, path]
     end
   end
 
