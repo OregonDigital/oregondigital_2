@@ -1,4 +1,20 @@
 GIT
+  remote: git://github.com/projecthydra/active_fedora.git
+  revision: 8300c71de99524b105d78fa564804b97b962d0dd
+  specs:
+    active-fedora (9.0.0.rc3)
+      active-triples (~> 0.6.0)
+      activesupport (>= 4.1.0)
+      deprecation
+      ldp (~> 0.2.1)
+      linkeddata
+      nom-xml (>= 0.5.1)
+      om (~> 3.1)
+      rdf-ldp
+      rdf-rdfxml (~> 1.1.0)
+      rsolr (~> 1.0.10)
+
+GIT
   remote: git://github.com/projecthydra/hydra-head.git
   revision: 95dfd1bd7acbf3b8a8f09929ae03540b5f789c0a
   specs:
@@ -76,18 +92,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active-fedora (9.0.0.beta8)
-      active-triples (~> 0.5.0)
-      activesupport (>= 4.1.0)
-      deprecation
-      ldp (~> 0.2.0)
-      linkeddata
-      nom-xml (>= 0.5.1)
-      om (~> 3.1)
-      rdf-ldp
-      rdf-rdfxml (~> 1.1.0)
-      rsolr (~> 1.0.10)
-    active-triples (0.5.0)
+    active-triples (0.6.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       deprecation (~> 0.1)
@@ -192,7 +197,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    faraday (0.9.0)
+    faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
     globalid (0.3.0)
@@ -221,7 +226,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.2)
-    ldp (0.2.0)
+    ldp (0.2.2)
       faraday
       http_logger
       linkeddata (>= 1.1)
@@ -471,6 +476,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active-fedora!
   blacklight
   blacklight_advanced_search
   bogus!
