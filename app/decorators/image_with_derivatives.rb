@@ -1,4 +1,14 @@
-class ImageWithDerivatives < AssetWithDerivatives
+class ImageWithDerivatives < SimpleDelegator
+
+  def save
+    derivative_asset.save
+  end
+
+  private
+
+  def derivative_asset
+    @derivative_asset ||= AssetWithDerivatives.new(__getobj__, derivative_class, runners)
+  end
 
   def runners
     [

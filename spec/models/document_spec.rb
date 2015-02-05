@@ -8,6 +8,15 @@ RSpec.describe Document do
     it "should be able to have an id" do
       expect(resource_class.new(:id => "1").id).to eq "1"
     end
+    describe "#injector" do
+      fake(:injector)
+      before do
+        make_equal_to_fakes(subject.injector)
+      end
+      it "should use OregonDigital's injector" do
+        expect(subject.injector).to eq OregonDigital.inject
+      end
+    end
   end
 
   describe "#pdf_pages" do

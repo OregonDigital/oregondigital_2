@@ -8,6 +8,25 @@ RSpec.describe Image do
     it "should be able to have an id" do
       expect(Image.new(:id => "1").id).to eq "1"
     end
+
+    describe "#injector" do
+      fake(:injector)
+      before do
+        make_equal_to_fakes(subject.injector)
+      end
+      it "should use OregonDigital's injector" do
+        expect(subject.injector).to eq OregonDigital.inject
+      end
+    end
+
+    describe "#content" do
+      before do
+        make_equal_to_fakes(subject.content)
+      end
+      it "should be a FileContent" do
+        expect(subject.content).to be_kind_of FileContent
+      end
+    end
   end
 
 

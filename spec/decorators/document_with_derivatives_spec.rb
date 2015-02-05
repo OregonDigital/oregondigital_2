@@ -2,28 +2,21 @@ require 'rails_helper'
 
 RSpec.describe DocumentWithDerivatives do
   subject { DocumentWithDerivatives.new(document) }
-  let(:document) { Document.new }
+  fake(:document, :id => "1")
+  fake(:asset_with_derivatives)
+  fake(:injector)
+  let(:pdf_runner) { injector.pdf_runner(subject.id) }
+  before do
+    stub(document).injector { injector }
+  end
   describe "derivatives" do
-    fake(:document_generator) { OregonDigital::Derivatives::Generators::DocumentDerivativeGenerator}
-    fake(:injector)
-    let(:pdf_runner) { injector.pdf_runner(subject.id) }
-    before do
-      stub(OregonDigital::Derivatives::Generators::DocumentDerivativeGenerator).new(subject, subject.content, pdf_runner) { document_generator }
-    end
-    let(:assign_content) {}
     context "when saved" do
-      let(:file) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb') }
       before do
-        assign_content
+        stub(AssetWithDerivatives).new(document, OregonDigital::Derivatives::Generators::DocumentDerivativeGenerator, [pdf_runner]) { asset_with_derivatives }
         subject.save
       end
-      context "when there's new content" do
-        let(:assign_content) do
-          subject.content.content = file
-        end
-        it "should try to run derivatives" do
-          expect(document_generator).to have_received.run
-        end
+      it "should call asset_with_derivative's save method" do
+        expect(asset_with_derivatives).to have_received.save
       end
     end
   end
