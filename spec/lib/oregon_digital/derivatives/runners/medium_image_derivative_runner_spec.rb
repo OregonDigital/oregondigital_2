@@ -4,7 +4,7 @@ RSpec.describe OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner 
   verify_contract :medium_derivative_runner
   subject { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner.new(path) }
   let(:file) { fake(:file) { File } }
-  let(:callback) { fake(:image_with_derivatives) { ImageWithDerivatives } }
+  let(:callback) { fake(:derivative_callback) { OregonDigital::Derivatives::DerivativeCallback} }
   let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
   fake(:image_processor) { OregonDigital::Derivatives::Processors::ImageProcessor }
   describe "#run" do
@@ -21,7 +21,7 @@ RSpec.describe OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner 
       stub(OregonDigital::Derivatives::Processors::ImageProcessor).new(file, default_options) { image_processor }
       result
     end
-    it "should call #thumbnail_success on the callback" do
+    it "should call #medium_success on the callback" do
       expect(callback).to have_received.medium_success(path)
     end
     it "should call image processor" do

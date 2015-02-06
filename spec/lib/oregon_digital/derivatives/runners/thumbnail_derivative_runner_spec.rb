@@ -4,7 +4,7 @@ RSpec.describe OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner do
   verify_contract :thumbnail_derivative_runner
   subject { OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner.new(path) }
   let(:file) { fake(:file) { File } }
-  let(:callback) { fake(:image_with_derivatives) { ImageWithDerivatives} }
+  let(:callback) { fake(:derivative_callback) { OregonDigital::Derivatives::DerivativeCallback } }
   let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
   fake(:image_processor) { OregonDigital::Derivatives::Processors::ImageProcessor }
   describe "#run" do

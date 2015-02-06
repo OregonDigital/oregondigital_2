@@ -4,6 +4,7 @@ module OregonDigital::Derivatives::Processors
     attr_accessor :file, :quality, :tile_size, :path
     def initialize(file, opts={})
       @file = file
+      @file.rewind if @file.respond_to?(:rewind)
       @quality = opts.fetch(:quality, 75)
       @tile_size = opts.fetch(:tile_size, 256)
       @path = opts.fetch(:path)
@@ -14,6 +15,7 @@ module OregonDigital::Derivatives::Processors
       temporary_file do |f|
         vips_image = VIPS::Image.new(f.path)
         vips_image = vips_image.msb
+        FileUtils.mkdir_p(Pathname.new(path).dirname) # VIPS doesn't make one.
         vips_image.tiff(path, vips_options)
       end
     end

@@ -4,7 +4,7 @@ RSpec.describe OregonDigital::Derivatives::Runners::RunnerList do
   verify_contract :runner_list
   fake(:runner) { OregonDigital::Derivatives::Runners::DerivativeRunner }
   let(:stream_content) { fake() }
-  let(:callback) { fake(:asset_with_derivatives) { AssetWithDerivatives } }
+  let(:callback) { fake(:derivative_callback) { OregonDigital::Derivatives::DerivativeCallback } }
 
   subject { OregonDigital::Derivatives::Runners::RunnerList.new([runner]) }
   describe "#run" do

@@ -1,5 +1,7 @@
 module OregonDigital::Derivatives::Runners
   class RunnerList
+    include Enumerable
+    delegate :each, :length, :to => :list
     attr_accessor :list
     def initialize(list)
       @list = list

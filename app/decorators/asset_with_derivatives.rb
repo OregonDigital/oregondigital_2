@@ -1,10 +1,5 @@
 class AssetWithDerivatives < SimpleDelegator
-  attr_reader :derivative_class, :runners
-
-  def initialize(asset, runners)
-    super(asset)
-    @runners = runners
-  end
+  attr_reader :derivative_class
 
   def save
     check_derivatives
@@ -24,7 +19,7 @@ class AssetWithDerivatives < SimpleDelegator
   def create_derivatives
     @needs_derivatives = false
     begin
-      runners.run(stream_content, self)
+      runners.run(stream_content, derivative_callback)
     rescue NotImplementedError
     end
   end
@@ -39,8 +34,16 @@ class AssetWithDerivatives < SimpleDelegator
 
   private
 
+  def runners
+    @runners ||= OregonDigital::Derivatives::Runners::RunnerFinder.find(__getobj__)
+  end
+
+  def derivative_callback
+    @derivative_callback ||= OregonDigital::Derivatives::DerivativeCallback.new(self)
+  end
+
   def stream_content
-    @stream_content ||= StringIO.new(content.content)
+    @stream_content ||= StreamableContent.new(content.content, content.mime_type)
   end
 
 end

@@ -4,7 +4,7 @@ RSpec.describe OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner do
   verify_contract :pyramidal_derivative_runner
   subject { OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner.new(path) }
   let(:file) { fake(:file) { File } }
-  let(:callback) { fake(:image_with_derivatives) { ImageWithDerivatives} }
+  let(:callback) { fake(:derivative_callback) { OregonDigital::Derivatives::DerivativeCallback } }
   let(:path) { Rails.root.join("tmp", "1.tiff").to_s }
 
   describe "#run" do
