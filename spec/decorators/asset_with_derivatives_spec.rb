@@ -5,10 +5,12 @@ RSpec.describe AssetWithDerivatives do
   verify_contract :asset_with_derivatives
   let(:asset) { fake(:image) }
   let(:content) { fake(:FileContent) }
-  let(:runner) { fake(:runner) { OregonDigital::Derivatives::Runners::RunnerList } }
+  let(:runner) { fake(:runner_list) { OregonDigital::Derivatives::Runners::RunnerList } }
   let(:real_content) { "real" }
   let(:stream_content) { fake() }
   before do
+    make_equal_to_fakes(stream_content)
+    make_equal_to_fakes(subject)
     stub(asset).content { content }
     stub(content).content { real_content }
     stub(StringIO).new(content.content) { stream_content }

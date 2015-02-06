@@ -5,11 +5,10 @@ RSpec.describe DocumentWithDerivatives do
   subject { DocumentWithDerivatives.new(document) }
   fake(:document, :id => "1")
   fake(:asset_with_derivatives)
-  fake(:injector)
-  let(:pdf_runner) { injector.pdf_runner(subject.id) }
+  fake(:derivative_injector)
+  let(:pdf_runner) { derivative_injector.pdf_runner(subject.id) }
   fake(:runner_list) { OregonDigital::Derivatives::Runners::RunnerList }
   before do
-    stub(document).injector { injector }
     stub(OregonDigital::Derivatives::Runners::RunnerList).new([pdf_runner]) { runner_list }
   end
   describe "derivatives" do

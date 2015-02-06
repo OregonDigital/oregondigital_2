@@ -4,7 +4,8 @@ Bogus.configure do |c|
   c.search_modules = [OregonDigital]
 end
 Bogus.fakes do
-  fake(:injector, :class => proc{OregonDigital::Injector}) do
+  fake(:injector, :class => proc{OregonDigital::Injector})
+  fake(:derivative_injector, :class => proc{OregonDigital::DerivativeInjector}) do
     thumbnail_path Rails.root.join("media","thumbnails", "1", "0", "1.jpg").to_s
     medium_path Rails.root.join("media","medium-images", "1", "0", "1.jpg").to_s
     pyramidal_path Rails.root.join("media", "pyramidal", "1", "0", "1.tiff").to_s
@@ -13,18 +14,21 @@ Bogus.fakes do
     medium_runner Bogus.fake_for(:medium_runner) { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner }
     pyramidal_runner Bogus.fake_for(:pyramidal_runner) { OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner }
     pdf_runner Bogus.fake_for(:pdf_runner) { OregonDigital::Derivatives::Runners::PdfRunner }
+    derivative_decorator_class AssetWithDerivatives
+    runner_list OregonDigital::Derivatives::Runners::RunnerList
   end
 end
 RSpec.configure do |c|
   c.before do
     stub(OregonDigital).inject { fake(:injector) }
+    stub(OregonDigital).derivative_injector { fake(:derivative_injector) }
   end
 end
 
 module BogusHelpers
   def make_equal_to_fakes(thing)
     thing.define_singleton_method(:==) do |*args|
-      return true if args.first.kind_of?(Bogus::Fake)
+      return true if args.first.kind_of?(Bogus::Fake) || args.first.kind_of?(Bogus::RespondsToEverything)
       super(*args)
     end
   end

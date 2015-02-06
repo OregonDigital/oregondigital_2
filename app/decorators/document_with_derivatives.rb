@@ -1,4 +1,6 @@
 class DocumentWithDerivatives < SimpleDelegator
+  delegate :derivative_decorator_class, :runner_list, :to => :derivative_injector
+
   def save
     derivative_asset.save
   end
@@ -8,17 +10,20 @@ class DocumentWithDerivatives < SimpleDelegator
     self.pdf_pages_path = path
   end
 
+  def derivative_injector
+    OregonDigital.derivative_injector
+  end
+
   private
 
   def derivative_asset
-    @derivative_asset ||= AssetWithDerivatives.new(__getobj__, runners)
+    @derivative_asset ||= derivative_decorator_class.new(__getobj__, runners)
   end
 
-
   def runners
-    @runners ||= OregonDigital::Derivatives::Runners::RunnerList.new(
+    @runners ||= runner_list.new(
       [
-        injector.pdf_runner(id)
+        derivative_injector.pdf_runner(id)
       ]
     )
   end

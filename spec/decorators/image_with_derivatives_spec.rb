@@ -5,14 +5,11 @@ RSpec.describe ImageWithDerivatives do
   subject { ImageWithDerivatives.new(image) }
   fake(:image, :id => "1")
   fake(:asset_with_derivatives)
-  fake(:injector)
-  let(:thumbnail_runner) { injector.thumbnail_runner(subject.id)}
-  let(:medium_runner) { injector.medium_runner(subject.id) }
-  let(:pyramidal_runner) { injector.pyramidal_runner(subject.id) }
+  fake(:derivative_injector)
+  let(:thumbnail_runner) { derivative_injector.thumbnail_runner(subject.id)}
+  let(:medium_runner) { derivative_injector.medium_runner(subject.id) }
+  let(:pyramidal_runner) { derivative_injector.pyramidal_runner(subject.id) }
   fake(:runner_list) { OregonDigital::Derivatives::Runners::RunnerList }
-  before do
-    stub(image).injector { injector }
-  end
   describe "derivatives" do
     context "when saved" do
       before do
