@@ -1,4 +1,3 @@
-require_relative 'null_runner'
 module OregonDigital::Derivatives::Runners
   class RunnerFinder
     delegate :runner_list, :thumbnail_runner, :medium_runner, :pyramidal_runner, :pdf_runner, :to => :injector
