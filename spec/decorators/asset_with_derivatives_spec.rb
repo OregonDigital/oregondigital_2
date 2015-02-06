@@ -1,18 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe AssetWithDerivatives do
-  subject { AssetWithDerivatives.new(asset, derivative_class, [runner]) }
+  subject { AssetWithDerivatives.new(asset, runner) }
   verify_contract :asset_with_derivatives
   let(:asset) { fake(:image) }
   let(:content) { fake(:FileContent) }
-  let(:runner) { fake(:runner) { OregonDigital::Derivatives::Runners::DerivativeRunner } }
+  let(:runner) { fake(:runner) { OregonDigital::Derivatives::Runners::RunnerList } }
   let(:real_content) { "real" }
-  let(:derivative_class) { fake() }
-  let(:derivative_class_instance) { fake(:image_derivative_generator) { OregonDigital::Derivatives::Generators::ImageDerivativeGenerator } }
+  let(:stream_content) { fake() }
   before do
     stub(asset).content { content }
     stub(content).content { real_content }
-    stub(derivative_class).new(subject, content, runner) { derivative_class_instance }
+    stub(StringIO).new(content.content) { stream_content }
   end
   describe "#save" do
     context "when the content hasn't changed" do
@@ -20,8 +19,8 @@ RSpec.describe AssetWithDerivatives do
         stub(content).content_changed? { false }
         subject.save
       end
-      it "should not run the derivative generator" do
-        expect(derivative_class_instance).not_to have_received.run
+      it "should not call #run on the runner" do
+        expect(runner).not_to have_received.run(any_args)
       end
     end
     context "when the content has changed" do
@@ -29,13 +28,13 @@ RSpec.describe AssetWithDerivatives do
         stub(content).content_changed? { true }
         subject.save
       end
-      it "should run the derivative generator" do
-        expect(derivative_class_instance).to have_received.run
+      it "should call #run on the runner" do
+        expect(runner).to have_received.run(stream_content, subject)
       end
       context "and the content is blank" do
         let(:real_content) { "" }
-        it "should not run the derivative generator" do
-          expect(derivative_class_instance).not_to have_received.run
+        it "should not call #run on the runner" do
+          expect(runner).not_to have_received.run(any_args)
         end
       end
     end

@@ -1,10 +1,9 @@
 class AssetWithDerivatives < SimpleDelegator
   attr_reader :derivative_class, :runners
 
-  def initialize(asset, derivative_class, runners)
+  def initialize(asset, runners)
     super(asset)
-    @derivative_class = derivative_class
-    @runners = Array.wrap(runners)
+    @runners = runners
   end
 
   def save
@@ -25,13 +24,9 @@ class AssetWithDerivatives < SimpleDelegator
   def create_derivatives
     @needs_derivatives = false
     begin
-      derivative_creator.run
+      runners.run(stream_content, self)
     rescue NotImplementedError
     end
-  end
-
-  def derivative_creator
-    derivative_class.new(self, content, *runners)
   end
 
   def needs_derivatives?
@@ -40,6 +35,12 @@ class AssetWithDerivatives < SimpleDelegator
 
   def content_changed?
     content.content_changed? && !content.content.blank?
+  end
+
+  private
+
+  def stream_content
+    @stream_content ||= StringIO.new(content.content)
   end
 
 end

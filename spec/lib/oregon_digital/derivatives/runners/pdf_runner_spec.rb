@@ -6,7 +6,7 @@ RSpec.describe OregonDigital::Derivatives::Runners::PdfRunner do
   let(:path) { Rails.root.join("tmp", "documents").to_s }
   let(:resource) { resource_class.new(path) }
   let(:file) { fake(:file) { File } }
-  let(:callback) { fake(:document_generator) { OregonDigital::Derivatives::Generators::DocumentDerivativeGenerator } }
+  let(:callback) { fake(:document_with_derivatives) { DocumentWithDerivatives } }
   subject { resource }
   describe "#run" do
     let(:result) { subject.run(file, callback) }

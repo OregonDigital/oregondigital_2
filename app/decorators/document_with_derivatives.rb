@@ -3,20 +3,24 @@ class DocumentWithDerivatives < SimpleDelegator
     derivative_asset.save
   end
 
+  def pdf_success(path)
+    self.has_pdf_pages = true
+    self.pdf_pages_path = path
+  end
+
   private
 
   def derivative_asset
-    @derivative_asset ||= AssetWithDerivatives.new(__getobj__, derivative_class, runners)
+    @derivative_asset ||= AssetWithDerivatives.new(__getobj__, runners)
   end
 
 
   def runners
-    [
-      injector.pdf_runner(id)
-    ]
+    @runners ||= OregonDigital::Derivatives::Runners::RunnerList.new(
+      [
+        injector.pdf_runner(id)
+      ]
+    )
   end
 
-  def derivative_class
-    OregonDigital::Derivatives::Generators::DocumentDerivativeGenerator
-  end
 end
