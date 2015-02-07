@@ -1,5 +1,11 @@
 class AssetWithDerivatives < SimpleDelegator
-  attr_reader :derivative_class
+  attr_reader :derivative_callback, :stream_content, :runner_finder
+  def initialize(asset, runner_finder, derivative_callback, stream_content)
+    super(asset)
+    @runner_finder = runner_finder
+    @derivative_callback = derivative_callback
+    @stream_content = stream_content
+  end
 
   def save
     check_derivatives
@@ -35,15 +41,7 @@ class AssetWithDerivatives < SimpleDelegator
   private
 
   def runners
-    @runners ||= OregonDigital::Derivatives::Runners::RunnerFinder.find(__getobj__)
-  end
-
-  def derivative_callback
-    @derivative_callback ||= OregonDigital::Derivatives::DerivativeCallback.new(self)
-  end
-
-  def stream_content
-    @stream_content ||= StreamableContent.new(content.content, content.mime_type)
+    @runners ||= runner_finder.find(__getobj__)
   end
 
 end
