@@ -22,10 +22,7 @@ class AssetWithDerivatives < SimpleDelegator
 
   def create_derivatives
     @needs_derivatives = false
-    begin
-      runner.run(self)
-    rescue NotImplementedError
-    end
+    runner.run(self)
   end
 
   def needs_derivatives?
