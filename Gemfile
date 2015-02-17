@@ -64,6 +64,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'jazz_hands', :github => "terrellt/jazz_hands"
   gem 'capybara'
+  gem 'simplecov'
 end
 
 group :test do
