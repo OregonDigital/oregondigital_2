@@ -28,6 +28,16 @@ RSpec.describe AssetWithDerivatives do
 
         expect(runner).to have_received.run(subject)
       end
+      context "and persistence fails" do
+        before do
+          stub(asset).save { false }
+        end
+        it "should not call #run on the runner" do
+          subject.save
+
+          expect(runner).not_to have_received.run(any_args)
+        end
+      end
     end
     context "when the content has changed to be blank" do
       before do

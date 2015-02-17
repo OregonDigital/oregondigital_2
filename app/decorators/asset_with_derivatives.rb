@@ -8,7 +8,7 @@ class AssetWithDerivatives < SimpleDelegator
   def save
     check_derivatives
     result = __getobj__.save
-    create_derivatives if needs_derivatives?
+    create_derivatives if needs_derivatives? && result
     result
   end
 
