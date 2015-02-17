@@ -9,6 +9,32 @@ RSpec.describe Image do
       expect(Image.new(:id => "1").id).to eq "1"
     end
 
+    describe "#content_content_changed" do
+      context "when content changes" do
+        it "should be true" do
+          image = Image.new
+          image.content.content = "bla"
+
+          expect(image.content_content_changed?).to eq true
+        end
+      end
+      context "when content doesn't change" do
+        it "should be false" do
+          image = Image.new
+
+          expect(image.content_content_changed?).to eq false
+        end
+      end
+      context "when content is blank" do
+        it "should be false" do
+          image = Image.new
+          image.content.content = ""
+          
+          expect(image.content_content_changed?).to eq false
+        end
+      end
+    end
+
     describe "#injector" do
       fake(:injector)
       before do

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "image derivatives" do
-  subject { AssetWithDerivatives.new(image, runner_finder, derivative_callback, stream_content) }
+  subject { AssetWithDerivatives.new(image, runners, derivative_callback, stream_content) }
   let(:image) { Image.new }
   let(:derivative_callback) { OregonDigital::Derivatives::DerivativeCallback.new(image) }
   let(:stream_content) { StreamableContent.new(image.content.content, image.content.mime_type) }
-  let(:runner_finder) { OregonDigital::Derivatives::Runners::RunnerFinder }
+  let(:runners) { OregonDigital::Derivatives::Runners::RunnerFinder.find(image) }
   let(:file) { File.open(File.join(fixture_path, "fixture_image.tiff")) }
   before do
     Bogus.clear

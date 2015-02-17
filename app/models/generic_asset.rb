@@ -4,9 +4,18 @@ class GenericAsset < ActiveFedora::Base
   include OregonDigital::Derivatives::Model
   contains "content", :class_name => 'FileContent'
   contains "workflow_metadata", :class_name => "Files::YmlFile"
+  delegate :content_changed?, :to => :content, :prefix => true
 
   def injector
     @injector ||= OregonDigital.inject
+  end
+
+  def content_content_changed?
+    if content.content.blank?
+      false
+    else
+      content.content_changed?
+    end
   end
 
   private

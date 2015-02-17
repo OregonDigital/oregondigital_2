@@ -1,8 +1,8 @@
 class AssetWithDerivatives < SimpleDelegator
-  attr_reader :derivative_callback, :stream_content, :runner_finder
-  def initialize(asset, runner_finder, derivative_callback, stream_content)
+  attr_reader :derivative_callback, :stream_content, :runners
+  def initialize(asset, runners, derivative_callback, stream_content)
     super(asset)
-    @runner_finder = runner_finder
+    @runners = runners
     @derivative_callback = derivative_callback
     @stream_content = stream_content
   end
@@ -35,13 +35,7 @@ class AssetWithDerivatives < SimpleDelegator
   end
 
   def content_changed?
-    content.content_changed? && !content.content.blank?
-  end
-
-  private
-
-  def runners
-    @runners ||= runner_finder.find(__getobj__)
+    content_content_changed?
   end
 
 end

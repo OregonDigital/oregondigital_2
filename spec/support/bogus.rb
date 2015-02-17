@@ -5,6 +5,8 @@ Bogus.configure do |c|
 end
 Bogus.fakes do
   fake(:injector, :class => proc{OregonDigital::Injector})
+  fake(:runner_list, :class => proc{ OregonDigital::Derivatives::Runners::RunnerList })
+  fake(:derivative_callback, :class => proc{ OregonDigital::Derivatives::DerivativeCallback })
   fake(:derivative_injector, :class => proc{OregonDigital::DerivativeInjector}) do
     thumbnail_path Rails.root.join("media","thumbnails", "1", "0", "1.jpg").to_s
     medium_path Rails.root.join("media","medium-images", "1", "0", "1.jpg").to_s
