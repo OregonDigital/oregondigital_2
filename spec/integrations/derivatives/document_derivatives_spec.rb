@@ -13,5 +13,6 @@ RSpec.describe "document derivatives" do
     expect{asset_with_derivatives.save}.not_to raise_error
     expect(document.workflow_metadata.pdf_pages_path).not_to be_blank
     expect(document.workflow_metadata.pdf_pages_path).to include document.id
+    expect(document.workflow_metadata.ocr_path).to include "ocr.html"
   end
 end

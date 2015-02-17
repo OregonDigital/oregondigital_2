@@ -44,4 +44,11 @@ RSpec.describe Document do
     end
   end
 
+  describe "#ocr" do
+    let(:path) { Rails.root.join("tmp", "ocr.html").to_s }
+    it "should have derivative accessors for ocr" do
+      expect(subject).to have_derivative_accessors_for(:ocr, [true, path])
+    end
+  end
+
 end

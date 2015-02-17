@@ -16,6 +16,15 @@ module OregonDigital
       OregonDigital::Derivatives::Runners::PdfRunner.new(pdf_path(id), derivative_callback_factory)
     end
 
+    def ocr_runner(id)
+      OregonDigital::Derivatives::Runners::OcrDerivativeRunner.new(ocr_path(id), derivative_callback_factory)
+    end
+
+    def ocr_path(id)
+      ocr_base = pdf_path(id)
+      Pathname.new(ocr_base).join("ocr.html").to_s
+    end
+
     def thumbnail_path(id)
       thumbnail_base = Rails.root.join("media", "thumbnails")
       distributor_path(id, '.jpg', thumbnail_base)

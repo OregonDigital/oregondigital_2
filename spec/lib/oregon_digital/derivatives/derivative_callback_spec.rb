@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::DerivativeCallback do
+  verify_contract :derivative_callback
   subject { OregonDigital::Derivatives::DerivativeCallback.new(asset) }
   let(:asset) { fake(:image) }
   let(:path) { Rails.root.join("tmp", "1.jpg").to_s }
@@ -29,6 +30,21 @@ RSpec.describe OregonDigital::Derivatives::DerivativeCallback do
     end
     it "should set pyramidal_path" do
       expect(asset).to have_received(:pyramidal_path=, path)
+    end
+  end
+
+  describe "#ocr_success" do
+    let(:asset) { fake(:document) }
+    let(:path) { Rails.root.join("tmp", "ocr.html").to_s }
+    let(:result) { subject.ocr_success(path) }
+    before do
+      result
+    end
+    it "should set has_ocr" do
+      expect(asset).to have_received(:has_ocr=, true)
+    end
+    it "should set ocr_path" do
+      expect(asset).to have_received(:ocr_path=, path)
     end
   end
 

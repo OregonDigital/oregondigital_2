@@ -15,7 +15,8 @@ module OregonDigital::Derivatives::Runners
 
     def list
       [
-        runner_builder.pdf_runner(asset.id)
+        runner_builder.pdf_runner(asset.id),
+        runner_builder.ocr_runner(asset.id)
       ]
     end
 

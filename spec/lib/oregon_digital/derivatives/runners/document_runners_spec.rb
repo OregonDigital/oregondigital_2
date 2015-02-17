@@ -12,5 +12,9 @@ RSpec.describe OregonDigital::Derivatives::Runners::DocumentRunners do
       make_equal_to_fakes(asset)
       expect(derivative_injector.pdf_runner(asset.id)).to have_received.run(asset)
     end
+    it "should call #run on ocr_runner" do
+      make_equal_to_fakes(asset)
+      expect(derivative_injector.ocr_runner(asset.id)).to have_received.run(asset)
+    end
   end
 end

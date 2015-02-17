@@ -25,5 +25,10 @@ module OregonDigital::Derivatives
       asset.has_pdf_pages = true
       asset.pdf_pages_path = path
     end
+    
+    def ocr_success(path)
+      asset.has_ocr = true
+      asset.ocr_path = path
+    end
   end
 end

@@ -24,6 +24,19 @@ RSpec.describe OregonDigital::DerivativeInjector do
     end
   end
 
+  describe "#ocr_runner" do
+    fake(:ocr_runner) { OregonDigital::Derivatives::Runners::OcrDerivativeRunner }
+    before do
+      stub(OregonDigital::Derivatives::Runners::OcrDerivativeRunner).new(resource.ocr_path(id), resource.derivative_callback_factory) { ocr_runner }
+    end
+    context "when given an id" do
+      let(:result) { resource.ocr_runner(id) }
+      it "should create a ocr runner" do
+        expect(result).to eql ocr_runner
+      end
+    end
+  end
+
   describe "#medium_runner" do
     fake(:medium_runner) { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner }
     before do
@@ -68,6 +81,15 @@ RSpec.describe OregonDigital::DerivativeInjector do
       let(:result) { resource.thumbnail_path(id) }
       it "should return a good path" do
         expect(result).to eq Rails.root.join("media", "thumbnails", "1", "0", "1.jpg").to_s
+      end
+    end
+  end
+
+  describe "#ocr_path" do
+    context "when given an id" do
+      let(:result) { resource.ocr_path(id) }
+      it "should return a good path" do
+        expect(result).to eq Rails.root.join("media", "documents", "1", "0", "1", "ocr.html").to_s
       end
     end
   end
