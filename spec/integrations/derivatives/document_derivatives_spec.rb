@@ -5,7 +5,7 @@ RSpec.describe "document derivatives" do
   it "should work" do
     Bogus.clear
     document = Document.new
-    file = File.open(File.join(fixture_path, "fixture_pdf.pdf"))
+    file = File.open(File.join(fixture_path, "tiny_pdf.pdf"))
     document.content.content = file
     document.content.mime_type = "application/pdf"
     asset_with_derivatives = AssetWithDerivatives.new(document, OregonDigital::Derivatives::Runners::DocumentRunners.new(OregonDigital.derivative_injector))

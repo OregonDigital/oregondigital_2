@@ -5,7 +5,7 @@ RSpec.describe OregonDigital::Derivatives::Processors::PdfProcessor do
   verify_contract :pdf_processor
 
   subject { OregonDigital::Derivatives::Processors::PdfProcessor.new(file, options) }
-  let(:file) { File.open(File.join(fixture_path, "fixture_pdf.pdf")) }
+  let(:file) { File.open(File.join(fixture_path, "tiny_pdf.pdf")) }
   let(:options) do
     {
       :path => path,
@@ -35,7 +35,7 @@ RSpec.describe OregonDigital::Derivatives::Processors::PdfProcessor do
     let(:expected_result) do
       arr = []
       ["large", "x-large"].each do |size|
-        (1..2).each do |page|
+        (1..1).each do |page|
           arr << pathname.join("#{size}-page-#{page}.jpg").to_s
         end
       end
@@ -43,7 +43,7 @@ RSpec.describe OregonDigital::Derivatives::Processors::PdfProcessor do
     end
     it "should create page*quality pages" do
       expect(File.exists?(path)).to eq true
-      expect(pages.length).to eq 4
+      expect(pages.length).to eq 2
       expect(pages).to eq expected_result
     end
   end
