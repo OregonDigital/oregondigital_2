@@ -36,8 +36,20 @@ module OregonDigital
       distributor_path(id, '', pdf_base)
     end
 
-    def derivative_decorator_class
+    def derivative_asset_factory
       AssetWithDerivatives
+    end
+
+    def derivative_callback_factory
+      OregonDigital::Derivatives::DerivativeCallback
+    end
+
+    def streamable_content_factory
+      StreamableContent
+    end
+
+    def runner_finder
+      OregonDigital::Derivatives::Runners::RunnerFinder
     end
 
     def runner_list
