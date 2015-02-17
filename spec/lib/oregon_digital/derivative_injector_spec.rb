@@ -5,12 +5,6 @@ RSpec.describe OregonDigital::DerivativeInjector do
   let(:resource) { OregonDigital::DerivativeInjector.new }
   let(:id) { "1" }
 
-  describe "#derivative_decorator_class" do
-    it "should be AssetWithDerivatives" do
-      expect(resource.derivative_decorator_class).to eq AssetWithDerivatives
-    end
-  end
-
   describe "#runner_list" do
     it "should be a RunnerList" do
       expect(resource.runner_list).to eq OregonDigital::Derivatives::Runners::RunnerList

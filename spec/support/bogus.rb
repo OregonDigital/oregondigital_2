@@ -16,7 +16,6 @@ Bogus.fakes do
     medium_runner Bogus.fake_for(:medium_runner) { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner }
     pyramidal_runner Bogus.fake_for(:pyramidal_runner) { OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner }
     pdf_runner Bogus.fake_for(:pdf_runner) { OregonDigital::Derivatives::Runners::PdfRunner }
-    derivative_decorator_class AssetWithDerivatives
     runner_list OregonDigital::Derivatives::Runners::RunnerList
   end
 end
