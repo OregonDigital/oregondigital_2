@@ -1,9 +1,8 @@
 class AssetWithDerivatives < SimpleDelegator
-  attr_reader :derivative_callback, :runner_finder
-  def initialize(asset, runner_finder, derivative_callback)
+  attr_reader :runner
+  def initialize(asset, runner)
     super(asset)
-    @runner_finder = runner_finder
-    @derivative_callback = derivative_callback
+    @runner = runner
   end
 
   def save
@@ -24,7 +23,7 @@ class AssetWithDerivatives < SimpleDelegator
   def create_derivatives
     @needs_derivatives = false
     begin
-      runners.run(streamable_content, derivative_callback)
+      runner.run(self)
     rescue NotImplementedError
     end
   end
@@ -34,13 +33,7 @@ class AssetWithDerivatives < SimpleDelegator
   end
 
   def content_changed?
-    content_content_changed?
-  end
-
-  private
-
-  def runners
-    @runners ||= runner_finder.find(__getobj__)
+    content_content_changed? && !content_blank?
   end
 
 end

@@ -7,9 +7,9 @@ module OregonDigital::Derivatives::Runners
       @list = list
     end
 
-    def run(stream, callbacks)
+    def run(asset)
       list.each do |runner|
-        runner.run(stream, callbacks)
+        runner.run(asset)
       end
     end
   end

@@ -7,7 +7,7 @@ RSpec.describe "image derivatives" do
     file = File.open(File.join(fixture_path, "fixture_image.tiff"))
     image.content.content = file
     image.content.mime_type = "image/tiff"
-    asset_with_derivatives = DerivativeCreationFacade.call(image, OregonDigital.derivative_injector)
+    asset_with_derivatives = AssetWithDerivatives.new(image, OregonDigital::Derivatives::Runners::ImageRunners.new(OregonDigital.derivative_injector))
 
     expect{asset_with_derivatives.save}.not_to raise_error
     expect(image.workflow_metadata.thumbnail_path).to include image.id

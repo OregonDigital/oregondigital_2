@@ -19,6 +19,24 @@ RSpec.describe Document do
     end
   end
 
+  describe "#streamable_content" do
+    let(:file) { File.open(File.join(fixture_path, 'fixture_pdf.pdf'), 'rb') }
+    context "when there's content" do
+      before do
+        subject.content.content = file
+        subject.content.mime_type = "application/pdf"
+      end
+      it "should be a StreamableContent" do
+        make_equal_to_fakes(subject.streamable_content)
+        result = subject.streamable_content
+
+        expect(result).to be_a StreamableContent
+        expect(result.mime_type).to eq "application/pdf"
+        expect(result.content).to eq file
+      end
+    end
+  end
+
   describe "#pdf_pages" do
     let(:path) { Rails.root.join("tmp", "documents").to_s }
     it "should have derivative accessors for pdf_pages" do

@@ -1,13 +1,15 @@
 module OregonDigital::Derivatives::Runners
   class DerivativeRunner
-    attr_accessor :source, :path, :callbacks
-    def initialize(path)
+    attr_accessor :source, :path, :callback_factory, :asset, :callbacks
+    def initialize(path, callback_factory)
       @path = path
+      @callback_factory = callback_factory
     end
 
-    def run(source, callbacks)
-      @source = source
-      @callbacks = Array.wrap(callbacks)
+    def run(asset)
+      @asset = asset
+      @source = asset.streamable_content
+      @callbacks = Array.wrap(callback_factory.new(asset))
       create_derivatives
       notify_callbacks
     end

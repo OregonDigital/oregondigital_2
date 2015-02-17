@@ -8,7 +8,7 @@ RSpec.describe "document derivatives" do
     file = File.open(File.join(fixture_path, "fixture_pdf.pdf"))
     document.content.content = file
     document.content.mime_type = "application/pdf"
-    asset_with_derivatives = DerivativeCreationFacade.call(document, OregonDigital.derivative_injector)
+    asset_with_derivatives = AssetWithDerivatives.new(document, OregonDigital::Derivatives::Runners::DocumentRunners.new(OregonDigital.derivative_injector))
 
     expect{asset_with_derivatives.save}.not_to raise_error
     expect(document.workflow_metadata.pdf_pages_path).not_to be_blank

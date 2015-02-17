@@ -14,7 +14,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
   describe "#thumbnail_runner" do
     fake(:thumbnail_runner) { OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner }
     before do
-      stub(OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner).new(resource.thumbnail_path(id)) { thumbnail_runner }
+      stub(OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner).new(resource.thumbnail_path(id), resource.derivative_callback_factory) { thumbnail_runner }
     end
     context "when given an id" do
       let(:result) { resource.thumbnail_runner(id) }
@@ -27,7 +27,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
   describe "#medium_runner" do
     fake(:medium_runner) { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner }
     before do
-      stub(OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner).new(resource.medium_path(id)) { medium_runner }
+      stub(OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner).new(resource.medium_path(id), resource.derivative_callback_factory) { medium_runner }
     end
     context "when given an id" do
       let(:result) { resource.medium_runner(id) }
@@ -40,7 +40,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
   describe "#pyramidal_runner" do
     fake(:pyramidal_runner) { OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner }
     before do
-      stub(OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner).new(resource.pyramidal_path(id)) { pyramidal_runner }
+      stub(OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner).new(resource.pyramidal_path(id), resource.derivative_callback_factory) { pyramidal_runner }
     end
     context "when given an id" do
       let(:result) { resource.pyramidal_runner(id) }
@@ -53,7 +53,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
   describe "#pdf_runner" do
     fake(:pdf_runner) { OregonDigital::Derivatives::Runners::PdfRunner }
     before do
-      stub(OregonDigital::Derivatives::Runners::PdfRunner).new(resource.pdf_path(id)) { pdf_runner }
+      stub(OregonDigital::Derivatives::Runners::PdfRunner).new(resource.pdf_path(id), resource.derivative_callback_factory) { pdf_runner }
     end
     context "when given an id" do
       let(:result) { resource.pdf_runner(id) }

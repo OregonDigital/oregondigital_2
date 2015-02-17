@@ -1,19 +1,19 @@
 module OregonDigital
   class DerivativeInjector
     def thumbnail_runner(id)
-      OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner.new(thumbnail_path(id))
+      OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner.new(thumbnail_path(id), derivative_callback_factory)
     end
 
     def medium_runner(id)
-      OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner.new(medium_path(id))
+      OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner.new(medium_path(id), derivative_callback_factory)
     end
 
     def pyramidal_runner(id)
-      OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner.new(pyramidal_path(id))
+      OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner.new(pyramidal_path(id), derivative_callback_factory)
     end
 
     def pdf_runner(id)
-      OregonDigital::Derivatives::Runners::PdfRunner.new(pdf_path(id))
+      OregonDigital::Derivatives::Runners::PdfRunner.new(pdf_path(id), derivative_callback_factory)
     end
 
     def thumbnail_path(id)

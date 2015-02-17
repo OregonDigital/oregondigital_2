@@ -26,11 +26,26 @@ RSpec.describe Image do
         end
       end
       context "when content is blank" do
-        it "should be false" do
+        it "should be true" do
           image = Image.new
           image.content.content = ""
           
-          expect(image.content_content_changed?).to eq false
+          expect(image.content_content_changed?).to eq true
+        end
+      end
+    end
+
+    describe "#content_blank?" do
+      context "when there is no content" do
+        it "should be true" do
+          expect(subject.content_blank?).to eq true
+        end
+      end
+      context "when there is content" do
+        it "should be false" do
+          subject.content.content = "bla"
+
+          expect(subject.content_blank?).to eq false
         end
       end
     end
@@ -53,7 +68,6 @@ RSpec.describe Image do
         end
       end
     end
-
 
     describe "#injector" do
       fake(:injector)
