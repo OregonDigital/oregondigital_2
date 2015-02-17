@@ -5,6 +5,7 @@ RSpec.describe GenericAsset do
 
   let(:generic_asset) { GenericAsset.new(:id => id) }
   let(:id) {}
+  let(:file) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb') }
   it "should initialize" do
     expect{ GenericAsset.new }.not_to raise_error
   end
@@ -29,7 +30,6 @@ RSpec.describe GenericAsset do
       end
     end
     context "when content is assigned" do
-      let(:file) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb') }
       before do
         generic_asset.add_file_datastream(file, :dsid => "content")
       end

@@ -11,7 +11,7 @@ class DerivativeCreationFacade
   end
 
   def built_asset
-    service_locator.derivative_asset_factory.new(asset, runners, callback, stream_content) 
+    service_locator.derivative_asset_factory.new(asset, runner_finder, callback) 
   end
 
   private
@@ -20,13 +20,8 @@ class DerivativeCreationFacade
     service_locator.derivative_callback_factory.new(asset)
   end
 
-  def stream_content
-    service_locator.streamable_content_factory.new(asset.content.content, asset.content.mime_type)
+  def runner_finder
+    service_locator.runner_finder
   end
-
-  def runners
-    service_locator.runner_finder.find(asset)
-  end
-
 
 end

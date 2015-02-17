@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-RSpec.describe "image derivatives" do
+RSpec.describe "document derivatives" do
   it "should work" do
     Bogus.clear
     document = Document.new
@@ -12,5 +12,6 @@ RSpec.describe "image derivatives" do
 
     expect{asset_with_derivatives.save}.not_to raise_error
     expect(document.workflow_metadata.pdf_pages_path).not_to be_blank
+    expect(document.workflow_metadata.pdf_pages_path).to include document.id
   end
 end

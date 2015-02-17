@@ -35,6 +35,26 @@ RSpec.describe Image do
       end
     end
 
+    describe "#streamable_content" do
+      let(:file) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb') }
+      let(:image) { Image.new }
+      context "when there's content" do
+        before do
+          image.content.content = file
+          image.content.mime_type = "image/jpeg"
+        end
+        it "should be a StreamableContent" do
+          make_equal_to_fakes(image.streamable_content)
+          result = image.streamable_content
+
+          expect(result).to be_a StreamableContent
+          expect(result.mime_type).to eq "image/jpeg"
+          expect(result.content).to eq file
+        end
+      end
+    end
+
+
     describe "#injector" do
       fake(:injector)
       before do
