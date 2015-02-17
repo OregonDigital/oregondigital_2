@@ -12,8 +12,8 @@ RSpec.describe GenericAsset do
 
   describe "load from solr" do
     context "when it's loaded from solr" do
-      let(:asset) { described_class.create(:title => ["bla"]) }
-      subject {described_class.load_instance_from_solr(asset.id)}
+      let(:asset) { described_class.new(:title => ["bla"]) }
+      subject {described_class.load_instance_from_solr(asset.id, asset.to_solr)}
       # Can't use Bogus here.
       before { Bogus.reset_overwritten_classes }
       it "should respond to all attributes" do
