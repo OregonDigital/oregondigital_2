@@ -12,7 +12,7 @@ module OregonDigital
       OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner.new(pyramidal_path(id), derivative_callback_factory)
     end
 
-    def pdf_runner(id)
+    def pdf_pages_runner(id)
       OregonDigital::Derivatives::Runners::PdfRunner.new(pdf_path(id), derivative_callback_factory)
     end
 

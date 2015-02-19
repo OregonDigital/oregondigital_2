@@ -89,6 +89,12 @@ RSpec.describe Image do
     end
   end
 
+  describe "#derivatives" do
+    it "should be set" do
+      expect(subject.derivatives).to eq [:thumbnail, :medium, :pyramidal]
+    end
+  end
+
 
   [:thumbnail, :medium, :pyramidal].each do |derivative|
     it "should have derivative accessors for #{derivative}" do

@@ -63,13 +63,13 @@ RSpec.describe OregonDigital::DerivativeInjector do
     end
   end
 
-  describe "#pdf_runner" do
+  describe "#pdf_pages_runner" do
     fake(:pdf_runner) { OregonDigital::Derivatives::Runners::PdfRunner }
     before do
       stub(OregonDigital::Derivatives::Runners::PdfRunner).new(resource.pdf_path(id), resource.derivative_callback_factory) { pdf_runner }
     end
     context "when given an id" do
-      let(:result) { resource.pdf_runner(id) }
+      let(:result) { resource.pdf_pages_runner(id) }
       it "should create a pdf runner" do
         expect(result).to eql pdf_runner
       end
