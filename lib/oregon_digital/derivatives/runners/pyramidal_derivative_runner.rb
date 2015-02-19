@@ -23,8 +23,8 @@ module OregonDigital::Derivatives::Runners
       256
     end
 
-    def success_method
-      :pyramidal_success
+    def type
+      :pyramidal
     end
   end
 end

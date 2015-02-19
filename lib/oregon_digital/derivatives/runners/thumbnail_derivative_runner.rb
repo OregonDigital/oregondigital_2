@@ -3,8 +3,8 @@ module OregonDigital::Derivatives::Runners
 
     private
 
-    def success_method
-      :thumbnail_success
+    def type
+      :thumbnail
     end
 
     def size

@@ -21,7 +21,7 @@ RSpec.describe OregonDigital::Derivatives::Runners::PdfRunner do
     end
 
     it "should call #pdf_success on the callback" do
-      expect(derivative_callback).to have_received.pdf_success(path)
+      expect(derivative_callback).to have_received.success(:pdf_pages, path)
     end
     it "should call pdf processor" do
       expect(pdf_processor).to have_received.run

@@ -7,8 +7,8 @@ module OregonDigital::Derivatives::Runners
       "680x680>"
     end
 
-    def success_method
-      :medium_success
+    def type
+      :medium
     end
 
   end

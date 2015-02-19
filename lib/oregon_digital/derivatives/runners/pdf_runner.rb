@@ -10,8 +10,8 @@ module OregonDigital::Derivatives::Runners
       }
     end
 
-    def success_method
-      :pdf_success
+    def type
+      :pdf_pages
     end
   end
 end

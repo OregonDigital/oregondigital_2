@@ -17,8 +17,8 @@ RSpec.describe OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner do
       stub(OregonDigital::Derivatives::Processors::ImageProcessor).new(file, anything) { image_processor }
       subject.run(asset)
     end
-    it "should call #thumbnail_success on the callback" do
-      expect(derivative_callback).to have_received.thumbnail_success(path)
+    it "should call #success on the callback" do
+      expect(derivative_callback).to have_received.success(:thumbnail, path)
     end
     it "should call image processor" do
       expect(image_processor).to have_received.run

@@ -10,8 +10,8 @@ module OregonDigital::Derivatives::Runners
       }
     end
 
-    def success_method
-      :ocr_success
+    def type
+      :ocr
     end
   end
 end

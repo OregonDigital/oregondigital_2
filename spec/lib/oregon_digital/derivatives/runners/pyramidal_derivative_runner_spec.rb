@@ -19,8 +19,8 @@ RSpec.describe OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner do
     it "should run pyramidal generator" do
       expect(pyramidal_processor).to have_received.run
     end
-    it "should call #pyramidal_success on the callback" do
-      expect(derivative_callback).to have_received.pyramidal_success(path)
+    it "should call #success on the callback" do
+      expect(derivative_callback).to have_received.success(:pyramidal, path)
     end
   end
 end

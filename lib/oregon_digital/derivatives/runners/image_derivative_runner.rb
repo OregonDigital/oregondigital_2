@@ -16,10 +16,6 @@ module OregonDigital::Derivatives::Runners
       }
     end
 
-    def size
-      "120x120>"
-    end
-
     def format
       'jpeg'
     end

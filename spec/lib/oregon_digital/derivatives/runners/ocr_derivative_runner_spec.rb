@@ -20,7 +20,7 @@ RSpec.describe OregonDigital::Derivatives::Runners::OcrDerivativeRunner do
       expect(ocr_processor).to have_received.run
     end
     it "should call #ocr_success on the callback" do
-      expect(derivative_callback).to have_received.ocr_success(path)
+      expect(derivative_callback).to have_received.success(:ocr, path)
     end
   end
 end

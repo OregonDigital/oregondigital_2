@@ -22,7 +22,7 @@ module OregonDigital::Derivatives::Runners
 
     def notify_callbacks
       callbacks.each do |callback|
-        callback.send(success_method, path)
+        callback.success(type, path)
       end
     end
     

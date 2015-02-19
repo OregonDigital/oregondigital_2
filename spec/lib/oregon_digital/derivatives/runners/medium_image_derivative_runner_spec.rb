@@ -16,8 +16,8 @@ RSpec.describe OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner 
       stub(OregonDigital::Derivatives::Processors::ImageProcessor).new(file, anything) { image_processor }
       subject.run(asset)
     end
-    it "should call #medium_success on the callback" do
-      expect(derivative_callback).to have_received.medium_success(path)
+    it "should call #success on the callback" do
+      expect(derivative_callback).to have_received.success(:medium, path)
     end
     it "should call image processor" do
       expect(image_processor).to have_received.run
