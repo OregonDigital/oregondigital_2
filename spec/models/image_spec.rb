@@ -93,6 +93,11 @@ RSpec.describe Image do
     it "should be set" do
       expect(subject.derivatives).to eq [:thumbnail, :medium, :pyramidal]
     end
+    it "should have a runner for each derivative" do
+      subject.derivatives.each do |derivative|
+        expect(OregonDigital.derivative_injector).to respond_to :"#{derivative}_runner"
+      end
+    end
   end
 
 

@@ -19,6 +19,17 @@ RSpec.describe Document do
     end
   end
 
+  describe "#derivatives" do
+    it "should be set" do
+      expect(subject.derivatives).to eq [:pdf_pages, :ocr]
+    end
+    it "should have a runner for each derivative" do
+      subject.derivatives.each do |derivative|
+        expect(OregonDigital.derivative_injector).to respond_to :"#{derivative}_runner"
+      end
+    end
+  end
+
   describe "#streamable_content" do
     let(:file) { File.open(File.join(fixture_path, 'fixture_pdf.pdf'), 'rb') }
     context "when there's content" do
