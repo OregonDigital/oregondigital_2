@@ -16,5 +16,6 @@ RSpec.describe "document derivatives" do
     expect(document.workflow_metadata.pdf_pages_path).not_to be_blank
     expect(document.workflow_metadata.pdf_pages_path).to include document.id
     expect(document.workflow_metadata.ocr_path).to include "ocr.html"
+    expect(document.workflow_metadata.thumbnail_path).to include document.id
   end
 end

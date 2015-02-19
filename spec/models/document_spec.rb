@@ -21,7 +21,7 @@ RSpec.describe Document do
 
   describe "#derivatives" do
     it "should be set" do
-      expect(subject.derivatives).to eq [:pdf_pages, :ocr]
+      expect(subject.derivatives).to eq [:pdf_pages, :ocr, :thumbnail]
     end
     it "should have a runner for each derivative" do
       subject.derivatives.each do |derivative|
