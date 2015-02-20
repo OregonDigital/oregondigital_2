@@ -53,6 +53,14 @@ module OregonDigital
       OregonDigital::Derivatives::Runners::RunnerList
     end
 
+    def runner_finder_factory
+      OregonDigital::Derivatives::RunnerFinder
+    end
+
+    def lazy_runner_factory
+      OregonDigital::Derivatives::LazyRunner
+    end
+
     private
 
     def distributor_path(id, extension, path)
