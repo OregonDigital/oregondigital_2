@@ -19,12 +19,12 @@ module OregonDigital
         end
         tmp_graph
       end
-    end
 
-    private
+      private
 
-    def tmp_graph
-      @tmp_graph ||= RDF::Graph.new
+      def tmp_graph
+        @tmp_graph ||= RDF::Graph.new
+      end
     end
   end
 end
