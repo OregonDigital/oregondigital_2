@@ -12,7 +12,6 @@ module OregonDigital
       end
 
       def replace_subject(find_subject, replace_subject)
-        tmp_graph = RDF::Graph.new
         graph.statements.each do |s|
           subject = s.subject
           subject = replace_subject if subject == find_subject
@@ -20,6 +19,12 @@ module OregonDigital
         end
         tmp_graph
       end
+    end
+
+    private
+
+    def tmp_graph
+      @tmp_graph ||= RDF::Graph.new
     end
   end
 end

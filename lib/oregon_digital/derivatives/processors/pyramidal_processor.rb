@@ -13,14 +13,18 @@ module OregonDigital::Derivatives::Processors
 
     def run
       temporary_file do |f|
-        vips_image = VIPS::Image.new(f.path)
-        vips_image = vips_image.msb
-        FileUtils.mkdir_p(Pathname.new(path).dirname) # VIPS doesn't make one.
-        vips_image.tiff(path, vips_options)
+        build_pyramidal(f)
       end
     end
 
     private
+
+    def build_pyramidal(temporary_file)
+      vips_image = VIPS::Image.new(temporary_file.path)
+      vips_image = vips_image.msb
+      FileUtils.mkdir_p(Pathname.new(path).dirname) # VIPS doesn't make one.
+      vips_image.tiff(path, vips_options)
+    end
 
     def vips_options
       {
