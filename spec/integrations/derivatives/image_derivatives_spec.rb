@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "image derivatives" do
   it "should work" do
-    Bogus.clear
     image = Image.new
     file = File.open(File.join(fixture_path, "fixture_image.tiff"))
     image.content.content = file

@@ -46,14 +46,6 @@ GIT
       logger
 
 GIT
-  remote: git://github.com/terrellt/bogus.git
-  revision: 2cd401328e39f3b7372faee5220c81ca26c7000c
-  branch: fake_comparisons
-  specs:
-    bogus (0.1.5)
-      dependor (>= 0.0.4)
-
-GIT
   remote: git://github.com/terrellt/jazz_hands.git
   revision: d5829e6119671b2ff5fe6098846764084f2ab562
   specs:
@@ -169,7 +161,6 @@ GEM
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     deep_merge (1.0.1)
-    dependor (1.0.1)
     deprecation (0.1.0)
       activesupport
     devise (3.4.1)
@@ -485,7 +476,6 @@ DEPENDENCIES
   active-fedora!
   blacklight
   blacklight_advanced_search
-  bogus!
   capybara
   coffee-rails (~> 4.1.0)
   constantinople

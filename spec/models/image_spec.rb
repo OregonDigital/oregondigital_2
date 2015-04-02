@@ -1,14 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Image do
-  verify_contract :image
   subject { Image.new }
 
   describe "contracts" do
-    it "should be able to have an id" do
-      expect(Image.new(:id => "1").id).to eq "1"
-    end
-
     describe "#content_content_changed" do
       context "when content changes" do
         it "should be true" do
@@ -59,7 +54,6 @@ RSpec.describe Image do
           image.content.mime_type = "image/jpeg"
         end
         it "should be a StreamableContent" do
-          make_equal_to_fakes(image.streamable_content)
           result = image.streamable_content
 
           expect(result).to be_a StreamableContent
@@ -69,20 +63,7 @@ RSpec.describe Image do
       end
     end
 
-    describe "#injector" do
-      fake(:injector)
-      before do
-        make_equal_to_fakes(subject.injector)
-      end
-      it "should use OregonDigital's injector" do
-        expect(subject.injector).to eq OregonDigital.inject
-      end
-    end
-
     describe "#content" do
-      before do
-        make_equal_to_fakes(subject.content)
-      end
       it "should be a FileContent" do
         expect(subject.content).to be_kind_of FileContent
       end

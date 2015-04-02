@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::DerivativeInjector do
-  verify_contract :derivative_injector
   let(:resource) { OregonDigital::DerivativeInjector.new }
   let(:id) { "1" }
 
@@ -12,9 +11,9 @@ RSpec.describe OregonDigital::DerivativeInjector do
   end
 
   describe "#thumbnail_runner" do
-    fake(:thumbnail_runner) { OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner }
+    let(:thumbnail_runner) { instance_double(OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner) }
     before do
-      stub(OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner).new(resource.thumbnail_path(id), resource.derivative_callback_factory) { thumbnail_runner }
+      allow(OregonDigital::Derivatives::Runners::ThumbnailDerivativeRunner).to receive(:new).with(resource.thumbnail_path(id), resource.derivative_callback_factory).and_return(thumbnail_runner)
     end
     context "when given an id" do
       let(:result) { resource.thumbnail_runner(id) }
@@ -25,9 +24,9 @@ RSpec.describe OregonDigital::DerivativeInjector do
   end
 
   describe "#ocr_runner" do
-    fake(:ocr_runner) { OregonDigital::Derivatives::Runners::OcrDerivativeRunner }
+    let(:ocr_runner) { instance_double(OregonDigital::Derivatives::Runners::OcrDerivativeRunner) }
     before do
-      stub(OregonDigital::Derivatives::Runners::OcrDerivativeRunner).new(resource.ocr_path(id), resource.derivative_callback_factory) { ocr_runner }
+      allow(OregonDigital::Derivatives::Runners::OcrDerivativeRunner).to receive(:new).with(resource.ocr_path(id), resource.derivative_callback_factory).and_return(ocr_runner)
     end
     context "when given an id" do
       let(:result) { resource.ocr_runner(id) }
@@ -38,9 +37,9 @@ RSpec.describe OregonDigital::DerivativeInjector do
   end
 
   describe "#medium_runner" do
-    fake(:medium_runner) { OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner }
+    let(:medium_runner) { instance_double(OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner) }
     before do
-      stub(OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner).new(resource.medium_path(id), resource.derivative_callback_factory) { medium_runner }
+      allow(OregonDigital::Derivatives::Runners::MediumImageDerivativeRunner).to receive(:new).with(resource.medium_path(id), resource.derivative_callback_factory).and_return(medium_runner)
     end
     context "when given an id" do
       let(:result) { resource.medium_runner(id) }
@@ -51,9 +50,9 @@ RSpec.describe OregonDigital::DerivativeInjector do
   end
 
   describe "#pyramidal_runner" do
-    fake(:pyramidal_runner) { OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner }
+    let(:pyramidal_runner) { instance_double(OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner) }
     before do
-      stub(OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner).new(resource.pyramidal_path(id), resource.derivative_callback_factory) { pyramidal_runner }
+      allow(OregonDigital::Derivatives::Runners::PyramidalDerivativeRunner).to receive(:new).with(resource.pyramidal_path(id), resource.derivative_callback_factory).and_return(pyramidal_runner)
     end
     context "when given an id" do
       let(:result) { resource.pyramidal_runner(id) }
@@ -64,9 +63,9 @@ RSpec.describe OregonDigital::DerivativeInjector do
   end
 
   describe "#pdf_pages_runner" do
-    fake(:pdf_runner) { OregonDigital::Derivatives::Runners::PdfRunner }
+    let(:pdf_runner) { instance_double(OregonDigital::Derivatives::Runners::PdfRunner) }
     before do
-      stub(OregonDigital::Derivatives::Runners::PdfRunner).new(resource.pdf_path(id), resource.derivative_callback_factory) { pdf_runner }
+      allow(OregonDigital::Derivatives::Runners::PdfRunner).to receive(:new).with(resource.pdf_path(id), resource.derivative_callback_factory).and_return(pdf_runner)
     end
     context "when given an id" do
       let(:result) { resource.pdf_pages_runner(id) }

@@ -2,8 +2,6 @@ require 'rails_helper'
 require 'oregon_digital/derivatives/processors/image_processor'
 
 RSpec.describe OregonDigital::Derivatives::Processors::PdfProcessor do
-  verify_contract :pdf_processor
-
   subject { OregonDigital::Derivatives::Processors::PdfProcessor.new(file, options) }
   let(:file) { File.open(File.join(fixture_path, "tiny_pdf.pdf")) }
   let(:options) do

@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::DerivativeCallback do
-  verify_contract :derivative_callback
   subject { OregonDigital::Derivatives::DerivativeCallback.new(asset) }
-  let(:asset) { fake(:image) }
+  let(:asset) { object_double(Image.new).as_null_object }
   image_paths = {
     :thumbnail => Rails.root.join("tmp", "1.jpg"),
     :medium => Rails.root.join("tmp", "1.jpg"),
@@ -21,24 +20,24 @@ RSpec.describe OregonDigital::Derivatives::DerivativeCallback do
           subject.success(type, path.to_s)
         end
         it "should set has_#{type}" do
-          expect(asset).to have_received(:"has_#{type}=", true)
+          expect(asset).to have_received(:"has_#{type}=").with(true)
         end
         it "should set #{type}_path" do
-          expect(asset).to have_received(:"#{type}_path=", path.to_s)
+          expect(asset).to have_received(:"#{type}_path=").with(path.to_s)
         end
       end
     end
     context "for a document" do
-      let(:asset) { fake(:document) }
+      let(:asset) { object_double(Document.new).as_null_object }
       document_paths.each do |type, path|
         before do
           subject.success(type, path.to_s)
         end
         it "should set has_#{type}" do
-          expect(asset).to have_received(:"has_#{type}=", true)
+          expect(asset).to have_received(:"has_#{type}=").with(true)
         end
         it "should set #{type}_path" do
-          expect(asset).to have_received(:"#{type}_path=", path.to_s)
+          expect(asset).to have_received(:"#{type}_path=").with(path.to_s)
         end
       end
     end

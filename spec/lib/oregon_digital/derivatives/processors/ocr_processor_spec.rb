@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::Processors::OcrProcessor do
-  verify_contract :ocr_processor
-
-
   subject { OregonDigital::Derivatives::Processors::OcrProcessor.new(file, options) }
   let(:file) { File.open(File.join(fixture_path, "tiny_pdf.pdf")) }
   let(:options) do

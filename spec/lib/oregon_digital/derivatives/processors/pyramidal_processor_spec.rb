@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'vips'
 
 RSpec.describe OregonDigital::Derivatives::Processors::PyramidalProcessor do
-  verify_contract :pyramidal_processor
   subject { OregonDigital::Derivatives::Processors::PyramidalProcessor.new(file, options) }
   let(:file) { File.open(File.join(fixture_path, "fixture_image.tiff")) }
   let(:options) do

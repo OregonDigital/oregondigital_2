@@ -2,19 +2,24 @@ require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::RunnerFinder do
   subject { OregonDigital::Derivatives::RunnerFinder.new(runner_builder) }
-  let(:asset) { fake(:image, :id => "1") }
+  let(:asset) { object_double(Image.new, :id => "1") }
   let(:runner_builder) { OregonDigital.derivative_injector }
+  before do
+    allow(runner_builder).to receive(:thumbnail_runner).with("1").and_return(double("thumbnail runner"))
+    allow(runner_builder).to receive(:medium_runner).with("1").and_return(double("medium runner"))
+    allow(runner_builder).to receive(:pyramidal_runner).with("1").and_return(double("pyramidal runner"))
+  end
 
   describe "#find" do
     context "when derivatives are set" do
       before do
-        stub(asset).derivatives { [:thumbnail, :medium, :pyramidal] }
+        allow(asset).to receive(:derivatives).and_return([:thumbnail, :medium, :pyramidal])
       end
       it "should use runner_builder to build" do
         subject.find(asset)
 
         asset.derivatives.each do |derivative|
-          expect(runner_builder).to have_received(:"#{derivative}_runner", asset.id)
+          expect(runner_builder).to have_received(:"#{derivative}_runner").with(asset.id)
         end
       end
       it "should return a runner list" do

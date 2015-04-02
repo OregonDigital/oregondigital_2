@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::Processors::ImageProcessor do
-  verify_contract :image_processor
   subject { OregonDigital::Derivatives::Processors::ImageProcessor.new(file, options) }
   let(:file) { File.open(File.join(fixture_path, "fixture_image.jpg")) }
   let(:options) do

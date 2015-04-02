@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe "document derivatives" do
   it "should work" do
-    Bogus.clear
     document = Document.new
     file = File.open(File.join(fixture_path, "tiny_pdf.pdf"))
     document.content.content = file

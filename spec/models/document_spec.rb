@@ -1,24 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Document do
-  verify_contract :document
   let(:resource_class) { Document }
   subject { resource_class.new }
-  describe "contracts" do
-    it "should be able to have an id" do
-      expect(resource_class.new(:id => "1").id).to eq "1"
-    end
-    describe "#injector" do
-      fake(:injector)
-      before do
-        make_equal_to_fakes(subject.injector)
-      end
-      it "should use OregonDigital's injector" do
-        expect(subject.injector).to eq OregonDigital.inject
-      end
-    end
-  end
-
   describe "#derivatives" do
     it "should be set" do
       expect(subject.derivatives).to eq [:pdf_pages, :ocr, :thumbnail]
@@ -38,7 +22,6 @@ RSpec.describe Document do
         subject.content.mime_type = "application/pdf"
       end
       it "should be a StreamableContent" do
-        make_equal_to_fakes(subject.streamable_content)
         result = subject.streamable_content
 
         expect(result).to be_a StreamableContent

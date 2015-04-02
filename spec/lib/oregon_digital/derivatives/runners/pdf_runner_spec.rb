@@ -1,30 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::Derivatives::Runners::PdfRunner do
-  verify_contract :pdf_runner
   let(:resource_class) { OregonDigital::Derivatives::Runners::PdfRunner }
   subject { resource_class.new(path, callback_factory) }
 
   let(:path) { Rails.root.join("tmp", "documents").to_s }
-  fake(:derivative_callback)
-  let(:callback_factory) { fake() }
+  let(:callback_factory) { double("callback factory") }
+  let(:derivative_callback) { instance_double(OregonDigital::Derivatives::DerivativeCallback) }
 
   describe "#run" do
-    let(:asset) { fake(:document, :streamable_content => file) }
-    let(:file) { fake(:file) { File } }
-    fake(:pdf_processor) { OregonDigital::Derivatives::Processors::PdfProcessor }
+    let(:asset) { object_double(Document.new, :streamable_content => file) }
+    let(:file) { instance_double(File) }
+    let(:pdf_processor) { instance_double(OregonDigital::Derivatives::Processors::PdfProcessor) }
 
     before do
-      stub(callback_factory).new(asset) { derivative_callback }
-      stub(OregonDigital::Derivatives::Processors::PdfProcessor).new(file, anything) { pdf_processor }
+      allow(callback_factory).to receive(:new).with(asset).and_return(derivative_callback)
+      allow(derivative_callback).to receive(:success)
+      allow(pdf_processor).to receive(:run)
+      allow(OregonDigital::Derivatives::Processors::PdfProcessor).to receive(:new).with(file, anything).and_return(pdf_processor)
       subject.run(asset)
     end
 
     it "should call #pdf_success on the callback" do
-      expect(derivative_callback).to have_received.success(:pdf_pages, path)
+      expect(derivative_callback).to have_received(:success).with(:pdf_pages, path)
     end
     it "should call pdf processor" do
-      expect(pdf_processor).to have_received.run
+      expect(pdf_processor).to have_received(:run)
     end
   end
 end

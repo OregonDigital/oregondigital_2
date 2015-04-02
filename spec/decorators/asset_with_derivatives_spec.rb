@@ -1,54 +1,54 @@
 require 'rails_helper'
 
 RSpec.describe AssetWithDerivatives do
-  verify_contract :asset_with_derivatives
-  let(:asset) { fake(:image) }
-  let(:runner) { fake(:runner_list) }
-
+  let(:asset) { object_double(Image.new) }
+  let(:runner) { instance_double(OregonDigital::Derivatives::Runners::RunnerList) }
   subject { AssetWithDerivatives.new(asset, runner) }
   describe "#save" do
+    before do
+      allow(asset).to receive(:save).and_return(true)
+      allow(runner).to receive(:run)
+    end
     context "when the content hasn't changed" do
       before do
-        stub(asset).content_content_changed? { false }
+        allow(asset).to receive(:content_content_changed?).and_return(false)
       end
       it "should not call #run on the runner" do
         subject.save
 
-        expect(runner).not_to have_received.run(any_args)
+        expect(runner).not_to have_received(:run).with(any_args)
       end
     end
     context "when the content has changed" do
       before do
-        stub(asset).content_content_changed? { true }
-        stub(asset).content_blank? { false }
+        allow(asset).to receive(:content_content_changed?).and_return(true)
+        allow(asset).to receive(:content_blank?).and_return(false)
       end
       it "should call #run on the runner" do
-        make_equal_to_fakes(subject)
         subject.save
 
-        expect(runner).to have_received.run(subject)
+        expect(runner).to have_received(:run).with(subject)
       end
       context "and persistence fails" do
         before do
-          stub(asset).save { false }
+          allow(asset).to receive(:save).and_return(false)
         end
         # Pending - there's no way for #save to return false.
-        xit "should not call #run on the runner" do
+        it "should not call #run on the runner" do
           subject.save
-
-          expect(runner).not_to have_received.run(any_args)
+          expect(runner).not_to have_received(:run)
         end
       end
     end
     context "when the content has changed to be blank" do
       before do
-        stub(asset).content_content_changed? { true }
-        stub(asset).content_blank? { true }
+        allow(asset).to receive(:content_content_changed?).and_return(true)
+        allow(asset).to receive(:content_blank?).and_return(true)
       end
       it "should not call #run on the runner" do
         subject.save
 
-        expect(runner).not_to have_received.run(any_args)
+        expect(runner).not_to have_received(:run)
       end
     end
   end

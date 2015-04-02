@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe GenericAsset do
-  verify_contract(:generic_asset)
-
   let(:generic_asset) { GenericAsset.new(:id => id) }
   let(:id) {}
   let(:file) { File.open(File.join(fixture_path, 'fixture_image.jpg'), 'rb') }
@@ -14,8 +12,6 @@ RSpec.describe GenericAsset do
     context "when it's loaded from solr" do
       let(:asset) { described_class.new(:title => ["bla"]) }
       subject {described_class.load_instance_from_solr(asset.id, asset.to_solr)}
-      # Can't use Bogus here.
-      before { Bogus.reset_overwritten_classes }
       it "should respond to all attributes" do
         expect(subject.title).to eq asset.title
       end
@@ -53,15 +49,14 @@ RSpec.describe GenericAsset do
     end
     context 'when a new object is saved' do
       before(:each) do
-        fake_class(OregonDigital::IdService)
-        stub(OregonDigital::IdService).mint { "9999" }
+        allow(OregonDigital::IdService).to receive(:mint).and_return("9999")
       end
       context "when it doesn't have an id" do
         before do
           generic_asset.save
         end
         it "should call the id service" do
-          expect(OregonDigital::IdService).to have_received.mint
+          expect(OregonDigital::IdService).to have_received(:mint)
         end
         it 'should no longer be nil' do
           expect(generic_asset.id).not_to be_nil
@@ -71,7 +66,7 @@ RSpec.describe GenericAsset do
         let(:id) { "0000" }
         let(:generic_asset) { GenericAsset.new(:id => id) }
         it "should not call the id service" do
-          expect(OregonDigital::IdService).not_to have_received.mint
+          expect(OregonDigital::IdService).not_to have_received(:mint)
         end
         it 'should not override the pid' do
           expect(generic_asset.id).to eq id
