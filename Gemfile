@@ -33,6 +33,7 @@ gem 'active-fedora', :github => "projecthydra/active_fedora"
 
 # Blacklight
 gem 'blacklight'
+gem 'rsolr'
 
 # NOID for IDs
 gem 'noid'
