@@ -27,24 +27,3 @@ class CleanRepository
     end
   end
 end
-
-class CleanConnection < SimpleDelegator
-  def get(*args)
-    __getobj__.get(*args) do |req|
-      prefer_headers = PreferHeaders.new(req.headers["Prefer"])
-      prefer_headers.omit = prefer_headers.omit | omit_uris
-      req.headers["Prefer"] = prefer_headers.to_s
-    end
-  end
-
-  private
-
-  def omit_uris
-    [
-      "http://fedora.info/definitions/v4/repository#ServerManaged",
-      "http://www.w3.org/ns/ldp#PreferContainment",
-      "http://www.w3.org/ns/ldp#PreferEmptyContainer",
-      "http://www.w3.org/ns/ldp#PreferMembership"
-    ]
-  end
-end
