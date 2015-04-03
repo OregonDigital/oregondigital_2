@@ -29,7 +29,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Hydra
 gem 'hydra-head', :github => "projecthydra/hydra-head"
-gem 'active-fedora', :github => "projecthydra/active_fedora"
+gem 'active-fedora', :github => "terrellt/active_fedora", :branch => "feature/clean_connection"
 
 # Blacklight
 gem 'blacklight'

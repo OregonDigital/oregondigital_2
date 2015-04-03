@@ -3,6 +3,6 @@ class SolrDocument
 
   include Blacklight::Solr::Document
 
-  use_extension( OregonDigital::SolrNTripleExtension)
+  use_extension(OregonDigital::RdfConnegExtension)
 
 end

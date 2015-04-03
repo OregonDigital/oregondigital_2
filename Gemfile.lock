@@ -1,20 +1,4 @@
 GIT
-  remote: git://github.com/projecthydra/active_fedora.git
-  revision: ee566ed727b3b3d98dacb419c496911b468d66e6
-  specs:
-    active-fedora (9.0.6)
-      active-triples (~> 0.6.0)
-      activesupport (>= 4.1.0)
-      deprecation
-      ldp (~> 0.2.1)
-      linkeddata
-      nom-xml (>= 0.5.1)
-      om (~> 3.1)
-      rdf-ldp
-      rdf-rdfxml (~> 1.1.0)
-      rsolr (~> 1.0.10)
-
-GIT
   remote: git://github.com/projecthydra/hydra-head.git
   revision: 4e713e4bf356511bed73ca6f2dae13d94fde1871
   specs:
@@ -44,6 +28,23 @@ GIT
       i18n
       logger
       rubyzip
+
+GIT
+  remote: git://github.com/terrellt/active_fedora.git
+  revision: 45430b446d0b896f1ba3654d91695f667d79d039
+  branch: feature/clean_connection
+  specs:
+    active-fedora (9.0.6)
+      active-triples (~> 0.6.0)
+      activesupport (>= 4.1.0)
+      deprecation
+      ldp (~> 0.3.0)
+      linkeddata
+      nom-xml (>= 0.5.1)
+      om (~> 3.1)
+      rdf-ldp
+      rdf-rdfxml (~> 1.1.0)
+      rsolr (~> 1.0.10)
 
 GIT
   remote: git://github.com/terrellt/jazz_hands.git
@@ -230,7 +231,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
-    ldp (0.2.3)
+    ldp (0.3.0)
       faraday
       http_logger
       linkeddata (>= 1.1)

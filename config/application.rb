@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 require_relative '../lib/oregon_digital'
+require 'json/ld'
 
 module OregonDigital
   class Application < Rails::Application

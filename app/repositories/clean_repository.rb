@@ -1,23 +1,30 @@
 class CleanRepository
   attr_reader :connection, :id_converter
   def initialize(connection, id_converter)
-    @connection = CleanConnection.new(connection)
+    @connection = connection
     @id_converter = id_converter
   end
 
   def find(id)
-    connection.get(uri(id)).graph
-      .delete(has_model_query)
+    ConvertedSubject.new(id, connection.get(uri(id))).graph
   end
 
   private
 
-  def has_model_query
-    [nil, ActiveFedora::RDF::Fcrepo::Model.hasModel, nil]
-  end
-
   def uri(id)
     id_converter.id_to_uri(id)
+  end
+
+  class ConvertedSubject < SimpleDelegator
+    attr_reader :id
+    def initialize(id, result)
+      @id = id
+      super(result)
+    end
+
+    def graph
+      @graph ||= OregonDigital::GraphMutators::SubjectChanger.call(__getobj__.graph, GenericAsset.id_to_uri(id), RDF::URI("http://oregondigital.org/resource/#{id}"))
+    end
   end
 end
 
