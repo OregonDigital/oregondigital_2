@@ -27,7 +27,7 @@ RSpec.describe GenericAsset do
     end
     context "when content is assigned" do
       before do
-        generic_asset.add_file_datastream(file, :dsid => "content")
+        generic_asset.add_file(file, :path => "content")
       end
       it "should work" do
         expect(generic_asset.content.content).not_to be_blank
