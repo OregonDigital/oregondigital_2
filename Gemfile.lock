@@ -62,6 +62,15 @@ GIT
       pry-stack_explorer (~> 0.4.9)
       railties (>= 3.0, < 5.0)
 
+GIT
+  remote: git@github.com:circleci/rspec_junit_formatter.git
+  revision: 7b098c8ab2ac5e5f78190b51629ed6d67a9de4d1
+  specs:
+    rspec_junit_formatter (0.2.0)
+      builder (< 4)
+      rspec (>= 2, < 4)
+      rspec-core (!= 2.12.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -376,6 +385,10 @@ GEM
       railties (>= 4.2.0, < 5)
     rsolr (1.0.12)
       builder (>= 2.1.2)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
     rspec-core (3.2.2)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
@@ -499,6 +512,7 @@ DEPENDENCIES
   recursive-open-struct
   rsolr
   rspec-rails
+  rspec_junit_formatter!
   ruby-vips
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
