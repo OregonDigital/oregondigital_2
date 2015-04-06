@@ -42,7 +42,9 @@ RSpec.describe OregonDigital::Derivatives::Processors::PdfProcessor do
     it "should create page*quality pages" do
       expect(File.exists?(path)).to eq true
       expect(pages.length).to eq 2
-      expect(pages).to eq expected_result
+      expected_result.each do |result|
+        expect(pages).to include result
+      end
     end
   end
 end
