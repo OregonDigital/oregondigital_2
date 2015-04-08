@@ -5,10 +5,16 @@ class ShowField
   end
 
   def key
-    "#{property}_ssm"
+    solr_name_generator.solr_name(property, :displayable)
   end
 
   def label
     property.humanize
+  end
+
+  private
+
+  def solr_name_generator
+    ActiveFedora::SolrQueryBuilder
   end
 end
