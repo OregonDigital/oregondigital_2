@@ -22,6 +22,6 @@ class BlacklightConfig
   end
 
   def show_fields
-    GenericAsset.properties.keys.map{|x| ShowField.new(x) }
+    metadata_class.properties.keys.map{|x| ShowField.new(x) }
   end
 end
