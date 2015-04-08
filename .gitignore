@@ -18,3 +18,9 @@
 
 # Ignore jetty
 /jetty
+
+# Ignore media
+/media
+
+# Ignore coverage
+/coverage

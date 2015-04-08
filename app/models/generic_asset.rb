@@ -1,9 +1,14 @@
 class GenericAsset < ActiveFedora::Base
   include Hydra::AccessControls::Permissions
   include OregonDigital::Models::Metadata
+  include OregonDigital::Derivatives::Model
+  contains "content", :class_name => 'FileContent'
+  contains "workflow_metadata", :class_name => "Files::YmlFile"
+  delegate :content_changed?,:blank?, :to => :content, :prefix => true
+  delegate :streamable_content, :to => :content
 
-  def assign_rdf_subject
-    super
+  def injector
+    @injector ||= OregonDigital.inject
   end
 
   private

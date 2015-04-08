@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::GraphMutators::SubjectChanger do
-  verify_contract :subject_changer
-
   subject { described_class.new(graph) }
   let(:graph) do
     r = RDF::Graph.new

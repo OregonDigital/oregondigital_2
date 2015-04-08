@@ -12,15 +12,15 @@ RSpec.describe OregonDigital::IdService do
     let(:pid_exists) { false }
 
     before do
-      stub(ActiveFedora::Base).exists?(anything) { pid_exists }
-      stub(OregonDigital::IdGenerator).next_id { pid1 }
+      allow(ActiveFedora::Base).to receive(:exists?).and_return(pid_exists)
+      allow(OregonDigital::IdGenerator).to receive(:next_id).and_return(pid1)
     end
 
     context "when the pid exists" do
       let(:pid_exists) { true }
       before do
-        stub(OregonDigital::IdGenerator).next_id { pid1 }
-        stub(described_class).mint
+        allow(OregonDigital::IdGenerator).to receive(:next_id).and_return(pid1)
+        allow(described_class).to receive(:mint)
       end
       it "should repeatedly try for uniqueness" do
         id
@@ -54,21 +54,24 @@ RSpec.describe OregonDigital::IdService do
 
   describe "create" do
     subject { described_class }
-    let(:fake_service) { fake(:id_service) }
+
+    let(:fake_service) { instance_double(OregonDigital::IdService) }
     it "should call initialize without the retry option.result" do
-      stub(subject).new(any_args) { fake_service }
+      allow(fake_service).to receive(:result)
+      allow(subject).to receive(:new).with(any_args).and_return(fake_service)
       subject.create("monkeys")
-      expect(subject).to have_received.new(:pid => "monkeys", :retry => false)
+      expect(subject).to have_received(:new).with(:pid => "monkeys", :retry => false)
       expect(fake_service).to have_received(:result)
     end
   end
   
   describe "#mint" do
-    let(:fake_service) { fake(:id_service) }
+    let(:fake_service) { instance_double(OregonDigital::IdService) }
     it "should call new.result" do
-      stub(described_class).new(any_args) { fake_service }
+      allow(described_class).to receive(:new).and_return(fake_service)
+      allow(fake_service).to receive(:result)
       described_class.mint
-      expect(described_class).to have_received.new
+      expect(described_class).to have_received(:new)
       expect(fake_service).to have_received(:result)
     end
   end

@@ -29,9 +29,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Hydra
 gem 'hydra-head', :github => "projecthydra/hydra-head"
+gem 'active-fedora', :github => "projecthydra/active_fedora"
 
 # Blacklight
 gem 'blacklight'
+gem 'rsolr'
 
 # NOID for IDs
 gem 'noid'
@@ -41,6 +43,15 @@ gem 'constantinople'
 
 # Blacklight Advanced
 gem 'blacklight_advanced_search'
+
+gem 'mini_magick'
+# Recursive open-struct for YAML Datastream
+gem 'recursive-open-struct'
+
+#Vips for pyramidal processing.
+gem 'ruby-vips'
+
+gem 'docsplit'
 
 
 group :development, :test do
@@ -54,13 +65,13 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'jazz_hands', :github => "terrellt/jazz_hands"
   gem 'capybara'
+  gem 'simplecov'
 end
 
 group :test do
   gem 'webmock'
   gem 'timecop'
   gem 'database_cleaner'
-  gem 'bogus'
 end
 
 gem 'devise'
