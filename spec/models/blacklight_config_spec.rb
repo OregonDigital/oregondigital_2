@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe BlacklightConfig do
-  subject { BlacklightConfig.new(resource) }
+  subject { BlacklightConfig.new(resource, default_config) }
   let(:resource) { GenericAsset }
+  let(:default_config) { CatalogController.blacklight_config }
 
   describe "#default_configuration" do
     it "should not error" do
       expect{subject.default_configuration}.not_to raise_error
     end
     it "should be the CatalogController's config" do
-      expect(subject.default_configuration).to eq CatalogController.blacklight_config
+      expect(subject.default_configuration).to eq default_config
     end
   end
 

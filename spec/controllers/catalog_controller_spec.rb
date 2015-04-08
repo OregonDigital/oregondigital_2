@@ -23,7 +23,7 @@ RSpec.describe CatalogController do
     let(:blacklight_config) { double("Blacklight Configuration") }
     let(:config) { double("config") }
     before do
-      allow(BlacklightConfig).to receive(:new).with(GenericAsset).and_return(blacklight_config)
+      allow(BlacklightConfig).to receive(:new).with(GenericAsset, CatalogController.blacklight_config).and_return(blacklight_config)
       allow(blacklight_config).to receive(:configuration).and_return(config)
     end
     it "should call from BlacklightConfig" do

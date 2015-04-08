@@ -10,7 +10,7 @@ RSpec.describe "catalog/_show_default.html.erb" do
     end
   end
   let(:blacklight_config) {
-    BlacklightConfig.new(GenericAsset).configuration
+    BlacklightConfig.new(GenericAsset, CatalogController.blacklight_config).configuration
   }
   let(:document) { SolrDocument.new(resource.to_solr) }
   before do

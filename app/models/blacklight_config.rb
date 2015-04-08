@@ -1,16 +1,13 @@
 class BlacklightConfig
-  attr_reader :metadata_class
-  def initialize(metadata_class)
+  attr_reader :metadata_class, :default_configuration
+  def initialize(metadata_class, default_configuration)
     @metadata_class = metadata_class
+    @default_configuration = default_configuration
     apply_show_fields
   end
 
-  def default_configuration
-    CatalogController.blacklight_config.deep_copy
-  end
-
   def configuration
-    @configuration ||= default_configuration
+    @configuration ||= default_configuration.deep_copy
   end
 
   private
