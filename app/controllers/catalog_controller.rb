@@ -11,7 +11,6 @@ class CatalogController < ApplicationController
   # Include Oregon Digital Catalog Logic
   include OregonDigital::Catalog
 
-
   def blacklight_config
     BlacklightConfig.new(GenericAsset).configuration
   end
