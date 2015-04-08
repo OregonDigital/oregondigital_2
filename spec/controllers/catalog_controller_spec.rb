@@ -18,4 +18,16 @@ RSpec.describe CatalogController do
       end
     end
   end
+
+  describe "#blacklight_config" do
+    let(:blacklight_config) { double("Blacklight Configuration") }
+    let(:config) { double("config") }
+    before do
+      allow(BlacklightConfig).to receive(:new).with(GenericAsset).and_return(blacklight_config)
+      allow(blacklight_config).to receive(:configuration).and_return(config)
+    end
+    it "should call from BlacklightConfig" do
+      expect(controller.blacklight_config).to eq config
+    end
+  end
 end
