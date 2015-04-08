@@ -9,10 +9,10 @@ module OregonDigital::Models
       property :alternative, :predicate => RDF::DC.alternative do |index|
         index.as :searchable, :displayable
       end
-      property :captionTitle, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.captionTitle do |index|
+      property :captionTitle, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.captionTitle do |index|
         index.as :searchable, :displayable
       end
-      property :tribalTitle, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.tribalTitle do |index|
+      property :tribalTitle, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.tribalTitle do |index|
         index.as :searchable, :displayable
       end
 
@@ -65,7 +65,7 @@ module OregonDigital::Models
       property :transcriber, :predicate => OregonDigital::Vocabularies::MARCREL.trc do |index|
         index.as :displayable
       end
-      property :creatorDisplay, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL['cco/creatorDisplay'] do |index|
+      property :creatorDisplay, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE['cco/creatorDisplay'] do |index|
         index.as :displayable
       end
       property :collector, :predicate => OregonDigital::Vocabularies::MARCREL.col do |index|
@@ -82,7 +82,7 @@ module OregonDigital::Models
       property :inscription, :predicate => OregonDigital::Vocabularies::VRA.inscription do |index|
         index.as :searchable, :displayable
       end
-      property :view, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL['cco/viewDescription'] do |index|
+      property :view, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE['cco/viewDescription'] do |index|
         index.as :displayable
       end
       property :firstLine, :predicate => OregonDigital::Vocabularies::SHEETMUSIC.firstLine do |index|
@@ -91,16 +91,16 @@ module OregonDigital::Models
       property :firstLineChorus, :predicate => OregonDigital::Vocabularies::SHEETMUSIC.firstLineChorus do |index|
         index.as :searchable, :displayable
       end
-      property :compassDirection, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.compassDirection do |index|
+      property :compassDirection, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.compassDirection do |index|
         index.as :displayable
       end
-      property :objectOrientation, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.objectOrientation do |index|
+      property :objectOrientation, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.objectOrientation do |index|
         index.as :displayable
       end
-      property :photographOrientation, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.photographOrientation do |index|
+      property :photographOrientation, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.photographOrientation do |index|
         index.as :displayable
       end
-      property :conditionOfSource, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.sourceCondition do |index|    
+      property :conditionOfSource, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.sourceCondition do |index|    
         index.as :searchable, :displayable
       end
       property :instrumentation, :predicate => OregonDigital::Vocabularies::SHEETMUSIC.instrumentation do |index|
@@ -109,19 +109,19 @@ module OregonDigital::Models
       property :od_content, :predicate => RDF::URI('http://opaquenamespace.org/ns/contents') do |index|
         index.as :symbol
       end
-      property :militaryServiceLocation, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.militaryServiceLocation do |index|
+      property :militaryServiceLocation, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.militaryServiceLocation do |index|
         index.as :searchable, :displayable
       end
-      property :militaryHighestRank, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.militaryHighestRank do |index|
+      property :militaryHighestRank, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.militaryHighestRank do |index|
         index.as :searchable, :displayable
       end
-      property :militaryOccupation, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.militaryOccupation do |index|
+      property :militaryOccupation, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.militaryOccupation do |index|
         index.as :searchable, :displayable
       end
-      property :cover, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.coverDescription do |index|
+      property :cover, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.coverDescription do |index|
         index.as :searchable, :displayable
       end
-      property :canzonierePoems, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.canzonierePoems do |index|
+      property :canzonierePoems, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.canzonierePoems do |index|
         index.as :displayable
       end
       property :coverage, :predicate => RDF::DC11.coverage do |index|
@@ -133,7 +133,7 @@ module OregonDigital::Models
       property :tableOfContents, :predicate => RDF::DC.tableOfContents do |index|
         index.as :displayable
       end
-      property :tribalNotes, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.tribalNotes do |index|
+      property :tribalNotes, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.tribalNotes do |index|
         index.as :displayable
       end
       property :acceptedNameUsage, :predicate => RDF::URI('http://rs.tdwg.org/dwc/terms/acceptedNameUsage') do |index|
@@ -167,19 +167,19 @@ module OregonDigital::Models
       property :workType, :predicate => RDF.type do |index|
         index.as :searchable, :facetable, :displayable
       end
-      property :militaryBranch, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.militaryBranch do |index|
+      property :militaryBranch, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.militaryBranch do |index|
         index.as :searchable, :facetable, :displayable
       end
-      property :ethnographicTerm, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.ethnographic do |index|
+      property :ethnographicTerm, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.ethnographic do |index|
         index.as :searchable, :facetable, :displayable
       end
-      property :sportsTeam, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.sportsTeam do |index|
+      property :sportsTeam, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.sportsTeam do |index|
         index.as :searchable, :displayable
       end
-      property :tribalClasses, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.tribalClasses do |index|
+      property :tribalClasses, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.tribalClasses do |index|
         index.as :searchable, :displayable
       end
-      property :tribalTerms, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.tribalTerms do |index|
+      property :tribalTerms, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.tribalTerms do |index|
         index.as :searchable, :displayable
       end
 
@@ -200,10 +200,10 @@ module OregonDigital::Models
       property :streetAddress, :predicate => RDF::URI('http://www.loc.gov/standards/mads/rdf/v1.html#streetAddress') do |index|
         index.as :searchable, :displayable
       end
-      property :rangerDistrict, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.rangerDistrict do |index|
+      property :rangerDistrict, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.rangerDistrict do |index|
         index.as :searchable, :facetable, :displayable
       end
-      property :tgn, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.tgn do |index|
+      property :tgn, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.tgn do |index|
         index.as :searchable, :facetable, :displayable
       end
 
@@ -220,13 +220,13 @@ module OregonDigital::Models
       property :latestDate, :predicate => OregonDigital::Vocabularies::VRA.latestDate do |index|
         index.as :searchable, :displayable
       end
-      property :viewDate, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL['cco/viewDate'] do |index|
+      property :viewDate, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE['cco/viewDate'] do |index|
         index.as :displayable
       end
-      property :awardDate, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.awardDate do |index|
+      property :awardDate, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.awardDate do |index|
         index.as :searchable, :displayable
       end
-      property :collectedDate, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.collectedDate do |index|
+      property :collectedDate, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.collectedDate do |index|
         index.as :displayable
       end
 
@@ -237,7 +237,7 @@ module OregonDigital::Models
       property :itemLocator, :predicate => OregonDigital::Vocabularies::HOLDING.label do |index|
         index.as :searchable, :displayable
       end
-      property :accessionNumber, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL['cco/accessionNumber'] do |index|
+      property :accessionNumber, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE['cco/accessionNumber'] do |index|
         index.as :searchable, :displayable
       end
       property :lccn, :predicate => OregonDigital::Vocabularies::BIBFRAME.lccn do |index|
@@ -283,25 +283,25 @@ module OregonDigital::Models
       property :od_repository, :predicate => OregonDigital::Vocabularies::MARCREL.rps do |index|
         index.as :searchable, :facetable, :displayable
       end
-      property :localCollectionID, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.localCollectionID do |index|
+      property :localCollectionID, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.localCollectionID do |index|
         index.as :searchable, :displayable
       end
-      property :localCollectionName, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.localCollectionName do |index|
+      property :localCollectionName, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.localCollectionName do |index|
         index.as :searchable, :facetable, :displayable
       end
-      property :seriesName, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.seriesName do |index|
+      property :seriesName, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.seriesName do |index|
         index.as :searchable, :displayable
       end
-      property :seriesNumber, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.seriesNumber do |index|
+      property :seriesNumber, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.seriesNumber do |index|
         index.as :displayable
       end
-      property :boxNumber, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.boxNumber do |index|
+      property :boxNumber, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.boxNumber do |index|
         index.as :searchable, :displayable
       end
-      property :folderNumber, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.folderNumber do |index|
+      property :folderNumber, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.folderNumber do |index|
         index.as :searchable, :displayable
       end
-      property :folderName, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.folderName do |index|
+      property :folderName, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.folderName do |index|
         index.as :searchable, :displayable
       end
 
@@ -334,7 +334,7 @@ module OregonDigital::Models
       end
 
       # Groupings
-      property :set, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.set do |index|
+      property :set, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.set do |index|
         index.as :searchable, :facetable, :displayable
       end
 
@@ -345,7 +345,7 @@ module OregonDigital::Models
       property :largerWork, :predicate => OregonDigital::Vocabularies::SHEETMUSIC.largerWork do |index|
         index.as :searchable, :displayable
       end
-      property :artSeries, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.artSeries do |index|
+      property :artSeries, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.artSeries do |index|
         index.as :searchable, :displayable
       end
       property :hostItem, :predicate => OregonDigital::Vocabularies::SHEETMUSIC.hostItem do |index|
@@ -368,24 +368,24 @@ module OregonDigital::Models
       end
 
       # Administrative
-      property :institution, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.contributingInstitution do |index|
+      property :institution, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.contributingInstitution do |index|
         index.as :searchable, :facetable, :displayable
       end
-      property :conversion, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.conversionSpecifications
-      property :dateDigitized, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.dateDigitized
+      property :conversion, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.conversionSpecifications
+      property :dateDigitized, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.dateDigitized
       property :created, :predicate => RDF::DC.created do |index|
         index.as :searchable, :facetable, :displayable
       end
       property :modified, :predicate => RDF::DC.modified do |index|
         index.as :searchable, :displayable
       end
-      property :exhibit, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.exhibit do |index|
+      property :exhibit, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.exhibit do |index|
         index.as :searchable, :facetable, :displayable
       end
-      property :fullText, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.fullText do |index|
+      property :fullText, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.fullText do |index|
         index.as :searchable, :displayable
       end
-      property :tribalStatus, :predicate => OregonDigital::Vocabularies::OREGONDIGITAL.tribalStatus do |index|
+      property :tribalStatus, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.tribalStatus do |index|
         index.as :searchable, :displayable
       end
       property :submissionDate, :predicate => RDF::DC.dateSubmitted do |index|

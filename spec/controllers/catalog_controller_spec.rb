@@ -12,9 +12,9 @@ RSpec.describe CatalogController do
 
         get 'show', :id => "bla", :format => :nt
         graph = asset.resource.class.new("http://oregondigital.org/resource/bla") << RDF::Reader.for(:ntriples).new(response.body)
-        
         expect(graph.title).to eq title
         expect(graph.type).to eq [type]
+        expect(graph.statements.to_a.length).to eq 2
       end
     end
   end

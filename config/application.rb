@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 require_relative '../lib/oregon_digital'
+require_relative '../lib/conneg_hack_middleware'
+require 'json/ld'
 
 module OregonDigital
   class Application < Rails::Application
@@ -31,5 +33,6 @@ module OregonDigital
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.active_record.raise_in_transactional_callbacks = true
+    config.middleware.use ::ConnegHackMiddleware
   end
 end
