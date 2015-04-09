@@ -37,7 +37,7 @@ gem 'rsolr'
 
 # NOID for IDs
 gem 'noid'
-gem 'active_fedora-noid', :github => "projecthydra-labs/active_fedora-noid"
+gem 'active_fedora-noid'
 
 # Constantinople for config values
 gem 'constantinople'

@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/projecthydra-labs/active_fedora-noid.git
-  revision: 108ff26304de3dae430ff378b33005f1fa514cf4
-  specs:
-    active_fedora-noid (0.2.0)
-      active-fedora (~> 9.0)
-      noid (~> 0.7)
-
-GIT
   remote: git://github.com/projecthydra/active_fedora.git
   revision: fbfd541bf327e4e44b9a97ef7a8f45d0ef5fca55
   specs:
@@ -107,6 +99,9 @@ GEM
       deprecation (~> 0.1)
       linkeddata (~> 1.1)
       rdf (~> 1.1)
+    active_fedora-noid (1.0.0)
+      active-fedora (~> 9.0)
+      noid (~> 0.7)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -499,7 +494,7 @@ PLATFORMS
 
 DEPENDENCIES
   active-fedora!
-  active_fedora-noid!
+  active_fedora-noid
   blacklight
   blacklight_advanced_search
   capybara
