@@ -48,15 +48,17 @@ RSpec.describe GenericAsset do
       end
     end
     context 'when a new object is saved' do
+      let(:id_service) { instance_double("ActiveFedora::Noid::Service") }
       before(:each) do
-        allow(OregonDigital::IdService).to receive(:mint).and_return("9999")
+        allow(OregonDigital.inject).to receive(:id_service).and_return(id_service)
+        allow(id_service).to receive(:mint).and_return("9999")
       end
       context "when it doesn't have an id" do
         before do
           generic_asset.save
         end
         it "should call the id service" do
-          expect(OregonDigital::IdService).to have_received(:mint)
+          expect(id_service).to have_received(:mint)
         end
         it 'should no longer be nil' do
           expect(generic_asset.id).not_to be_nil
@@ -66,7 +68,7 @@ RSpec.describe GenericAsset do
         let(:id) { "0000" }
         let(:generic_asset) { GenericAsset.new(:id => id) }
         it "should not call the id service" do
-          expect(OregonDigital::IdService).not_to have_received(:mint)
+          expect(id_service).not_to have_received(:mint)
         end
         it 'should not override the pid' do
           expect(generic_asset.id).to eq id
