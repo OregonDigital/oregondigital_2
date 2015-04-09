@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/projecthydra-labs/active_fedora-noid.git
+  revision: 108ff26304de3dae430ff378b33005f1fa514cf4
+  specs:
+    active_fedora-noid (0.2.0)
+      active-fedora (~> 9.0)
+      noid (~> 0.7)
+
+GIT
   remote: git://github.com/projecthydra/active_fedora.git
   revision: fbfd541bf327e4e44b9a97ef7a8f45d0ef5fca55
   specs:
@@ -491,6 +499,7 @@ PLATFORMS
 
 DEPENDENCIES
   active-fedora!
+  active_fedora-noid!
   blacklight
   blacklight_advanced_search
   capybara
