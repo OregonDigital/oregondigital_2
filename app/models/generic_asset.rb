@@ -14,6 +14,6 @@ class GenericAsset < ActiveFedora::Base
   private
 
   def assign_id
-    OregonDigital::IdService.mint
+    injector.id_service.mint
   end
 end
