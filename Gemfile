@@ -52,6 +52,8 @@ gem 'recursive-open-struct'
 #Vips for pyramidal processing.
 gem 'ruby-vips'
 
+gem 'hydra-editor'
+
 gem 'docsplit'
 
 
