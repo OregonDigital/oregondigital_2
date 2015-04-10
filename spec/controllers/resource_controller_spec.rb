@@ -8,6 +8,7 @@ RSpec.describe ResourceController  do
     it "should redirect to a catalog resource if a resource exists" do
       allow(ActiveFedora::Base).to receive(:exists?).with('id').and_return(true)
       expect( get :show, :id => 'id').to redirect_to '/catalog/id'
+      expect(response.status).to eq 303
     end
   end
 end
