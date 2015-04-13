@@ -120,6 +120,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     arel (6.0.0)
+    attr_extras (4.4.0)
     autoprefixer-rails (5.1.9)
       execjs
       json
@@ -511,6 +512,7 @@ PLATFORMS
 DEPENDENCIES
   active-fedora!
   active_fedora-noid
+  attr_extras
   blacklight
   blacklight_advanced_search
   capybara
