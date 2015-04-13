@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :resource, :only => :show
+  mount HydraEditor::Engine => '/'
 end
