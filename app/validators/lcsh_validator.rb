@@ -1,6 +1,12 @@
 class LcshValidator
-  def valid?(value)
-    UriValidator.valid?(value) && value.start_with?(base_uri)
+  def valid?(values)
+    Array.wrap(values).all? do |value|
+      UriValidator.valid?(value) && value.start_with?(base_uri)
+    end
+  end
+
+  def message
+    "contains a non-LCSH term"
   end
 
   private

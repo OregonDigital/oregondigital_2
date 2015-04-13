@@ -6,12 +6,17 @@ class WithValidatedProperty < SimpleDelegator
     @validator = validator
   end
 
-  def valid?
-    __getobj__.valid?
+  def valid?(*args)
+    __getobj__.valid?(*args)
     unless validator.valid?(result)
       errors.add(property, validator.message)
     end
     errors.blank?
+  end
+
+  def save(*args)
+    return false unless valid?
+    __getobj__.save(*args)
   end
 
   private
