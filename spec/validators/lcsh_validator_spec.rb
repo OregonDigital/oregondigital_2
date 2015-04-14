@@ -3,24 +3,18 @@ require 'rails_helper'
 RSpec.describe LcshValidator do
   subject { LcshValidator.new }
   describe "#valid?" do
-    let(:result) { subject.valid?(value) }
-    context 'when given a non-lcsh uri' do
-      let(:value) { [RDF::URI("http://opaquenamespace.org/ns/subject/bad")] }
-      it "should return false" do
-        expect(result).to eq false
-      end
-    end
-    context "when given an lcsh uri" do
-      let(:value) { [RDF::URI("http://id.loc.gov/authorities/subjects/1")] }
-      it "should return true" do
-        expect(result).to eq true
-      end
-    end
-    context "when given a string and not a URI" do
-      let(:value) { ["http://id.loc.gov/authorities/subjects/1"] }
-      it "should return false" do
-        expect(result).to eq false
-      end
+    let(:base_uri) { "http://id.loc.gov/authorities/subjects" }
+    let(:validator) { instance_double(BaseUriValidator) }
+    let(:value) { ["#{base_uri}/1"] }
+    it "should ask BaseUriValidator" do
+      allow(BaseUriValidator).to receive(:new).with(base_uri).and_return(validator)
+      validation_result = double("Result")
+      allow(validator).to receive(:valid?).and_return(validation_result)
+
+      result = subject.valid?(value)
+
+      expect(validator).to have_received(:valid?).with(value)
+      expect(result).to eq validation_result
     end
   end
 

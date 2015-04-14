@@ -1,8 +1,6 @@
 class LcshValidator
   def valid?(values)
-    Array.wrap(values).all? do |value|
-      UriValidator.valid?(value) && value.start_with?(base_uri)
-    end
+    validator.valid?(values)
   end
 
   def message
@@ -10,6 +8,10 @@ class LcshValidator
   end
 
   private
+
+  def validator
+    @validator ||= BaseUriValidator.new(base_uri)
+  end
 
   def base_uri
     "http://id.loc.gov/authorities/subjects"
