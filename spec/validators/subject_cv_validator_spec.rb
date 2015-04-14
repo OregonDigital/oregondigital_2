@@ -24,10 +24,4 @@ RSpec.describe SubjectCvValidator do
       end
     end
   end
-
-  describe "#message" do
-    it "should be a combination of validators strings" do
-      expect(subject.message).to eq subject.__send__(:validators).map(&:message).to_sentence
-    end
-  end
 end

@@ -29,7 +29,7 @@ RSpec.describe OrValidator do
     end
     describe "#message" do
       it "should combine the two validators' messages" do
-        expect(subject.message).to eq "message and message"
+        expect(subject.message).to eq "message or message"
       end
     end
   end
