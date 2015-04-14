@@ -13,7 +13,8 @@ class SubjectCvValidator
   def validators
     [
       LcshValidator.new,
-      OpaqueNsSubjectValidator.new
+      OpaqueNsSubjectValidator.new,
+      BaseUriValidator.new("http://vocab.getty.edu/tgn/")
     ]
   end
 end

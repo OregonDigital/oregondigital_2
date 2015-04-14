@@ -23,5 +23,11 @@ RSpec.describe SubjectCvValidator do
         expect(result).to eq true
       end
     end
+    context "when given a Getty URI" do
+      let(:value) { RDF::URI("http://vocab.getty.edu/tgn/1") }
+      it "should be valid" do
+        expect(result).to eq true
+      end
+    end
   end
 end
