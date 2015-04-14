@@ -6,4 +6,8 @@ class BaseUriValidator
       UriValidator.valid?(value) && value.start_with?(base_uri.to_s)
     end
   end
+
+  def message
+    "is not in the base uri #{base_uri}"
+  end
 end

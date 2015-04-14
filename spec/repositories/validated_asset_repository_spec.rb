@@ -25,6 +25,11 @@ RSpec.describe ValidatedAssetRepository do
 
       expect(result.save).to eq true
     end
+    it "should validate from multiple sources" do
+      result.lcsubject = [RDF::URI("http://opaquenamespace.org/ns/subject/banana")]
+
+      expect(result).to be_valid
+    end
   end
 
   describe "#find" do

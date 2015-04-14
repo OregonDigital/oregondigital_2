@@ -23,4 +23,10 @@ RSpec.describe BaseUriValidator do
       end
     end
   end
+
+  describe "#message" do
+    it "should be right" do
+      expect(subject.message).to eq "is not in the base uri http://opaquenamespace.org/ns/subject"
+    end
+  end
 end

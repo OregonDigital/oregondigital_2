@@ -24,7 +24,7 @@ class ValidatedAssetRepository
   def validations
     {
       :lcsubject => [
-        LcshValidator.new
+        SubjectCvValidator.new
       ]
     }
   end
