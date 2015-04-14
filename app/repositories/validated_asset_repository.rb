@@ -22,10 +22,7 @@ class ValidatedAssetRepository
   end
 
   def validations
-    {
-      :lcsubject => [
-        SubjectCvValidator.new
-      ]
-    }
+    @validations ||= 
+      PropertyValidationsGenerator.new(base_repository).validations
   end
 end
