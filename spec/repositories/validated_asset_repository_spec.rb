@@ -32,6 +32,15 @@ RSpec.describe ValidatedAssetRepository do
     end
   end
 
+  describe "#decorate" do
+    let(:image) { Image.new }
+    let(:result) { subject.decorate(image) }
+    it "should decorate the asset passed" do
+      expect(result.class).to eq WithValidatedProperty
+      expect(result.__getobj__).to eq image
+    end
+  end
+
   describe "#find" do
     context "when given an existing asset" do
       let(:image) do

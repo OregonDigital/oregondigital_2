@@ -2,15 +2,16 @@ class ValidatedAssetRepository
   pattr_initialize :base_repository
 
   def new(*args)
-    property_decorator.new(
-      base_repository.new(*args),
-      validations
-    ).run
+    decorate(base_repository.new(*args))
   end
 
   def find(*args)
+    decorate(base_repository.find(*args))
+  end
+
+  def decorate(asset)
     property_decorator.new(
-      base_repository.find(*args),
+      asset,
       validations
     ).run
   end
