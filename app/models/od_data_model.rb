@@ -207,7 +207,9 @@ class ODDataModel
 
   def simple_properties
     @simple_properties ||= Hash[
-      properties.map
+      properties.map do |property, config|
+        [property, config.predicate]
+      end
     ]
   end
 end
