@@ -219,6 +219,11 @@ GEM
     hirb (0.7.3)
     htmlentities (4.3.3)
     http_logger (0.5.1)
+    hydra-editor (1.0.3)
+      active-fedora (>= 9.0.0)
+      cancancan (~> 1.8)
+      rails (~> 4.1)
+      simple_form (~> 3.1.0)
     i18n (0.7.0)
     jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
@@ -433,6 +438,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     simplecov (0.9.2)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -513,6 +521,7 @@ DEPENDENCIES
   devise-guests (~> 0.3)
   docsplit
   factory_girl_rails
+  hydra-editor
   hydra-head!
   jazz_hands!
   jbuilder (~> 2.0)
