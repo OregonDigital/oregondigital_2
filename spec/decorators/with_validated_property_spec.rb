@@ -9,7 +9,6 @@ RSpec.describe WithValidatedProperty do
   let(:errors) { ActiveModel::Errors.new(result) }
   before do
     allow(asset).to receive(:title).and_return(result)
-    #allow(asset).to receive(:get_values).with(property, :cast => false).and_return(result)
     allow(asset).to receive(:errors).and_return(errors)
     allow(asset).to receive(:valid?).and_return(true)
     allow(errors).to receive(:add).and_call_original
