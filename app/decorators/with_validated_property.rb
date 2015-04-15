@@ -2,14 +2,14 @@ class WithValidatedProperty < SimpleDelegator
   attr_reader :property, :validator
   def initialize(resource, property, validator)
     super(resource)
-    @property = property
+    @property = ValidatedProperty(property)
     @validator = validator
   end
 
   def valid?(*args)
     __getobj__.valid?(*args)
     unless validator.valid?(result)
-      errors.add(property, validator.message)
+      errors.add(property.validated_property, validator.message)
     end
     errors.blank?
   end
@@ -22,6 +22,6 @@ class WithValidatedProperty < SimpleDelegator
   private
 
   def result
-    get_values(property, :cast => false)
+    __send__(property.property_accessor)
   end
 end
