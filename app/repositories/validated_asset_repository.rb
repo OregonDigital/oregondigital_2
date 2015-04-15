@@ -19,7 +19,7 @@ class ValidatedAssetRepository
   private
 
   def property_decorator
-    DecorateProperties
+    ComposedValidations::DecorateProperties
   end
 
   def validations

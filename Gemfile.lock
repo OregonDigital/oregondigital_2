@@ -166,6 +166,8 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
+    composed_validations (0.0.1)
+      attr_extras
     constantinople (0.2.2)
       deep_merge (~> 1.0)
       map (~> 4.2)
@@ -518,6 +520,7 @@ DEPENDENCIES
   blacklight_advanced_search
   capybara
   coffee-rails (~> 4.1.0)
+  composed_validations
   constantinople
   database_cleaner
   devise

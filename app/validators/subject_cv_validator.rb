@@ -7,7 +7,7 @@ class SubjectCvValidator
   private
 
   def or_validator
-    @or_validator ||= OrValidator.new(validators)
+    @or_validator ||= ComposedValidations::OrValidator.new(validators)
   end
 
   def validators
