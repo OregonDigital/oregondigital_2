@@ -69,6 +69,7 @@ group :development, :test do
   gem 'jazz_hands', :github => "terrellt/jazz_hands"
   gem 'capybara'
   gem 'simplecov'
+  gem 'newrelic_rpm'
 end
 
 group :test do
