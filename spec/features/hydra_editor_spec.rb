@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Hydra Editor" do
+RSpec.describe "Hydra Editor", :slow => true do
   let(:admin) {FactoryGirl.create(:admin)}
 
   it "should save an image" do
