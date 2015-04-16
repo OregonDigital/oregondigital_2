@@ -22,6 +22,19 @@ RSpec.describe BlacklightConfig do
         expect(subject.index.title_field).to eq Solrizer.solr_name('title', :displayable)
       end
     end
+    describe "#search_fields" do
+      it "should have all the search fields" do
+        expect(subject.search_fields.keys).to eq [
+          "all_fields",
+          "title",
+          "description",
+          "creator",
+          "lcsubject",
+          "date",
+          "institution"
+        ]
+      end
+    end
     describe "#default_solr_params" do
       it "should be right" do
         expect(subject.default_solr_params).to eq ({
