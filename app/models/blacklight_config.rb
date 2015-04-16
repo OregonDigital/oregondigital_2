@@ -3,7 +3,7 @@ class BlacklightConfig
   def initialize(metadata_class, default_configuration)
     @metadata_class = metadata_class
     @default_configuration = default_configuration
-    apply_show_fields
+    apply_configurations
   end
 
   def configuration
@@ -12,13 +12,17 @@ class BlacklightConfig
 
   private
 
-  def apply_show_fields
-    show_fields.each do |field|
-      configuration.add_show_field field.key, :label => field.label
-    end
+  def configurations
+    [
+      ShowConfiguration.new(configuration, metadata_class),
+      ViewConfiguration.new(configuration),
+      DefaultConfiguration.new(configuration),
+      SearchFieldConfiguration.new(configuration)
+    ]
   end
 
-  def show_fields
-    metadata_class.properties.keys.map{|x| ShowField.new(x) }
+  def apply_configurations
+    configurations.each(&:run)
   end
+
 end

@@ -14,13 +14,49 @@ RSpec.describe BlacklightConfig do
     end
   end
 
+
   describe "#configuration" do
+    subject { BlacklightConfig.new(resource, default_config).configuration }
+    describe "#index.title_field" do
+      it "should be title" do
+        expect(subject.index.title_field).to eq Solrizer.solr_name('title', :displayable)
+      end
+    end
+    describe "#search_fields" do
+      it "should have all the search fields" do
+        expect(subject.search_fields.keys).to eq [
+          "all_fields",
+          "title",
+          "description",
+          "creator",
+          "lcsubject",
+          "date",
+          "institution"
+        ]
+      end
+    end
+    describe "#default_solr_params" do
+      it "should be right" do
+        expect(subject.default_solr_params).to eq ({
+          :qt => 'search',
+          :rows => 10,
+          :hl => true,
+          :"hl.fl" => "full_text_tsimv",
+          :"hl.useFastVectorHighlighter" => true
+        })
+      end
+    end
+    describe "#index.display_type_field" do
+      it "should be has_model" do
+        expect(subject.index.display_type_field).to eq Solrizer.solr_name('has_model', :symbol)
+      end
+    end
     it "should be a Blacklight::Configuration" do
-      expect(subject.configuration).to be_instance_of Blacklight::Configuration
+      expect(subject).to be_instance_of Blacklight::Configuration
     end
     it "should have a show field config for each field" do
-      keys = subject.configuration.show_fields.values.map(&:key)
-      labels = subject.configuration.show_fields.values.map(&:label)
+      keys = subject.show_fields.values.map(&:key)
+      labels = subject.show_fields.values.map(&:label)
       expect(keys).to include "title_ssm"
       expect(labels).to include "Title"
       expect(keys).to include "alternative_ssm"
