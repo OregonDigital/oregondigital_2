@@ -19,4 +19,7 @@ Hydra.configure do |config|
   #
   # specify the user model
   # config.user_model = '#{model_name.classify}'
+  config.id_to_resource_uri = lambda do |id|
+    "http://oregondigital.org/resource/#{id}"
+  end
 end
