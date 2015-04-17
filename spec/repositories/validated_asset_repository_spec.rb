@@ -2,6 +2,15 @@ require 'rails_helper'
 
 RSpec.describe ValidatedAssetRepository do
   subject { ValidatedAssetRepository.new(Image) }
+  before do
+    cv = ControlledVocabulary.create(:name => "Subjects")
+    v1 = Vocabulary.create(:base_uri => "http://id.loc.gov/authorities/subjects")
+    v2 = Vocabulary.create(:base_uri => "http://opaquenamespace.org/ns/subject")
+    v3 = Vocabulary.create(:base_uri => "http://vocab.getty.edu/tgn")
+    cv.vocabularies << [v1, v2, v3]
+    cv.save
+    ControlledVocabularyProperty.create(:controlled_vocabulary => cv, :property => "lcsubject")
+  end
 
   describe "#new" do
     let(:image) { Image.new }

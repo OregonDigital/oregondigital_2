@@ -1,14 +1,15 @@
 class PropertyValidationsGenerator
   pattr_initialize :base_repository
   def validations
-    {
-      validated_property(:lcsubject) => [
-        SubjectCvValidator.new
-      ]
-    }
+    db_validations
+  end
+
+  def db_validations
+    ControlledVocabularyProperty.all.map{|x| {validated_property(x.property.to_sym) => [x.controlled_vocabulary.validator]}}.inject({}, &:merge)
   end
 
   private
+
 
   # We need to validate against the URIs, not the AT objects, so access with
   # :lcsubject_ids, but add errors to :lcsubject.
