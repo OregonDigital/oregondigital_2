@@ -42,4 +42,29 @@ RSpec.describe TriplePoweredResource do
       expect(reloaded_resource.statements.to_a.first.subject).to eq subject.rdf_subject
     end
   end
+
+  describe "#preferred_label" do
+    context "when there's a french and english label" do
+      before do
+        subject << [subject.rdf_subject, RDF::SKOS.prefLabel, RDF::Literal("French", :language => :fr)]
+        subject << [subject.rdf_subject, RDF::SKOS.prefLabel, RDF::Literal("Test", :language => :en)]
+      end
+      it "should prefer the english version" do
+        expect(subject.preferred_label).to eq "Test"
+      end
+    end
+    xit "should delegate to LabelFinder" do
+      label_finder = instance_double(LabelFinder)
+      label = double("Label")
+      allow(LabelFinder).to receive(:new).with(subject, anything).and_return(label_finder)
+      allow(label_finder).to receive(:label).and_return(label)
+
+      expect(subject.preferred_label).to eq label
+    end
+    it "should work" do
+      subject.preflabel = ["Test"]
+      
+      expect(subject.preferred_label).to eq "Test"
+    end
+  end
 end
