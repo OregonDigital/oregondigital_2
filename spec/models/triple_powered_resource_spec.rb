@@ -10,6 +10,9 @@ RSpec.describe TriplePoweredResource do
       expect(subject.statements.to_a.length).to eq 0
     end
   end
+  it "should be able to handle not having a URI passed" do
+    expect{described_class.new}.not_to raise_error
+  end
   context "when persisted with statements" do
     before do
       subject << [subject.rdf_subject, RDF::DC.title, "Test"]

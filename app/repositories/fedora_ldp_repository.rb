@@ -27,7 +27,7 @@ class FedoraLDPRepository
   end
 
   def relative_path
-    "."+ActiveFedora.fedora.base_path+"/"+subject.host+subject.path
+    "."+ActiveFedora.fedora.base_path+"/"+subject.host.to_s+subject.path.to_s
   end
 
   def absolute_path
