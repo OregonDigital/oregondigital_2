@@ -1,19 +1,11 @@
-<% if has_user_authentication_provider? %>
-  <% if current_user and can? :create, GenericAsset %>
-    <h1>Admin Panel</h1>
-    <div class="panel panel-default">
-      <div class="panel panel-heading">
-        Admin Panel
-      </div>
-      <div class="panel panel-body">
-        <ul>
-          <li><%= link_to "Ingest a New Record", hydra_editor.new_record_path %></li>
-        </ul>
-      </div>
-    </div>
-  <% else %>
-    You do not have sufficient permissions to access this page.
-  <% end %>
-<% else %>
-  You do not have sufficient permissions to access this page.
-<% end %>
+<h1>Admin Panel</h1>
+<div class="panel panel-default">
+  <div class="panel panel-heading">
+    Admin Panel
+  </div>
+  <div class="panel panel-body">
+    <ul>
+      <li><%= link_to "Ingest a New Record", hydra_editor.new_record_path %></li>
+    </ul>
+  </div>
+</div>

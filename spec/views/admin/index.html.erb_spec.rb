@@ -1,12 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'admin/index' do
-  let(:blacklight_config) { CatalogController.new.blacklight_config }
   let(:ability) { Ability.new(user) }
   before do
-    allow(view).to receive(:blacklight_config).and_return(blacklight_config)
-    allow(view).to receive(:has_user_authentication_provider?).and_return(true)
-    allow(view).to receive(:current_user).and_return(user) if user
     allow(controller).to receive(:current_ability).and_return(ability)
     render
   end
