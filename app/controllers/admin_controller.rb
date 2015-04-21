@@ -10,11 +10,6 @@ class AdminController < ApplicationController
   private
 
   def current_user_is_admin?
-    if current_user and can? :create, GenericAsset
-      true
-    else
-      false
-    end
-    false
+    can?(:create, GenericAsset)
   end
 end
