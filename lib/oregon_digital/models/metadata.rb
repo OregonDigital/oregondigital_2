@@ -3,7 +3,7 @@ module OregonDigital::Models
     extend ActiveSupport::Concern
     included do
       ODDataModel.properties.each do |property_name, config|
-        property property_name, :predicate => config.predicate, :class_name => config.class_name do |index|
+        property property_name, :predicate => config.predicate, :class_name => (config.class_name || TriplePoweredResource) do |index|
           index.as :searchable, :displayable, :facetable
         end
       end

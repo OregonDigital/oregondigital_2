@@ -43,7 +43,7 @@ class SubjectMutater
     temp_graph = RDF::Graph.new
     source_graph.statements.to_a.each do |statement|
       s = statement.subject
-      if s.start_with?(find.to_s)
+      if s.to_s.start_with?(find.to_s)
         s = replace
       end
       temp_graph << [s, statement.predicate, statement.object]
