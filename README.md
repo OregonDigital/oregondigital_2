@@ -13,14 +13,14 @@ Requirements:
 
 Configuration and database creation:
 
+**Note:** To prevent errors, you may need to prefix the rake commands with `bundle exec`, which can be required in some systems. 
+
     git clone git@github.com:OregonDigital/oregondigital_2.git
 	cd oregondigital_2
 	bundle install
 	rake db:migrate
 	rake jetty:clean
 	rake jetty:config
-
-Note: To prevent errors, you may need to prefix the rake commands with `bundle exec`, which can be required in some systems. 
 
 Start the servers:
 
