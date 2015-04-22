@@ -7,7 +7,7 @@ RSpec.describe Files::YmlFile do
     @content = File.read(File.join(fixture_path, "fixture_yml.yml"))
   end
   before(:each) do
-    class DummyAsset < GenericAsset
+    class DummyAsset < ActiveFedora::Base
       contains 'descMetadata', :class_name => 'Files::YmlFile'
     end
   end
