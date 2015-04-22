@@ -5,12 +5,14 @@ RSpec.describe AdminController do
     let(:user) {nil}
     before do
       sign_in(user) if user
-      @request.env["devise.mapping"] = Devise.mappings[:user]
       get :index
     end
     context "When not logged in" do
       it "should display an insufficient permissions error" do
         expect(flash[:error]).to eq("You do not have sufficient permissions to view this page")
+      end
+      it "should redirect" do
+        expect(response).to redirect_to root_path
       end
     end
     context "When logged in as a user" do

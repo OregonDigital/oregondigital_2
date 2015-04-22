@@ -12,7 +12,7 @@ RSpec.describe 'admin/index' do
       expect(rendered).to have_content "Admin Panel"
     end
     context "when ingesting a new record" do
-      it "should have a link to injest a new record" do
+      it "should have a link to ingest a new record" do
         expect(rendered).to have_link "Ingest a New Record", :href => hydra_editor.new_record_path
      end
     end
