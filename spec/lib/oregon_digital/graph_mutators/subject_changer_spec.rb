@@ -10,7 +10,7 @@ RSpec.describe OregonDigital::GraphMutators::SubjectChanger do
   end
   let(:find_subject) { RDF::URI.new("http://bla.org") }
   let(:replace_subject) { RDF::URI.new("http://test.org") }
-  let(:ignore_subject) { RDF::URI("http://bla.org/bla/bla2") }
+  let(:ignore_subject) { RDF::URI("http://banana.org/bla/bla2") }
   describe "#replace_subject!" do
     let(:result) { subject.replace_subject(find_subject, replace_subject) }
     let(:subjects) { result.each_subject.to_a }

@@ -94,4 +94,23 @@ RSpec.describe GenericAsset do
       expect(generic_asset.title).to eq ["Title"]
     end
   end
+
+  describe "#lcsubject" do
+    context "when set to a string" do
+      before do
+        generic_asset.lcsubject = ["Test"]
+      end
+      it "should return as a string" do
+        expect(generic_asset.lcsubject).to eq ["Test"]
+      end
+    end
+    context "when set to a URI" do
+      before do
+        generic_asset.lcsubject = [RDF::URI("http://id.loc.gov/authorities/names/n80017721")]
+      end
+      it "should return as a TriplePoweredResource" do
+        expect(generic_asset.lcsubject.first.class).to eq TriplePoweredResource
+      end
+    end
+  end
 end
