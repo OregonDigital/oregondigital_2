@@ -17,15 +17,15 @@ RSpec.describe "_user_util_links" do
     end
   end
   context "when signed in as a user" do
-    let(:user) { FactoryGirl.build(:user) }
+    let(:user) { FactoryGirl.create(:user) }
     it "should not show the admin link" do
       expect(rendered).to_not have_link "Admin Panel"
     end
   end
   context "when signed in as an admin" do
-    let(:user) { FactoryGirl.build(:admin) }
+    let(:user) { FactoryGirl.create(:user, :admin) }
     it "should show the admin link" do
-      expect(rendered).to have_link "Admin Panel", :href => admin_index_path
+      expect(rendered).to have_link "Admin Panel"
     end
   end
 end

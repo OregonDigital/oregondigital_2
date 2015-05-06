@@ -25,7 +25,7 @@ RSpec.describe AdminController do
       end
     end
     context "When logged in as an admin" do
-      let(:user) { FactoryGirl.create(:admin) }
+      let(:user) { FactoryGirl.create(:user, :admin) }
       it "should display the admin panel" do
         expect(response).to be_success
       end
