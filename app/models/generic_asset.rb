@@ -1,11 +1,6 @@
 class GenericAsset < ActiveFedora::Base
   include Hydra::AccessControls::Permissions
   include OregonDigital::Derivatives::Model
-  ODDataModel.properties.each do |property_name, config|
-    property property_name, :predicate => config.predicate, :class_name => config.class_name do |index|
-      index.as :searchable, :displayable, :facetable
-    end
-  end
   contains "content", :class_name => 'FileContent'
   contains "workflow_metadata", :class_name => "Files::YmlFile"
   delegate :content_changed?,:blank?, :to => :content, :prefix => true
