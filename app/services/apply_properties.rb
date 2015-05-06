@@ -1,7 +1,7 @@
 class ApplyProperties
   pattr_initialize :properties
   
-  def apply!
+  def apply!(asset)
 
   end
 end
