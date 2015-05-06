@@ -1,15 +1,14 @@
 class AdminController < ApplicationController
+  before_filter :authenticate
 
   def index
-    unless current_user_is_admin?
-      flash[:error] = "You do not have sufficient permissions to view this page"
-      redirect_to root_path
-    end
   end
 
   private
 
-  def current_user_is_admin?
-    can?(:create, GenericAsset)
+  def authenticate
+    unless current_user && current_user.admin?
+      raise CanCan::AccessDenied
+    end
   end
 end
