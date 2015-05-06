@@ -11,6 +11,7 @@ RSpec.describe ApplyProperties do
     d = double("config_double")
     allow(d).to receive(:predicate).and_return(RDF::DC.title)
     allow(d).to receive(:class_name).and_return(class_name)
+    d
   end
   let(:class_name) { double("class_name") }
   describe "#apply!" do
