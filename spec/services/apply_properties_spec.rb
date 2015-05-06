@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ApplyProperties do
-  subject { described_class.new(properties) }
+  subject { described_class.new(properties, SolrApplicationStrategy.new) }
   let(:properties) do
     {
       :title => config_double

@@ -1,7 +1,7 @@
 class GenericAsset < ActiveFedora::Base
   include Hydra::AccessControls::Permissions
   include OregonDigital::Derivatives::Model
-  ApplyProperties.new(ODDataModel.properties).apply!(self)
+  ApplyProperties.new(ODDataModel.properties, SolrApplicationStrategy.new).apply!(self)
   contains "content", :class_name => 'FileContent'
   contains "workflow_metadata", :class_name => "Files::YmlFile"
   delegate :content_changed?,:blank?, :to => :content, :prefix => true

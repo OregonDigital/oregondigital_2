@@ -1,24 +1,9 @@
 class ApplyProperties
-  pattr_initialize :properties
+  pattr_initialize :properties, :application_strategy
   
   def apply!(asset)
-    properties.each do |property_name, config|
-      asset.property property_name, config_to_configuration(config) do |index|
-        index.as(*index_types)
-      end
+    properties.each do |property|
+      application_strategy.call(asset, property)
     end
-  end
-
-  def index_types
-    [:searchable, :displayable, :facetable]
-  end
-
-  private
-
-  def config_to_configuration(config)
-    {
-      :predicate => config.predicate,
-      :class_name => config.class_name
-    }
   end
 end
