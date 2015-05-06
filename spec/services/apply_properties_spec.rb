@@ -17,11 +17,14 @@ RSpec.describe ApplyProperties do
   describe "#apply!" do
     let(:asset) { object_double(GenericAsset) }
     it "should call #property for each defined property" do
-      allow(asset).to receive(:property)
+      solr_configuration = double("solr_configuration")
+      allow(asset).to receive(:property).and_yield(solr_configuration)
+      allow(solr_configuration).to receive(:as)
 
       subject.apply!(asset)
 
       expect(asset).to have_received(:property).with(:title, {:predicate => RDF::DC.title, :class_name => class_name})
+      expect(solr_configuration).to have_received(:as).with(:searchable, :displayable, :facetable)
     end
   end
 end
