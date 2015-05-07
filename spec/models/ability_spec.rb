@@ -11,6 +11,7 @@ RSpec.describe Ability do
   end
   context "when given an admin" do
     let(:user) { FactoryGirl.create(:user, :admin) }
+    it { should be_able_to(:create, GenericAsset) }
     it "should be an admin" do
       expect(user).to be_admin
     end
