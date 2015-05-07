@@ -77,6 +77,7 @@ group :development, :test do
   gem 'capybara'
   gem 'simplecov'
   gem 'newrelic_rpm'
+  gem 'capybara-screenshot'
 end
 
 group :test do
