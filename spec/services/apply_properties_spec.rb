@@ -3,14 +3,12 @@ require 'rails_helper'
 RSpec.describe ApplyProperties do
   subject { described_class.new(properties, SolrApplicationStrategy.new) }
   let(:properties) do
-    {
-      :title => config_double
-    }
+    [config_double]
   end
   let(:config_double) do
     d = double("config_double")
-    allow(d).to receive(:predicate).and_return(RDF::DC.title)
-    allow(d).to receive(:class_name).and_return(class_name)
+    allow(d).to receive(:name).and_return(:title)
+    allow(d).to receive(:to_h).and_return(:predicate => RDF::DC.title, :class_name => class_name)
     d
   end
   let(:class_name) { double("class_name") }

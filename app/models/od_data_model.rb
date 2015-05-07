@@ -1,5 +1,4 @@
-class ODDataModel
-  include PropertiesDSL
+class ODDataModel < DataModel
   # Titles
   property :title, :predicate => RDF::DC.title
   property :alternative, :predicate => RDF::DC.alternative
@@ -206,11 +205,7 @@ class ODDataModel
   property :hasNumber, :predicate => RDF::URI('http://sw-portal.deri.org/ontologies/swportal#hasNumber')
 
   def simple_properties
-    @simple_properties ||= Hash[
-      properties.map do |property, config|
-        [property, config.predicate]
-      end
-    ]
+    @simple_properties ||= Hash[properties.group_by(&:name).map{|k, v| [k,v.first.predicate]}]
   end
 end
 
