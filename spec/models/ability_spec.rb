@@ -14,5 +14,8 @@ RSpec.describe Ability do
     it "should be an admin" do
       expect(user).to be_admin
     end
+    it "should be able to manage everything" do
+      expect(subject).to be_able_to(:manage, :all)
+    end
   end
 end
