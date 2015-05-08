@@ -60,6 +60,9 @@ gem 'attr_extras'
 
 gem 'composed_validations'
 
+#Hydra Role Management for admin management
+gem 'hydra-role-management'
+
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -74,6 +77,7 @@ group :development, :test do
   gem 'capybara'
   gem 'simplecov'
   gem 'newrelic_rpm'
+  gem 'capybara-screenshot'
 end
 
 group :test do
