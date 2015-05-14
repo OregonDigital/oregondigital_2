@@ -2,6 +2,7 @@
   <div id="descriptions_display">
 	<%= render 'records/form_header' %>
     <div class="well">
+      <%= f.input :content, :as => :file %>
       <%= render :partial => "records/edit_fields/default", :collection => f.object.terms, :as => :key, :locals => {:f => f} %>
     </div> <!-- /well -->
   </div>

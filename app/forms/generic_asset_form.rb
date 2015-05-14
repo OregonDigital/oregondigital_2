@@ -4,4 +4,9 @@ class GenericAssetForm
   # a "clean" graph from AF
   skip_terms = [:workType]
   self.terms = ODDataModel.properties.keys - skip_terms
+
+  def self.permitted_params
+    super << :content
+  end
+
 end
