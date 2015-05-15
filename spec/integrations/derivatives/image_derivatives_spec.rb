@@ -13,5 +13,7 @@ RSpec.describe "image derivatives" do
     expect(image.workflow_metadata.thumbnail_path).not_to be_blank
     expect(image.workflow_metadata.medium_path).not_to be_blank
     expect(image.workflow_metadata.pyramidal_path).not_to be_blank
+    reloaded_asset = Image.find(image.id)
+    expect(reloaded_asset.workflow_metadata.to_h).not_to eq ({})
   end
 end

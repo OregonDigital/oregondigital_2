@@ -50,7 +50,7 @@ module OregonDigital
     end
 
     def runner_list
-      OregonDigital::Derivatives::Runners::RunnerList
+      persisting_runner_factory.new(OregonDigital::Derivatives::Runners::RunnerList)
     end
 
     def runner_finder_factory
@@ -62,6 +62,10 @@ module OregonDigital
     end
 
     private
+
+    def persisting_runner_factory
+      OregonDigital::Derivatives::PersistingRunner::Factory
+    end
 
     def distributor_path(id, extension, path)
       distributor = OregonDigital::FileDistributor.new(id)
