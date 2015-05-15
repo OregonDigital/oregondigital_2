@@ -5,6 +5,10 @@ class AssetWithDerivatives < SimpleDelegator
     @runner = runner
   end
 
+  def class
+    __getobj__.class
+  end
+
   def save
     check_derivatives
     result = __getobj__.save

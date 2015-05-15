@@ -8,7 +8,7 @@ class RecordsController < ApplicationController
   end
 
   def decorate(resource)
-    HasContent.new(resource)
+    AssetWithDerivativesFactory.new(HasContent.new(resource))
   end
 
 end

@@ -28,7 +28,12 @@ RSpec.describe "Hydra Editor", :slow => true do
       expect(page).to have_content("John and Jane Doe, a portrait")
       expect(page).to have_content("This image depicts the most well-known corpse couple, the Does")
       expect(page).to have_content("successfully updated")
-      expect(Image.find(pid).content.content).not_to be_blank
+      image = Image.find(pid)
+      expect(image.content.content).not_to be_blank
+      expect(image.workflow_metadata.thumbnail_path).to include pid
+      expect(image.workflow_metadata.thumbnail_path).not_to be_blank
+      expect(image.workflow_metadata.medium_path).not_to be_blank
+      expect(image.workflow_metadata.pyramidal_path).not_to be_blank
     end
   end
 end

@@ -6,7 +6,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
 
   describe "#runner_list" do
     it "should be a RunnerList" do
-      expect(resource.runner_list).to eq OregonDigital::Derivatives::Runners::RunnerList
+      expect(resource.runner_list).to be_kind_of OregonDigital::Derivatives::PersistingRunner::Factory
     end
   end
 
