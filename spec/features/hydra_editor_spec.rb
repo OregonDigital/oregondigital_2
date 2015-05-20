@@ -6,9 +6,7 @@ RSpec.describe "Hydra Editor", :slow => true do
 
   it "should save an image" do
     as_user(admin) do
-      visit "/records/new"
-      page.select("Image", :from => "type")
-      find(:css, "input.btn-primary").click
+      navigate_to_new_image_path
 
       expect(page).to have_field("Content")
       attach_file("Content", file)
@@ -35,5 +33,22 @@ RSpec.describe "Hydra Editor", :slow => true do
       expect(image.workflow_metadata.medium_path).not_to be_blank
       expect(image.workflow_metadata.pyramidal_path).not_to be_blank
     end
+  end
+  it "should show invalid fields" do
+    as_user(admin) do
+      navigate_to_new_image_path
+
+      fill_in "image_lcsubject", :with => "Not a URI"
+      find(:css, "input.btn-primary").click
+      
+      expect(current_path).to eq "/records"
+      expect(page).to have_content "contains a non-LCSH term"
+    end
+  end
+
+  def navigate_to_new_image_path
+    visit "/records/new"
+    page.select("Image", :from => "type")
+    find(:css, "input.btn-primary").click
   end
 end
