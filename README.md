@@ -32,3 +32,9 @@ You can go to your browser and open `http://localhost:3000`, where you can see t
 Run tests with RSpec:
 
     rspec spec
+
+Set up a dev admin user:
+
+    rake admin_user
+
+Log in to the app as "admin@example.org" with password "admin123".
