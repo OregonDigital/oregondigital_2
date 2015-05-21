@@ -15,7 +15,7 @@ module OregonDigital
         end
 
         def decorator
-          HasHint
+          HasHintOption
         end
 
         def base_factory

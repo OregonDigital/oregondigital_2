@@ -1,4 +1,4 @@
-class HasHint < SimpleDelegator
+class HasHintOption < SimpleDelegator
   def options
     super.merge({:hint => hint})
   end
