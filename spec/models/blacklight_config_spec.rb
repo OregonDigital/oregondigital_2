@@ -57,11 +57,11 @@ RSpec.describe BlacklightConfig do
     it "should have a show field config for each field" do
       keys = subject.show_fields.values.map(&:key)
       labels = subject.show_fields.values.map(&:label)
-      expect(keys).to include "title_ssm"
+      expect(keys).to include "title_ssim"
       expect(labels).to include "Title"
-      expect(keys).to include "alternative_ssm"
+      expect(keys).to include "alternative_ssim"
       expect(labels).to include "Alternative"
-      expect(keys).to include *GenericAsset.properties.keys.map{|x| "#{x}_ssm"}
+      expect(keys).to include *GenericAsset.properties.keys.map{|x| "#{x}_ssim"}
     end
   end
 

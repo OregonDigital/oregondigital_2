@@ -1,5 +1,6 @@
-class ODDataModel
-  include PropertiesDSL
+##
+# Includes the Oregon Digital Data Dictionary.
+class ODDataModel < DataModel
   # Titles
   property :title, :predicate => RDF::DC.title
   property :alternative, :predicate => RDF::DC.alternative
@@ -204,13 +205,5 @@ class ODDataModel
   property :containedInJournal, :predicate => RDF::URI('http://sw-portal.deri.org/ontologies/swportal#containedInJournal')
   property :isVolume, :predicate => RDF::URI('http://sw-portal.deri.org/ontologies/swportal#isVolume')
   property :hasNumber, :predicate => RDF::URI('http://sw-portal.deri.org/ontologies/swportal#hasNumber')
-
-  def simple_properties
-    @simple_properties ||= Hash[
-      properties.map do |property, config|
-        [property, config.predicate]
-      end
-    ]
-  end
 end
 

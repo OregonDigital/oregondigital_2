@@ -5,7 +5,7 @@ RSpec.describe ShowField do
   let(:property) { :title }
   describe "#key" do
     it "should be right" do
-      expect(subject.key).to eq ActiveFedora::SolrQueryBuilder.solr_name(property, :displayable)
+      expect(subject.key).to eq ActiveFedora::SolrQueryBuilder.solr_name(property, :symbol)
     end
   end
 
