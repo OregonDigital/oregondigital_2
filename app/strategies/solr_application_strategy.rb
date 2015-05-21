@@ -8,7 +8,7 @@ class SolrApplicationStrategy
   private
 
   def index_types
-    [:searchable, :displayable, :facetable]
+    [:stored_searchable, :symbol]
   end
 end
 
