@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/jechols/hydra-editor.git
-  revision: 7c8983c825a1f21e86b4667fa4f579ee7af6ca40
+  revision: 785b14b158b2387e856b3a80288f3b3c4ddafcca
+  branch: feature/configurable-field-generator
   specs:
     hydra-editor (1.0.4)
       active-fedora (>= 9.0.0)
