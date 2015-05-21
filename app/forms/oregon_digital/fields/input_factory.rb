@@ -1,6 +1,6 @@
 module OregonDigital
   module Fields
-    class Factory
+    class InputFactory
       def self.create(object, property)
         if object.class.multiple?(property)
           MultiInput.new(object, property)

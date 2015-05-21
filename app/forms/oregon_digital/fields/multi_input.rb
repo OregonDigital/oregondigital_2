@@ -7,7 +7,7 @@ module OregonDigital
 
         @field_type = :multi_value
         @input_html_options = {:class => "form-control"}
-        @wrapper_html_options = {:class => ".repeating-field"}
+        @wrapper_html_options = {:class => "repeating-field"}
       end
     end
   end
