@@ -1,11 +1,25 @@
 module OregonDigital
   module Fields
     class InputFactory
-      def self.create(object, property)
-        if object.class.multiple?(property)
-          MultiInput.new(object, property)
-        else
-          Input.new(object, property)
+      class << self
+        def create(object, property)
+          decorate do
+            base_factory.create(object, property)
+          end
+        end
+
+        private
+
+        def decorate
+          decorator.new(yield)
+        end
+
+        def decorator
+          HasHint
+        end
+
+        def base_factory
+          HydraEditor::Fields::Factory
         end
       end
     end
