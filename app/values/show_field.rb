@@ -5,7 +5,7 @@ class ShowField
   end
 
   def key
-    solr_name_generator.solr_name(property, :displayable)
+    solr_name_generator.solr_name(property, :symbol)
   end
 
   def label
