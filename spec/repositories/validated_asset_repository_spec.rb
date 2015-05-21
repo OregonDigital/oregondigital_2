@@ -38,6 +38,9 @@ RSpec.describe ValidatedAssetRepository do
     it "should decorate the asset passed" do
       expect(result.__getobj__).to eq image
     end
+    it "should have a list of validators that were set" do
+      expect(result.validators).not_to eq []
+    end
   end
 
   describe "#find" do
