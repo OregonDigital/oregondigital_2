@@ -22,7 +22,7 @@ RSpec.describe ApplyProperties do
       subject.apply!(asset)
 
       expect(asset).to have_received(:property).with(:title, {:predicate => RDF::DC.title, :class_name => class_name})
-      expect(solr_configuration).to have_received(:as).with(:searchable, :displayable, :facetable)
+      expect(solr_configuration).to have_received(:as).with(:stored_searchable, :symbol)
     end
   end
 end
