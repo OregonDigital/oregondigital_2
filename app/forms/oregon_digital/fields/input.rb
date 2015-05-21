@@ -27,7 +27,7 @@ module OregonDigital
       end
 
       def options
-        all_options.select {|option, method| method != nil }
+        all_options.compact
       end
     end
   end
