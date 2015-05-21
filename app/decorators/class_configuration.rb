@@ -1,5 +1,13 @@
+##
+# Decorator to add class configurations to each property given a map of
+# properties to class names.
+# @note If a property is configured here it will override previously defined
+#   classes on that property.
 class ClassConfiguration < SimpleDelegator
   attr_reader :config_map
+  # @param [Property] item Property to decorate.
+  # @param [Hash{Symbol => String, Class}] Hash of properties to the class to
+  #   map them to.
   def initialize(item, config_map)
     @config_map = config_map
     super(item)

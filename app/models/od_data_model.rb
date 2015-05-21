@@ -1,3 +1,5 @@
+##
+# Includes the Oregon Digital Data Dictionary.
 class ODDataModel < DataModel
   # Titles
   property :title, :predicate => RDF::DC.title

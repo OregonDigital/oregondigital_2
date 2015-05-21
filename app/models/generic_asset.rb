@@ -1,6 +1,8 @@
 class GenericAsset < ActiveFedora::Base
   include Hydra::AccessControls::Permissions
   include OregonDigital::Derivatives::Model
+  # DSL to apply a data model with a given strategy.
+  # @note We should push this up to either AF or ActiveTriples.
   def self.apply_data_model(model, strategy)
     ApplyProperties.new(model.properties, strategy).apply!(self)
   end
