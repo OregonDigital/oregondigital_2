@@ -12,7 +12,7 @@ module OregonDigital
         return object.required?(property)
       end
 
-      def hint?
+      def hint
         nil
       end
 
@@ -22,7 +22,7 @@ module OregonDigital
           as: field_type,
           input_html: input_html_options,
           wrapper_html: wrapper_html_options,
-          hint: hint?,
+          hint: hint,
         }
       end
 
