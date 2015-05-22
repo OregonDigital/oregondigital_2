@@ -4,5 +4,5 @@ require 'jettywrapper'
 
 require File.expand_path('../config/application', __FILE__)
 
+Jettywrapper.url = "https://github.com/OregonDigital/hydra-marmotta-jetty/archive/develop.zip"
 Rails.application.load_tasks
-Jettywrapper.hydra_jetty_version = "v8.1.1"

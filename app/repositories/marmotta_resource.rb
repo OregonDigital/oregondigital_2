@@ -10,7 +10,7 @@ class MarmottaResource
     result = resource_connection.get("")
     graph = RDF::Graph.new
     if result.success?
-      graph << JSON::LD::reader.new(result.body)
+      graph << JSON::LD::Reader.new(result.body)
     end
     graph
   end

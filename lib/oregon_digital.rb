@@ -8,7 +8,7 @@ module OregonDigital
   end
 
   def marmotta
-    @marmotta ||= MarmottaConnection.new(uri: "http://localhost:8080/marmotta", context: Rails.env)
+    @marmotta ||= MarmottaConnection.new(uri: "http://localhost:8983/marmotta", context: Rails.env)
   end
   module_function :inject
   module_function :derivative_injector
