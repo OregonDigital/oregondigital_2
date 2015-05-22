@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe MarmottaResource do
   subject { described_class.new(resource_uri, connection: connection) }
+  before do
+    connection.delete_all
+  end
   let(:connection) { OregonDigital.marmotta }
   let(:resource_uri) { RDF::URI("http://opaquenamespace.org/ns/1") }
   let(:graph) do
