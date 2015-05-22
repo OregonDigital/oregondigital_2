@@ -8,5 +8,4 @@ class GenericAssetForm
   def self.permitted_params
     super << :content
   end
-
 end

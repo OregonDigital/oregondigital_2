@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/jechols/hydra-editor.git
+  revision: 785b14b158b2387e856b3a80288f3b3c4ddafcca
+  branch: feature/configurable-field-generator
+  specs:
+    hydra-editor (1.0.4)
+      active-fedora (>= 9.0.0)
+      cancancan (~> 1.8)
+      rails (~> 4.1)
+      simple_form (~> 3.1.0)
+
+GIT
   remote: git://github.com/projecthydra/active_fedora.git
   revision: 85d1f168e7ebd7478cc250bf6e05a6744fe3ce7f
   specs:
@@ -229,11 +240,6 @@ GEM
     hirb (0.7.3)
     htmlentities (4.3.3)
     http_logger (0.5.1)
-    hydra-editor (1.0.4)
-      active-fedora (>= 9.0.0)
-      cancancan (~> 1.8)
-      rails (~> 4.1)
-      simple_form (~> 3.1.0)
     hydra-role-management (0.2.1)
       blacklight
       bootstrap_form
@@ -543,7 +549,7 @@ DEPENDENCIES
   devise-guests (~> 0.3)
   docsplit
   factory_girl_rails
-  hydra-editor
+  hydra-editor!
   hydra-head!
   hydra-role-management
   jazz_hands!
