@@ -65,6 +65,7 @@ gem 'hydra-role-management'
 
 gem 'hurley'
 
+gem 'rails_config'
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
