@@ -8,11 +8,11 @@ class MarmottaResource
 
   def get
     result = resource_connection.get("")
+    graph = RDF::Graph.new
     if result.success?
-      RDF::Graph.new << JSON::LD::Reader.new(result.body)
-    else
-      RDF::Graph.new
+      graph << JSON::LD::reader.new(result.body)
     end
+    graph
   end
 
   def delete
