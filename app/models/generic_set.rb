@@ -1,0 +1,3 @@
+class GenericSet < GenericAsset
+
+end

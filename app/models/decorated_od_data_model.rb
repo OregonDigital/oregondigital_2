@@ -22,6 +22,7 @@ class DecoratedODDataModel
     #   {:title => "GenericAsset"}
     def config_map
       {
+        :set => "GenericSet"
       }
     end
   end
