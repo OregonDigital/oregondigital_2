@@ -63,6 +63,8 @@ gem 'composed_validations'
 #Hydra Role Management for admin management
 gem 'hydra-role-management'
 
+gem 'hurley'
+
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -73,7 +75,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'factory_girl_rails'
-  gem 'jazz_hands', :github => "terrellt/jazz_hands"
+  gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'capybara'
   gem 'simplecov'
   gem 'newrelic_rpm'
