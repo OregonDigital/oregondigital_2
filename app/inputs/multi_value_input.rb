@@ -40,10 +40,13 @@ class MultiValueInput < SimpleForm::Inputs::Base
 
     def build_field(value, index)
       options = build_field_options(value, index)
-      if options.delete(:type) == 'textarea'.freeze
-        @builder.text_area(attribute_name, options)
-      else
-        @builder.text_field(attribute_name, options)
+      case options.delete(:type)
+        when 'textarea'.freeze
+          @builder.text_area(attribute_name, options)
+        when 'uri_enabled_string'.freeze
+          OregonDigital::URIEnabledStringField.new(@builder, attribute_name, options).field
+        else
+          @builder.text_field(attribute_name, options)
       end
     end
 
