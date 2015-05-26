@@ -4,37 +4,21 @@ class MultiValueInput < SimpleForm::Inputs::Base
     input_html_classes.unshift("string")
     input_html_options[:name] ||= "#{object_name}[#{attribute_name}][]"
 
-    outer_wrapper do
-      buffer_each(collection) do |value, index|
-        inner_wrapper do
-          build_field(value, index)
-        end
-      end
+    template.content_tag("ul", :class => "listing") do
+      collection_inputs
     end
   end
 
   protected
-
-    def buffer_each(collection)
-      collection.each_with_object('').with_index do |(value, buffer), index|
-        buffer << yield(value, index)
+    def collection_inputs
+      tags = []
+      collection.each_with_index do |value, index|
+        tags << template.content_tag("li", :class => "field-wrapper") do
+          build_field(value, index)
+        end
       end
+      tags.reduce(:<<)
     end
-
-    def outer_wrapper
-      "    <ul class=\"listing\">\n        #{yield}\n      </ul>\n"
-    end
-
-
-    def inner_wrapper
-        <<-HTML
-          <li class="field-wrapper">
-            #{yield}
-          </li>
-        HTML
-    end
-
-  private
 
     # Although the 'index' parameter is not used in this implementation it is useful in an
     # an overridden version of this method, especially when the field is a complex object and
