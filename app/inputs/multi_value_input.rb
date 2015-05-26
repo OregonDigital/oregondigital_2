@@ -1,6 +1,5 @@
 class MultiValueInput < SimpleForm::Inputs::Base
   def input(wrapper_options)
-    @rendered_first_element = false
     input_html_classes.unshift("string")
     input_html_options[:name] ||= "#{object_name}[#{attribute_name}][]"
 
@@ -20,14 +19,11 @@ class MultiValueInput < SimpleForm::Inputs::Base
       tags.reduce(:<<)
     end
 
-    # Although the 'index' parameter is not used in this implementation it is useful in an
-    # an overridden version of this method, especially when the field is a complex object and
-    # the override defines nested fields.
     def build_field_options(value, index)
       options = input_html_options.dup
 
       options[:value] = value
-      if @rendered_first_element
+      if index > 0
         options[:id] = nil
         options[:required] = nil
       else
@@ -36,7 +32,6 @@ class MultiValueInput < SimpleForm::Inputs::Base
       options[:class] ||= []
       options[:class] += ["#{input_dom_id} form-control multi-text-field"]
       options[:'aria-labelledby'] = label_id
-      @rendered_first_element = true
 
       options
     end
