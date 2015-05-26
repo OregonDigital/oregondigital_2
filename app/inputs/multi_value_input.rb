@@ -77,6 +77,4 @@ class MultiValueInput < SimpleForm::Inputs::Base
     def collection
       @collection ||= Array.wrap(object[attribute_name]).reject { |value| value.to_s.strip.blank? } + ['']
     end
-
-    def multiple?; true; end
 end
