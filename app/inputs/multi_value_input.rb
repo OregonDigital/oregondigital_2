@@ -22,16 +22,18 @@ class MultiValueInput < SimpleForm::Inputs::Base
     def build_field_options(value, index)
       options = input_html_options.dup
 
+      # Defaults and overrides
       options[:value] = value
-      if index > 0
-        options[:id] = nil
-        options[:required] = nil
-      else
-        options[:id] ||= input_dom_id
-      end
+      options[:id] ||= input_dom_id
       options[:class] ||= []
       options[:class] += ["#{input_dom_id} form-control multi-text-field"]
       options[:'aria-labelledby'] = label_id
+
+      # ID must be unique, and required fields can't be infinitely required
+      if index > 0
+        options[:id] = nil
+        options[:required] = nil
+      end
 
       options
     end
