@@ -129,12 +129,13 @@ RSpec.describe GenericAsset do
     end
     context "when it receives uri for the set" do
       let(:genset) {GenericSet.new(:id => "myset" )}
-      let(:genasset) {GenericAsset.new(:id=>"myga", :set => ["http://localhost:8983/fedora/rest/dev/my/se/t/myset"])}
+      let(:genasset) {GenericAsset.new(:id=>"myga", :set => ["http://localhost:8983/fedora/rest/test/my/se/t/myset"])}
       before do
         genset.save
       end
       it "should convert the uri to the object" do
         genasset.save
+        genasset.reload
         expect(genasset.set[0]).to eq genset
       end
     end

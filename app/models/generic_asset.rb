@@ -11,7 +11,7 @@ class GenericAsset < ActiveFedora::Base
   contains "workflow_metadata", :class_name => "Files::YmlFile"
   delegate :content_changed?,:blank?, :to => :content, :prefix => true
   delegate :streamable_content, :to => :content
-  before_save :assign_set
+  #before_save :assign_set
 
   def injector
     @injector ||= OregonDigital.inject
@@ -20,6 +20,7 @@ class GenericAsset < ActiveFedora::Base
   private
 
   def assign_set
+    binding.pry
     self.set.each_with_index do |val, ind|
       if val.respond_to? :include? and val.include? "http"
           parts = val.split('/')
