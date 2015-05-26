@@ -113,4 +113,31 @@ RSpec.describe GenericAsset do
       end
     end
   end
+
+  describe "#set" do
+    context "when it has an assigned set" do
+      let(:genset) {GenericSet.new}
+      let(:assigned_object)  {genset}
+      before(:each) do
+        genset.save
+        subject.set = [assigned_object]
+        subject.save
+      end
+      it "should return the set" do
+        expect(subject.set[0]).to eq genset
+      end
+    end
+    context "when it receives uri for the set" do
+      let(:genset) {GenericSet.new(:id => "myset" )}
+      let(:genasset) {GenericAsset.new(:id=>"myga", :set => [RDF::URI(genset.uri)])}
+      before do
+        genset.save
+      end
+      it "should convert the uri to the object" do
+        genasset.save
+        genasset.reload
+        expect(genasset.set[0]).to eq genset
+      end
+    end
+  end
 end
