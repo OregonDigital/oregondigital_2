@@ -4,6 +4,6 @@ class HasHintOption < SimpleDelegator
   end
 
   def hint
-    nil
+    object.model.validators[property].map(&:message)[0] unless object.model.validators[property].nil?
   end
 end
