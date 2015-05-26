@@ -6,7 +6,7 @@ RSpec.describe "records/_form" do
   end
 
   let(:resource) do
-    Image.new
+    ValidatedAssetRepository.new(Image).new
   end
   let(:params) do
     {

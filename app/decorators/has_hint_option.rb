@@ -4,6 +4,12 @@ class HasHintOption < SimpleDelegator
   end
 
   def hint
-    object.model.validators[property].map(&:message)[0] unless object.model.validators[property].nil?
+    "Must fulfill: #{hint_message}" if hint_message
+  end
+
+  private
+
+  def hint_message
+    Array(object.validators[property]).map(&:message)[0]
   end
 end

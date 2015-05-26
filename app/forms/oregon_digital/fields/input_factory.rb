@@ -1,26 +1,18 @@
 module OregonDigital
   module Fields
     class InputFactory
-      class << self
-        def create(object, property)
-          decorate do
-            base_factory.create(object, property)
-          end
-        end
+      pattr_initialize :base_factory, :decorator
 
-        private
-
-        def decorate
-          decorator.new(yield)
+      def create(object, property)
+        decorate do
+          base_factory.create(object, property)
         end
+      end
 
-        def decorator
-          HasHintOption
-        end
+      private
 
-        def base_factory
-          HydraEditor::Fields::Factory
-        end
+      def decorate
+        decorator.new(yield)
       end
     end
   end
