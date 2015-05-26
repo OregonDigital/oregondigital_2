@@ -1,4 +1,4 @@
-class MultiValueInput < SimpleForm::Inputs::CollectionInput
+class MultiValueInput < SimpleForm::Inputs::Base
   def input(wrapper_options)
     @rendered_first_element = false
     input_html_classes.unshift("string")
