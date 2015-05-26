@@ -129,7 +129,7 @@ RSpec.describe GenericAsset do
     end
     context "when it receives uri for the set" do
       let(:genset) {GenericSet.new(:id => "myset" )}
-      let(:genasset) {GenericAsset.new(:id=>"myga", :set => ["http://localhost:8983/fedora/rest/test/my/se/t/myset"])}
+      let(:genasset) {GenericAsset.new(:id=>"myga", :set => [RDF::URI(genset.uri)])}
       before do
         genset.save
       end
