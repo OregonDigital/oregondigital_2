@@ -20,4 +20,7 @@ RSpec.describe "records/_form" do
   it "should have a named file field" do
     expect(rendered).to have_selector "input[type=file][name='image[content]']"
   end
+  it "should have the hint show up" do
+    expect(rendered).to have_css ".help-block"
+  end
 end
