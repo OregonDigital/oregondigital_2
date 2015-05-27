@@ -10,11 +10,11 @@ dependencies:
   pre:
     - sudo add-apt-repository ppa:libreoffice/libreoffice-4-2 -y
     - sudo sh bin/vips-install.sh
-    - sudo apt-get install poppler-utils poppler-data ghostscript libreoffice 
+    - sudo apt-get install poppler-utils poppler-data ghostscript libreoffice
   post:
     - RAILS_ENV=development bundle exec rake jetty:clean
     - bundle exec rake hydra:jetty:config
-    - cd jetty && java -Djetty.port=8983 -Dsolr.solr.home=/home/ubuntu/oregondigital_2/jetty/solr -XX:MaxPermSize=128m -Xmx256m -jar start.jar:
+    - cd jetty && java -Djetty.port=8983 -Dsolr.solr.home=/home/ubuntu/oregondigital_2/jetty/solr -Dmarmotta.home=/home/ubuntu/oregondigital_2/jetty/marmotta -XX:MaxPermSize=256m -Xmx512m -jar start.jar:
         background: true
     - bin/jetty_wait
 test:

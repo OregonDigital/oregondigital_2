@@ -1,5 +1,5 @@
 class MarmottaResource
-  delegate :context_connection, :to => :connection
+  delegate :context_connection, :sparql_update, :to => :connection
   attr_reader :uri, :connection
   def initialize(uri, connection:)
     @uri = uri
@@ -20,9 +20,7 @@ class MarmottaResource
   end
 
   def post(graph)
-    context_connection.post("") do |req|
-      req.body = graph.dump(:jsonld)
-    end.success?
+    sparql_update.insert_data(graph)
   end
 
   private

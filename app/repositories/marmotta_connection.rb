@@ -29,12 +29,20 @@ class MarmottaConnection
     end
   end
 
+  def sparql_update
+    @sparql_update ||= SparqlWithContext.new(context_uri,"#{uri}/sparql/update")
+  end
+
   def context_connection
     @context_connection ||= Hurley::Client.new("#{uri}/context").tap do |c|
       c.header[:accept] = mime_type
       c.header[:content_type] = mime_type
-      c.query[:graph] = "#{uri}/context/#{context}"
+      c.query[:graph] = context_uri.to_s
     end
+  end
+
+  def context_uri
+    RDF::URI("#{uri}/context/#{context}")
   end
 
   private
