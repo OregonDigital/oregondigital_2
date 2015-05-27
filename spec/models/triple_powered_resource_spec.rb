@@ -53,14 +53,6 @@ RSpec.describe TriplePoweredResource do
         expect(subject.preferred_label).to eq "Test"
       end
     end
-    xit "should delegate to LabelFinder" do
-      label_finder = instance_double(LabelFinder)
-      label = double("Label")
-      allow(LabelFinder).to receive(:new).with(subject, anything).and_return(label_finder)
-      allow(label_finder).to receive(:label).and_return(label)
-
-      expect(subject.preferred_label).to eq label
-    end
     it "should work" do
       subject.preflabel = ["Test"]
       
