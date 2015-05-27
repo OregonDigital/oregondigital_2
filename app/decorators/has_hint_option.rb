@@ -4,12 +4,12 @@ class HasHintOption < SimpleDelegator
   end
 
   def hint
-    "Must fulfill: #{hint_message.join(", ")}" unless hint_message.empty?
+    "Must fulfill: #{hint_message}" unless hint_message.empty?
   end
 
   private
 
   def hint_message
-    object.property_hint(property)
+    object.property_hint(property).join(", ")
   end
 end
