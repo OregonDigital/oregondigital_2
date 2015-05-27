@@ -14,7 +14,7 @@ dependencies:
   post:
     - RAILS_ENV=development bundle exec rake jetty:clean
     - bundle exec rake hydra:jetty:config
-    - cd jetty && java -Djetty.port=8983 -Dsolr.solr.home=/home/ubuntu/oregondigital_2/jetty/solr -XX:MaxPermSize=128m -Xmx256m -jar start.jar:
+    - cd jetty && java -Djetty.port=8983 -Dsolr.solr.home=/home/ubuntu/oregondigital_2/jetty/solr -XX:MaxPermSize=256m -Xmx512m -jar start.jar:
         background: true
     - bin/jetty_wait
 test:
