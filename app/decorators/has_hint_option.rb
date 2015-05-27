@@ -10,6 +10,6 @@ class HasHintOption < SimpleDelegator
   private
 
   def hint_message
-    object.property_hint(property).join(", ")
+    object.property_hint(property)
   end
 end

@@ -11,7 +11,7 @@ class GenericAssetForm
   end
 
   def property_hint(property)
-    Array.wrap(validators[property]).map(&:message).compact
+    Array.wrap(validators[property]).map(&:message).compact.to_sentence
   end
 
 end

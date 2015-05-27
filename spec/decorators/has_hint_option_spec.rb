@@ -8,7 +8,7 @@ RSpec.describe HasHintOption do
   let(:property) { :lcsubject }
   let(:nil_message) {[nil].compact}
   let(:validator_message) {["Here is a message"]}
-  let(:validator_messages) {["Here is a message", "and another"]}
+  let(:validator_messages) {["Here is a message", "another"]}
  
 
   describe "#hint" do
@@ -25,7 +25,7 @@ RSpec.describe HasHintOption do
     end
     context "when there is a validator" do
       before do
-        allow(object).to receive(:property_hint).and_return(validator_message) 
+        allow(object).to receive(:property_hint).and_return(validator_message.to_sentence) 
       end
       
       it "should return that validator's message" do
@@ -33,11 +33,11 @@ RSpec.describe HasHintOption do
       end
       context "With multiple validator messages" do
         before do
-          allow(object).to receive(:property_hint).and_return(validator_messages) 
+          allow(object).to receive(:property_hint).and_return(validator_messages.to_sentence) 
         end
 
         it "should return those messages comma delimited" do
-          expect(subject.hint).to eq"Must fulfill: Here is a message, and another"
+          expect(subject.hint).to eq"Must fulfill: Here is a message and another"
         end
       end
     end
