@@ -18,7 +18,7 @@ class LanguageSelector
   end
 
   def preferred_labels
-    ["en", "en-us"]
+    ["en-us", "en"]
   end
 
   # Decorator for LabelFinders - returns the selected label as the first
