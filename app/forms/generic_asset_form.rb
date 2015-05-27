@@ -9,4 +9,9 @@ class GenericAssetForm
   def self.permitted_params
     super << :content
   end
+
+  def property_hint(property)
+    Array.wrap(validators[property]).map(&:message).compact
+  end
+
 end
