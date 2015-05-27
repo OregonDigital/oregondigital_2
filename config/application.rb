@@ -33,6 +33,6 @@ module OregonDigital
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.active_record.raise_in_transactional_callbacks = true
-    #config.middleware.use ::ConnegHackMiddleware
+    config.middleware.use ::ConnegHackMiddleware
   end
 end
