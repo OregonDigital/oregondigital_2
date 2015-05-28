@@ -1,0 +1,64 @@
+require 'rails_helper'
+require 'enriched_solr_document'
+
+RSpec.describe EnrichedSolrDocument do
+  subject { described_class.new(solr_document) }
+  before do
+    OregonDigital.marmotta.delete_all
+  end
+
+  describe "#update_document" do
+    let(:document_result) { subject.update_document }
+    context "when there are no URIs" do
+      let(:solr_document) { {"lcsubject_ssim" => ["test"] } }
+      it "should not be anything" do
+        expect(document_result).to eq ( {} )
+      end
+    end
+    context "when there are label-less URIs" do
+      let(:solr_document) { {"lcsubject_ssim" => [uri.to_s]} }
+      let(:uri) { "http://localhost:41/1" }
+      it "should return an empty document" do
+        build_resource(uri: uri, label: nil)
+
+        expect(document_result).to eq ( {} )
+      end
+    end
+    context "when there are labelled URIs" do
+      let(:solr_document) { {"lcsubject_ssim" => [uri.to_s, uri.to_s+"2"]} }
+      let(:uri) { "http://localhost:41/1" }
+      it "should return the label" do
+        build_resource(uri: uri, label: "Test")
+        build_resource(uri: uri+"2", label: "Test2")
+
+        expect(document_result).to eq (
+          {
+            "lcsubject_preferred_label_ssim" => ["Test", "Test2"]
+          }
+        )
+      end
+    end
+    context "when there are labelled URIs with the same label" do
+      let(:solr_document) { {"lcsubject_ssim" => [uri.to_s, uri.to_s+"2"]} }
+      let(:uri) { "http://localhost:41/1" }
+      it "should de-duplicate" do
+        build_resource(uri: uri, label: "Test")
+        build_resource(uri: uri+"2", label: "Test")
+
+        expect(document_result).to eq (
+          {
+            "lcsubject_preferred_label_ssim" => ["Test"]
+          }
+        )
+      end
+    end
+  end
+
+  def build_resource(uri:, label:)
+    TriplePoweredResource.new(uri).tap do |r|
+      r.preflabel = label
+      r.persist!
+    end
+  end
+end
+
