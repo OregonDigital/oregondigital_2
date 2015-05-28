@@ -9,6 +9,7 @@ class EnrichedSolrDocument
     end.delete_if{|_, v| v.blank?}
   end
 
+  # @return An atomic update-ready solr document.
   def to_solr
     @to_solr ||= {"id" => solr_document["id"]}.merge(
     update_document.each_with_object({}) do |(k, v), hsh|
