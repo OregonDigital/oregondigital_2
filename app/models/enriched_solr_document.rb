@@ -1,12 +1,19 @@
 class EnrichedSolrDocument
   pattr_initialize :solr_document
   def update_document
-    properties.each_with_object({}) do |property, hsh|
+    @update_document ||= properties.each_with_object({}) do |property, hsh|
       Array.wrap(enhancements.new(property).property).each do |enhance_property|
         hsh[enhance_property.property_key] ||= []
         hsh[enhance_property.property_key] |= enhance_property.values
       end
     end.delete_if{|_, v| v.blank?}
+  end
+
+  def to_solr
+    @to_solr ||= {"id" => solr_document["id"]}.merge(
+    update_document.each_with_object({}) do |(k, v), hsh|
+      hsh[k] = {"set" => v}
+    end)
   end
 
   private

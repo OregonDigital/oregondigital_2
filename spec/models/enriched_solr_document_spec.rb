@@ -7,6 +7,21 @@ RSpec.describe EnrichedSolrDocument do
     OregonDigital.marmotta.delete_all
   end
 
+  describe "#to_solr" do
+    let(:document_result) { subject.to_solr }
+    let(:solr_document) { {"id" => "1", "lcsubject_ssim" => [uri.to_s]} }
+    let(:uri) { "http://localhost:41/1" }
+    it "should be a good solr document to atomic update" do
+      build_resource(uri: uri, label: "Test")
+
+      expect(document_result).to eq (
+        {
+          "id" => "1",
+          "lcsubject_preferred_label_ssim" => {"set" => ["Test"]}
+        }
+      )
+    end
+  end
   describe "#update_document" do
     let(:document_result) { subject.update_document }
     context "when there are no URIs" do
