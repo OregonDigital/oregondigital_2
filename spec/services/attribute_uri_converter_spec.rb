@@ -20,9 +20,9 @@ RSpec.describe AttributeURIConverter do
         :e => ["bar"],
       }
       converted = AttributeURIConverter.new(attrs).convert_attributes
-      expect(converted[:a]).to eql(RDF::URI("scheme://host"))
-      expect(converted[:b]).to eql("http:example.com")
-      expect(converted[:c]).to eql("definitely not a uri")
+      expect(converted[:a]).to eql([RDF::URI("scheme://host")])
+      expect(converted[:b]).to eql(["http:example.com"])
+      expect(converted[:c]).to eql(["definitely not a uri"])
       expect(converted[:d]).to eql([RDF::URI("http://example.org"), "also not a uri"])
       expect(converted[:e]).to eql(["bar"])
       expect(converted.keys).to eql([:a, :b, :c, :d, :e])
