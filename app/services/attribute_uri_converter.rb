@@ -4,8 +4,8 @@ class AttributeURIConverter
   end
 
   def convert_attributes
-    @attributes.each do |property, values|
-      convert_attribute(property, values)
+    @attributes.each do |property, value|
+      convert_attribute(property, value)
     end
 
     @attributes
@@ -13,7 +13,19 @@ class AttributeURIConverter
 
   private
 
-  def convert_attribute(property, values)
-    @attributes[property] = Array.wrap(values).map {|v| MaybeURI.new(v)}.map(&:value)
+  def convert_attribute(property, value)
+    if Array === value
+      convert_attribute_list(property, value)
+    else
+      @attributes[property] = to_uri(value)
+    end
+  end
+
+  def convert_attribute_list(property, values)
+    @attributes[property] = values.map {|v| to_uri(v)}
+  end
+
+  def to_uri(v)
+    MaybeURI.new(v).value
   end
 end
