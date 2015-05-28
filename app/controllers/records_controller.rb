@@ -3,8 +3,8 @@ class RecordsController < ApplicationController
 
   protected
 
-  def set_attributes
-    resource.attributes = AttributeURIConverter.new(collect_form_attributes).convert_attributes
+  def collect_form_attributes
+    AttributeURIConverter.new(super).convert_attributes
   end
 
   def resource
