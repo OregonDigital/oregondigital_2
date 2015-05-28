@@ -1,7 +1,11 @@
 class RecordsController < ApplicationController
   include RecordsControllerBehavior
 
-  private
+  protected
+
+  def set_attributes
+    resource.attributes = AttributeURIConverter.new(collect_form_attributes).convert_attributes
+  end
 
   def resource
     decorate(super)
