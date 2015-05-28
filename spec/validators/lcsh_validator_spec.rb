@@ -9,11 +9,11 @@ RSpec.describe LcshValidator do
     it "should ask BaseUriValidator" do
       allow(BaseUriValidator).to receive(:new).with(base_uri).and_return(validator)
       validation_result = double("Result")
-      allow(validator).to receive(:valid?).and_return(validation_result)
+      allow(validator).to receive(:valid_value?).and_return(validation_result)
 
-      result = subject.valid?(value)
+      result = subject.valid_value?(value)
 
-      expect(validator).to have_received(:valid?).with(value)
+      expect(validator).to have_received(:valid_value?).with(value)
       expect(result).to eq validation_result
     end
   end

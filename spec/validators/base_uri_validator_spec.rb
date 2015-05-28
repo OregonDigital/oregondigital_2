@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe BaseUriValidator do
   subject { BaseUriValidator.new("http://opaquenamespace.org/ns/subject") }
   describe "#valid?" do
-    let(:result) { subject.valid?(value) }
+    let(:result) { subject.valid_value?(value) }
     context 'when given a bad uri' do
       let(:value) { [RDF::URI("http://bla.org/bla")] }
       it "should return false" do
