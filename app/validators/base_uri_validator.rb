@@ -1,9 +1,9 @@
 class BaseUriValidator
   pattr_initialize :base_uri
 
-  def valid?(values)
+  def valid_value?(values)
     Array.wrap(values).all? do |value|
-      UriValidator.valid?(value) && value.start_with?(base_uri.to_s)
+      UriValidator.valid_value?(value) && value.start_with?(base_uri.to_s)
     end
   end
 

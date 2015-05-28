@@ -3,7 +3,7 @@ class PropertyValidationsGenerator
   def validations
     {
       validated_property(:lcsubject) => [
-        SubjectCvValidator.new
+        ControlledSubject.new
       ]
     }
   end

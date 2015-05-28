@@ -1,7 +1,5 @@
 class OpaqueNsSubjectValidator
-  def valid?(values)
-    validator.valid?(values)
-  end
+  delegate :valid_value?, :to => :validator
 
   def message
     "contains a non opaque namespace term"
