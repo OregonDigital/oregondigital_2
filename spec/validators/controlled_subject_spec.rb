@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe SubjectCvValidator do
+RSpec.describe ControlledSubject do
   subject { described_class.new }
 
   describe "#valid?" do
-    let(:result) { subject.valid?(value) }
+    let(:result) { subject.valid_value?(value) }
     context "when given a string" do
       let(:value) { "string" }
       it "should not be valid" do
