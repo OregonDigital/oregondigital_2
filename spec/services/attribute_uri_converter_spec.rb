@@ -5,24 +5,27 @@ RSpec.describe AttributeURIConverter do
     it "converts all URI-like values in a hash to RDF" do
       attrs = {
         # Simplest case
-        :d => "scheme://host",
+        :a => "scheme://host",
 
         # Broken "URI"
-        :e => "http:example.com",
+        :b => "http:example.com",
 
         # String
-        :f => "definitely not a uri",
+        :c => "definitely not a uri",
 
         # Array with a URI and a non-URI
-        :g => ["http://example.org", "also not a uri"]
+        :d => ["http://example.org", "also not a uri"],
+
+        # Single-item array
+        :e => ["bar"],
       }
       converted = AttributeURIConverter.new(attrs).convert_attributes
-      expect(converted).to eq({
-        :d => RDF::URI("scheme://host"),
-        :e => "http:example.com",
-        :f => "definitely not a uri",
-        :g => [RDF::URI("http://example.org"), "also not a uri"]
-      })
+      expect(converted[:a]).to eql(RDF::URI("scheme://host"))
+      expect(converted[:b]).to eql("http:example.com")
+      expect(converted[:c]).to eql("definitely not a uri")
+      expect(converted[:d]).to eql([RDF::URI("http://example.org"), "also not a uri"])
+      expect(converted[:e]).to eql(["bar"])
+      expect(converted.keys).to eql([:a, :b, :c, :d, :e])
     end
   end
 end
