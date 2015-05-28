@@ -1,0 +1,7 @@
+<div align="center">
+<div id="small-image-viewer">
+  <%= image_tag(Image.find(params[:id]).relative_thumbnail_location(Image.find(params[:id]).workflow_metadata.medium_path), alt: Image.find(params[:id]).title.first) %>
+
+  </div>
+</div>
+
