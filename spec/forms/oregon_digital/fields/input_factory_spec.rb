@@ -1,12 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::Fields::InputFactory do
+  subject { described_class.new(base_factory, decorator) }
+  let(:base_factory) { object_double(HydraEditor::Fields::Factory) }
+  let(:decorator) { object_double(HasHintOption) }
+  let(:object) { instance_double(GenericAssetForm) }
+  let(:decorated_input) { double("decorated input") }
+  let(:input) { double("input") }
+  let(:property) { :lcsubject }
+  let(:result) { subject.create(object, property) }
+
   describe "#create" do
-    it "should return an input that can have a hint" do
-      object = GenericAsset.new
-      result = described_class.create(object, :lcsubject)
-      expect(result.property).to eq :lcsubject
-      expect(result.options).to include ({:hint => nil})
+    it "decorate the input" do
+      allow(base_factory).to receive(:create).and_return(input)
+      allow(decorator).to receive(:new).and_return(decorated_input)
+
+      expect(result).to eq decorated_input
+      expect(decorator).to have_received(:new).with(input)
+      expect(base_factory).to have_received(:create).with(object, :lcsubject)
     end
   end
 end

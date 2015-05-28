@@ -21,4 +21,5 @@ class GenericAsset < ActiveFedora::Base
   def assign_id
     injector.id_service.mint.reverse
   end
+
 end

@@ -6,7 +6,7 @@ RSpec.describe "records/_form" do
   end
 
   let(:resource) do
-    Image.new
+    ValidatedAssetRepository.new(Image).new
   end
   let(:params) do
     {
@@ -19,5 +19,8 @@ RSpec.describe "records/_form" do
   end
   it "should have a named file field" do
     expect(rendered).to have_selector "input[type=file][name='image[content]']"
+  end
+  it "should have the hint show up" do
+    expect(rendered).to have_css ".help-block"
   end
 end
