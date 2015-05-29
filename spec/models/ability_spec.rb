@@ -8,6 +8,9 @@ RSpec.describe Ability do
     it "should not be an admin" do
       expect(user).not_to be_admin
     end
+    it "should not be able to edit a SolrDocument instance" do
+      expect(subject).not_to be_able_to(:edit, SolrDocument.new)
+    end
   end
   context "when given an admin" do
     let(:user) { FactoryGirl.create(:user, :admin) }
@@ -17,6 +20,9 @@ RSpec.describe Ability do
     end
     it "should be able to manage everything" do
       expect(subject).to be_able_to(:manage, :all)
+    end
+    it "should be able to edit a SolrDocument instance" do
+      expect(subject).to be_able_to(:edit, SolrDocument.new)
     end
   end
 end

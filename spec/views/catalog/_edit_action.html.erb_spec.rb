@@ -1,37 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "catalog/_edit_action.html.erb" do
-  let(:resource) do
-    GenericAsset.new do |g|
-      g.attributes = {
-        :id => 1,
-        :title => ["Title"],
-        :alternative => ["Test"]
-      }
-    end
-  end
-  let(:document) { SolrDocument.new(resource.to_solr) }
-  let(:ability) { Ability.new(user) }
+  let(:document) { instance_double(SolrDocument, :id => "1")}
   before do
-    allow(controller).to receive(:current_ability).and_return(ability)
+    allow(view).to receive(:can?).with(:edit, document).and_return(permission_result)
     render :partial => "catalog/edit_action.html.erb", :locals => {:document => document }
   end
-  context "when not logged in" do
-    let(:user) { nil }
-    it "should not have edit link" do
-      expect(rendered).to_not have_link("Edit")
+  context "when they can edit the document" do
+    let(:permission_result) { true }
+    it "should have the edit link" do
+      expect(rendered).to have_link("Edit")
     end
   end
-  context "when logged in as a user" do
-    let(:user) { FactoryGirl.create(:user) }
-    it "should not have edit link" do
-      expect(rendered).to_not have_link("Edit")
-    end
-  end
-  context "when logged in as an admin" do
-    let(:user) { FactoryGirl.create(:user, :admin) }
-    it "should have a link to edit" do
-      expect(rendered).to have_content("Edit")
+  context "when they can't edit the document" do
+    let(:permission_result) { false }
+    it "should not have the edit link" do
+      expect(rendered).not_to have_link "Edit"
     end
   end
 end
