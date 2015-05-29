@@ -22,12 +22,19 @@ Configuration and database creation:
 	rake jetty:clean
 	rake jetty:config
 
+
+Add Symlink to properly display images
+    cd public
+	ln -s ../media media
+
+
 Start the servers:
 
     rake jetty:start
 	rails server
 
 You can go to your browser and open `http://localhost:3000`, where you can see the Rails app running. When you access `http://localhost:8983` Jetty should list the available contexts (solr and fedora)
+
 
 Run tests with RSpec:
 
@@ -38,3 +45,5 @@ Set up a dev admin user:
     rake admin_user
 
 Log in to the app as "admin@example.org" with password "admin123".
+
+

@@ -2,7 +2,6 @@
 <div id="small-image-viewer">
 
   <% if document["id"] %>
-    <h1>Hola Mundo!</h1>
     <% @image = Image.find(document["id"]) %>
     <%= image_tag(@image.relative_medium_image_location, 
                   alt: @image.title.first, 
