@@ -12,7 +12,7 @@ class RecordsController < ApplicationController
   end
 
   def decorate(resource)
-    derivative_asset = AssetWithDerivativesFactory.new(HasContent.new(resource))
+    derivative_asset = resource_decorators.new(resource)
     ValidatedAssetRepository.new(resource.class).decorate(derivative_asset)
   end
 
