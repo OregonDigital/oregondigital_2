@@ -15,6 +15,8 @@ class CompositeEnhancementFactory
   class CompositeEnhancement
     pattr_initialize :factories, :property
 
+    # @return [Array<Property>] Property result of all the contained
+    # enhancements.
     def property
       enhancements.map(&:property)
     end

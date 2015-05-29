@@ -2,6 +2,8 @@
 class LabelEnhancement
   pattr_initialize :raw_property
 
+  # @return [SolrProperty] A property with labels for the property passed to
+  # this.
   def property
     SolrProperty.new(solr_identifier, values)
   end
