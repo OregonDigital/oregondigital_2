@@ -5,10 +5,16 @@
 # those will just fall through here with no changes.
 class HasURIInputType < SimpleDelegator
   def options
-    opts = super.dup
-    if object.class.multiple?(property)
-      opts[:as] = :uri_multi_value
+    if has_multiple?
+      super.merge(:as => :uri_multi_value)
+    else
+      super
     end
-    opts
+  end
+
+  private
+
+  def has_multiple?
+    object.class.multiple?(property)
   end
 end
