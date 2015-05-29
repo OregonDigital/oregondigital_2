@@ -1,6 +1,9 @@
+# Responsible for enriching a solr document and atomically updating the
+# document.
 class Enricher
   pattr_initialize(:id)
 
+  # Perform enrichment
   def enrich!
     connection.update(
       :params => { softCommit: true },
