@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jechols/hydra-editor.git
-  revision: 5cb4dc113bbc6db82d5989267864b36133cce216
+  revision: 2057d33f4fd7f05147bd5176eb0e2aa8833229e9
   branch: feature/configurable-field-generator
   specs:
     hydra-editor (1.0.4)
