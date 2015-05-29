@@ -8,4 +8,9 @@ class EnrichesSolr < SimpleDelegator
     end
     result
   end
+
+  # Required to not mess up SimpleForm's path helpers.
+  def class
+    __getobj__.class
+  end
 end
