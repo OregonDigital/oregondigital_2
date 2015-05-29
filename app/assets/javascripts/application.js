@@ -20,3 +20,5 @@
 //= require blacklight/blacklight
 //= require_tree .
 //= require hydra-editor/hydra-editor
+//
+//= require edit_record

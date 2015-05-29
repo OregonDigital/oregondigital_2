@@ -85,6 +85,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'poltergeist'
   gem 'webmock'
   gem 'timecop'
   gem 'database_cleaner'
