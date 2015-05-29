@@ -9,11 +9,11 @@ class MaybeURI
     end
   end
 
-  private
-
   def uri?
     String === raw_value && !uri.scheme.blank? && !uri.host.blank?
   end
+
+  private
 
   def uri
     @uri ||= RDF::URI(raw_value)
