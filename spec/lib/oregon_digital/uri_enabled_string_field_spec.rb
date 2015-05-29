@@ -15,14 +15,20 @@ RSpec.describe OregonDigital::URIEnabledStringField do
         subject.field
       end
 
-      it "should create a submitable, read-only hidden field with the URI" do
-        expected_opts = {:name => "name", :id => "id", :value => "http://rdf.example.com", :readonly => true}
-        expect(builder).to receive(:hidden_field).with(:attribute, expected_opts)
+      it "should create a submitable, read-only field with the URI" do
+        expected_opts = {
+          :name => "name",
+          :id => "id",
+          :value => "http://rdf.example.com",
+          :readonly => true,
+          :class => ["hidden"]
+        }
+        expect(builder).to receive(:text_field).with(:attribute, expected_opts)
         subject.field
       end
 
       it "should return both fields" do
-        expect(subject.field).to eq("text field HTMLhidden field HTML")
+        expect(subject.field).to eq("text field HTMLtext field HTML")
       end
     end
 
@@ -39,7 +45,6 @@ RSpec.describe OregonDigital::URIEnabledStringField do
   def build_builder
     b = instance_double(ActionView::Helpers::FormBuilder)
     allow(b).to receive(:text_field).and_return("text field HTML")
-    allow(b).to receive(:hidden_field).and_return("hidden field HTML")
     b
   end
 
