@@ -19,6 +19,6 @@ class OnlyUris
   private
 
   def uri?(value)
-    value.to_s.start_with?("http")
+    MaybeURI.new(value).uri?
   end
 end
