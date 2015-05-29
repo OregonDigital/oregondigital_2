@@ -68,9 +68,12 @@ RSpec.describe "Hydra Editor", :slow => true do
 
         visit "/records/#{pid}/edit"
 
-        input = all(:css, '.image_author input[type="text"].string')[0]
+        input = all(:css, '.image_author input[type="text"].string:not(.hidden)')[0]
         expect(input.value).to eq('The Mighty Banana Said Unto Thee, "Behold My Yellowness"')
-        expect(page).to have_button("View URI")
+        expect(page).to have_selector(".switch-fields", :count => 1)
+        find(".switch-fields").click
+        input = all(:css, '.image_author input[type="text"].string:not(.hidden)')[0]
+        expect(input.value).to eq "http://localhost:40/banana"
       end
     end
 
