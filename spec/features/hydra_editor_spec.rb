@@ -71,6 +71,25 @@ RSpec.describe "Hydra Editor", :slow => true do
         expect(input.value).to eq('The Mighty Banana Said Unto Thee, "Behold My Yellowness"')
       end
     end
+
+    it "should be read-only when re-edited" do
+      as_user(admin) do
+        navigate_to_new_image_path
+
+        fill_in "image_title", :with => "John and Jane Doe, a portrait"
+        fill_in "image_author", :with => "http://localhost:40/banana"
+        button = find(:css, "input.btn-primary")
+        button.click
+        expect(page).to have_content("successfully created")
+
+        pid = Image.last.id
+
+        visit "/records/#{pid}/edit"
+
+        input = all(:css, '.image_author input[type="text"].string')[0]
+        expect(input[:readonly]).to eq('readonly')
+      end
+    end
   end
 
   def navigate_to_new_image_path
