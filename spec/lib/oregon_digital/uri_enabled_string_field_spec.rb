@@ -15,8 +15,8 @@ RSpec.describe OregonDigital::URIEnabledStringField do
         subject.field
       end
 
-      it "should create a submitable hidden field with the URI" do
-        expected_opts = {:name => "name", :id => "id", :value => "http://rdf.example.com"}
+      it "should create a submitable, read-only hidden field with the URI" do
+        expected_opts = {:name => "name", :id => "id", :value => "http://rdf.example.com", :readonly => true}
         expect(builder).to receive(:hidden_field).with(:attribute, expected_opts)
         subject.field
       end

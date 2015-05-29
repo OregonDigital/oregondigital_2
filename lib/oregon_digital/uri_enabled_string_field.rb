@@ -31,7 +31,10 @@ module OregonDigital
 
     # Returns the actual important RDF data: the URI
     def rdf_uri_field
-      builder.hidden_field(attribute_name, options.merge(:value => subject))
+      builder.hidden_field(attribute_name, options.merge(
+        :value => subject,
+        :readonly => true)
+      )
     end
 
     def label
