@@ -3,8 +3,11 @@
 class HasURIInputType < SimpleDelegator
   def options
     opts = super.dup
-    opts[:input_html] ||= {}
-    opts[:input_html][:type] = "uri_enabled_string"
+    if object.class.multiple?(property)
+      opts[:as] = :uri_multi_value
+    else
+      opts[:as] = :string
+    end
     opts
   end
 end
