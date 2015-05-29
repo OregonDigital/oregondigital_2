@@ -1,4 +1,6 @@
 # The Label Enhancement takes URI properties and returns their preferred labels.
+# @example LabelEnhancement.new(SolrProperty.new("lcsubject_ssim",
+#   [RDF::URI("http://bla.org")]))
 class LabelEnhancement
   pattr_initialize :raw_property
 

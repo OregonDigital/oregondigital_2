@@ -16,4 +16,12 @@ class RecordsController < ApplicationController
     ValidatedAssetRepository.new(resource.class).decorate(derivative_asset)
   end
 
+  def resource_decorators
+    DecoratorList.new(
+      AssetWithDerivativesFactory,
+      HasContent,
+      EnrichesSolr
+    )
+  end
+
 end
