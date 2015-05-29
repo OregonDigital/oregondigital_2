@@ -1,9 +1,6 @@
 # The Label Enhancement takes URI properties and returns their preferred labels.
 class LabelEnhancement
-  attr_reader :raw_property
-  def initialize(property)
-    @raw_property = property
-  end
+  pattr_initialize :raw_property
 
   def property
     SolrProperty.new(solr_identifier, values)
