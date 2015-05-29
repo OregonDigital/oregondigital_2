@@ -1,6 +1,13 @@
 <div align="center">
 <div id="small-image-viewer">
-  <%= image_tag(Image.find(params[:id]).relative_thumbnail_location(Image.find(params[:id]).workflow_metadata.medium_path), alt: Image.find(params[:id]).title.first) %>
+
+  <% if document["id"] %>
+    <h1>Hola Mundo!</h1>
+    <% @image = Image.find(document["id"]) %>
+    <%= image_tag(@image.relative_medium_image_location, 
+                  alt: @image.title.first, 
+                  title: @image.title.first) %>
+  <% end %>
 
   </div>
 </div>
