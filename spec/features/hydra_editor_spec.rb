@@ -46,6 +46,33 @@ RSpec.describe "Hydra Editor", :slow => true do
     end
   end
 
+  context "when a field is entered as a URI" do
+    before do
+      TriplePoweredResource.new("http://localhost:40/banana").tap do |t|
+        t.preflabel = 'The Mighty Banana Said Unto Thee, "Behold My Yellowness"'
+      end.persist!
+    end
+
+    it "should show the label when re-edited" do
+      as_user(admin) do
+        navigate_to_new_image_path
+
+        fill_in "image_title", :with => "John and Jane Doe, a portrait"
+        fill_in "image_author", :with => "http://localhost:40/banana"
+        button = find(:css, "input.btn-primary")
+        button.click
+        expect(page).to have_content("successfully created")
+
+        pid = Image.last.id
+
+        visit "/records/#{pid}/edit"
+
+        input = all(:css, '.image_author input[type="text"].string')[0]
+        expect(input.value).to eq('The Mighty Banana Said Unto Thee, "Behold My Yellowness"')
+      end
+    end
+  end
+
   def navigate_to_new_image_path
     visit "/records/new"
     page.select("Image", :from => "type")
