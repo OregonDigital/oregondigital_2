@@ -24,6 +24,7 @@ Configuration and database creation:
 
 
 Add Symlink to properly display images
+
     cd public
 	ln -s ../media media
 
