@@ -1,3 +1,6 @@
+##
+# Decorator to queue enrichment of the solr document after an asset is
+# sucessfully saved.
 class EnrichesSolr < SimpleDelegator
   def save(*args)
     if result = super

@@ -39,6 +39,19 @@ RSpec.describe EnrichedSolrDocument do
         expect(document_result).to eq ( {} )
       end
     end
+    context "when there are fields with no URIs" do
+      let(:solr_document) { {"id" => "test", "lcsubject_ssim" => ["test", uri.to_s]} }
+      let(:uri) { "http://localhost:41/1" }
+      it "should only deal with URI fields" do
+        build_resource(uri: uri, label: "Test")
+
+        expect(document_result).to eq (
+          {
+            "lcsubject_preferred_label_ssim" => ["Test"]
+          }
+        )
+      end
+    end
     context "when there are labelled URIs" do
       let(:solr_document) { {"lcsubject_ssim" => [uri.to_s, uri.to_s+"2"]} }
       let(:uri) { "http://localhost:41/1" }

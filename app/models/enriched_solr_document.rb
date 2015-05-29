@@ -1,3 +1,5 @@
+##
+# A solr document with enrichments run against URI-based fields.
 class EnrichedSolrDocument
   pattr_initialize :solr_document
   def update_document
@@ -24,11 +26,6 @@ class EnrichedSolrDocument
   end
 
   def properties
-    @properties ||= uri_properties.map{|keys| SolrProperty.new(*keys)}
+    @properties ||= solr_document.map{|keys| SolrProperty.new(*keys)}
   end
-
-  def uri_properties
-    solr_document.delete_if{|_, v| !Array.wrap(v).any?{|x| x.to_s.start_with?("http")}}
-  end
-
 end

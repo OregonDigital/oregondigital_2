@@ -2,6 +2,7 @@
 # An enumerator which iterates only over URIs in a given set of values.
 class OnlyUris
   attr_reader :values
+  delegate :length, :to => :to_a
   include Enumerable
   def initialize(values)
     @values = Array.wrap(values)

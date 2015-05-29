@@ -1,3 +1,6 @@
+##
+# Represents a solr property in a solr document. Has a property_key and values
+# associated with it.
 class SolrProperty
   attr_reader :property_key, :values
   def initialize(property_key, values)
