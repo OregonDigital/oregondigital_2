@@ -2,7 +2,7 @@ class MaybeURI
   pattr_initialize :raw_value
 
   def value
-    if is_uri?
+    if uri?
       uri
     else
       raw_value
@@ -11,7 +11,7 @@ class MaybeURI
 
   private
 
-  def is_uri?
+  def uri?
     String === raw_value && !uri.scheme.blank? && !uri.host.blank?
   end
 
