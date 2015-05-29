@@ -5,14 +5,24 @@ class Enricher
 
   # Perform enrichment
   def enrich!
-    connection.update(
-      :params => { softCommit: true },
-      :data => [enriched_solr_document].to_json,
-      :headers => { 'Content-Type' => 'application/json' }
-    ) unless enriched_solr_document.empty?
+    unless enriched_solr_document.empty?
+      perform_atomic_update!
+    end
   end
 
   private
+
+  def perform_atomic_update!
+    connection.update(
+      :params => { softCommit: true },
+      :data => solr_json,
+      :headers => { 'Content-Type' => 'application/json' }
+    )
+  end
+
+  def solr_json
+    [enriched_solr_document].to_json
+  end
 
   def enriched_solr_document
     @enriched_solr_document ||= EnrichedSolrDocument.new(solr_document).to_solr
