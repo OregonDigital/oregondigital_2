@@ -4,7 +4,7 @@ class EnrichedSolrDocument
   pattr_initialize :solr_document
   def update_document
     @update_document ||= properties.each_with_object({}) do |property, hsh|
-      Array.wrap(enhancements.new(property).property).each do |enhance_property|
+      enhancements.new(property).properties.each do |enhance_property|
         hsh[enhance_property.property_key] ||= []
         hsh[enhance_property.property_key] |= enhance_property.values
       end

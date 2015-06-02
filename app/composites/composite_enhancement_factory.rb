@@ -17,8 +17,8 @@ class CompositeEnhancementFactory
 
     # @return [Array<Property>] Property result of all the contained
     # enhancements.
-    def property
-      enhancements.map(&:property)
+    def properties
+      enhancements.flat_map(&:properties)
     end
 
     private
