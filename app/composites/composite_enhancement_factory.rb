@@ -15,7 +15,7 @@ class CompositeEnhancementFactory
   class CompositeEnhancement
     pattr_initialize :factories, :property
 
-    # @return [Array<Property>] Property result of all the contained
+    # @return [Array<SolrProperty>] Property result of all the contained
     # enhancements.
     def properties
       enhancements.flat_map(&:properties)
