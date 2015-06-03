@@ -270,6 +270,11 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     map (4.7.1)
+    marmotta (0.1.0)
+      hurley
+      json-ld
+      rdf
+      sparql-client
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_magick (4.2.3)
@@ -524,6 +529,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jettywrapper!
   jquery-rails
+  marmotta
   mini_magick
   newrelic_rpm
   noid
