@@ -8,7 +8,7 @@ module OregonDigital
   end
 
   def marmotta
-    @marmotta ||= MarmottaConnection.new(uri: config.marmotta.url, context: Rails.env)
+    @marmotta ||= Marmotta::Connection.new(uri: config.marmotta.url, context: Rails.env)
   end
 
   def config
