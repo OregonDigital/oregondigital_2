@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ClassConfiguration do
   subject { described_class.new(property, class_name_map) }
-  let(:property) { Property.new(:name => "order", :class_name => "wrong") }
+  let(:property) { ActiveTriples::Property.new(:name => "order", :class_name => "wrong") }
   let(:class_name_map) { {:order => class_name}}
   let(:class_name) { double("class_name") }
 

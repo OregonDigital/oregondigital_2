@@ -1,6 +1,6 @@
 ##
 # Includes the Oregon Digital Data Dictionary.
-class ODDataModel < DataModel
+class ODDataModel < ActiveTriples::Schema
   # Titles
   property :title, :predicate => RDF::DC.title
   property :alternative, :predicate => RDF::DC.alternative

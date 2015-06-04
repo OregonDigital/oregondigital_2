@@ -4,7 +4,7 @@
 #   good place to define that.
 class SolrApplicationStrategy
   # @param [ActiveFedora::Base] object The object to apply the property to.
-  # @param [Property, #name, #to_h] property The property to define.
+  # @param [ActiveTriples::Property, #name, #to_h] property The property to define.
   def call(object, property)
     object.property property.name, property.to_h do |index|
       index.as(*index_types)

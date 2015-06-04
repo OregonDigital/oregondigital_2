@@ -3,7 +3,7 @@
 # defined on that property it will not override it.
 class DefaultClass < SimpleDelegator
   attr_reader :default_class_name
-  # @param [Property] item Property to decorate
+  # @param [ActiveTriples::Property] item Property to decorate
   # @param [String, Class] default_class_name Class to use as a default
   def initialize(item, default_class_name)
     @default_class_name = default_class_name
