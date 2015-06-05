@@ -2,6 +2,7 @@
 require 'blacklight/catalog'
 
 class CatalogController < ApplicationController
+  before_filter :redirect301, :only => :show
 
   include Blacklight::Catalog
   include Hydra::Controller::ControllerBehavior
@@ -12,4 +13,12 @@ class CatalogController < ApplicationController
   def blacklight_config
     @blacklight_config ||= BlacklightConfig.new(GenericAsset, self.class.blacklight_config).configuration
   end
+
+  def redirect301
+    id = RecordID.new(params[:id])
+    if id.old?
+      redirect_to catalog_path(:id => id.value), :status => 301
+    end
+  end
+
 end

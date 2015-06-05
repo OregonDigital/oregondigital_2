@@ -17,6 +17,15 @@ RSpec.describe CatalogController do
         expect(graph.statements.to_a.length).to eq 2
       end
     end
+    describe "redirecting" do
+      before do
+        get :show, :id => "oregondigital:bla"
+      end
+      it "should redirect with 301" do
+        expect(response).to redirect_to catalog_path(:id => "bla")
+        expect(response.code).to eq "301"
+      end
+    end
   end
 
   describe "#blacklight_config" do
