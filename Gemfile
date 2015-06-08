@@ -29,7 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Hydra
 gem 'hydra-head', :github => "projecthydra/hydra-head"
-gem 'active-fedora', :github => "projecthydra/active_fedora"
+gem 'active-fedora', :github => "terrellt/active_fedora", :branch => "ATSchemas"
+gem 'active-triples', :github => "terrellt/ActiveTriples", :branch => "child_node_persistence"
 
 # Blacklight
 gem 'blacklight'

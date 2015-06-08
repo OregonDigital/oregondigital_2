@@ -1,7 +1,9 @@
 class TriplePoweredResource < ActiveTriples::Resource
   property :preflabel, :predicate => RDF::SKOS.prefLabel
-  def repository
-    @repository ||= MarmottaRepository.new(rdf_subject)
+  def initialize(*args)
+    super
+    set_persistence_strategy MarmottaStrategy::Factory.new(OregonDigital.marmotta)
+    reload
   end
 
   def preferred_label
