@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: git://github.com/terrellt/active_fedora.git
-  revision: 7bf7285377d1ced344cb49db204d30ecca60898a
+  revision: 1b8c8ade456a39b0769757a7e9f3586473152cb5
   branch: ATSchemas
   specs:
     active-fedora (9.1.1)
