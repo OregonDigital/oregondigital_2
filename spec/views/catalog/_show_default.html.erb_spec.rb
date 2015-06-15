@@ -5,7 +5,10 @@ RSpec.describe "catalog/_show_default.html.erb" do
     GenericAsset.new do |g|
       g.attributes = {
         :title => ["Title"],
-        :alternative => ["Test"]
+        :alternative => ["Test"],
+        :date => ["06/17/2015"],
+        :creator => ["Brandon"],
+        :material => []
       }
     end
   end
@@ -23,5 +26,15 @@ RSpec.describe "catalog/_show_default.html.erb" do
   it "should show alternative" do
     expect(rendered).to have_content("Alternative")
     expect(rendered).to have_content("Test")
+  end
+  it "should show all other fields" do
+    expect(rendered).to have_content("Date")
+    expect(rendered).to have_content("06/17/2015")
+    expect(rendered).to have_content("Creator")
+    expect(rendered).to have_content("Brandon")
+  end
+  it "should not show blank fields" do
+    expect(rendered).to_not have_content("Material")
+    expect(rendered).to_not have_content("Space Smores")
   end
 end
