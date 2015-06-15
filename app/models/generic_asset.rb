@@ -16,6 +16,8 @@ class GenericAsset < ActiveFedora::Base
     @injector ||= OregonDigital.inject
   end
 
+  # Override indexing service to allow for indexing AF::Base objects in
+  # properties.
   def indexing_service
     @indexing_service ||= IndexingService.new(self)
   end
