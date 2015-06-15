@@ -82,6 +82,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'newrelic_rpm'
   gem 'capybara-screenshot'
+  gem 'coveralls', :require => false
 end
 
 group :test do
