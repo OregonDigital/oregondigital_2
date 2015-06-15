@@ -1,9 +1,7 @@
 class IdentifiableIndexing < ActiveFedora::RDF::IndexingService
 
   def solr_document_field_value(val)
-    if val.kind_of?(ActiveFedora::Base)
-      val = val.resource
-    end
+    val = MaybeIdentifiable.new(val).value
     super(val)
   end
 
