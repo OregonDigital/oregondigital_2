@@ -126,6 +126,9 @@ RSpec.describe GenericAsset do
       it "should return the set" do
         expect(subject.set[0]).to eq genset
       end
+      it "should index it" do
+        expect(subject.to_solr["set_ssim"]).to eq ["#{genset.uri}"]
+      end
     end
     context "when it receives uri for the set" do
       let(:genset) {GenericSet.new(:id => "myset" )}

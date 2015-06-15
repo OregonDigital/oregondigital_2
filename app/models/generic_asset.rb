@@ -16,6 +16,10 @@ class GenericAsset < ActiveFedora::Base
     @injector ||= OregonDigital.inject
   end
 
+  def indexing_service
+    @indexing_service ||= IndexingService.new(self)
+  end
+
   private
 
   def assign_id
