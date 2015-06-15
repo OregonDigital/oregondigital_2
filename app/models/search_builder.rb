@@ -1,6 +1,7 @@
 class SearchBuilder < Hydra::SearchBuilder
   attr_accessor :set
 
+  # Restricts result sets to a Set object.
   def restrict_to_set(solr_params)
     if set && set.respond_to?(:uri)
       solr_params[:fq] ||= []

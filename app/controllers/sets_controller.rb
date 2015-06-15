@@ -7,6 +7,7 @@ class SetsController < CatalogController
     super
   end
 
+  # Overrides search_builder to allow for restricting to given set.
   def search_builder(*args)
     super.tap do |builder|
       if @set
