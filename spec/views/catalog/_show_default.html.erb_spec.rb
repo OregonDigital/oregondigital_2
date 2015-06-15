@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "catalog/_show_default.html.erb" do
   let(:resource) do
     GenericAsset.new do |g|
-      g.attributes = { :title => ["Title"], :alternative => ["Test"] } 
+      g.attributes = attributes_list 
     end
   end
   let(:attributes_list) {{ :title => ["Title"], :alternative => ["Test"] }}
