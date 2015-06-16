@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   get 'sets/:set_id', :to => "sets#index", :as => :sets_index
   get 'sets/:set_id/:id', :to => "sets#show", :as => :sets
   get 'sets/:set_id/facet/:id', :to => "sets#facet"
+  get 'sets/:set_id/email', :to => "sets#email", :as => :email_sets
+  get 'sets/:set_id/sms', :to => "sets#sms", :as => :sms_sets
+  get 'sets/:set_id/citation', :to => "sets#citation", :as => :citation_sets
 end
