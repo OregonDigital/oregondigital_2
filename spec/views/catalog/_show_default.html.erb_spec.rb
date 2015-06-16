@@ -35,6 +35,5 @@ RSpec.describe "catalog/_show_default.html.erb" do
   end
   it "should not show blank fields" do
     expect(rendered).to_not have_content("Material")
-    expect(rendered).to_not have_content("Space Smores")
   end
 end
