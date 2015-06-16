@@ -10,7 +10,12 @@ class BlacklightConfig
     private
 
     def add_edit_button
-      configuration.show.document_actions[:edit_record] = Blacklight::Configuration::ToolConfig.new(:partial => "edit_action")
+      configuration.show.document_actions[:edit_record] = edit_action
+      configuration.index.document_actions[:edit_record] = edit_action
+    end
+
+    def edit_action
+      Blacklight::Configuration::ToolConfig.new(:partial => "edit_action")
     end
 
     def remove_defaults
