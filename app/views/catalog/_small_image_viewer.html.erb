@@ -1,0 +1,13 @@
+<div align="center">
+<div id="small-image-viewer">
+
+  <% if document["id"] %>
+    <% @image = Image.find(document["id"]) %>
+    <%= image_tag(@image.relative_medium_image_location, 
+                  alt: @image.title.first, 
+                  title: @image.title.first) %>
+  <% end %>
+
+  </div>
+</div>
+
