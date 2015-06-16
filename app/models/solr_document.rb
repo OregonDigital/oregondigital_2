@@ -7,13 +7,13 @@ class SolrDocument
 
   def field_value_is_uri(field)
     Array(self[field]).map do |value|
-      maybe_uri(value).uri?
-    end.include?(true)
+      uri_filter(value).filter
+    end.compact
   end
 
   private
 
-  def maybe_uri(value)
-    MaybeURI.new(value) 
+  def uri_filter(value)
+    OregonDigital::URIFilter.new(value, MaybeURI) 
   end
 end
