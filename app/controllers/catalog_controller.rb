@@ -10,6 +10,10 @@ class CatalogController < ApplicationController
   self.search_params_logic += [:add_access_controls_to_solr_params]
 
   def blacklight_config
-    @blacklight_config ||= BlacklightConfig.new(GenericAsset, self.class.blacklight_config).configuration
+    @blacklight_config ||= config_builder.configuration
+  end
+
+  def config_builder
+    @config_builder ||= BlacklightConfig.new(GenericAsset, self.class.blacklight_config)
   end
 end
