@@ -45,6 +45,18 @@ RSpec.describe SetsController do
     end
   end
 
+  describe "#blacklight_config" do
+    it "should have a set configured" do
+      set = instance_double(GenericSet, :id => "test")
+      allow(GenericSet).to receive(:load_instance_from_solr).and_return(
+        set
+      )
+      # Set expectation.
+      expect_any_instance_of(BlacklightConfig).to receive(:set=).with(set).and_call_original
+      visit_set_index(set: set)
+    end
+  end
+
   def visit_set_index(set:)
     get :index, :set_id => set.id
   end

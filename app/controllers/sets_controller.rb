@@ -22,6 +22,12 @@ class SetsController < CatalogController
     GenericSet.load_instance_from_solr(set_id)
   end
 
+  def config_builder
+    @set_config ||= super.tap do |t|
+      t.set = find_set(params[:set_id])
+    end
+  end
+
   def set_not_found
     flash[:error] = t("sets.set_not_found")
     redirect_to root_path
