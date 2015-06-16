@@ -7,7 +7,8 @@ RSpec.describe "catalog/_show_default.html.erb" do
     end
   end
   let(:attributes_list) {{ :title => ["Title"], :alternative => ["Test"] }}
-  let(:attributes_list_with_uri) {attributes_list.merge!({:lcsubject => ["http://www.nothingissomething.com"]})} 
+  let(:value_with_uri) {["http://www.nothingissomething.com"]}
+  let(:attributes_list_with_uri) {attributes_list.merge!({:lcsubject => value_with_uri})} 
   let(:blacklight_config) {
     BlacklightConfig.new(GenericAsset, CatalogController.blacklight_config).configuration
   }
@@ -29,9 +30,9 @@ RSpec.describe "catalog/_show_default.html.erb" do
         g.attributes = attributes_list_with_uri
       end 
     end
-    it "should display the field value without the uri in it" do
-      expect(rendered).to have_content "Alternative"
-      expect(rendered).to_not have_content "Lcsubject"
+    it "should display the fields that dont have uri's in them" do
+      expect(rendered).to have_content("Alternative")
+      expect(rendered).to_not have_content("Lcsubject")
     end
   end
 end

@@ -5,15 +5,15 @@ class SolrDocument
 
   use_extension(Hydra::ContentNegotiation)
 
-  def uri_free_value(field)
+  def field_value_is_uri(field)
     Array(self[field]).map do |value|
-      uri_remover(value).to_s
-    end
+      maybe_uri(value).uri?
+    end.include?(true)
   end
 
   private
 
-  def uri_remover(value)
-    OregonDigital::URIRemover.new(value)
+  def maybe_uri(value)
+    MaybeURI.new(value) 
   end
 end
