@@ -17,7 +17,8 @@ class BlacklightConfig
       ShowConfiguration.new(configuration, metadata_class),
       ViewConfiguration.new(configuration),
       DefaultConfiguration.new(configuration),
-      SearchFieldConfiguration.new(configuration)
+      SearchFieldConfiguration.new(configuration),
+      ShowActions.new(configuration)
     ]
   end
 

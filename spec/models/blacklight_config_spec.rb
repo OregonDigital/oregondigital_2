@@ -67,6 +67,10 @@ RSpec.describe BlacklightConfig do
     it "should have a tool config for edit" do
       expect(subject.show.document_actions[:edit_record].partial).to eq "edit_action"
     end
+    
+    it "should only have bookmark and edit as document actions" do
+      expect(subject.show.document_actions.keys).to contain_exactly :bookmark, :edit_record
+    end
   end
 
 end
