@@ -9,7 +9,6 @@ class CatalogController < ApplicationController
   # This applies appropriate access controls to all solr queries
   self.search_params_logic += [:add_access_controls_to_solr_params]
 
-
   def blacklight_config
     @blacklight_config ||= BlacklightConfig.new(GenericAsset, self.class.blacklight_config).configuration
   end
