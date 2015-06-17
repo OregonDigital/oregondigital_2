@@ -1,8 +1,8 @@
 <dl class="dl-horizontal  dl-invert">
   <% document_show_fields(document).each do |field_name, field| -%>
-    <% unless document.field_value_is_uri(field_name).empty? %>
+    <% unless document.field_value_is_uri?(field_name) %>
 	    <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
-      <dd class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_value document, field: field_name, :value => document.field_value_is_uri(field_name) %></dd>
+      <dd class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_value document, field: field_name, :value => document.filtered_field_values(field_name) %></dd>
     <% end %>
   <% end -%>
 </dl>
