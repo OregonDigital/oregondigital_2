@@ -14,6 +14,15 @@ RSpec.describe BlacklightConfig do
     end
   end
 
+  describe "#set=" do
+    let(:set) { instance_double(GenericSet, :id => "myset") }
+    it "should set a show route" do
+      subject.set = set
+
+      expect(subject.configuration.show.route).to eq({:controller => "sets", :set_id => "myset"})
+    end
+  end
+
 
   describe "#configuration" do
     subject { BlacklightConfig.new(resource, default_config).configuration }

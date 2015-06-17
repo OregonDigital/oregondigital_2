@@ -1,9 +1,14 @@
 class BlacklightConfig
-  attr_reader :metadata_class, :default_configuration
+  attr_reader :metadata_class, :default_configuration, :set
   def initialize(metadata_class, default_configuration)
     @metadata_class = metadata_class
     @default_configuration = default_configuration
     apply_configurations
+  end
+
+  def set=(set)
+    @set = set
+    ApplySet.new(configuration, set).run
   end
 
   def configuration
