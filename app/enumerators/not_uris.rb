@@ -18,6 +18,10 @@ class NotUris
 
   private
 
+  def method_missing(meth_name, *args, &block)
+    to_a.public_send(meth_name, *args, &block)
+  end
+
   def uri?(value)
     MaybeURI.new(value).uri?
   end
