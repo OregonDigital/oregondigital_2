@@ -7,7 +7,7 @@ class SolrDocument
 
   def [](value)
     if value != "id"
-      NotUris.new(super)
+      NotUris.new(super).to_a
     else
       super
     end
