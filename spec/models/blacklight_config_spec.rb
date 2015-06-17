@@ -71,6 +71,10 @@ RSpec.describe BlacklightConfig do
     it "should only have bookmark and edit as document actions" do
       expect(subject.show.document_actions.keys).to contain_exactly :bookmark, :edit_record
     end
+
+    it "should have an edit action for index" do
+      expect(subject.index.document_actions[:edit_record].partial).to eq "edit_action"
+    end
   end
 
 end
