@@ -23,7 +23,3 @@ en:
   hello: "Hello world"
   sets:
     set_not_found: "Invalid set requested."
-  hydra_editor:
-    form:
-      model_label:
-        GenericSet: "Collection"
