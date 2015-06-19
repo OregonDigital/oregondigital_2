@@ -1,0 +1,4 @@
+<% if document[:workflow_metadata__medium_path_ssim].present? %>
+  <%= image_tag DerivativePath.new(Pathname.new(document[:workflow_metadata__medium_path_ssim].first)).relative_path %>
+<% end %>
+<%= render :partial => "show_default", :locals => {:document => document} %>
