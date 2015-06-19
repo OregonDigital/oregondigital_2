@@ -79,7 +79,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
     context "when given an id" do
       let(:result) { resource.thumbnail_path(id) }
       it "should return a good path" do
-        expect(result).to eq Rails.root.join("media", "thumbnails", "1", "0", "1.jpg").to_s
+        expect(result).to eq Rails.root.join("media", "thumbnails", "1", "0", "1.jpg")
       end
     end
   end
@@ -88,7 +88,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
     context "when given an id" do
       let(:result) { resource.ocr_path(id) }
       it "should return a good path" do
-        expect(result).to eq Rails.root.join("media", "documents", "1", "0", "1", "ocr.html").to_s
+        expect(result).to eq Rails.root.join("media", "documents", "1", "0", "1", "ocr.html")
       end
     end
   end
@@ -97,7 +97,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
     context "when given an id" do
       let(:result) { resource.medium_path(id) }
       it "should return a good path" do
-        expect(result).to eq Rails.root.join("media", "medium-images", "1", "0", "1.jpg").to_s
+        expect(result).to eq Rails.root.join("media", "medium-images", "1", "0", "1.jpg")
       end
     end
   end
@@ -106,7 +106,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
     context "when given an id" do
       let(:result) { resource.pyramidal_path(id) }
       it "should return a good path" do
-        expect(result).to eq Rails.root.join("media", "pyramidal", "1", "0", "1.tiff").to_s
+        expect(result).to eq Rails.root.join("media", "pyramidal", "1", "0", "1.tiff")
       end
     end
   end
@@ -115,7 +115,7 @@ RSpec.describe OregonDigital::DerivativeInjector do
     context "when given an id" do
       let(:result) { resource.pdf_path(id) }
       it "should return a good path" do
-        expect(result).to eq Rails.root.join("media", "documents", "1", "0", "1").to_s
+        expect(result).to eq Rails.root.join("media", "documents", "1", "0", "1")
       end
     end
   end
