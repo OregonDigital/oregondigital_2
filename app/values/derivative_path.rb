@@ -14,7 +14,7 @@ class DerivativePath < SimpleDelegator
   end
 
   def derivative_type
-    relative_path_from(injector.derivative_base).to_s.split("/").first.singularize.to_sym
+    relative_path_from(injector.derivative_base).to_s.split("/").first.singularize.underscore.to_sym
   end
 
   private

@@ -36,5 +36,11 @@ RSpec.describe DerivativePath do
         expect(result).to eq :pyramidal
       end
     end
+    context "given a medium image" do
+      let(:path) { injector.medium_path("test") }
+      it "should return medium_image" do
+        expect(result).to eq :medium_image
+      end
+    end
   end
 end
