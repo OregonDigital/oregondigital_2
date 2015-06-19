@@ -1,4 +1,4 @@
 <% if document.derivative_paths[:pyramidal] %>
-  <%= openseadragon_picture_tag "/image-service/#{document.id}/info.json" %>
+  <%= openseadragon_picture_tag "/image-service/#{document.id}/info.json", {:data => {:openseadragon => {:showRotationControl => true}}}%>
 <% end %>
 <%= render :partial => "show_default", :locals => {:document => document} %>
