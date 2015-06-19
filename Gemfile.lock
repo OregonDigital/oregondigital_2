@@ -305,6 +305,8 @@ GEM
       activesupport
       nokogiri (>= 1.4.2)
       solrizer (~> 3.3)
+    openseadragon (0.2.0)
+      rails (> 3.2.0)
     orm_adapter (0.5.0)
     parslet (1.7.0)
       blankslate (>= 2.0, <= 4.0)
@@ -412,6 +414,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    riiif (0.1.0)
+      rails (> 3.2.0)
     rsolr (1.0.12)
       builder (>= 2.1.2)
     rspec (3.2.0)
@@ -551,12 +555,14 @@ DEPENDENCIES
   mini_magick
   newrelic_rpm
   noid
+  openseadragon
   poltergeist
   pry-byebug
   pry-rails
   rails (= 4.2.0)
   rails_config
   recursive-open-struct
+  riiif
   rsolr
   rspec-rails
   rspec_junit_formatter!
