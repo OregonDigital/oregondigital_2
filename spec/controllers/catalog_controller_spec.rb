@@ -2,6 +2,16 @@ require 'rails_helper'
 
 RSpec.describe CatalogController do
   describe "#show" do
+    context "when given an image" do
+      render_views
+      it "should render the image show view" do
+        i = Image.create
+
+        get 'show', :id => i.id
+
+        expect(response).to render_template "catalog/_show_image"
+      end
+    end
     describe "nt" do
       it "should return ntriples" do
         title = ["yo"]

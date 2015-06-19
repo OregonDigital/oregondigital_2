@@ -13,4 +13,9 @@ class SolrDocument
       super
     end
   end
+
+  def derivative_paths
+    @derivative_paths ||= SolrDocumentDerivativePaths.new(self)
+  end
 end
+

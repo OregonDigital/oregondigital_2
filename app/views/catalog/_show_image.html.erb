@@ -1,0 +1,4 @@
+<% if document.derivative_paths[:medium_image] %>
+  <%= image_tag document.derivative_paths[:medium_image].relative_path %>
+<% end %>
+<%= render :partial => "show_default", :locals => {:document => document} %>
