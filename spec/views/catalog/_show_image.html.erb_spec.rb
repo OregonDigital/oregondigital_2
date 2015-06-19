@@ -9,7 +9,7 @@ RSpec.describe "catalog/_show_image" do
   end
   before do
     allow(view).to receive(:document).and_return(document)
-    stub_template "catalog/_show_default" => "Default Stuff"
+    stub_template "catalog/_show_default.html.erb" => "Default Stuff"
     render
   end
   it "should render default stuff" do
