@@ -35,6 +35,6 @@ class OregonDigital::FileDistributor
   # Creates a path @depth subdirectories deep to represent a "bucket"-style directory structure,
   # prefixing with base_path.  Zero-pads the identifier if it's too short.
   def path
-    return base_path.join(bucket_path, filename).to_s
+    base_path.join(bucket_path, filename)
   end
 end

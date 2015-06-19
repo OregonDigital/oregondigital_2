@@ -16,7 +16,7 @@ RSpec.describe OregonDigital::Derivatives::Processors::PdfProcessor do
       "large" => "1x"
     }
   end
-  let(:path) { Rails.root.join("tmp", "documents").to_s }
+  let(:path) { Rails.root.join("tmp", "documents") }
   let(:pathname) { Pathname.new(path) }
 
   describe "#run" do

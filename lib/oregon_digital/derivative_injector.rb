@@ -21,28 +21,31 @@ module OregonDigital
     end
 
     def ocr_path(id)
-      ocr_base = pdf_path(id)
-      Pathname.new(ocr_base).join("ocr.html").to_s
+      pdf_path(id).join("ocr.html")
     end
 
     def thumbnail_path(id)
-      thumbnail_base = Rails.root.join("media", "thumbnails")
+      thumbnail_base = derivative_base.join("thumbnails")
       distributor_path(id, '.jpg', thumbnail_base)
     end
 
     def medium_path(id)
-      medium_base = Rails.root.join("media", "medium-images")
+      medium_base = derivative_base.join("medium-images")
       distributor_path(id, '.jpg', medium_base)
     end
 
     def pyramidal_path(id)
-      pyramidal_base = Rails.root.join("media", "pyramidal")
+      pyramidal_base = derivative_base.join("pyramidal")
       distributor_path(id, '.tiff', pyramidal_base)
     end
 
     def pdf_path(id)
-      pdf_base = Rails.root.join("media", "documents")
+      pdf_base = derivative_base.join("documents")
       distributor_path(id, '', pdf_base)
+    end
+
+    def derivative_base
+      Rails.root.join("media")
     end
 
     def derivative_callback_factory

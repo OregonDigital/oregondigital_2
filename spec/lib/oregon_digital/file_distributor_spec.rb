@@ -29,17 +29,17 @@ RSpec.describe OregonDigital::FileDistributor do
     it "should zero-pad the path" do
       fd.identifier = "27"
       fd.depth = 4
-      expect(fd.path).to eq(fd.base_path.join("7/2/0/0/27").to_s)
+      expect(fd.path).to eq(fd.base_path.join("7/2/0/0/27"))
     end
 
     it "should allow overriding base_path" do
       fd.base_path = "/var"
-      expect(fd.path).to eq("/var/4/y/-45xzy4")
+      expect(fd.path.to_s).to eq("/var/4/y/-45xzy4")
     end
 
     it "should use extension as part of the path, but not alter the directory" do
       fd.extension = ".jpg"
-      expect(fd.path).to eq(fd.base_path.join("4/y/-45xzy4.jpg").to_s)
+      expect(fd.path).to eq(fd.base_path.join("4/y/-45xzy4.jpg"))
     end
   end
 end
