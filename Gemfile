@@ -68,6 +68,14 @@ gem 'hurley'
 gem 'rails_config'
 
 gem 'marmotta'
+gem 'passenger'
+gem 'capistrano', '~> 2.0'
+gem 'rspec-rails'
+gem 'sprockets', '~>2.0'
+
+group :production, :staging do
+  gem 'mysql2'
+end
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -75,7 +83,6 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'factory_girl_rails'
   gem 'pry-byebug'

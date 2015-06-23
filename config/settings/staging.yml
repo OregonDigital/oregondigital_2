@@ -1,0 +1,2 @@
+marmotta:
+  url: <%= ENV["OD2_MARMOTTA_URL"] || "http://localhost:8983/marmotta" %>
