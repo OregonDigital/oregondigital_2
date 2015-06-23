@@ -1,0 +1,34 @@
+<div id="header-navbar" class="navbar navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle btn collapsed" data-toggle="collapse" data-target="#user-util-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to image_tag("oregondigital/logo-od.svg"), root_path, class: "projectbranding" %>
+
+      <div class="sponsors">
+        <p class="text-center">A COLLABORATION OF</p>
+        <a href="http://library.uoregon.edu">
+          <%= image_tag "oregondigital/logo-uolib.svg", :alt => "University of Oregon Libraries", class: "uologo" %>
+        </a>
+        <a href="http://osulibrary.oregonstate.edu">
+          <%= image_tag "oregondigital/logo-osulib.svg", :alt => "Oregon State University Libraries", class: "osulogo" %>
+        </a>
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="user-util-collapse">
+      <%= render :partial=>'/user_util_links' %>
+    </div>
+  </div>
+</div>
+
+<div id="search-navbar" class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <%= render_search_bar  %>
+  </div>
+</div>
+  

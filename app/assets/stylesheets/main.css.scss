@@ -1,0 +1,83 @@
+
+.sponsors {
+  /* Fallback for web browsers that doesn't support RGBa */
+  background: rgb(0, 0, 0);
+  /* RGBa with 0.6 opacity */
+  background: rgba(0, 0, 0, 0.7);
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+
+  color: white;  
+  font-size: .75em;
+  height: 118px;
+  padding-top: 5px;
+  width: 192px;
+  float: left;
+
+  @include respond-to(phone) {height: 80px; width: 96px;}
+  @include respond-to(tablet-portrait) {height: 80px; width: 96px;}
+  @include respond-to(tablet-landscape-desktop) { width: 124px; }
+
+
+  p {
+    margin: 0; padding: 0;
+    @include respond-to(phone) {display: none;}
+    @include respond-to(tablet-portrait) {display: none;}
+  }
+
+  .osulogo, .uologo {
+    float: left;
+    height: 120px;
+    width: 96px;
+
+    @include respond-to(phone) {height: 48px; width: 48px; margin-top: 1em;}
+    @include respond-to(tablet-portrait) {height: 48px; width: 48px; margin-top: 1em;}
+    @include respond-to(tablet-landscape-desktop) {width: 60px; height: 60px; margin-top: 1.5em;}
+  }
+}
+
+.projectbranding img{
+  height: 96px;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+  width: 256px;
+
+  @include respond-to(phone) {width: 128px; margin-top: -.5em;}
+  @include respond-to(tablet-portrait) {width: 128px; margin-top: -.5em;}
+  @include respond-to(tablet-landscape-desktop) {width: 192px;}
+}
+
+.util-links-login {
+  padding: 4px;
+}
+
+.mycontrols li{
+  float: left;
+  clear: left;
+  background-color: #FCF4E8;
+  margin-bottom: 1px;
+  width: 15em;
+
+  > a {
+    padding: .3em;
+  }
+}
+
+
+/* Move Below Elsewhere or treat otherwise? */
+#header-navbar {
+  background-color: #f5dbb2;
+}
+
+button.navbar-toggle.btn {
+  background-color: #0f829a; 
+  color: #ffffff; 
+  margin-top: 16px; 
+  margin-bottom: 16px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
