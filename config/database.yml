@@ -20,6 +20,17 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-production:
-  <<: *default
-  database: db/production.sqlite3
+production: &production
+  adapter: <%= ENV['OD2_ADAPTER'] || "sqlite3" %>
+  database: <%= ENV['OD2_DB'] || 'db/production.sqlite3' %>
+  encoding: utf8
+  reconnect: false
+  username: <%= ENV['OD2_DB_USERNAME'] %>
+  password: <%= ENV['OD2_DB_PASSWORD'] %>
+  host: <%= ENV['OD2_DB_HOST'] %>
+  port: <%= ENV['OD2_DB_PORT'] || 3306 %>
+  pool: 5
+  timeout: 5000
+
+staging:
+  <<: *production

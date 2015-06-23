@@ -1,0 +1,20 @@
+development:
+  user: fedoraAdmin
+  password: fedoraAdmin
+  url: http://127.0.0.1:8983/fedora/rest
+  base_path: /dev
+test:
+  user: fedoraAdmin
+  password: fedoraAdmin
+  url: http://localhost:8983/fedora/rest
+  base_path: /test
+production:
+  user: <%= ENV["OD2_FEDORA_USERNAME"] || "fedoraAdmin" %>
+  password: <%= ENV["OD2_FEDORA_PASSWORD"] || "fedoraAdmin" %>
+  url: <%= ENV["OD2_FEDORA_URL"] || "http://127.0.0.1:8983/fedora/rest" %>
+  base_path: /prod
+staging:
+  user: <%= ENV["OD2_FEDORA_USERNAME"] || "fedoraAdmin" %>
+  password: <%= ENV["OD2_FEDORA_PASSWORD"] || "fedoraAdmin" %>
+  url: <%= ENV["OD2_FEDORA_URL"] || "http://127.0.0.1:8983/fedora/rest" %>
+  base_path: <%= ENV["OD2_FEDORA_BASE_PATH"] || "/staging" %>
