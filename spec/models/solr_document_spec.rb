@@ -14,5 +14,8 @@ RSpec.describe SolrDocument do
       expect(result[:medium_image].relative_path.to_s).to eq "/media/medium-images/t/s/test.jpg"
       expect(result[:pyramidal].relative_path.to_s).to eq "/media/pyramidal/t/s/test.tiff"
     end
+    it "should return a null path for non-existent paths" do
+      expect(result[:blabla_image].relative_path.to_s).to eq ""
+    end
   end
 end

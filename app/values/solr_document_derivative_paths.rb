@@ -2,6 +2,10 @@ class SolrDocumentDerivativePaths
   pattr_initialize :document
   delegate :[], :to => :derivative_paths
 
+  def [](key)
+    derivative_paths[key] || NullDerivativePath.instance
+  end
+
   private
 
   def derivative_paths
@@ -23,4 +27,14 @@ class SolrDocumentDerivativePaths
     end
   end
 
+  class NullDerivativePath
+    include Singleton
+    def to_s
+      ""
+    end
+    
+    def relative_path
+      self
+    end
+  end
 end
