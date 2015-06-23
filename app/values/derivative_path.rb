@@ -20,7 +20,8 @@ class DerivativePath < SimpleDelegator
   private
 
   def clean(path)
-    Pathname.new(path.to_s.gsub(/releases\/.*?\//, 'release_path'))
+    p = Pathname.new(path.to_s.gsub(/releases\/.*?\//, 'release_path/'))
+    p = Pathname.new(p.to_s.gsub(/releases\/[^\/]*$/, 'release_path'))
   end
 
   def injector
