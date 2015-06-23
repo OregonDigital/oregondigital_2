@@ -6,7 +6,7 @@ class CapistranoAwarePath < SimpleDelegator
   private
 
   def clean(path)
-    path = path.to_s.gsub(/releases\/.*?\//, 'release_path/')
-    Pathname.new(path.gsub(/releases\/[^\/]*$/, 'release_path'))
+    path = path.to_s.gsub(/releases\/.*?\//, 'shared/')
+    Pathname.new(path.gsub(/releases\/[^\/]*$/, 'shared'))
   end
 end
