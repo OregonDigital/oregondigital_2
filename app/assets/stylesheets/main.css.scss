@@ -10,31 +10,27 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
 
   color: white;  
+  float: left;
   font-size: .75em;
-  height: 118px;
+  height: 118px; 
   padding-top: 5px;
   width: 192px;
-  float: left;
 
-  @include respond-to(phone) {height: 80px; width: 96px;}
-  @include respond-to(tablet-portrait) {height: 80px; width: 96px;}
-  @include respond-to(tablet-landscape-desktop) { width: 124px; }
-
+  @include breakpoint(xs) {height: 80px; width: 96px;}
 
   p {
-    margin: 0; padding: 0;
-    @include respond-to(phone) {display: none;}
-    @include respond-to(tablet-portrait) {display: none;}
+    margin: 0; 
+    padding: 0;
+
+    @include breakpoint(xs) {display: none;}    
   }
 
   .osulogo, .uologo {
     float: left;
     height: 120px;
-    width: 96px;
+    width: 96px; 
 
-    @include respond-to(phone) {height: 48px; width: 48px; margin-top: 1em;}
-    @include respond-to(tablet-portrait) {height: 48px; width: 48px; margin-top: 1em;}
-    @include respond-to(tablet-landscape-desktop) {width: 60px; height: 60px; margin-top: 1.5em;}
+    @include breakpoint(xs) {height: 48px; width: 48px; margin-top: 1.5em;}
   }
 }
 
@@ -44,9 +40,7 @@
   margin-top: 1rem;
   width: 256px;
 
-  @include respond-to(phone) {width: 128px; margin-top: -.5em;}
-  @include respond-to(tablet-portrait) {width: 128px; margin-top: -.5em;}
-  @include respond-to(tablet-landscape-desktop) {width: 192px;}
+  @include breakpoint(xs) {width: 128px; margin-top: -.7em;}
 }
 
 .util-links-login {
@@ -66,7 +60,7 @@
 }
 
 
-/* Move Below Elsewhere or treat otherwise? */
+/* Move below elsewhere or treat otherwise? */
 #header-navbar {
   background-color: #f5dbb2;
 }
@@ -80,4 +74,15 @@ button.navbar-toggle.btn {
 
 .navbar {
   margin-bottom: 0px;
+  min-height: 80px;
+}
+
+.navbar-header {
+    @include breakpoint(xs) {
+      height: 80px;
+    }
+}
+
+.navbar + .navbar {
+  margin-top: 0px;
 }
