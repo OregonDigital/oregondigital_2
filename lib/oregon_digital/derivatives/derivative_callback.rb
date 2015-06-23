@@ -8,7 +8,7 @@ module OregonDigital::Derivatives
 
     def success(type, path)
       asset.__send__(:"has_#{type}=", true)
-      asset.__send__(:"#{type}_path=", path.to_s)
+      asset.__send__(:"#{type}_path=", CapistranoAwarePath.new(path).to_s)
     end
 
   end

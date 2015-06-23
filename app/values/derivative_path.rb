@@ -1,20 +1,22 @@
 class DerivativePath < SimpleDelegator
   delegate :to_s, :to => :__getobj__
+  attr_reader :path_factory
 
-  def initialize(string_or_path)
-    super(Pathname.new(string_or_path.to_s))
+  def initialize(string_or_path, path_factory=Pathname)
+    @path_factory = path_factory
+    super(path_factory.new(string_or_path))
   end
 
   def relative_path
-    Pathname.new("/").join(relative_path_from(derivative_base))
+    path_factory.new("/").join(relative_path_from(derivative_base))
   end
 
   def derivative_base
-    injector.derivative_base.parent
+    path_factory.new(injector.derivative_base.parent)
   end
 
   def derivative_type
-    relative_path_from(injector.derivative_base).to_s.split("/").first.singularize.underscore.to_sym
+    relative_path_from(path_factory.new(injector.derivative_base)).to_s.split("/").first.singularize.underscore.to_sym
   end
 
   private

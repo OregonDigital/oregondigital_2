@@ -15,6 +15,14 @@ RSpec.describe OregonDigital::Derivatives::DerivativeCallback do
 
   describe "#success" do
     context "for an image" do
+      context "when given a capistrano path" do
+        before do
+          subject.success(:thumbnail, Pathname.new("/data0/www/od2/releases/12312123/media/thumbnails/1/2/2.jpg"))
+        end
+        it "should set path to the cap symlink" do
+          expect(asset).to have_received(:thumbnail_path=).with("/data0/www/od2/shared/media/thumbnails/1/2/2.jpg")
+        end
+      end
       image_paths.each do |type, path|
         before do
           subject.success(type, path.to_s)
