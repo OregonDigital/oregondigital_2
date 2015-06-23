@@ -21,28 +21,12 @@ RSpec.describe DerivativePath do
         expect(subject.relative_path).to eq Pathname.new("/media/thumbnails/t/s/test.jpg")
       end
     end
-    context "given a path from the server" do
-      let(:path) { Pathname.new("/data0/od2.library.oregonstate.edu/releases/20150623202821/media/thumbnails/j/s/d08f659sj.jpg") }
-      it "should return correctly" do
-        allow(subject).to receive(:injector).and_return(injector)
-        allow(injector).to receive(:derivative_base).and_return(Pathname.new("/data0/od2.library.oregonstate.edu/releases/20150623221531/media"))
-        expect(subject.relative_path).to eq Pathname.new("/media/thumbnails/j/s/d08f659sj.jpg")
-      end
-    end
   end
 
   describe "#derivative_type" do
     let(:result) { subject.derivative_type }
     context "given a thumbnail" do
       it "should return :thumbnail" do
-        expect(result).to eq :thumbnail
-      end
-    end
-    context "given a path from the server" do
-      let(:path) { Pathname.new("/data0/od2.library.oregonstate.edu/releases/20150623202821/media/thumbnails/j/s/d08f659sj.jpg") }
-      it "should return correctly" do
-        allow(subject).to receive(:injector).and_return(injector)
-        allow(injector).to receive(:derivative_base).and_return(Pathname.new("/data0/od2.library.oregonstate.edu/releases/20150623221531/media"))
         expect(result).to eq :thumbnail
       end
     end
