@@ -25,5 +25,11 @@ RSpec.describe "catalog/_thumbnail_default.html.erb" do
         expect(rendered).to have_selector "img[src='/media/thumbnails/3/1/13.jpg']"
       end
     end
+    context "when there's no thumbnail" do
+      let(:solr_hash) { {:id => 1} }
+      it "should not show anything" do
+        expect(rendered).not_to have_selector "img"
+      end
+    end
   end
 end
