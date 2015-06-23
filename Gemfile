@@ -79,6 +79,8 @@ end
 
 gem 'blacklight-gallery'
 
+gem 'openseadragon'
+
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
