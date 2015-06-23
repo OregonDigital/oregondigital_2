@@ -2,7 +2,7 @@ class DerivativePath < SimpleDelegator
   delegate :to_s, :to => :__getobj__
   attr_reader :path_factory
 
-  def initialize(string_or_path, path_factory=Pathname)
+  def initialize(string_or_path, path_factory=CapistranoAwarePath)
     @path_factory = path_factory
     super(path_factory.new(string_or_path))
   end
