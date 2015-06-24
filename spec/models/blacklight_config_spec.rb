@@ -28,7 +28,7 @@ RSpec.describe BlacklightConfig do
     subject { BlacklightConfig.new(resource, default_config).configuration }
     describe "#index.title_field" do
       it "should be title" do
-        expect(subject.index.title_field).to eq Solrizer.solr_name('title', :stored_searchable, type: :string)
+        expect(subject.index.title_field).to eq Solrizer.solr_name('title', :symbol)
       end
     end
     describe "#search_fields" do

@@ -16,7 +16,7 @@ class BlacklightConfig
 
     def normal_fields
       %w{title description creator lcsubject date institution}.map do |field|
-        SearchField.new(field, :qf => field+"_tesim")
+        SearchField.new(field, :qf => Solrizer.solr_name(field, :stored_searchable))
       end
     end
 
@@ -27,7 +27,7 @@ class BlacklightConfig
     end
 
     def all_field
-      SearchField.new("all_fields", :qf => "title_tesim description_tesim date_tesim all_text_timv")
+      SearchField.new("all_fields", :qf => "all_text_timv")
     end
   end
 end
