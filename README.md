@@ -10,7 +10,8 @@ Local Development Setup
 
 Requirements:
 
-**Ruby Version: 2.0**
+- **Ruby Version: 2.0**
+- **IIIF-compatible image server** - see [IIIF setup](IIIFSetup.md)
 
 Configuration and database creation:
 
