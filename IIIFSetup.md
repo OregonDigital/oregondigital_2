@@ -28,8 +28,9 @@ sudo apt install golang
 # Install RAIS
 GOPATH=$HOME/go go get -u github.com/uoregon-libraries/rais-image-server/cmd/rais-server
 
-# Run it locally
-~/go/bin/rais-server --address=":8080" --iiif-url="http://localhost:8080/images/iiif" --tile-path="$(pwd)"
+# Run it locally - replace "RAILS_ROOT" with your rails root path, or wherever
+# your media directory is located; e.g.; "/home/jechols/oregondigital_2"
+~/go/bin/rais-server --address=":8080" --iiif-url="http://localhost:8080/images/iiif" --tile-path="RAILS_ROOT"
 ```
 
 Note that the `--iiif-url` MUST reflect precisely what you have in your config,
