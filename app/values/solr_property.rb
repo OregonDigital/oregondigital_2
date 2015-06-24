@@ -16,6 +16,10 @@ class SolrProperty
     split_key.last
   end
 
+  def to_preferred_label
+    self.class.new("#{key}_preferred_label_#{solr_identifier}", [])
+  end
+
   private
 
   def split_key

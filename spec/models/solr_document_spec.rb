@@ -8,6 +8,21 @@ RSpec.describe SolrDocument do
       g.workflow_metadata.pyramidal_path = OregonDigital.derivative_injector.pyramidal_path("test").to_s
     end
   end
+  describe "#[]" do
+    context "when enriched" do
+      subject { SolrDocument.new(resource.to_solr.merge(enriched)) }
+      let(:enriched) do
+        {
+          :title_ssim => ["http://test.test.org", "Raw String"],
+          :title_preferred_label_ssim => ["Test"],
+          :title_alt_label_ssim => ["Alternative"]
+        }
+      end
+      it "should show title labels together with their preferred label" do
+        expect(subject[:title_ssim]).to eq ["Test", "Raw String"]
+      end
+    end
+  end
   describe "#derivative_paths" do
     let(:result) { subject.derivative_paths }
     it "should return all the derivative paths" do

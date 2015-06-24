@@ -19,7 +19,7 @@ class LabelEnhancement
   end
 
   def solr_identifier
-    "#{raw_property.key}_preferred_label_#{raw_property.solr_identifier}"
+    raw_property.to_preferred_label.property_key
   end
 
   def resource(value)

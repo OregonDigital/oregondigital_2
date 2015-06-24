@@ -5,17 +5,22 @@ class SolrDocument
 
   use_extension(Hydra::ContentNegotiation)
 
-  def [](value)
-    # Necessary because id returns a singular value, it can't return an array.
-    if value != "id"
-      NotUris.new(super).to_a
-    else
-      super
-    end
+  def [](key)
+    property(key).values
   end
 
   def derivative_paths
     @derivative_paths ||= SolrDocumentDerivativePaths.new(self)
+  end
+
+  private
+
+  def property(key)
+    if key == "id"
+      SingularSolrProperty.new(key, _source[key])
+    else
+      EnrichedSolrPropertyResult.new(key, _source)
+    end
   end
 end
 
