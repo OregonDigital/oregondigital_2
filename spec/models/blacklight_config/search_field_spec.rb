@@ -31,7 +31,7 @@ RSpec.describe BlacklightConfig::SearchField do
     end
     context "by default" do
       it "should set qf" do
-        expect(subject.solr_parameters).to eq ({:qf => Solrizer.solr_name(field, :searchable)})
+        expect(subject.solr_parameters).to eq ({:qf => Solrizer.solr_name(field, :stored_searchable)})
       end
     end
   end
