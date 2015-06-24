@@ -3,10 +3,6 @@ class BlacklightConfig
     pattr_initialize :configuration
     def run
       configuration.default_solr_params = default_params
-      configuration.index.title_field = 'title_tesim'
-      configuration.add_index_field Solrizer.solr_name('date', :stored_searchable, type: :string), :label => 'Date'
-      configuration.add_index_field Solrizer.solr_name('description', :stored_searchable, type: :string), :label => 'Description'
-
     end
 
     private
