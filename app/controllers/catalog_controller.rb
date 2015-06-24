@@ -7,7 +7,7 @@ class CatalogController < ApplicationController
   include Hydra::Controller::ControllerBehavior
   include Hydra::Controller::SearchBuilder
   # This applies appropriate access controls to all solr queries
-  self.search_params_logic += [:add_access_controls_to_solr_params]
+  # self.search_params_logic += [:add_access_controls_to_solr_params]
 
   def blacklight_config
     @blacklight_config ||= config_builder.configuration
