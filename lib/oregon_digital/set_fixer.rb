@@ -1,11 +1,12 @@
 module OregonDigital
   class SetFixer
 
-    attr_reader :solr_service, :base
+    attr_reader :solr_service, :base, :rdf_uri
 
-    def initialize(solr_service, base)
+    def initialize(solr_service, base, rdf_uri)
       @solr_service = solr_service
       @base = base
+      @rdf_uri = rdf_uri
     end
 
     def fix_set
@@ -23,7 +24,7 @@ module OregonDigital
     end
 
     def uri_conversion(set_id)
-      RDF::URI(base.id_to_uri(base.uri_to_id(x.to_s).split(":").last)) 
+      rdf_uri.new(base.id_to_uri(base.uri_to_id(set_id.to_s).split(":").last)) 
     end
 
     def bad_ids
