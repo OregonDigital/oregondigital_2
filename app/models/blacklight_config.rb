@@ -25,7 +25,8 @@ class BlacklightConfig
       SearchFieldConfiguration.new(configuration),
       ShowActions.new(configuration),
       ThumbnailConfiguration.new(configuration),
-      Gallery.new(configuration)
+      Gallery.new(configuration),
+      IndexConfiguration.new(configuration)
     ]
   end
 

@@ -14,7 +14,7 @@ class BlacklightConfig
       if opts[:qf]
         {:qf => opts[:qf]}
       else
-        {:qf => Solrizer.solr_name(key, :searchable) }
+        {:qf => Solrizer.solr_name(key, :stored_searchable) }
       end
     end
   end
