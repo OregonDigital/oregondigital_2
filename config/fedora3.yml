@@ -1,0 +1,12 @@
+development:
+  user: fedoraAdmin
+  password: fedoraAdmin
+  url: http://localhost:8985/fedora
+test:
+  user: fedoraAdmin
+  password: fedoraAdmin
+  url: http://localhost:8985/fedora
+production:
+  user: fedoraAdmin
+  password: fedoraAdmin
+  url: http://localhost:8985/fedora
