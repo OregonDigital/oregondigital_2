@@ -10,10 +10,12 @@ RSpec.describe OregonDigital::Derivatives::DelayedRunner do
     it "should run it on the job factory" do
       asset = instance_double(GenericAsset, :id => double("id"))
       allow(job_factory).to receive(:perform_later)
+      marshalled_runner = double("marshalled")
+      allow(Marshal).to receive(:dump).with(runner).and_return(marshalled_runner)
 
       subject.run(asset)
 
-      expect(job_factory).to have_received(:perform_later).with(asset.id, runner)
+      expect(job_factory).to have_received(:perform_later).with(asset.id, marshalled_runner)
     end
   end
 end
