@@ -4,6 +4,7 @@ RSpec.describe "catalog/_show_image" do
   let(:document) { SolrDocument.new(resource.to_solr) }
   before do
     allow(view).to receive(:document).and_return(document)
+    allow(view).to receive(:openseadragon_picture_tag)
     stub_template "catalog/_show_default.html.erb" => "Default Stuff"
     render
   end
@@ -29,6 +30,21 @@ RSpec.describe "catalog/_show_image" do
     end
     it "should have an image tag" do
       expect(rendered).to have_selector("img[src='/media/medium-images/t/s/test.jpg']")
+    end
+  end
+
+  context "When it has a pyramidal and medium image" do
+    let(:resource) { build_resource(medium: true, pyramidal: true) }
+
+    it "should render default stuff" do
+      expect(rendered).to have_content "Default Stuff"
+      expect(response).to render_template "catalog/_show_default"
+    end
+    it "should not have an image tag" do
+      expect(rendered).not_to have_selector("img")
+    end
+    it "should call the openseadragon picture tag" do
+      expect(view).to have_received(:openseadragon_picture_tag).once
     end
   end
 
