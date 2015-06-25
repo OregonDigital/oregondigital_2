@@ -7,10 +7,6 @@ class DerivativePath < SimpleDelegator
     super(path_factory.new(string_or_path))
   end
 
-  def present?
-    true
-  end
-
   def relative_path
     path_factory.new("/").join(relative_path_from(derivative_base))
   end
