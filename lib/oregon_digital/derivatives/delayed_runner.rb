@@ -4,7 +4,9 @@ module OregonDigital::Derivatives
     delegate :to_a, :to => :runner
 
     def run(asset)
-      job_factory.perform_later(asset.id, runner)
+      # Have to marshal the runner because ActiveJob doesn't, and there's no
+      # unique ID for them.
+      job_factory.perform_later(asset.id, Marshal.dump(runner))
     end
 
     class Factory
