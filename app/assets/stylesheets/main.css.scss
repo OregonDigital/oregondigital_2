@@ -1,0 +1,88 @@
+
+.sponsors {
+  /* Fallback for web browsers that doesn't support RGBa */
+  background: rgb(0, 0, 0);
+  /* RGBa with 0.6 opacity */
+  background: rgba(0, 0, 0, 0.7);
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+
+  color: white;  
+  float: left;
+  font-size: .75em;
+  height: 118px; 
+  padding-top: 5px;
+  width: 192px;
+
+  @include breakpoint(xs) {height: 80px; width: 96px;}
+
+  p {
+    margin: 0; 
+    padding: 0;
+
+    @include breakpoint(xs) {display: none;}    
+  }
+
+  .osulogo, .uologo {
+    float: left;
+    height: 120px;
+    width: 96px; 
+
+    @include breakpoint(xs) {height: 48px; width: 48px; margin-top: 1.5em;}
+  }
+}
+
+.projectbranding img{
+  height: 96px;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+  width: 256px;
+
+  @include breakpoint(xs) {width: 128px; margin-top: -.7em;}
+}
+
+.util-links-login {
+  padding: 4px;
+}
+
+.mycontrols li{
+  float: left;
+  clear: left;
+  background-color: #FCF4E8;
+  margin-bottom: 1px;
+  width: 15em;
+
+  > a {
+    padding: .3em;
+  }
+}
+
+
+/* Move below elsewhere or treat otherwise? */
+#header-navbar {
+  background-color: #f5dbb2;
+}
+
+button.navbar-toggle.btn {
+  background-color: #0f829a; 
+  color: #ffffff; 
+  margin-top: 16px; 
+  margin-bottom: 16px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  min-height: 80px;
+}
+
+.navbar-header {
+    @include breakpoint(xs) {
+      height: 80px;
+    }
+}
+
+.navbar + .navbar {
+  margin-top: 0px;
+}

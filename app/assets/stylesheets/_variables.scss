@@ -1,4 +1,8 @@
 
+$body-bg:           url('oregondigital/bg-pattern.jpg');
+$accent-bg:         #f5dbb2;
+$highlight-bg:      #1fa1bf;
+
 $link-color:        #0f959a;//#1C88A4;
 $link-hover-color:  lighten($link-color, 10%);
 
@@ -8,6 +12,8 @@ $brand-success:     darken(#468847, 20%);
 $brand-danger:      darken(#b94a48, 20%);
 $brand-info:        darken(#3a87ad, 20%);
 
+$navbar-height:     100px;
+
 /* Undo color changes for variables that bootstrap defines as being based on
  * those I just overrode */
 $btnPrimaryBackground:          #0f959a;
@@ -15,4 +21,3 @@ $dropdownLinkBackgroundActive:  #08c;
 
 @import url(http://fonts.googleapis.com/css?family=Gudea:400,700,400italic);
 $font-family-sans-serif: 'Gudea', Helvetica, Verdana, sans-serif;
-
