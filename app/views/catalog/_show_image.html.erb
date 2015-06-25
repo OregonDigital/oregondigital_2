@@ -1,6 +1,6 @@
-<% if document.derivative_paths[:pyramidal] %>
+<% if document.derivative_paths[:pyramidal].present? %>
   <%= openseadragon_picture_tag document.derivative_paths[:pyramidal].to_iiif, {:data => {:openseadragon => {:showRotationControl => true}}}%>
-<% elsif document.derivative_paths[:medium_image] %>
+<% elsif document.derivative_paths[:medium_image].present? %>
   <%= image_tag document.derivative_paths[:medium_image].relative_path %>
 <% end %>
 <%= render :partial => "show_default", :locals => {:document => document} %>

@@ -11,6 +11,10 @@ class DerivativePath < SimpleDelegator
     path_factory.new("/").join(relative_path_from(derivative_base))
   end
 
+  def present?
+    true
+  end
+
   def relative_path_no_slash
     relative_path.to_s.sub(%r|^\/|, '')
   end

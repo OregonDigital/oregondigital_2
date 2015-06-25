@@ -36,5 +36,9 @@ class SolrDocumentDerivativePaths
     def relative_path
       self
     end
+
+    def present?
+      false
+    end
   end
 end
