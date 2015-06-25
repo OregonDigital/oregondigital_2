@@ -7,20 +7,12 @@ class DerivativePath < SimpleDelegator
     super(path_factory.new(string_or_path))
   end
 
-  def relative_path
-    path_factory.new("/").join(relative_path_from(derivative_base))
-  end
-
   def present?
     true
   end
 
-  def relative_path_no_slash
-    relative_path.to_s.sub(%r|^\/|, '')
-  end
-
-  def derivative_base
-    path_factory.new(injector.derivative_base.parent)
+  def relative_path
+    path_factory.new("/").join(relative_path_from(derivative_base))
   end
 
   def derivative_type
@@ -29,6 +21,16 @@ class DerivativePath < SimpleDelegator
 
   def to_iiif
     path_factory.new(OregonDigital.iiif_server_url).join(escape_slashes(relative_path_no_slash), "info.json")
+  end
+
+  private
+
+  def relative_path_no_slash
+    relative_path.to_s.sub(%r|^\/|, '')
+  end
+
+  def derivative_base
+    path_factory.new(injector.derivative_base.parent)
   end
 
   def escape_slashes(s)
