@@ -39,6 +39,7 @@ module OregonDigital::Derivatives::Processors
 
     def convert_file
       image_transformer.format(format)
+      image_transformer.auto_orient
       image_transformer.quality(quality.to_s) if quality
     end
 

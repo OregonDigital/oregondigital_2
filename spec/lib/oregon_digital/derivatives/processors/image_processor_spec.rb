@@ -23,5 +23,13 @@ RSpec.describe OregonDigital::Derivatives::Processors::ImageProcessor do
       expect(image[:width]).to eq 120
       expect(image[:height]).to eq 120
     end
+    context "when given an exif rotated image" do
+      let(:file) { File.open(File.join(fixture_path, "rotated_image.jpg")) }
+      it "should fix it up" do
+        image = MiniMagick::Image.open(options[:path])
+        expect(image[:width]).to eq 120
+        expect(image[:height]).to eq 84
+      end
+    end
   end
 end
