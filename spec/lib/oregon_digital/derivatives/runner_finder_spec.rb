@@ -23,7 +23,7 @@ RSpec.describe OregonDigital::Derivatives::RunnerFinder do
         end
       end
       it "should return a runner list" do
-        expect(subject.find(asset)).to be_kind_of OregonDigital::Derivatives::PersistingRunner
+        expect(subject.find(asset)).to be_kind_of OregonDigital::Derivatives::DelayedRunner
       end
       it "should return appropriate runners" do
         expect(subject.find(asset).to_a).to eq [runner_builder.thumbnail_runner("1"),
