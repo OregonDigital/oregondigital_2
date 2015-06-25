@@ -16,17 +16,21 @@ class DerivativePath < SimpleDelegator
   end
 
   def derivative_type
-    relative_path_from(path_factory.new(injector.derivative_base)).to_s.split("/").first.singularize.underscore.to_sym
+    split_base_path.first.singularize.underscore.to_sym
   end
 
   def to_iiif
-    path_factory.new(OregonDigital.iiif_server_url).join(escape_slashes(relative_path_no_slash), "info.json")
+    path_factory.new(OregonDigital.iiif_server_url).join(escape_slashes(bucket_path), "info.json")
   end
 
   private
 
-  def relative_path_no_slash
-    relative_path.to_s.sub(%r|^\/|, '')
+  def split_base_path
+    relative_path_from(path_factory.new(injector.derivative_base)).to_s.split("/")
+  end
+
+  def bucket_path
+    split_base_path[1, 99].join("/")
   end
 
   def derivative_base

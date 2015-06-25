@@ -49,7 +49,7 @@ RSpec.describe DerivativePath do
     let(:result) { subject.to_iiif }
 
     it "should produce a link to the IIIF server's info.json" do
-      expect(result.to_s).to eq "http://localhost/path/to/iiif/media%2Fpyramidal%2Ft%2Fs%2Ftest.tiff/info.json"
+      expect(result.to_s).to eq "http://localhost/path/to/iiif/t%2Fs%2Ftest.tiff/info.json"
     end
   end
 end
