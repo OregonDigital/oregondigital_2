@@ -56,12 +56,6 @@ module OregonDigital
       delayed_runner_factory.new(persisting_runner_factory.new(OregonDigital::Derivatives::Runners::RunnerList), derivative_job)
     end
 
-    # @param [GenericAsset] asset The asset to find a derivative runner for
-    # @return [Runner] The derivative runner for the given asset.
-    def derivative_runner(asset)
-      runner_finder_factory.new(self).find(asset)
-    end
-
     def runner_finder_factory
       OregonDigital::Derivatives::RunnerFinder
     end
