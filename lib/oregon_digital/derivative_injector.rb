@@ -53,7 +53,7 @@ module OregonDigital
     end
 
     def runner_list
-      persisting_runner_factory.new(OregonDigital::Derivatives::Runners::RunnerList)
+      delayed_runner_factory.new(persisting_runner_factory.new(OregonDigital::Derivatives::Runners::RunnerList), derivative_job)
     end
 
     def runner_finder_factory
@@ -65,6 +65,14 @@ module OregonDigital
     end
 
     private
+
+    def delayed_runner_factory
+      OregonDigital::Derivatives::DelayedRunner::Factory
+    end
+
+    def derivative_job
+      CreateDerivativesJob
+    end
 
     def persisting_runner_factory
       OregonDigital::Derivatives::PersistingRunner::Factory

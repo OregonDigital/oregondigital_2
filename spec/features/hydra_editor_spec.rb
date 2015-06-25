@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Hydra Editor", :slow => true do
+RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
   let(:admin) {FactoryGirl.create(:user, :admin)}
   let(:file) { Rails.root.join("spec", "fixtures", "fixture_image.jpg") }
 
