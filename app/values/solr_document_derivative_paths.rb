@@ -33,7 +33,19 @@ class SolrDocumentDerivativePaths
       ""
     end
     
+    def present?
+      false
+    end
+
     def relative_path
+      self
+    end
+
+    def derivative_type
+      "null"
+    end
+
+    def to_iiif
       self
     end
   end

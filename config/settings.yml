@@ -1,2 +1,6 @@
+# Override this in settings/development.local.yml if you are using a different
+# IIIF server.  If you overrides via settings.local.yml, tests break!
+openseadragon:
+  iiif_server: "http://localhost:8080/images/iiif"
 marmotta:
   url: "http://localhost:8983/marmotta"

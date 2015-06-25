@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper Openseadragon::OpenseadragonHelper
   rescue_from CanCan::AccessDenied, :with => :unauthorized
 
   before_filter do

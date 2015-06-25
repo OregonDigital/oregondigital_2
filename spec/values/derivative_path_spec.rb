@@ -43,4 +43,13 @@ RSpec.describe DerivativePath do
       end
     end
   end
+
+  describe "#to_iiif" do
+    let(:path) { injector.pyramidal_path("test") }
+    let(:result) { subject.to_iiif }
+
+    it "should produce a link to the IIIF server's info.json" do
+      expect(result.to_s).to eq "http://localhost/path/to/iiif/t%2Fs%2Ftest.tiff/info.json"
+    end
+  end
 end
