@@ -16,11 +16,21 @@ class SolrProperty
     split_key.last
   end
 
+  def derivative_properties
+    [
+      to_preferred_label
+    ]
+  end
+
   def to_preferred_label
-    self.class.new("#{key}_preferred_label_#{solr_identifier}", [])
+    derivative_key("preferred_label")
   end
 
   private
+
+  def derivative_key(derivative)
+    self.class.new([key, derivative, solr_identifier].join("_"), [])
+  end
 
   def split_key
     @split_key ||= property_key.rpartition("_")
