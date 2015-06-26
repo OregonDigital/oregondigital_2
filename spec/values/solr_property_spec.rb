@@ -16,6 +16,9 @@ RSpec.describe SolrProperty do
     it "should return preferred label" do
       expect(result[:preferred_label].key).to eq "lc_subject_preferred_label"
     end
+    it "should return alternative label" do
+      expect(result[:alternative_label].key).to eq "lc_subject_alternative_label"
+    end
   end
 
   describe "#values" do
