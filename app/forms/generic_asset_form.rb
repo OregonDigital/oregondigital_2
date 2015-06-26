@@ -14,4 +14,8 @@ class GenericAssetForm
     Array.wrap(validators[property]).map(&:description).compact.to_sentence
   end
 
+  def has_content?
+    model.content.has_content?
+  end
+
 end
