@@ -14,8 +14,22 @@ class BlacklightConfig
       if opts[:qf]
         {:qf => opts[:qf]}
       else
-        {:qf => Solrizer.solr_name(key, :stored_searchable) }
+        {:qf => all_properties.map(&:property_key)}
       end
+    end
+
+    private
+
+    def all_properties
+      [property] | property.derivative_properties.values
+    end
+
+    def property
+      @property ||= SolrProperty.new(solr_name)
+    end
+
+    def solr_name
+      Solrizer.solr_name(key, :stored_searchable)
     end
   end
 end
