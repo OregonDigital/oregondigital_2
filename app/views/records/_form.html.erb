@@ -3,6 +3,14 @@
 	<%= render 'records/form_header' %>
     <div class="well">
       <%= f.input :content, :as => :file %>
+      <% if f.object.has_content? %>
+        <p>
+          <span class="label label-danger">Note</span>
+          You are editing a record that already has a file.  If you choose to
+          upload a file here, it will overwrite the existing file and replace
+          derivatives based on that file.
+        </p>
+      <% end %>
       <%= render :partial => "records/edit_fields/default", :collection => f.object.terms, :as => :key, :locals => {:f => f} %>
     </div> <!-- /well -->
   </div>
