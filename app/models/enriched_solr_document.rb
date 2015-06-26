@@ -22,7 +22,7 @@ class EnrichedSolrDocument
   private
 
   def enhancements
-    CompositeEnhancementFactory.new(LabelEnhancement)
+    CompositeEnhancementFactory.new(LabelEnhancement, AltLabelEnhancement)
   end
 
   def properties

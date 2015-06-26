@@ -18,7 +18,8 @@ class SolrProperty
 
   def derivative_properties
     {
-      :preferred_label => derivative_key("preferred_label")
+      :preferred_label => derivative_key("preferred_label"),
+      :alternative_label => derivative_key("alternative_label")
     }
   end
 
