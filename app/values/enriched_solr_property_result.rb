@@ -1,5 +1,6 @@
 class EnrichedSolrPropertyResult
   pattr_initialize :key, :document
+  delegate :derivative_properties, :to => :property
 
   def values
     NotUris.new(all_values).to_a
@@ -17,7 +18,7 @@ class EnrichedSolrPropertyResult
 
   def enriched_properties
     [
-      property.to_preferred_label
+      derivative_properties[:preferred_label]
     ]
   end
 

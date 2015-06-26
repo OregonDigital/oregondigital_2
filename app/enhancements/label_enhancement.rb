@@ -19,7 +19,7 @@ class LabelEnhancement
   end
 
   def solr_identifier
-    raw_property.to_preferred_label.property_key
+    raw_property.derivative_properties[:preferred_label].property_key
   end
 
   def resource(value)

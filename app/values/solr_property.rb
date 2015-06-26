@@ -3,7 +3,7 @@
 # associated with it.
 class SolrProperty
   attr_reader :property_key, :values
-  def initialize(property_key, values)
+  def initialize(property_key, values=[])
     @property_key = property_key.to_s
     @values = Array.wrap(values)
   end
@@ -16,11 +16,17 @@ class SolrProperty
     split_key.last
   end
 
-  def to_preferred_label
-    self.class.new("#{key}_preferred_label_#{solr_identifier}", [])
+  def derivative_properties
+    {
+      :preferred_label => derivative_key("preferred_label")
+    }
   end
 
   private
+
+  def derivative_key(derivative)
+    self.class.new([key, derivative, solr_identifier].join("_"), [])
+  end
 
   def split_key
     @split_key ||= property_key.rpartition("_")
