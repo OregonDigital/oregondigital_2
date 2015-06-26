@@ -225,6 +225,11 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    fastercsv (1.5.5)
+    fedora-migrate (0.2.0)
+      hydra-head (~> 9.0)
+      rchardet
+      rubydora (~> 1.8)
     ffi (1.9.8)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
@@ -232,6 +237,8 @@ GEM
       tilt
     highline (1.7.2)
     hike (1.2.3)
+    hooks (0.3.6)
+      uber (~> 0.0.4)
     htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -379,6 +386,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
+    rchardet (1.6.1)
     rdf (1.1.14)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (1.1.0)
@@ -462,6 +470,16 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     ruby-vips (0.3.9)
+    rubydora (1.8.1)
+      activemodel
+      activesupport
+      deprecation
+      equivalent-xml
+      fastercsv
+      hooks (~> 0.3.0)
+      mime-types
+      nokogiri
+      rest-client
     rubyzip (1.1.7)
     safe_yaml (1.0.4)
     sass (3.4.13)
@@ -524,6 +542,7 @@ GEM
     tins (1.5.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uber (0.0.13)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -571,6 +590,7 @@ DEPENDENCIES
   devise-guests (~> 0.3)
   docsplit
   factory_girl_rails
+  fedora-migrate
   hurley
   hydra-editor!
   hydra-head!
