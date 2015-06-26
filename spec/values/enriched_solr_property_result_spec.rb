@@ -29,7 +29,7 @@ RSpec.describe EnrichedSolrPropertyResult do
       let(:document) do
         {
           :title_ssim => ["Test", "http://test.test.com"],
-          SolrProperty.new(:title_ssim,nil).to_preferred_label.property_key => ["Enriched"]
+          SolrProperty.new(:title_ssim,nil).derivative_properties[:preferred_label].property_key => ["Enriched"]
         }
       end
       it "should return them" do

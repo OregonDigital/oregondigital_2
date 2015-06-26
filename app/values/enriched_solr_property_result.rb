@@ -17,7 +17,7 @@ class EnrichedSolrPropertyResult
 
   def enriched_properties
     [
-      property.to_preferred_label
+      property.derivative_properties[:preferred_label]
     ]
   end
 

@@ -11,18 +11,10 @@ RSpec.describe SolrProperty do
     end
   end
 
-  describe "#to_preferred_label" do
-    let(:result) { subject.to_preferred_label }
-    it "should return a preferred label property" do
-      expect(result.key).to eq "lc_subject_preferred_label"
-      expect(result.solr_identifier).to eq "ssim"
-    end
-  end
-
   describe "#derivative_properties" do
     let(:result) { subject.derivative_properties }
     it "should return preferred label" do
-      expect(result.map(&:key)).to include "lc_subject_preferred_label"
+      expect(result[:preferred_label].key).to eq "lc_subject_preferred_label"
     end
   end
 
