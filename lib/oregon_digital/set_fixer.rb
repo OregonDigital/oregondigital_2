@@ -1,12 +1,11 @@
 module OregonDigital
   class SetFixer
 
-    attr_reader :solr_service, :base, :rdf_uri
+    attr_reader :solr_service, :repository
 
-    def initialize(solr_service, base, rdf_uri)
+    def initialize(solr_service, repository)
       @solr_service = solr_service
-      @base = base
-      @rdf_uri = rdf_uri
+      @repository = repository
     end
 
     def fix_set
@@ -17,14 +16,14 @@ module OregonDigital
 
     def change_set_ids
       bad_ids.each do |id|
-        asset = GenericAsset.find(id)
+        asset = repository.find(id)
         asset.set = asset.set_ids.map{|set_id| uri_conversion(set_id)}
         asset.save
       end
     end
 
     def uri_conversion(set_id)
-      rdf_uri.new(base.id_to_uri(base.uri_to_id(set_id.to_s).split(":").last)) 
+      RDF::URI(repository.id_to_uri(repository.uri_to_id(set_id.to_s).split(":").last)) 
     end
 
     def bad_ids

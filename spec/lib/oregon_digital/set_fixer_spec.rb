@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe OregonDigital::SetFixer do
-  subject { described_class.new(solr_service, base, rdf_uri) }
+  subject { described_class.new(solr_service, base) }
 
   let(:solr_service) { ActiveFedora::SolrService }
-  let(:base) { ActiveFedora::Base }
-  let(:rdf_uri) { RDF::URI }
+  let(:base) { GenericAsset }
 
-  describe "#fix_set", :slow => true do
+  describe "#fix_set" do
     context "with nothing in the repository" do
       it "should not do anything" do
         allow(GenericAsset).to receive(:find)

@@ -4,7 +4,7 @@ task migrate: :environment do
   FedoraMigrate.migrate_repository(namespace: "oregondigital", options: {convert: "descMetadata"})
   puts "Migration successful"
   puts "Fixing bad sets"
-  OregonDigital::SetFixer.new(ActiveFedora::SolrService, ActiveFedora::Base, RDF::URI).fix_set
+  OregonDigital::SetFixer.new(ActiveFedora::SolrService, GenericAsset).fix_set
   puts "Bad sets fixed"
   puts "Exiting"
 end 
