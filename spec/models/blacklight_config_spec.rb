@@ -77,7 +77,9 @@ RSpec.describe BlacklightConfig do
       FacetField.create(:key => "title")
 
       keys = subject.facet_fields.values.map(&:key)
+      labels = subject.facet_fields.values.map(&:label)
       expect(keys).to include "title_ssim"
+      expect(labels).to include "Title"
     end
 
     it "should have a tool config for edit" do
