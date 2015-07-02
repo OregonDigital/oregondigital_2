@@ -21,50 +21,36 @@ class SolrFieldSummary
   private
 
   def cleaned_result
-    derivative_properties = []
-    field_summary_hash.sort_by{|k, _| k.to_s.length }.each_with_object({}) do |(key, value), collector|
-      property = SolrProperty.new(key)
-      unless derivative_properties.include?(key)
-        field = Field.new(value)
-        property.derivative_properties.each do |derivative_property_key, prop|
-          derivative_properties << prop.property_key
-          field.derivative_properties[derivative_property_key] = Field.new(field_summary_hash[prop.property_key])
-        end
-        collector[property.key.to_sym] = field
+    @cleaned_result ||= Hash[
+      extract_derivative_properties.map do |k, v|
+        [k.key.to_sym, v]
       end
+    ]
+  end
+
+  def extract_derivative_properties
+    derivative_properties = []
+    # Move all derivative property keys underneath their parent keys and don't
+    # select the derivatives.
+    interim_result.select do |property, value|
+      property.derivative_properties.each do |derivative_property_key, prop|
+        derivative_properties << prop.property_key
+        value.derivative_properties[derivative_property_key] = interim_result[prop]
+      end
+      !derivative_properties.include?(property.property_key)
     end
   end
 
-  class Field < OpenStruct
-    def derivative_properties
-      @derivative_properties ||= {}
+  def interim_result
+    sorted_field_summary.each_with_object({}) do |(key, value), collector|
+      property = SolrProperty.new(key)
+      field = Field.new(value)
+      collector[property] = field
     end
   end
 
-  class Query
-    attr_reader :field
-    def initialize(field:)
-      @field = field
-    end
-
-    def result
-      @result ||= solr_result["fields"]
-    end
-
-    private
-
-    def solr_result
-      solr.send_and_receive("admin/luke", :params => solr_params)
-    end
-
-    def solr_params
-      {
-        :fl => field
-      }
-    end
-
-    def solr
-      ActiveFedora.solr.conn
-    end
+  # Sort by key length so that non-derivative properties come first.
+  def sorted_field_summary
+    field_summary_hash.sort_by{|k, _| k.to_s.length}
   end
 end

@@ -1,7 +1,7 @@
 ##
 # Represents a solr property in a solr document. Has a property_key and values
 # associated with it.
-class SolrProperty
+class SolrProperty < Struct.new(:property_key, :values)
   attr_reader :property_key, :values
   def initialize(property_key, values=[])
     @property_key = property_key.to_s
@@ -14,6 +14,10 @@ class SolrProperty
 
   def solr_identifier
     split_key.last
+  end
+
+  def eql?(other_property)
+    other_property.try(:property_key) == property_key && other_property.try(:values) == values
   end
 
   def derivative_properties
