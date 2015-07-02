@@ -1,9 +1,12 @@
 <h1> Currently Configured Facets </h1>
 <div id="facets">
+  <% @facets.active.each do |property, field| %>
+    <%= render :partial => "field", :locals => {:property => property, :field => field, :parent => nil, :hide_button => true} %>
+  <% end %>
 </div>
 
 <h1>Fields to Facet On</h1>
-<% @solr_fields.each do |property, field| %>
-  <%= render :partial => "field", :locals => {:property => property, :field => field} %>
+<% @facets.inactive.each do |property, field| %>
+  <%= render :partial => "field", :locals => {:property => property, :field => field, :parent => nil, :hide_button => false} %>
 <% end %>
 

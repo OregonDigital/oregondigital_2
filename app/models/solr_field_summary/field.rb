@@ -3,6 +3,11 @@ class SolrFieldSummary
     def derivative_properties
       @derivative_properties ||= {}
     end
+
+    def distinct
+      super || 0
+    end
+
     def topTerms
       super || []
     end

@@ -11,7 +11,11 @@ class FacetableSolrFieldIterator
   private
 
   def sorted
-    only_data_model_keys.sort_by{|k, v| -v.distinct}
+    flattened_derivative_properties.sort_by{|k, v| -v.distinct}
+  end
+
+  def flattened_derivative_properties
+    FlatteningDerivativePropertiesIterator.new(only_data_model_keys).to_h
   end
 
   def only_data_model_keys

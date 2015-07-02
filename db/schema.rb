@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429165654) do
+ActiveRecord::Schema.define(version: 20150702213649) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id",       null: false
@@ -24,6 +24,34 @@ ActiveRecord::Schema.define(version: 20150429165654) do
   end
 
   add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id"
+
+  create_table "controlled_vocabularies", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "controlled_vocabulary_properties", force: :cascade do |t|
+    t.integer  "controlled_vocabulary_id"
+    t.string   "property"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "controlled_vocabulary_vocabularies", force: :cascade do |t|
+    t.integer  "controlled_vocabulary_id"
+    t.integer  "vocabulary_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "facet_fields", force: :cascade do |t|
+    t.string   "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "facet_fields", ["key"], name: "index_facet_fields_on_key", unique: true
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
@@ -65,5 +93,11 @@ ActiveRecord::Schema.define(version: 20150429165654) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "vocabularies", force: :cascade do |t|
+    t.string   "base_uri"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

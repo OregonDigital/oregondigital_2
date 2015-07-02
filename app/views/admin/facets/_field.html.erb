@@ -1,5 +1,13 @@
 <div class="panel panel-default">
-  <div class="panel-heading"><%= property.to_s.titleize %></div>
+  <div class="panel-heading">
+    <%= property.to_s.titleize %>
+    <% unless hide_button %>
+      <%= simple_form_for @facet, :url => admin_facets_path(@facet) do |f| %>
+        <%= f.input :key, :as => :hidden, :input_html => { :value => [parent,property].compact.map(&:to_s).join("_") } %>
+        <%= f.submit %>
+      <% end %>
+    <% end %>
+  </div>
   <div class="panel-body">
     <div class="form-horizontal">
       <div class="form-group">
@@ -22,7 +30,7 @@
     <% unless field.derivative_properties.blank? %>
       Derivative Properties
       <% field.derivative_properties.each do |derivative_property, derivative_field| %>
-        <%= render :partial => "field", :locals => {:property => derivative_property, :field => derivative_field} %>
+        <%= render :partial => "field", :locals => {:property => derivative_property, :field => derivative_field, :parent => property, :hide_button => hide_button} %>
       <% end %>
     <% end %>
   </div>
