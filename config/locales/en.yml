@@ -23,3 +23,9 @@ en:
   hello: "Hello world"
   sets:
     set_not_found: "Invalid set requested."
+  admin:
+    facets:
+      field_created: "Facet field configured"
+      destroy:
+        fail: "Failed to delete facet"
+        success: "Deleted facet"

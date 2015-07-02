@@ -98,6 +98,7 @@ group :development, :test do
   gem 'newrelic_rpm'
   gem 'capybara-screenshot'
   gem 'coveralls', :require => false
+  gem 'shoulda-matchers', :require => false
 end
 
 group :test do
