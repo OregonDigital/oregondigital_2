@@ -6,6 +6,7 @@ class SolrFieldSummary
       )
     end
   end
+  include Enumerable
 
   pattr_initialize :field_summary_hash
   delegate :keys, :each, :to => :cleaned_result

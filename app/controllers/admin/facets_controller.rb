@@ -1,5 +1,5 @@
 class Admin::FacetsController < AdminController
   def index
-    @solr_fields = SolrFieldSummary.where(:field => "*")
+    @solr_fields = FacetableSolrFieldIterator.new(SolrFieldSummary.where(:field => "*"))
   end
 end
