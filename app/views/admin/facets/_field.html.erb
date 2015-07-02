@@ -3,8 +3,8 @@
     <%= property.to_s.titleize %>
     <% unless field.facet.persisted? %>
       <%= simple_form_for field.facet, :url => admin_facets_path(field.facet) do |f| %>
-        <%= f.input :key, :as => :hidden, :input_html => { :value => [parent,property].compact.map(&:to_s).join("_") } %>
-        <%= f.submit %>
+        <%= f.input :key, :as => :hidden, :input_html => { :value => property.to_s} %>
+        <%= f.submit "Enable #{property.to_s.titleize} Facet" %>
       <% end %>
     <% else %>
       <%= link_to "Delete", admin_facet_path(field.facet), :method => :delete %>
