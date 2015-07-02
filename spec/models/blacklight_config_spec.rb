@@ -72,6 +72,13 @@ RSpec.describe BlacklightConfig do
       expect(labels).to include "Alternative"
       expect(keys).to include *GenericAsset.properties.keys.map{|x| "#{x}_ssim"}
     end
+    
+    it "should have facets for all the facet fields" do
+      FacetField.create(:key => "title")
+
+      keys = subject.facet_fields.values.map(&:key)
+      expect(keys).to include "title_ssim"
+    end
 
     it "should have a tool config for edit" do
       expect(subject.show.document_actions[:edit_record].partial).to eq "edit_action"

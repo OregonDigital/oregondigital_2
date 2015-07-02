@@ -9,13 +9,10 @@ RSpec.describe Admin::FacetsController do
     it "should find the possible solr fields" do
       facade = instance_double(FacetConfigurationFacade)
       allow(FacetConfigurationFacade).to receive(:new).and_return(facade)
-      new_facet = instance_double(FacetField)
-      allow(FacetField).to receive(:new).and_return(new_facet)
 
       get :index
 
       expect(assigns(:facets)).to eq facade
-      expect(assigns(:facet)).to eq new_facet
     end
   end
 
