@@ -35,7 +35,14 @@ RSpec.describe SolrFieldSummary do
           "topTerms" => [
             "Test",
             "Test2"
-          ]
+          ],
+          "dynamicBase" => "*_ssim"
+        },
+        "title_tesim" => 
+        {
+          "docs" => 10,
+          "distinct" => 6,
+          "dynamicBase" => "*_tesim"
         }
       }
     end
@@ -53,6 +60,9 @@ RSpec.describe SolrFieldSummary do
     end
     it "should not give derivative keys its own property" do
       expect(subject.keys).to eq [:title]
+    end
+    it "should only do ssim keys" do
+      expect(subject[:title].dynamicBase).to eq "*_ssim"
     end
   end
 end

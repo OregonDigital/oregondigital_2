@@ -2,7 +2,7 @@ class SolrFieldSummary
   class << self
     def where(params={})
       new(
-        Query.new(params).result
+        SolrFieldSummary::Query.new(params).result
       )
     end
   end
@@ -51,6 +51,8 @@ class SolrFieldSummary
 
   # Sort by key length so that non-derivative properties come first.
   def sorted_field_summary
-    field_summary_hash.sort_by{|k, _| k.to_s.length}
+    field_summary_hash.sort_by{|k, _| k.to_s.length}.select do |k, v|
+      SolrProperty.new(k).solr_identifier == "ssim"
+    end
   end
 end
