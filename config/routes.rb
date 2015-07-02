@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
 
   get '/admin', :to => 'admin#index', :as => "admin_index"
+  namespace :admin do
+    resources :facets
+  end
   resources :resource, :only => :show
   mount HydraEditor::Engine => '/'
 

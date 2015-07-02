@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><%= property.to_s.titleize %></div>
+  <div class="panel-body">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2">Distinct Values:</label>
+        <div class="col-sm-10">
+          <p class="form-control-static"> <%= field.distinct %> </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Top Terms:</label>
+        <div class="col-sm-10">
+          <ul class="form-control-static">
+            <% field.topTerms.each_slice(2) do |term, count| %>
+              <li><%= term %> - <%= count %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <% unless field.derivative_properties.blank? %>
+      Derivative Properties
+      <% field.derivative_properties.each do |derivative_property, derivative_field| %>
+        <%= render :partial => "field", :locals => {:property => derivative_property, :field => derivative_field} %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

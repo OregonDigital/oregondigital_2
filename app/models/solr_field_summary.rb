@@ -8,7 +8,7 @@ class SolrFieldSummary
   end
 
   pattr_initialize :field_summary_hash
-  delegate :keys, :to => :cleaned_result
+  delegate :keys, :each, :to => :cleaned_result
 
   def [](key)
     cleaned_result[key.to_sym]
@@ -35,7 +35,9 @@ class SolrFieldSummary
     interim_result.select do |property, value|
       property.derivative_properties.each do |derivative_property_key, prop|
         derivative_properties << prop.property_key
-        value.derivative_properties[derivative_property_key] = interim_result[prop]
+        if interim_result[prop]
+          value.derivative_properties[derivative_property_key] = interim_result[prop]
+        end
       end
       !derivative_properties.include?(property.property_key)
     end
