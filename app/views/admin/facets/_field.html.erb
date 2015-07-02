@@ -29,11 +29,5 @@
         </div>
       </div>
     </div>
-    <% unless field.derivative_properties.blank? %>
-      Derivative Properties
-      <% field.derivative_properties.each do |derivative_property, derivative_field| %>
-        <%= render :partial => "field", :locals => {:property => derivative_property, :field => derivative_field, :parent => property, :hide_button => hide_button} %>
-      <% end %>
-    <% end %>
   </div>
 </div>
