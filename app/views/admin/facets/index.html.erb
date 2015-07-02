@@ -1,12 +1,12 @@
 <h1> Currently Configured Facets </h1>
 <div id="facets">
   <% @facets.active.each do |property, field| %>
-    <%= render :partial => "field", :locals => {:property => property, :field => field, :parent => nil, :hide_button => true} %>
+    <%= render :partial => "field", :locals => {:property => property, :field => field, :parent => nil, :create => false} %>
   <% end %>
 </div>
 
 <h1>Fields to Facet On</h1>
 <% @facets.inactive.each do |property, field| %>
-  <%= render :partial => "field", :locals => {:property => property, :field => field, :parent => nil, :hide_button => false} %>
+  <%= render :partial => "field", :locals => {:property => property, :field => field, :parent => nil, :create => true} %>
 <% end %>
 

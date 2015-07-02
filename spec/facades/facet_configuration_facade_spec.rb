@@ -36,10 +36,11 @@ RSpec.describe FacetConfigurationFacade do
     end
     context "when there are active facets" do
       it "should contain settings for them" do
-        FacetField.create(:key => "title")
+        facet = FacetField.create(:key => "title")
 
         expect(subject.active.to_h.keys.first).to eq :title
         expect(subject.active.to_h.values.first.distinct).to eq 5
+        expect(subject.active.to_h.values.first.facet).to eq facet
       end
     end
   end
@@ -48,6 +49,7 @@ RSpec.describe FacetConfigurationFacade do
     context "when there are no active facets" do
       it "should have all the fields" do
         expect(subject.inactive.to_h.keys).to eq [:workType, :alternative, :title]
+        expect(subject.inactive.to_h[:workType].facet).not_to be_persisted
       end
     end
     context "when there are active facets" do

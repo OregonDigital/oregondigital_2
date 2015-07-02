@@ -1,7 +1,6 @@
 class Admin::FacetsController < AdminController
   def index
     @facets = FacetConfigurationFacade.new
-    @facet = FacetField.new
   end
 
   def create

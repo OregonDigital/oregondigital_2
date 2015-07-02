@@ -1,11 +1,13 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <%= property.to_s.titleize %>
-    <% unless hide_button %>
-      <%= simple_form_for @facet, :url => admin_facets_path(@facet) do |f| %>
+    <% unless field.facet.persisted? %>
+      <%= simple_form_for field.facet, :url => admin_facets_path(field.facet) do |f| %>
         <%= f.input :key, :as => :hidden, :input_html => { :value => [parent,property].compact.map(&:to_s).join("_") } %>
         <%= f.submit %>
       <% end %>
+    <% else %>
+      <%= link_to "Delete", admin_facet_path(field.facet), :method => :delete %>
     <% end %>
   </div>
   <div class="panel-body">
