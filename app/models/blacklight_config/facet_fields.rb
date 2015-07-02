@@ -4,7 +4,7 @@ class BlacklightConfig
     
     def run
       facet_fields.each do |field|
-        configuration.add_facet_field "#{field.key}_ssim"
+        configuration.add_facet_field ActiveFedora::SolrQueryBuilder.solr_name(field.key, :symbol)
       end
       configuration.add_facet_fields_to_solr_request!
     end
