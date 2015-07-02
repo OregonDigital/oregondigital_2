@@ -1,14 +1,10 @@
 class FacetConfigurationFacade
   def active
-    solr_field_iterator.to_h.slice(*facet_keys).map do |k, v|
-      [k, HasFacetField.new(v, grouped_facets[k].first)]
-    end
+    solr_field_iterator.to_h.slice(*facet_keys)
   end
 
   def inactive
-    solr_field_iterator.to_h.except(*facet_keys).map do |k, v|
-      [k, HasFacetField.new(v, FacetField.new)]
-    end
+    solr_field_iterator.to_h.except(*facet_keys)
   end
 
   private
@@ -30,7 +26,9 @@ class FacetConfigurationFacade
   end
 
   def solr_field_iterator
-    @solr_field_iterator ||= iterator_factory.new(all_solr_fields)
+    @solr_field_iterator ||= iterator_factory.new(all_solr_fields).map do |k, v|
+      [k, HasFacetField.new(v, grouped_facets[k].try(:first) || FacetField.new)]
+    end
   end
 
   def iterator_factory
