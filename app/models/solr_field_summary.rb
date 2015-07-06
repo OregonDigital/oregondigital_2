@@ -30,17 +30,13 @@ class SolrFieldSummary
   end
 
   def interim_result
-    sorted_field_summary.each_with_object({}) do |(key, value), collector|
+    field_summary_hash.each_with_object({}) do |(key, value), collector|
       property = SolrProperty.new(key)
       field = Field.new(value)
-      collector[property] = field
+      if property.solr_identifier == "ssim"
+        collector[property] = field
+      end
     end
   end
 
-  # Sort by key length so that non-derivative properties come first.
-  def sorted_field_summary
-    field_summary_hash.sort_by{|k, _| k.to_s.length}.select do |k, v|
-      SolrProperty.new(k).solr_identifier == "ssim"
-    end
-  end
 end
