@@ -11,15 +11,22 @@ class FacetableSolrFieldIterator
   private
 
   def sorted
-    flattened_derivative_properties.sort_by{|k, v| -v.distinct}
-  end
-
-  def flattened_derivative_properties
-    FlatteningDerivativePropertiesIterator.new(only_data_model_keys).to_h
+    only_data_model_keys.sort_by{|k, v| -v.distinct}
   end
 
   def only_data_model_keys
-    solr_field_summary.to_h.slice(*data_model_properties)
+    solr_field_summary.to_h.slice(*good_keys)
+  end
+
+  def good_keys
+    (data_model_properties | derivative_keys).map(&:to_sym)
+  end
+
+  def derivative_keys
+    data_model_properties.flat_map do |property|
+      s = SolrProperty.new(property.to_s+"_ssim")
+      s.derivative_properties.values.map(&:key)
+    end
   end
 
   def data_model_properties

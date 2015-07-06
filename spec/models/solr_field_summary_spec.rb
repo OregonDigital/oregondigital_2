@@ -56,10 +56,7 @@ RSpec.describe SolrFieldSummary do
       expect(subject[:banana]).to eq nil
     end
     it "should add derivative keys" do
-      expect(subject[:title].derivative_properties[:preferred_label].distinct).to eq 36
-    end
-    it "should not give derivative keys its own property" do
-      expect(subject.keys).to eq [:title]
+      expect(subject[:title_preferred_label].distinct).to eq 36
     end
     it "should only do ssim keys" do
       expect(subject[:title].dynamicBase).to eq "*_ssim"
