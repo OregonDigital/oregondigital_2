@@ -15,10 +15,6 @@ class SolrFieldSummary
     cleaned_result[key.to_sym]
   end
 
-  def keys
-    cleaned_result.keys
-  end
-
   private
 
   def cleaned_result
