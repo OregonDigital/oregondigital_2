@@ -26,7 +26,8 @@ class BlacklightConfig
       ShowActions.new(configuration),
       ThumbnailConfiguration.new(configuration),
       Gallery.new(configuration),
-      IndexConfiguration.new(configuration)
+      IndexConfiguration.new(configuration),
+      FacetFields.new(configuration)
     ]
   end
 

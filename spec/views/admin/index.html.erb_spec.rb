@@ -14,8 +14,13 @@ RSpec.describe 'admin/index' do
     context "when ingesting a new record" do
       it "should have a link to ingest a new record" do
         expect(rendered).to have_link "Ingest a New Record", :href => hydra_editor.new_record_path
+      end
+      it "should have a link to edit roles" do
         expect(rendered).to have_link "Edit User Roles", :href => role_management.roles_path
-     end
+      end
+      it "should have a link to configure facets" do
+        expect(rendered).to have_link "Configure Facets", :href => admin_facets_path
+      end
     end
   end
 end
