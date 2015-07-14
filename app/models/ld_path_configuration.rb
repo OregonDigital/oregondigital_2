@@ -1,7 +1,3 @@
-class LDPathConfiguration
-  attr_reader :name, :path
-  def initialize(name:, path:)
-    @name = name
-    @path = path
-  end
+class LDPathConfiguration < ActiveRecord::Base
+  validates :name, :path, :presence => true
 end

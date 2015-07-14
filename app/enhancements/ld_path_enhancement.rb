@@ -29,4 +29,12 @@ class LDPathEnhancement
   def uris
     OnlyUris.new(raw_property.values)
   end
+
+  class Factory
+    pattr_initialize :ldpath_configuration
+    
+    def new(raw_property)
+      LDPathEnhancement.new(raw_property, ldpath_configuration)
+    end
+  end
 end

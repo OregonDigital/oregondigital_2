@@ -39,6 +39,23 @@ RSpec.describe EnrichedSolrDocument do
         expect(document_result).to eq ( {} )
       end
     end
+    context "when there are LDPath Configurations" do
+      let(:solr_document) { {"lcsubject_ssim" => [uri.to_s]} }
+      let(:uri) { "http://localhost:41/1" }
+      it "should use them" do
+        build_resource(uri: uri, label: "Test").tap do |r|
+          r << [r.rdf_subject, RDF::SKOS.exactMatch, "Banana"]
+        end.persist!
+        LDPathConfiguration.create(name: "banana", path: "<#{RDF::SKOS.exactMatch}>")
+
+        expect(document_result).to include (
+          {
+            "lcsubject_banana_ssim" => ["Banana"]
+          }
+        )
+
+      end
+    end
     context "when there are alternative labels" do
       let(:solr_document) { {"lcsubject_ssim" => [uri.to_s]} }
       let(:uri) { "http://localhost:41/1" }

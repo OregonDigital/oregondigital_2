@@ -22,7 +22,13 @@ class EnrichedSolrDocument
   private
 
   def enhancements
-    CompositeEnhancementFactory.new(LabelEnhancement, AltLabelEnhancement)
+    CompositeEnhancementFactory.new(LabelEnhancement, AltLabelEnhancement, ld_path_enhancements)
+  end
+
+  def ld_path_enhancements
+    CompositeEnhancementFactory.new(*(LDPathConfiguration.all.map do |config|
+      LDPathEnhancement::Factory.new(config)
+    end))
   end
 
   def properties
