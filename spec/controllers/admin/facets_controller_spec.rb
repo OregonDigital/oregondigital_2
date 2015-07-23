@@ -25,6 +25,16 @@ RSpec.describe Admin::FacetsController do
     end
   end
 
+  describe "#update" do
+    it "should be able to update a facet" do
+      facet = FacetField.create(:key => "test", :label => "yo")
+
+      put :update, :id => facet.id, :facet_field => {:label => "test"}
+
+      expect(facet.reload.label).to eq "test"
+    end
+  end
+
   describe "#destroy" do
     context "when the field doesn't exist" do
       it "should redirect and show a flash" do

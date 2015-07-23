@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702213649) do
+ActiveRecord::Schema.define(version: 20150723222437) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id",       null: false
@@ -49,9 +49,18 @@ ActiveRecord::Schema.define(version: 20150702213649) do
     t.string   "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "label"
   end
 
   add_index "facet_fields", ["key"], name: "index_facet_fields_on_key", unique: true
+
+  create_table "ld_path_configurations", force: :cascade do |t|
+    t.string   "name"
+    t.text     "path"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
