@@ -27,7 +27,7 @@ class FacetConfigurationFacade
 
   def solr_field_iterator
     @solr_field_iterator ||= iterator_factory.new(all_solr_fields).map do |k, v|
-      [k, HasFacetField.new(v, grouped_facets[k].try(:first) || FacetField.new)]
+      [k, HasFacetField.new(v, grouped_facets[k].try(:first) || FacetField.new(:key => k))]
     end
   end
 

@@ -26,6 +26,8 @@ en:
   admin:
     facets:
       field_created: "Facet field configured"
+      update:
+        fail: 'Failed to update facet'
       destroy:
         fail: "Failed to delete facet"
         success: "Deleted facet"

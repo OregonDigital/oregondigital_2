@@ -10,6 +10,20 @@ class Admin::FacetsController < AdminController
     end
   end
 
+  def update
+    facet = find_facet(params[:id])
+    respond_to do |format|
+      if facet.update(facet_field_params)
+        format.html { redirect_to admin_facets_path }
+        format.json { respond_with_bip(facet) }
+      else
+        flash[:alert] = t('admin.facets.update.fail')
+        format.html { redirect_to admin_facets_path }
+        format.json { respond_with_bip(facet) }
+      end
+    end
+  end
+
   def destroy
     begin
       if find_facet(params[:id]).destroy
@@ -28,7 +42,7 @@ class Admin::FacetsController < AdminController
   end
 
   def facet_field_params
-    params.require(:facet_field).permit(:key)
+    params.require(:facet_field).permit(:key, :label)
   end
 
 end
