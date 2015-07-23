@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= property.to_s.titleize %>
+    <%= best_in_place_if field.facet.persisted?, field.facet, :label, :url => admin_facet_path(:id => field.facet.id || "0", :format => :json), :display_as => :view_label %>
     <% unless field.facet.persisted? %>
       <%= simple_form_for field.facet, :url => admin_facets_path(field.facet) do |f| %>
         <%= f.input :key, :as => :hidden, :input_html => { :value => property.to_s} %>

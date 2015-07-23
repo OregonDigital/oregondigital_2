@@ -12,11 +12,15 @@ class Admin::FacetsController < AdminController
 
   def update
     facet = find_facet(params[:id])
-    if facet.update(facet_field_params)
-      redirect_to admin_facets_path
-    else
-      flash[:alert] = t('admin.facets.update.fail')
-      redirect_to admin_facets_path
+    respond_to do |format|
+      if facet.update(facet_field_params)
+        format.html { redirect_to admin_facets_path }
+        format.json { respond_with_bip(facet) }
+      else
+        flash[:alert] = t('admin.facets.update.fail')
+        format.html { redirect_to admin_facets_path }
+        format.json { respond_with_bip(facet) }
+      end
     end
   end
 

@@ -20,4 +20,5 @@
 // Required by Blacklight
 //= require blacklight/blacklight
 //= require hydra-editor/hydra-editor
+//= require best_in_place
 //= require_tree .

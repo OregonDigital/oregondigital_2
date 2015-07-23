@@ -121,6 +121,9 @@ GEM
     bcp47 (0.3.3)
       i18n
     bcrypt (3.1.10)
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     blacklight (5.13.1)
@@ -577,6 +580,7 @@ DEPENDENCIES
   active-fedora!
   active_fedora-noid
   attr_extras
+  best_in_place
   blacklight
   blacklight-gallery
   blacklight_advanced_search
