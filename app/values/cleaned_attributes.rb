@@ -20,8 +20,6 @@ class CleanedAttributes
   end
 
   def string_properties
-    @string_properties ||= ODDataModel.properties.select{|x| x.cast == false}
-      .map(&:name)
-      .map(&:to_s)
+    @string_properties ||= ODDataModel.string_properties
   end
 end

@@ -208,5 +208,11 @@ class ODDataModel < DataModel
 
   # OEmbed
   property:oembed, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.oembed, :cast => false
+
+  def self.string_properties
+    @string_properties ||= properties.select{|x| x.cast == false}
+      .map(&:name)
+      .map(&:to_s)
+  end
 end
 

@@ -15,11 +15,15 @@ RSpec.describe SolrDocument do
         {
           :title_ssim => ["http://test.test.org", "Raw String"],
           :title_preferred_label_ssim => ["Test"],
-          :title_alt_label_ssim => ["Alternative"]
+          :title_alt_label_ssim => ["Alternative"],
+          :oembed_ssim => ["http://test.org"]
         }
       end
       it "should show title labels together with their preferred label" do
         expect(subject[:title_ssim]).to eq ["Test", "Raw String"]
+      end
+      it "should allow access to fields with URI casting off" do
+        expect(subject[:oembed_ssim]).to eq ["http://test.org"]
       end
     end
   end
