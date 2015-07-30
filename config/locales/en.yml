@@ -31,3 +31,7 @@ en:
       destroy:
         fail: "Failed to delete facet"
         success: "Deleted facet"
+  hydra_editor:
+    form:
+      model_label:
+        ExternalAsset: "External Asset"

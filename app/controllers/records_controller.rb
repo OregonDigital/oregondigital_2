@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
   protected
 
   def collect_form_attributes
-    AttributeURIConverter.new(super).convert_attributes
+    CleanedAttributes.from(super)
   end
 
   def resource
@@ -23,5 +23,6 @@ class RecordsController < ApplicationController
       EnrichesSolr
     )
   end
+
 
 end

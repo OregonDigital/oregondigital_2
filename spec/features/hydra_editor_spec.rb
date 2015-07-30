@@ -34,6 +34,19 @@ RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
       expect(image.workflow_metadata.pyramidal_path).not_to be_blank
     end
   end
+
+  it "should save an external resource", :perform_enqueued => false do
+    as_user(admin) do
+      navigate_to_new_external_resource_path
+      fill_in "external_asset_oembed", :with => "http://test.org"
+      find(:css, "input.btn-primary").click
+      expect(page).to have_content("successfully created")
+
+      asset = ExternalAsset.last
+
+      expect(asset.oembed).to eq ["http://test.org"]
+    end
+  end
   it "should show invalid fields" do
     as_user(admin) do
       navigate_to_new_image_path
@@ -100,6 +113,11 @@ RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
   def navigate_to_new_image_path
     visit "/records/new"
     page.select("Image", :from => "type")
+    find(:css, "input.btn-primary").click
+  end
+  def navigate_to_new_external_resource_path
+    visit "/records/new"
+    page.select("External Asset", :from => "type")
     find(:css, "input.btn-primary").click
   end
 end
