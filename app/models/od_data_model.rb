@@ -205,5 +205,14 @@ class ODDataModel < DataModel
   property :containedInJournal, :predicate => RDF::URI('http://sw-portal.deri.org/ontologies/swportal#containedInJournal')
   property :isVolume, :predicate => RDF::URI('http://sw-portal.deri.org/ontologies/swportal#isVolume')
   property :hasNumber, :predicate => RDF::URI('http://sw-portal.deri.org/ontologies/swportal#hasNumber')
+
+  # OEmbed
+  property:oembed, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE.oembed, :cast => false
+
+  def self.string_properties
+    @string_properties ||= properties.select{|x| x.cast == false}
+      .map(&:name)
+      .map(&:to_s)
+  end
 end
 
