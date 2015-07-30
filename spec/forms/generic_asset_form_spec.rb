@@ -25,4 +25,10 @@ RSpec.describe ImageForm do
       end
     end
   end
+
+  describe ".terms" do
+    it "should not include oembed" do
+      expect(ImageForm.terms).not_to include :oembed
+    end
+  end
 end
