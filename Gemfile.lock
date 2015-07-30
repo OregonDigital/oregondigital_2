@@ -138,6 +138,11 @@ GEM
       bootstrap-sass (~> 3.0)
       openseadragon (>= 0.2.0)
       rails
+    blacklight-oembed (0.0.4)
+      blacklight (~> 5.0)
+      bootstrap-sass (~> 3.0)
+      rails
+      ruby-oembed
     blacklight_advanced_search (5.1.4)
       blacklight (~> 5.10)
       parslet
@@ -472,6 +477,7 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    ruby-oembed (0.8.14)
     ruby-vips (0.3.9)
     rubydora (1.8.1)
       activemodel
@@ -583,6 +589,7 @@ DEPENDENCIES
   best_in_place
   blacklight
   blacklight-gallery
+  blacklight-oembed
   blacklight_advanced_search
   capistrano (~> 2.0)
   capybara

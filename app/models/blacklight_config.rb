@@ -25,9 +25,15 @@ class BlacklightConfig
       SearchFieldConfiguration.new(configuration),
       ShowActions.new(configuration),
       ThumbnailConfiguration.new(configuration),
-      Gallery.new(configuration),
       IndexConfiguration.new(configuration),
-      FacetFields.new(configuration)
+      FacetFields.new(configuration),
+    ] | plugins
+  end
+
+  def plugins
+    [
+      Gallery.new(configuration),
+      Embed.new(configuration)
     ]
   end
 

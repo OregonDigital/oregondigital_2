@@ -117,3 +117,5 @@ group :development, :test do
   # jettywrapper
   gem 'jettywrapper', :github => "projecthydra/jettywrapper"
 end
+
+gem 'blacklight-oembed'

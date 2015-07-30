@@ -96,6 +96,10 @@ RSpec.describe BlacklightConfig do
     it "should have an edit action for index" do
       expect(subject.index.document_actions[:edit_record].partial).to eq "edit_action"
     end
-  end
 
+    it "should configure OEmbed" do
+      expect(subject.show.oembed_field).to eq :oembed_ssim
+      expect(subject.show.partials).to include :oembed
+    end
+  end
 end

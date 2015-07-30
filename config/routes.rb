@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Blacklight::Oembed::Engine, at: 'oembed'
   root :to => "catalog#index"
   blacklight_for :catalog
   devise_for :users

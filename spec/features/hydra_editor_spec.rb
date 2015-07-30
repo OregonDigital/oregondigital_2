@@ -41,10 +41,7 @@ RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
       fill_in "external_asset_oembed", :with => "http://test.org"
       find(:css, "input.btn-primary").click
       expect(page).to have_content("successfully created")
-
-      asset = ExternalAsset.last
-
-      expect(asset.oembed).to eq ["http://test.org"]
+      expect(page).to have_selector(:css, "*[data-embed-url]")
     end
   end
   it "should show invalid fields" do
