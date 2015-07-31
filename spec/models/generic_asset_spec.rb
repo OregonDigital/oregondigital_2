@@ -171,6 +171,24 @@ RSpec.describe GenericAsset do
     end
   end
 
+  describe "#public=" do
+    context "when set to true" do
+      it "should add public to read groups" do
+        subject.public = true
+
+        expect(subject).to be_public
+      end
+    end
+    context "when set to false" do
+      it "should add public to read groups" do
+        subject.public = true
+        subject.public = false
+
+        expect(subject).not_to be_public
+      end
+    end
+  end
+
   describe "#reviewed?" do
     context "when the workflow data says it's reviewed" do
       it "should be true" do
@@ -196,6 +214,24 @@ RSpec.describe GenericAsset do
         g = GenericAsset.new
 
         expect(g.to_solr["reviewed_bsi"]).to eq false
+      end
+    end
+  end
+
+  describe "#reviewed=" do
+    context "when set to true" do
+      it "should mark it was reviewed" do
+        subject.reviewed = true
+
+        expect(subject).to be_reviewed
+      end
+    end
+    context "when set to false" do
+      it "mark it as unreviewed" do
+        subject.reviewed = true
+        subject.reviewed = false
+
+        expect(subject).not_to be_reviewed
       end
     end
   end

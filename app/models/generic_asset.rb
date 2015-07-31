@@ -9,6 +9,7 @@ class GenericAsset < ActiveFedora::Base
   contains "workflow_metadata", :class_name => "Files::YmlFile"
   delegate :content_changed?,:blank?, :to => :content, :prefix => true
   delegate :streamable_content, :to => :content
+  delegate :reviewed=, :to => :workflow_metadata
 
   def injector
     @injector ||= OregonDigital.inject
@@ -22,6 +23,14 @@ class GenericAsset < ActiveFedora::Base
 
   def public?
     read_groups.include?('public')
+  end
+
+  def public=(val)
+    if val == true
+      self.read_groups |= ['public']
+    elsif val == false
+      self.read_groups -= ['public']
+    end
   end
 
   def reviewed?
