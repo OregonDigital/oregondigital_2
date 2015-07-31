@@ -106,7 +106,7 @@ RSpec.describe GenericAsset do
     end
     context "when set to a URI" do
       before do
-        generic_asset.lcsubject = [RDF::URI("http://id.loc.gov/authorities/names/n80017721")]
+        generic_asset.lcsubject = [RDF::URI("http://bla.bla.bla")]
       end
       it "should return as a TriplePoweredResource" do
         expect(generic_asset.lcsubject.first.class).to eq TriplePoweredResource
@@ -140,6 +140,62 @@ RSpec.describe GenericAsset do
         genasset.save
         genasset.reload
         expect(genasset.set[0]).to eq genset
+      end
+    end
+  end
+
+  describe "#public?" do
+    context "when it has a public group" do
+      it "should be true" do
+        g = GenericAsset.new
+        g.read_groups = ['public']
+
+        expect(g).to be_public
+      end
+      it "should index it" do
+        g = GenericAsset.new
+        g.read_groups = ['public']
+
+        expect(g.to_solr["public_bsi"]).to eq true
+      end
+    end
+    context "when it doesn't" do
+      it "should be false" do
+        expect(GenericAsset.new).not_to be_public
+      end
+      it "should index it" do
+        g = GenericAsset.new
+        
+        expect(g.to_solr["public_bsi"]).to eq false
+      end
+    end
+  end
+
+  describe "#reviewed?" do
+    context "when the workflow data says it's reviewed" do
+      it "should be true" do
+        g = GenericAsset.new
+        g.workflow_metadata.reviewed = true
+
+        expect(g).to be_reviewed
+      end
+      it "should index" do
+        g = GenericAsset.new
+        g.workflow_metadata.reviewed = true
+
+        expect(g.to_solr["reviewed_bsi"]).to eq true
+      end
+    end
+    context "when the workflow data doesn't say it's reviewed" do
+      it "should be false" do
+        g = GenericAsset.new
+
+        expect(g).not_to be_reviewed
+      end
+      it "should index" do
+        g = GenericAsset.new
+
+        expect(g.to_solr["reviewed_bsi"]).to eq false
       end
     end
   end

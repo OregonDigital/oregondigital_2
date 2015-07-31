@@ -20,6 +20,14 @@ class GenericAsset < ActiveFedora::Base
     @indexing_service ||= IndexingService.new(self)
   end
 
+  def public?
+    read_groups.include?('public')
+  end
+
+  def reviewed?
+    !!workflow_metadata.reviewed
+  end
+
   private
 
   def assign_id
