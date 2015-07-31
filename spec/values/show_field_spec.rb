@@ -10,8 +10,8 @@ RSpec.describe ShowField do
   end
 
   describe "#label" do
-    it "should be humanized" do
-      expect(subject.label).to eq "Title"
+    it "should be contain the predicate it represents" do
+      expect(subject.label).to eq "<span data-predicate=\"http://purl.org/dc/terms/title\">Title</span>"
     end
   end
 end

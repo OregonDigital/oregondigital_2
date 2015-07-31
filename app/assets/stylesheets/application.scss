@@ -4,3 +4,9 @@
 
 @import "main";
 @import "openseadragon";
+.tooltip-inner {
+    max-width: 500px;
+    max-height: 250px;
+    height: auto;
+    display: inline-block;
+}

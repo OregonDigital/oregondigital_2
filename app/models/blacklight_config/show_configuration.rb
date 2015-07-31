@@ -10,7 +10,7 @@ class BlacklightConfig
 
     def apply_show_fields
       show_fields.each do |field|
-        configuration.add_show_field field.key, :label => field.label
+        configuration.add_show_field field.key, :label => field.label.html_safe
       end
     end
 
