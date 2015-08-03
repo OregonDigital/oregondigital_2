@@ -1,8 +1,8 @@
 class ReviewingAsset < SimpleDelegator
-  def save
+  def review!
     self.public = true
     self.reviewed = true
-    super
+    save
   end
 
   def class

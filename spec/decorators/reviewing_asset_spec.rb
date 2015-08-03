@@ -3,40 +3,31 @@ require 'rails_helper'
 RSpec.describe ReviewingAsset do
   subject { described_class.new(asset) }
 
-  describe "#save" do
+  describe "#review!" do
+    before do
+      subject.review!
+    end
     context "when given an unreviewed and unpublic asset" do
       let(:asset) { build_asset(is_public: false, is_reviewed: false) }
       it "should call save on the asset" do
-        subject.save
-
         expect(asset).to have_received(:save)
       end
       it "should set it public" do
-        subject.save
-
         expect(asset).to have_received(:public=).with(true)
       end
       it "should set it reviewed" do
-        subject.save
-
         expect(asset).to have_received(:reviewed=).with(true)
       end
     end
     context "when given a public and unreviewed asset" do
       let(:asset) { build_asset(is_public: true, is_reviewed: false) }
       it "should call save on the asset" do
-        subject.save
-
         expect(asset).to have_received(:save)
       end
       it "should set it public" do
-        subject.save
-
         expect(asset).to have_received(:public=).with(true)
       end
       it "should set it reviewed" do
-        subject.save
-
         expect(asset).to have_received(:reviewed=).with(true)
       end
     end
