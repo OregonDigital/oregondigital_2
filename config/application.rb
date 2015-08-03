@@ -34,5 +34,9 @@ module OregonDigital
 
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.use ::ConnegHackMiddleware
+
+    #Adds resque as the active_job backend
+    config.active_job.queue_adapter = :resque
+
   end
 end
