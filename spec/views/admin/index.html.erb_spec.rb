@@ -11,7 +11,7 @@ RSpec.describe 'admin/index' do
     it "should display the admin panel" do
       expect(rendered).to have_content "Admin Panel"
     end
-    context "when ingesting a new record" do
+    describe "admin links" do
       it "should have a link to ingest a new record" do
         expect(rendered).to have_link "Ingest a New Record", :href => hydra_editor.new_record_path
       end
@@ -20,6 +20,9 @@ RSpec.describe 'admin/index' do
       end
       it "should have a link to configure facets" do
         expect(rendered).to have_link "Configure Facets", :href => admin_facets_path
+      end
+      it "should have a link to review" do
+        expect(rendered).to have_link "Review", :href => reviewer_index_path
       end
     end
   end

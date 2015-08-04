@@ -8,4 +8,9 @@ class SearchBuilder < Hydra::SearchBuilder
       solr_params[:fq] << "#{ActiveFedora::SolrQueryBuilder.solr_name("set", :symbol)}:#{RSolr.solr_escape(set.uri)}"
     end
   end
+
+  def only_unreviewed(solr_params)
+    solr_params[:fq] ||= []
+    solr_params[:fq] << "reviewed_bsi:false"
+  end
 end

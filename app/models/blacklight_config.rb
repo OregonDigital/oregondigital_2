@@ -11,6 +11,12 @@ class BlacklightConfig
     ApplySet.new(configuration, set).run
   end
 
+  def reviewing=(reviewing)
+    if reviewing
+      configuration.show.route = { :controller => "reviewer" }
+    end
+  end
+
   def configuration
     @configuration ||= default_configuration.deep_copy
   end

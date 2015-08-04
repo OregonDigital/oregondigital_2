@@ -107,7 +107,7 @@ RSpec.describe GenericAsset do
     end
     context "when set to a URI" do
       before do
-        generic_asset.lcsubject = [RDF::URI("http://id.loc.gov/authorities/names/n80017721")]
+        generic_asset.lcsubject = [RDF::URI("http://bla.bla.bla")]
       end
       it "should return as a TriplePoweredResource" do
         expect(generic_asset.lcsubject.first.class).to eq TriplePoweredResource
@@ -144,4 +144,5 @@ RSpec.describe GenericAsset do
       end
     end
   end
+
 end
