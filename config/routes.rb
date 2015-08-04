@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   end
   resources :resource, :only => :show
   mount HydraEditor::Engine => '/'
-  mount Sidekiq::Web => '/sidekiq'
+
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
+  end 
 
   get 'sets/:set_id', :to => "sets#index", :as => :sets_index
   get 'sets/:set_id/:id', :to => "sets#show", :as => :sets
