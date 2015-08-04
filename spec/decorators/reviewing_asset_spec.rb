@@ -41,7 +41,7 @@ RSpec.describe ReviewingAsset do
   end
 
   def build_asset(is_public:, is_reviewed:)
-    i = object_double(GenericAsset.new)
+    i = object_double(Reviewable.new(GenericAsset.new))
     allow(i).to receive(:save)
     allow(i).to receive(:public?).and_return(is_public)
     allow(i).to receive(:public=)
