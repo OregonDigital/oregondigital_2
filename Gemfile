@@ -85,6 +85,10 @@ gem 'fedora-migrate'
 
 gem 'best_in_place'
 
+gem 'resque'
+gem 'resque-scheduler'
+gem 'resque-retry'
+
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
