@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OregonDigital::SetFixer do
+RSpec.describe OregonDigital::SetFixer, :slow => true do
   subject { described_class.new(solr_service, base) }
 
   let(:solr_service) { ActiveFedora::SolrService }
