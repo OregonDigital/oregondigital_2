@@ -5,11 +5,22 @@ RSpec.describe CatalogController do
     context "when given an image" do
       render_views
       it "should render the image show view" do
-        i = Image.create
+        i = Image.create(:read_groups => ["public"])
 
         get 'show', :id => i.id
 
         expect(response).to render_template "catalog/_show_image"
+      end
+    end
+    describe "permissions" do
+      context "when the user has no permission" do
+        it "should redirect" do
+          i = Image.create
+
+          get 'show', :id => i.id
+
+          expect(response).to be_redirect
+        end
       end
     end
     describe "nt" do
