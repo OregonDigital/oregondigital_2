@@ -28,6 +28,7 @@ RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
       expect(page).to have_content("successfully updated")
       image = Image.find(pid)
       expect(image.content.content).not_to be_blank
+      expect(image.content.mime_type).to eq "image/jpeg"
       expect(image.workflow_metadata.thumbnail_path).to include pid
       expect(image.workflow_metadata.thumbnail_path).not_to be_blank
       expect(image.workflow_metadata.medium_path).not_to be_blank
