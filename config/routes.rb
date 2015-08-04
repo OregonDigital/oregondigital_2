@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
   mount Blacklight::Oembed::Engine, at: 'oembed'
   root :to => "catalog#index"
   blacklight_for :catalog
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
   end
   resources :resource, :only => :show
   mount HydraEditor::Engine => '/'
+  mount Sidekiq::Web => '/sidekiq'
 
   get 'sets/:set_id', :to => "sets#index", :as => :sets_index
   get 'sets/:set_id/:id', :to => "sets#show", :as => :sets
