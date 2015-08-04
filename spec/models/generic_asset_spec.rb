@@ -49,9 +49,10 @@ RSpec.describe GenericAsset do
     end
     context 'when a new object is saved' do
       let(:id_service) { instance_double("ActiveFedora::Noid::Service") }
+      let(:minted_id) { "987654321" }
       before(:each) do
         allow(OregonDigital.inject).to receive(:id_service).and_return(id_service)
-        allow(id_service).to receive(:mint).and_return("987654321")
+        allow(id_service).to receive(:mint).and_return(minted_id)
       end
       context "when it doesn't have an id" do
         before do
@@ -63,8 +64,8 @@ RSpec.describe GenericAsset do
         it 'should no longer be nil' do
           expect(generic_asset.id).not_to be_nil
         end
-        it 'should reverse the id for better bucketing' do
-          expect(generic_asset.id).to eq('123456789')
+        it 'should assign the id properly' do
+          expect(generic_asset.id).to eq(minted_id)
         end
       end
       context 'but it already has an id' do
