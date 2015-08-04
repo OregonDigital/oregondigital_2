@@ -40,4 +40,28 @@ RSpec.describe CatalogController do
       expect(controller.blacklight_config).to eq config
     end
   end
+
+  describe "#index" do
+    context "when there are non-public items" do
+      it "should not display them" do
+        create_asset(id: 1, public: false)
+
+        get :index
+
+        expect(assigns(:document_list).length).to eq 0
+      end
+    end
+    def create_asset(id:, public:)
+      g = GenericAsset.new
+      g = ReviewingAsset.new(Reviewable.new(g))
+      g.public = public
+      solr.add g.to_solr.merge(:id => id)
+      solr.commit
+      g
+    end
+
+    def solr
+      ActiveFedora.solr.conn
+    end
+  end
 end

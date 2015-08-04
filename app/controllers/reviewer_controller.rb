@@ -10,4 +10,10 @@ class ReviewerController < CatalogController
       raise Hydra::AccessDenied.new("You do not have sufficient access privileges to access this.")
     end
   end
+
+  def config_builder
+    @set_config ||= super.tap do |t|
+      t.reviewing = true
+    end
+  end
 end

@@ -23,6 +23,13 @@ RSpec.describe BlacklightConfig do
     end
   end
 
+  describe "#reviewing=" do
+    it "should set a show route" do
+      subject.reviewing = true
+      
+      expect(subject.configuration.show.route).to eq({:controller => "reviewer"})
+    end
+  end
 
   describe "#configuration" do
     subject { BlacklightConfig.new(resource, default_config).configuration }

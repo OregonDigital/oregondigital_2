@@ -42,6 +42,12 @@ RSpec.describe ReviewerController do
         end
       end
     end
+    describe "#blacklight_config" do
+      it "should be set to reviewing" do
+        expect_any_instance_of(BlacklightConfig).to receive(:reviewing=).with(true).and_call_original
+        get :index
+      end
+    end
   end
   context "when not an admin" do
     it "should not be allowed" do
@@ -65,4 +71,5 @@ RSpec.describe ReviewerController do
   def solr
     ActiveFedora.solr.conn
   end
+
 end
