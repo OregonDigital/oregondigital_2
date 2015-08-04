@@ -20,5 +20,9 @@ Rails.application.routes.draw do
     get "sets/:set_id/#{export_type}", :to => "sets##{export_type}", :as => :"#{export_type}_sets"
   end
 
-  resources :reviewer
+  resources :reviewer do
+    member do
+      get 'facet'
+    end
+  end
 end

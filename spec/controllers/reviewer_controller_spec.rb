@@ -41,6 +41,12 @@ RSpec.describe ReviewerController do
           end
         end
       end
+      it "should be able to get facets" do
+        FacetField.create(:key => "format")
+        xhr :get, :facet, :id => 'format_ssim'
+
+        expect(response).to be_successful
+      end
     end
     describe "#blacklight_config" do
       it "should be set to reviewing" do
