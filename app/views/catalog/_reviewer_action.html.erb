@@ -1,0 +1,3 @@
+<% unless document.reviewed %>
+  <%= link_to "Review", reviewer_path(:id => document.id) %>
+<% end %>

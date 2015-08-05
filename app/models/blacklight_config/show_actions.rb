@@ -5,6 +5,7 @@ class BlacklightConfig
     def run
       add_edit_button
       add_download_button
+      add_reviewer_button
       remove_defaults
     end
 
@@ -16,6 +17,14 @@ class BlacklightConfig
 
     def download_action
       Blacklight::Configuration::ToolConfig.new(:partial => "download_action")
+    end
+
+    def add_reviewer_button
+      configuration.show.document_actions[:reviewer] = reviewer_action
+    end
+
+    def reviewer_action
+      Blacklight::Configuration::ToolConfig.new(:partial => "reviewer_action")
     end
 
     def add_edit_button
