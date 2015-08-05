@@ -41,4 +41,12 @@ class RecordsController < ApplicationController
       EnrichesSolr
     )
   end
+<<<<<<< HEAD
+=======
+
+  def updater
+    ReviewedStatusUpdater.new(params[:id], params[:to_review])
+  end
+
+>>>>>>> Adds the ability to mark edited records for review
 end
