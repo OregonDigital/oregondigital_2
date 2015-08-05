@@ -7,6 +7,7 @@ class HasContent < SimpleDelegator
     attributes = AttributesWithContent.new(attributes)
     if attributes.content
       self.content.content = attributes.content
+      self.content.mime_type = attributes.content.mime_type
     end
     super(attributes.to_h)
   end
@@ -18,7 +19,14 @@ class HasContent < SimpleDelegator
     end
 
     def content
-      attributes[:content]
+      if attributes[:content]
+        Content.new(attributes[:content])
+      end
+    end
+  end
+  class Content < SimpleDelegator
+    def mime_type
+      content_type
     end
   end
 end
