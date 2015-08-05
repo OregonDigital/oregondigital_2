@@ -5,17 +5,17 @@ class ReviewedStatusUpdater
   end
   
   def update_review_status!
-    update_asset if @to_review == "1" 
+    update_asset if @to_review == "1"
   end 
  
   private
 
   def update_asset
-    reviewable_asset.workflow_metadata.reviewed = false
+    asset.workflow_metadata.reviewed = false
     @asset.save
   end
 
-  def reviewable_asset
+  def asset
     @asset ||= GenericAsset.find(@id)
   end
 end
