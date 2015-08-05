@@ -3,6 +3,8 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'capybara/rspec'
+require 'capybara/rails' 
 require Rails.root.join("spec/support/webmock.rb")
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -35,6 +37,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  config.include HydraEditor::Engine.routes.url_helpers
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.

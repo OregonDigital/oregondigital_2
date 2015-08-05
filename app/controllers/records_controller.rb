@@ -1,6 +1,11 @@
 class RecordsController < ApplicationController
   include RecordsControllerBehavior
 
+  def update
+    super
+    updater.update_review_status!
+  end
+
   protected
 
   def collect_form_attributes
@@ -24,5 +29,8 @@ class RecordsController < ApplicationController
     )
   end
 
+  def updater
+    ReviewedStatusUpdater.new(params[:id], params[:to_review])
+  end
 
 end
