@@ -3,7 +3,9 @@ class RecordsController < ApplicationController
 
   def update
     super
-    updater.update_review_status!
+    if params[:to_review] == "1"
+      unreview_asset
+    end
   end
 
   protected
@@ -29,8 +31,19 @@ class RecordsController < ApplicationController
     )
   end
 
-  def updater
-    ReviewedStatusUpdater.new(params[:id], params[:to_review])
+  def unreview_asset
+    reviewable_asset.unreview!
+  end
+
+  def reviewing_decorators
+    DecoratorList.new(
+      Reviewable,
+      ReviewingAsset
+    ) 
+  end
+
+  def reviewable_asset
+    reviewing_decorators.new(GenericAsset.find(params[:id]))
   end
 
 end
