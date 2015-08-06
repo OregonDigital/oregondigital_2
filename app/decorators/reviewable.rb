@@ -21,7 +21,7 @@ class Reviewable < SimpleDelegator
   def public=(val)
     if val == true
       self.read_groups |= ['public']
-    elsif vaSwitl == false
+    elsif val == false
       self.read_groups -= ['public']
     end
   end
