@@ -14,7 +14,7 @@ RSpec.describe "Updating a record" do
   context "when updating an existing record that has been reviewed" do
     before do
       g = review_asset
-      visit edit_record_path(g)
+      visit "/records/#{g.id}/edit"
     end
     context "and wanting it to be re-reviewed" do
       before do
@@ -41,7 +41,7 @@ RSpec.describe "Updating a record" do
     before do
       g = reviewable_asset
       g.save
-      visit edit_record_path(g)
+      visit "/records/#{g.id}/edit"
     end
     context "and wanting it to be re-reviewed" do
       before do
