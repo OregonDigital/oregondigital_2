@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :resource, :only => :show
   mount HydraEditor::Engine => '/'
 
-  authenticate :user do
+  authenticate :user, lambda { |user| user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end 
 
