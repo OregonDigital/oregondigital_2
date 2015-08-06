@@ -18,8 +18,4 @@ class GenericAssetForm
     model.content.has_content?
   end
 
-  def reviewed
-    model.reviewed
-  end
-
 end
