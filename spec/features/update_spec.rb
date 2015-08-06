@@ -18,7 +18,7 @@ RSpec.describe "Updating a record" do
     end
     context "and wanting it to be re-reviewed" do
       before do
-        find(:css, "#to_review").set(true) 
+        uncheck("Reviewed")
         click_button "Save"
       end
 
@@ -45,7 +45,7 @@ RSpec.describe "Updating a record" do
     end
     context "and wanting it to be re-reviewed" do
       before do
-        find(:css, "#to_review").set(true)
+        uncheck("Reviewed")
         click_button "Save"
       end
 

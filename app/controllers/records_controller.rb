@@ -1,11 +1,6 @@
 class RecordsController < ApplicationController
   include RecordsControllerBehavior
 
-  def update
-    super
-    unreview_asset if params[:to_review] == "1"
-  end
-
   protected
 
   def collect_form_attributes
@@ -25,23 +20,9 @@ class RecordsController < ApplicationController
     DecoratorList.new(
       AssetWithDerivativesFactory,
       HasContent,
-      EnrichesSolr
+      EnrichesSolr,
+      Reviewable
     )
-  end
-
-  def unreview_asset
-    reviewable_asset.unreview!
-  end
-
-  def reviewing_decorators
-    DecoratorList.new(
-      Reviewable,
-      ReviewingAsset
-    ) 
-  end
-
-  def reviewable_asset
-    reviewing_decorators.new(GenericAsset.find(params[:id]))
   end
 
 end
