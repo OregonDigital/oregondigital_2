@@ -14,7 +14,7 @@ class SolrDocument
   end
 
   def reviewed
-    property("reviewed_bsi").values.first
+    self.[]("reviewed_bsi").first
   end
 
   private

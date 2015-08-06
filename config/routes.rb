@@ -30,6 +30,10 @@ Rails.application.routes.draw do
   resources :reviewer, :only => [:index, :show] do
     member do
       get 'facet'
+      get 'review'
+      put 'review'
     end
   end
+
+  
 end
