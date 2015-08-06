@@ -38,12 +38,14 @@ class RecordsController < ApplicationController
     DecoratorList.new(
       AssetWithDerivativesFactory,
       HasContent,
-      EnrichesSolr
+      EnrichesSolr,
+      Reviewable
     )
   end
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
   def unreview_asset
     reviewable_asset.unreview!
   end
@@ -60,4 +62,6 @@ class RecordsController < ApplicationController
   end
 
 >>>>>>> Adds the ability to mark edited records for review
+=======
+>>>>>>> Try out using reviewed attribute in form.
 end

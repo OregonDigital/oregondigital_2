@@ -10,7 +10,7 @@ class GenericAssetForm
   self.terms = ODDataModel.simple_properties.keys - skip_terms
 
   def self.permitted_params
-    super << :content
+    super + [:content, :reviewed]
   end
 
   def property_hint(property)
@@ -59,4 +59,5 @@ class NullFormTemplate
   def required_property_names
     []
   end
+
 end

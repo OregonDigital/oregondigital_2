@@ -18,6 +18,7 @@
                  :locals => {:f => f}
       %>
       <%= check_box_tag "to_review" %> <b>Check if you would like to mark this for review</b>
+      <%= f.input :reviewed, :as => :boolean %>
     </div> <!-- /well -->
   </div>
   <% unless f.object.hidden_terms.empty? %>
