@@ -36,6 +36,9 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  if Sidekiq.server?
+    config.cache_classes = true
+  end
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
