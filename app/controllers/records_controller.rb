@@ -44,8 +44,19 @@ class RecordsController < ApplicationController
 <<<<<<< HEAD
 =======
 
-  def updater
-    ReviewedStatusUpdater.new(params[:id], params[:to_review])
+  def unreview_asset
+    reviewable_asset.unreview!
+  end
+
+  def reviewing_decorators
+    DecoratorList.new(
+      Reviewable,
+      ReviewingAsset
+    ) 
+  end
+
+  def reviewable_asset
+    reviewing_decorators.new(GenericAsset.find(params[:id]))
   end
 
 >>>>>>> Adds the ability to mark edited records for review
