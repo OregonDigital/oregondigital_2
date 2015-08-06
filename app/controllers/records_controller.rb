@@ -3,9 +3,7 @@ class RecordsController < ApplicationController
 
   def update
     super
-    if params[:to_review] == "1"
-      unreview_asset
-    end
+    unreview_asset if params[:to_review] == "1"
   end
 
   protected
