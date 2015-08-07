@@ -24,8 +24,10 @@ module OregonDigital
         @word_array
       end
 
+      private
+
       def extracted_pages
-        @content.css("page")
+        Nokogiri::HTML(@content).css("page")
       end
 
     end
