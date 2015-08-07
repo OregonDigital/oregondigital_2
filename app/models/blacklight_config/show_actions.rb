@@ -21,6 +21,7 @@ class BlacklightConfig
 
     def add_reviewer_button
       configuration.show.document_actions[:reviewer] = reviewer_action
+      configuration.index.document_actions[:reviewer] = reviewer_action
     end
 
     def reviewer_action
