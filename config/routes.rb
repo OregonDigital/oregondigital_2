@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :facets
   end
   resources :resource, :only => :show
+  resources :downloads
   mount HydraEditor::Engine => '/'
 
   authenticate :user, lambda { |user| user.admin? } do
