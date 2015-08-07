@@ -3,12 +3,4 @@
 # Hydra::Controller::DownloadBehavior can be overridden.
 class DownloadsController < ApplicationController
   include Hydra::Controller::DownloadBehavior
-
-  def prepare_file_headers
-    send_file_headers! content_options
-    file.mime_type = self.request.format.to_s
-    response.headers['Content-Type'] = file.mime_type
-    self.content_type = file.mime_type
-  end
-
 end
