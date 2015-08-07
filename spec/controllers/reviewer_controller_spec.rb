@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe ReviewerController do
   context "when an admin" do
@@ -52,6 +53,15 @@ RSpec.describe ReviewerController do
       it "should be set to reviewing" do
         expect_any_instance_of(BlacklightConfig).to receive(:reviewing=).with(true).and_call_original
         get :index
+      end
+    end
+    describe "#review" do
+      it "should mark item as reviewed" do
+        item = create_asset(id: 1, reviewed: false, public: false)
+        item.save
+        patch :review, id: item.id
+        expect(response).to be_redirect
+        expect(item.reload.workflow_metadata.reviewed).to eq true
       end
     end
   end
