@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'spec_helper'
 
 RSpec.describe ReviewerController do
   context "when an admin" do
