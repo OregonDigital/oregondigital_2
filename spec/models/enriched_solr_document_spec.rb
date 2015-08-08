@@ -17,7 +17,8 @@ RSpec.describe EnrichedSolrDocument do
       expect(document_result).to eq (
         {
           "id" => "1",
-          "lcsubject_preferred_label_ssim" => {"set" => ["Test"]}
+          "lcsubject__preferred_label_ssim" => {"set" => ["Test"]},
+          "lcsubject__derived_preferred_label_ssim" => {"set" => ["Test"]}
         }
       )
     end
@@ -39,6 +40,24 @@ RSpec.describe EnrichedSolrDocument do
         expect(document_result).to eq ( {} )
       end
     end
+    context "when there are derivable sub-properties" do
+      let(:solr_document) { {"lcsubject_ssim" => [uri.to_s]} }
+      let(:uri) { "http://localhost:41/1" }
+      it "should add the derived properties" do
+        build_resource(uri: uri, label: "Test")
+        build_resource(uri: RDF::DC.subject, label: nil).tap do |r|
+          r << [r.rdf_subject, RDF::RDFS.subPropertyOf, RDF::DC.contributor]
+        end.persist!
+
+        expect(document_result).to eq (
+          {
+            "lcsubject__preferred_label_ssim" => ["Test"],
+            "lcsubject__derived_preferred_label_ssim" => ["Test"],
+            "contributor__derived_preferred_label_ssim" => ["Test"]
+          }
+        )
+      end
+    end
     context "when there are alternative labels" do
       let(:solr_document) { {"lcsubject_ssim" => [uri.to_s]} }
       let(:uri) { "http://localhost:41/1" }
@@ -49,8 +68,10 @@ RSpec.describe EnrichedSolrDocument do
 
         expect(document_result).to eq (
           {
-            "lcsubject_preferred_label_ssim" => ["Test"],
-            "lcsubject_alternative_label_ssim" => ["Another Test"]
+            "lcsubject__preferred_label_ssim" => ["Test"],
+            "lcsubject__derived_preferred_label_ssim" => ["Test"],
+            "lcsubject__alternative_label_ssim" => ["Another Test"],
+            "lcsubject__derived_alternative_label_ssim" => ["Another Test"]
           }
         )
       end
@@ -63,7 +84,8 @@ RSpec.describe EnrichedSolrDocument do
 
         expect(document_result).to eq (
           {
-            "lcsubject_preferred_label_ssim" => ["Test"]
+            "lcsubject__preferred_label_ssim" => ["Test"],
+            "lcsubject__derived_preferred_label_ssim" => ["Test"],
           }
         )
       end
@@ -77,7 +99,8 @@ RSpec.describe EnrichedSolrDocument do
 
         expect(document_result).to eq (
           {
-            "lcsubject_preferred_label_ssim" => ["Test", "Test2"]
+            "lcsubject__preferred_label_ssim" => ["Test", "Test2"],
+            "lcsubject__derived_preferred_label_ssim" => ["Test", "Test2"]
           }
         )
       end
@@ -91,7 +114,8 @@ RSpec.describe EnrichedSolrDocument do
 
         expect(document_result).to eq (
           {
-            "lcsubject_preferred_label_ssim" => ["Test"]
+            "lcsubject__preferred_label_ssim" => ["Test"],
+            "lcsubject__derived_preferred_label_ssim" => ["Test"]
           }
         )
       end

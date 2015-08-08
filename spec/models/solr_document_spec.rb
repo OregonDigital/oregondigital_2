@@ -14,8 +14,8 @@ RSpec.describe SolrDocument do
       let(:enriched) do
         {
           :title_ssim => ["http://test.test.org", "Raw String"],
-          :title_preferred_label_ssim => ["Test"],
-          :title_alt_label_ssim => ["Alternative"],
+          :title__preferred_label_ssim => ["Test"],
+          :title__alt_label_ssim => ["Alternative"],
           :oembed_ssim => ["http://test.org"]
         }
       end

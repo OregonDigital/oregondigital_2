@@ -14,7 +14,7 @@ RSpec.describe AltLabelEnhancement do
 
         property = subject.properties.first
         expect(property.values).to eq ["Alternative", "More labels"]
-        expect(property.key).to eq "lcsubject_alternative_label"
+        expect(property.key).to eq "lcsubject__alternative_label"
         expect(property.solr_identifier).to eq "ssim"
       end
     end

@@ -26,6 +26,9 @@ class FacetableSolrFieldIterator
     data_model_properties.flat_map do |property|
       s = SolrProperty.new(property.to_s+"_ssim")
       s.derivative_properties.values.map(&:key)
+    end.flat_map do |property|
+      s = SolrProperty.new("#{property}_ssim")
+      [s.key, s.derived_key.key]
     end
   end
 

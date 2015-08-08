@@ -12,7 +12,7 @@ RSpec.describe LabelEnhancement do
 
         property = subject.properties.first
         expect(property.values).to eq ["Test"]
-        expect(property.key).to eq "lcsubject_preferred_label"
+        expect(property.key).to eq "lcsubject__preferred_label"
         expect(property.solr_identifier).to eq "ssim"
       end
     end

@@ -13,7 +13,7 @@ RSpec.describe FacetableSolrFieldIterator do
       {
         "distinct" => 5
       },
-      "title_preferred_label_ssim" =>
+      "title__preferred_label_ssim" =>
       {
         "distinct" => 300
       },
@@ -30,13 +30,13 @@ RSpec.describe FacetableSolrFieldIterator do
 
   describe "#each" do
     it "should order by distinct" do
-      expect(subject.to_a.map(&:first)).to eq [:title_preferred_label, :workType, :alternative, :title]
+      expect(subject.to_a.map(&:first)).to eq [:title__preferred_label, :workType, :alternative, :title]
     end
     it "should only have data model keys" do
       expect(subject.to_a.map(&:first)).not_to include :bad_key
     end
     it "should flatten derivative properties" do
-      expect(subject.to_a.map(&:first)).to include :title_preferred_label
+      expect(subject.to_a.map(&:first)).to include :title__preferred_label
     end
   end
 end

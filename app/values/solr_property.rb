@@ -27,10 +27,22 @@ class SolrProperty < Struct.new(:property_key, :values)
     }
   end
 
+  def base
+    key.split("__").first
+  end
+
+  def derivative_type
+    key.split("__").last
+  end
+
+  def derived_key
+    self.class.new("#{base}__derived_#{derivative_type}_#{solr_identifier}", values)
+  end
+
   private
 
   def derivative_key(derivative)
-    self.class.new([key, derivative, solr_identifier].join("_"), [])
+    self.class.new([key, derivative].join("__")+"_#{solr_identifier}", [])
   end
 
   def split_key

@@ -25,7 +25,7 @@ RSpec.describe Enricher do
     it "should enrich the solr document" do
       subject.enrich!
 
-      expect(ActiveFedora::SolrService.query("id:#{id}").first["lcsubject_preferred_label_ssim"]).to eq ["Test"]
+      expect(ActiveFedora::SolrService.query("id:#{id}").first["lcsubject__preferred_label_ssim"]).to eq ["Test"]
     end
   end
 end

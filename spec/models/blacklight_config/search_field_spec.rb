@@ -36,8 +36,8 @@ RSpec.describe BlacklightConfig::SearchField do
       end
       it "should add derivative keys" do
         qf = subject.solr_parameters[:qf]
-        expect(qf).to include Solrizer.solr_name(field+"_preferred_label", :stored_searchable)
-        expect(qf).to include Solrizer.solr_name(field+"_alternative_label", :stored_searchable)
+        expect(qf).to include Solrizer.solr_name(field+"__preferred_label", :stored_searchable)
+        expect(qf).to include Solrizer.solr_name(field+"__alternative_label", :stored_searchable)
       end
     end
   end
