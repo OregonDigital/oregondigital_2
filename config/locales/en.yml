@@ -31,6 +31,16 @@ en:
       destroy:
         fail: "Failed to delete facet"
         success: "Deleted facet"
+    form_templates:
+      create:
+        success: Created new template
+        fail: Failed to create the template
+      update:
+        success: Template updated
+        fail: Failed to update the template
+      destroy:
+        success: Template deleted
+        fail: Failed to delete the template
   hydra_editor:
     form:
       model_label:

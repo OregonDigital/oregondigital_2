@@ -1,0 +1,38 @@
+<h2>Manage Ingest Templates</h2>
+
+<%= link_to "Create New Template", new_admin_form_template_path, :class => "btn btn-default" %>
+
+<% if @templates.length > 0 %>
+<table class="table table-striped">
+  <caption class="sr-only">Available Templates</caption>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @templates.each do |template| %>
+      <tr>
+        <td>
+          <a href="<%= edit_admin_form_template_path(template.id) %>">
+            <span class="sr-only">Edit</span>
+            <%= template.title %>
+          </a>
+        </td>
+
+        <td class="button-cell">
+          <a href="<%= admin_form_template_path(template.id) %>" data-method="delete"
+             data-confirm="Are you sure you want to remove '<%= template.title %>'?">
+            <span class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+              Delete <span class="sr-only"><%= template.title %></span>
+            </span>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
