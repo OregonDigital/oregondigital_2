@@ -38,6 +38,9 @@ en:
       update:
         success: Template updated
         fail: Failed to update the template
+      destroy:
+        success: Template deleted
+        fail: Failed to delete the template
   hydra_editor:
     form:
       model_label:

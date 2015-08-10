@@ -36,6 +36,16 @@ class Admin::FormTemplatesController < ApplicationController
     end
   end
 
+  def destroy
+    if find_template.destroy
+      flash[:success] = t('admin.form_templates.destroy.success')
+    else
+      flash[:alert] = t('admin.form_templates.destroy.fail')
+    end
+
+    redirect_to admin_form_templates_path
+  end
+
   private
 
   def enforce_admin
