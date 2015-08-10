@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723222437) do
+ActiveRecord::Schema.define(version: 20150803175310) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id",       null: false
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 20150723222437) do
   end
 
   add_index "facet_fields", ["key"], name: "index_facet_fields_on_key", unique: true
+
+  create_table "form_template_properties", force: :cascade do |t|
+    t.integer "form_template_id"
+    t.string  "name",                             null: false
+    t.boolean "visible",          default: false
+  end
+
+  create_table "form_templates", force: :cascade do |t|
+    t.string "title", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
