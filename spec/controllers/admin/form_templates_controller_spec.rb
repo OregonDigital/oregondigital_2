@@ -24,7 +24,7 @@ RSpec.describe Admin::FormTemplatesController do
 
     describe "#index" do
       it "should get all templates" do
-        templates = [build_template, build_template]
+        templates = [build_template(:id => 1), build_template(:id => 2)]
         expect(template_class).to receive(:all).once.and_return(templates)
         get :index
 
@@ -89,7 +89,7 @@ RSpec.describe Admin::FormTemplatesController do
     end
   end
 
-  def build_template
-    FormTemplate.new
+  def build_template(args = {})
+    FormTemplate.new(args)
   end
 end
