@@ -5,6 +5,22 @@ class Admin::FormTemplatesController < ApplicationController
     @templates = template_class.all
   end
 
+  def new
+    @template = template_class.new
+    terms.each {|term| @template.properties.build(:name => term)}
+  end
+
+  def create
+    @template = template_class.new(form_template_params)
+    if @template.save
+      flash[:success] = t('admin.form_templates.create.success')
+      redirect_to admin_form_templates_path
+    else
+      flash[:alert] = t('admin.form_templates.create.fail')
+      render :new
+    end
+  end
+
   private
 
   def enforce_admin
@@ -13,7 +29,15 @@ class Admin::FormTemplatesController < ApplicationController
     end
   end
 
+  def form_template_params
+    params.require(:form_template).permit(:title, {:properties_attributes => [:id, :name, :visible]})
+  end
+
   def template_class
     FormTemplate
+  end
+
+  def terms
+    GenericAssetForm.terms
   end
 end

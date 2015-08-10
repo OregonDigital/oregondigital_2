@@ -1,0 +1,9 @@
+<%= simple_form_for [:admin, @template] do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+
+  <%= f.simple_fields_for :properties do |p| %>
+    <%= p.input :visible, :label => "Show #{p.object.name}" %>
+    <%= p.input :name, :as => :hidden %>
+  <% end %>
+<% end %>

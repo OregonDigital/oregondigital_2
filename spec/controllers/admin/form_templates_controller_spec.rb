@@ -18,20 +18,78 @@ RSpec.describe Admin::FormTemplatesController do
   end
 
   context "when an admin" do
-    let(:template1) { instance_double("FormTemplate") }
-    let(:template2) { instance_double("FormTemplate") }
     before do
       sign_in FactoryGirl.create(:user, :admin)
     end
 
     describe "#index" do
       it "should get all templates" do
-        expect(template_class).to receive(:all).once.and_return([template1, template2])
+        templates = [build_template, build_template]
+        expect(template_class).to receive(:all).once.and_return(templates)
         get :index
 
         expect(response).to render_template "form_templates/index"
-        expect(assigns[:templates]).to eq([template1, template2])
+        expect(assigns[:templates]).to eq(templates)
       end
     end
+
+    describe "#new" do
+      let(:new_template) { build_template }
+      before do
+        allow(controller).to receive(:terms).and_return(["foo", "bar", "baz"])
+        expect(template_class).to receive(:new).and_return(new_template)
+      end
+
+      it "should render the form" do
+        get :new
+        expect(response).to render_template "form_templates/new"
+        expect(response).to render_template "form_templates/_form"
+      end
+
+      it "should set up all terms on the template" do
+        get :new
+        expect(new_template.properties.length).to eq(3)
+        expect(new_template.properties.collect {|p| p.name}).to eq(["foo", "bar", "baz"])
+      end
+    end
+
+    describe "#create" do
+      let(:form_params) { Hash.new }
+      let(:new_template) { build_template }
+      before do
+        allow(controller).to receive(:form_template_params).and_return(form_params)
+        allow(template_class).to receive(:new).with(form_params).and_return(new_template)
+        allow(new_template).to receive(:save).and_return(success)
+      end
+
+      context "when creation succeeds" do
+        let(:success) { true }
+
+        it "should redirect with notification" do
+          post :create, form_params
+          expect(response).to be_redirect
+          expect(flash["success"]).not_to be_empty
+        end
+      end
+
+      context "when creation fails" do
+        let(:success) { false }
+
+        it "should re-render the form" do
+          post :create, form_params
+          expect(response).to render_template "form_templates/new"
+          expect(response).to render_template "form_templates/_form"
+        end
+
+        it "should notify the user" do
+          post :create, form_params
+          expect(flash["alert"]).not_to be_empty
+        end
+      end
+    end
+  end
+
+  def build_template
+    FormTemplate.new
   end
 end
