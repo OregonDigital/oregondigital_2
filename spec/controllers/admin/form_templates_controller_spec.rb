@@ -87,6 +87,54 @@ RSpec.describe Admin::FormTemplatesController do
         end
       end
     end
+
+    describe "#edit" do
+      let(:template) { build_template }
+      before do
+        expect(template_class).to receive(:find).with("1").and_return(template)
+      end
+
+      it "should render the form" do
+        get :edit, :id => 1
+        expect(response).to render_template "form_templates/edit"
+        expect(response).to render_template "form_templates/_form"
+      end
+    end
+
+    describe "#update" do
+      let(:form_params) { Hash.new }
+      let(:template) { build_template }
+      before do
+        allow(controller).to receive(:form_template_params).and_return(form_params)
+        expect(template_class).to receive(:find).with("1").and_return(template)
+        allow(template).to receive(:update_attributes).and_return(success)
+      end
+
+      context "when update succeeds" do
+        let(:success) { true }
+
+        it "should redirect with notification" do
+          put :update, :id => 1
+          expect(response).to be_redirect
+          expect(flash["success"]).not_to be_empty
+        end
+      end
+
+      context "when update fails" do
+        let(:success) { false }
+
+        it "should re-render the form" do
+          put :update, :id => 1
+          expect(response).to render_template "form_templates/edit"
+          expect(response).to render_template "form_templates/_form"
+        end
+
+        it "should notify the user" do
+          put :update, :id => 1
+          expect(flash["alert"]).not_to be_empty
+        end
+      end
+    end
   end
 
   def build_template(args = {})

@@ -21,12 +21,31 @@ class Admin::FormTemplatesController < ApplicationController
     end
   end
 
+  def edit
+    @template = find_template
+  end
+
+  def update
+    @template = find_template
+    if @template.update_attributes(form_template_params)
+      flash[:success] = t('admin.form_templates.update.success')
+      redirect_to admin_form_templates_path
+    else
+      flash[:alert] = t('admin.form_templates.update.fail')
+      render :edit
+    end
+  end
+
   private
 
   def enforce_admin
     unless can?(:manage, FormTemplate)
       raise Hydra::AccessDenied.new("You do not have sufficient access privileges to access this.")
     end
+  end
+
+  def find_template
+    template_class.find(params[:id])
   end
 
   def form_template_params
