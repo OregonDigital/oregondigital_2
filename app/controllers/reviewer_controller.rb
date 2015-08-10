@@ -5,13 +5,16 @@ class ReviewerController < CatalogController
   self.search_params_logic -= [:add_access_controls_to_solr_params]
 
   def review
-    reviewer_asset = decorator.new(GenericAsset.find(params[:id]))
     reviewer_asset.review!
     flash[:notice] = "Successfully reviewed."
     redirect_to reviewer_index_path
   end
 
   private
+
+  def reviewer_asset
+    decorator.new(GenericAsset.find(params[:id]))
+  end
 
   def decorator
     DecoratorList.new(
