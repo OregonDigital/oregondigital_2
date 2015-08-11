@@ -23,7 +23,7 @@ class GenericAssetForm
 
   def template_terms
     if template
-      template.visible_terms
+      template.properties.select {|p| p.visible?}.collect {|p| p.name}
     else
       self.class.terms
     end
