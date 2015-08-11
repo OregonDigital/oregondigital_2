@@ -3,16 +3,14 @@ class RecordsController < ApplicationController
 
   def new
     @form = build_form
-    if params[:template_id]
-      @form.template = FormTemplate.find(params[:template_id])
-    end
+    find_template
+    render 'records/new'
   end
 
   def edit
     @form = build_form
-    if params[:template_id]
-      @form.template = FormTemplate.find(params[:template_id])
-    end
+    find_template
+    render 'records/edit'
   end
 
   protected
@@ -38,5 +36,9 @@ class RecordsController < ApplicationController
     )
   end
 
-
+  def find_template
+    if params[:template_id]
+      @form.template = FormTemplate.find(params[:template_id])
+    end
+  end
 end
