@@ -9,16 +9,17 @@ RSpec.describe "catalog/_reviewer_action.html.erb" do
   
   context "when they can review the document" do
     let(:permission_result) { true }
+    let(:reviewer_label) { "Mark as Reviewed" }
     context "the document is ready for review" do
       let(:document) { instance_double(SolrDocument, :id => "1", :reviewed => false)}
       it "should have the review link" do
-        expect(rendered).to have_link("Mark as Reviewed")
+        expect(rendered).to have_link(reviewer_label)
       end
     end
     context "the document is already reviewed" do
       let(:document) { instance_double(SolrDocument, :id => "1", :reviewed => true)}
       it "should not have the review link" do
-        expect(rendered).not_to have_link("Mark as Reviewed")
+        expect(rendered).not_to have_link(reviewer_label)
       end
     end
   end
