@@ -10,5 +10,4 @@ RSpec.describe OregonDigital::OCRReader::Word do
       expect(reader.pages.first.words.first.to_s).to eq "The"
     end
   end
-
 end

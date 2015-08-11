@@ -9,11 +9,11 @@ module OregonDigital
       end
 
       def words
-        @word_array = []
-        @words = extracted_words.each do |word| 
-          @word_array << Word.new(word).to_s
-        end
-        @word_array
+        extracted_words.map{ |word| Word.new(word) }
+      end
+
+      def stringified_words 
+        words.map(&:to_s)
       end
 
       private

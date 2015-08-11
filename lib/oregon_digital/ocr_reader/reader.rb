@@ -7,21 +7,15 @@ module OregonDigital
       end
 
       def pages
-        @page_array = []
-        @pages = extracted_pages.each_with_index do |page, index|
-          @page_array << Page.new(page, index + 1)
-        end
-        @page_array
+        extracted_pages.each_with_index.map{ |page, index| Page.new(page, index+1) }
       end 
 
       def words
-        @word_array = []
-        pages.each do |page|
-          page.words.each do |word|
-            @word_array << word.to_s
-          end
-        end
-        @word_array
+        pages.map(&:words).flatten
+      end
+
+      def stringified_words
+        words.map(&:to_s)
       end
 
       private

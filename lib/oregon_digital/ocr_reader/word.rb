@@ -8,6 +8,7 @@ module OregonDigital
       def to_s
         @word.text
       end
+
     end
   end
 end
