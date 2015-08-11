@@ -8,10 +8,13 @@ RSpec.describe ImageForm do
   let(:validator) { instance_double(ControlledSubject) }
   let(:validators) { {property => [validator]} }
 
+  before do
+    allow(image).to receive(:attributes).and_return(attribute_list)
+  end
+
   context "#property_hint" do
     before do
       allow(image).to receive(:validators).and_return(validators)
-      allow(image).to receive(:attributes).and_return(attribute_list)
       allow(validator).to receive(:description).and_return("This is my message")
     end
     it "should return a string hint composed of validation messages" do
@@ -29,6 +32,31 @@ RSpec.describe ImageForm do
   describe ".terms" do
     it "should not include oembed" do
       expect(ImageForm.terms).not_to include :oembed
+    end
+  end
+
+  describe "#template_terms" do
+    context "when there is no template" do
+      it "should fall back to class-level terms" do
+        expect(generic_form.template_terms).to eq(GenericAssetForm.terms)
+      end
+    end
+
+    context "when there is a template" do
+      let(:template) { FactoryGirl.build(:form_template, :with_title, :with_desc) }
+      before do
+        template.properties << FactoryGirl.build(:form_template_property, :name => "foo")
+        generic_form.template = template
+      end
+
+      it "should return the template's fields" do
+        expect(generic_form.template_terms).to eq(["title", "description", "foo"])
+      end
+
+      it "shouldn't return hidden fields" do
+        template.properties.last.visible = false
+        expect(generic_form.template_terms).to eq(["title", "description"])
+      end
     end
   end
 end
