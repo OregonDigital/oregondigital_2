@@ -1,6 +1,20 @@
 class RecordsController < ApplicationController
   include RecordsControllerBehavior
 
+  def new
+    @form = build_form
+    if params[:template_id]
+      @form.template = FormTemplate.find(params[:template_id])
+    end
+  end
+
+  def edit
+    @form = build_form
+    if params[:template_id]
+      @form.template = FormTemplate.find(params[:template_id])
+    end
+  end
+
   protected
 
   def collect_form_attributes

@@ -1,6 +1,9 @@
 class GenericAssetForm
   include HydraEditor::Form
   delegate :validators, :to => :model
+
+  attr_accessor :template
+
   # TODO: Put :workType back in once our editor can support URLs and/or we have
   # a "clean" graph from AF
   skip_terms = [:workType, :oembed]
@@ -18,4 +21,11 @@ class GenericAssetForm
     model.content.has_content?
   end
 
+  def template_terms
+    if template
+      template.visible_terms
+    else
+      self.class.terms
+    end
+  end
 end

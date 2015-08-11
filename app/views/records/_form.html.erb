@@ -11,7 +11,11 @@
           derivatives based on that file.
         </p>
       <% end %>
-      <%= render :partial => "records/edit_fields/default", :collection => f.object.terms, :as => :key, :locals => {:f => f} %>
+      <%= render :partial => "records/edit_fields/default",
+                 :collection => f.object.template_terms,
+                 :as => :key,
+                 :locals => {:f => f}
+      %>
     </div> <!-- /well -->
   </div>
   <%= hidden_field_tag :type, params[:type] %>
