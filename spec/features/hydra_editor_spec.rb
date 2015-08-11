@@ -108,14 +108,21 @@ RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
     end
   end
 
+  def navigate_to_admin_ingest_path
+    visit root_path
+    click_link "Admin Panel"
+    click_link "Ingest a New Record"
+  end
+
   def navigate_to_new_image_path
-    visit "/records/new"
-    page.select("Image", :from => "type")
+    navigate_to_admin_ingest_path
+    select("Image", :from => "type")
     find(:css, "input.btn-primary").click
   end
+
   def navigate_to_new_external_resource_path
-    visit "/records/new"
-    page.select("External Asset", :from => "type")
+    navigate_to_admin_ingest_path
+    select("External Asset", :from => "type")
     find(:css, "input.btn-primary").click
   end
 end
