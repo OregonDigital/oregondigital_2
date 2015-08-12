@@ -13,6 +13,10 @@ class SolrDocument
     @derivative_paths ||= SolrDocumentDerivativePaths.new(self)
   end
 
+  def reviewed
+    self.[]("reviewed_bsi").first
+  end
+
   private
 
   def property(key)

@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   resources :reviewer, :only => [:index, :show] do
     member do
       get 'facet'
+      patch 'review'
     end
   end
+
+  
 end

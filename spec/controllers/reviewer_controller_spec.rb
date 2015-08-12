@@ -54,6 +54,15 @@ RSpec.describe ReviewerController do
         get :index
       end
     end
+    describe "#review" do
+      it "should mark item as reviewed" do
+        item = create_asset(id: 1, reviewed: false, public: false)
+        item.save
+        patch :review, id: item.id
+        expect(response).to be_redirect
+        expect(item.reload.workflow_metadata.reviewed).to eq true
+      end
+    end
   end
   context "when not an admin" do
     it "should not be allowed" do
