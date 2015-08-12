@@ -42,26 +42,5 @@ class RecordsController < ApplicationController
       Reviewable
     )
   end
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-  def unreview_asset
-    reviewable_asset.unreview!
-  end
-
-  def reviewing_decorators
-    DecoratorList.new(
-      Reviewable,
-      ReviewingAsset
-    ) 
-  end
-
-  def reviewable_asset
-    reviewing_decorators.new(GenericAsset.find(params[:id]))
-  end
-
->>>>>>> Adds the ability to mark edited records for review
-=======
->>>>>>> Try out using reviewed attribute in form.
 end
