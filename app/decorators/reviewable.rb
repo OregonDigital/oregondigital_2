@@ -7,9 +7,9 @@ class Reviewable < SimpleDelegator
 
   def attributes=(attributes)
     if attributes["reviewed"] == "1"
-      self.reviewed = true
-    elsif attributes["reviewed"] == "0"
       self.reviewed = false
+    elsif attributes["reviewed"] == "0"
+      self.reviewed = true
     end
     super(attributes.except("reviewed"))
   end
