@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :resource, :only => :show
   resources :downloads
   mount HydraEditor::Engine => '/'
-  get 'records/choose_ingest_options', :to => "records#choose_ingest_options", :as => :ingest_options
+  get 'records/ingest_options', :to => "records#ingest_options", :as => :ingest_options
 
   authenticate :user, lambda { |user| user.admin? } do
     mount Sidekiq::Web => '/sidekiq'

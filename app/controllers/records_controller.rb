@@ -1,7 +1,7 @@
 class RecordsController < ApplicationController
   include RecordsControllerBehavior
 
-  def choose_ingest_options
+  def ingest_options
     @templates = [["Raw (no template)", nil]] + FormTemplate.all.collect {|t| [t.title, t.id]}
   end
 

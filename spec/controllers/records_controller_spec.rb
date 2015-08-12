@@ -15,14 +15,14 @@ RSpec.describe RecordsController do
     allow(controller).to receive(:build_form).and_return(form)
   end
 
-  describe "#choose_ingest_options" do
+  describe "#ingest_options" do
     it "should offer all templates' names and ids" do
-      get :choose_ingest_options
+      get :ingest_options
       expect(assigns[:templates]).to include([template1.title, template1.id], [template2.title, template2.id])
     end
 
     it "should include a 'raw' option for the template list" do
-      get :choose_ingest_options
+      get :ingest_options
       expect(assigns[:templates]).to include(["Raw (no template)", nil])
     end
   end
