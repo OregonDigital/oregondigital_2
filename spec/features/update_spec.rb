@@ -8,7 +8,7 @@ RSpec.describe "Updating a record", :slow => true do
   let(:reviewed_status) {GenericAsset.find(id).workflow_metadata.reviewed}
 
   before do
-    as_user admin
+    as_user user
   end
 
   context "when updating an existing record that has been reviewed" do
