@@ -3,7 +3,7 @@ class Document < GenericAsset
 
   def to_solr
     return super if joined_words.empty?
-    super.merge({ActiveFedora::SolrService.solr_name("full_text", "tsimv") => joined_words})
+    super.merge({ActiveFedora::SolrQueryBuilder.solr_name("full_text", "tsimv") => joined_words})
   end
 
   def ocr_reader

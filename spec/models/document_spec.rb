@@ -14,6 +14,25 @@ RSpec.describe Document do
     end
   end
 
+  describe "#to_solr" do
+    context "When there is no ocr with a document" do
+      before do
+        allow(subject).to receive(:joined_words).and_return("")
+      end
+      it "should return the solr document" do
+        expect(subject.to_solr["full_text_tsimv"]).to be_nil
+      end
+    end
+    context "When there is an ocr with a document" do
+      before do
+        allow(subject).to receive(:joined_words).and_return(["hey there!"])
+      end
+      it "should return the solr document" do
+        expect(subject.to_solr["full_text_tsimv"]).to eq ["hey there!"]
+      end
+    end
+  end
+
   describe "#streamable_content" do
     let(:file) { File.open(File.join(fixture_path, 'fixture_pdf.pdf'), 'rb') }
     context "when there's content" do
