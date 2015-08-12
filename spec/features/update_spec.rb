@@ -8,7 +8,7 @@ RSpec.describe "Updating a record", :slow => true do
   let(:reviewed_status) {GenericAsset.find(id).workflow_metadata.reviewed}
 
   before do
-    sign_in_user(user)
+    as_user admin
   end
 
   context "when updating an existing record that has been reviewed" do
@@ -18,7 +18,7 @@ RSpec.describe "Updating a record", :slow => true do
     end
     context "and wanting it to be re-reviewed" do
       before do
-        uncheck("Reviewed")
+        check("Reviewed")
         click_button "Save"
       end
 
@@ -45,7 +45,7 @@ RSpec.describe "Updating a record", :slow => true do
     end
     context "and wanting it to be re-reviewed" do
       before do
-        uncheck("Reviewed")
+        check("Reviewed")
         click_button "Save"
       end
 
@@ -54,15 +54,6 @@ RSpec.describe "Updating a record", :slow => true do
       end
     end
   end
-end
-
-def sign_in_user(u)
-  u = user
-  visit "/"
-  click_link "Login"
-  fill_in "Email", :with => u.email
-  fill_in "Password", :with => u.password
-  click_button "Log in"
 end
 
 def review_asset
