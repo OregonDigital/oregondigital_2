@@ -2,22 +2,20 @@ class RecordsController < ApplicationController
   include RecordsControllerBehavior
 
   def ingest_options
-    @templates = [["Raw (no template)", nil]] + FormTemplate.all.collect {|t| [t.title, t.id]}
-  end
-
-  def new
-    @form = build_form
-    find_template
-    render 'records/new'
-  end
-
-  def edit
-    @form = build_form
-    find_template
-    render 'records/edit'
+    @templates = [["Raw (no template)", nil]] + template_class.all.collect {|t| [t.title, t.id]}
   end
 
   protected
+
+  def build_form
+    f = super
+    f.template = template_class.find_by_id(params[:template_id])
+    f
+  end
+
+  def template_class
+    FormTemplate
+  end
 
   def collect_form_attributes
     CleanedAttributes.from(super)
@@ -38,12 +36,5 @@ class RecordsController < ApplicationController
       HasContent,
       EnrichesSolr
     )
-  end
-
-  def find_template
-    template_id = params[:template_id].to_i
-    if template_id > 0
-      @form.template = FormTemplate.find(template_id)
-    end
   end
 end

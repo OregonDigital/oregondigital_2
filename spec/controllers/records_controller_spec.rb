@@ -1,21 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe RecordsController do
-  let(:form) { instance_double(GenericAssetForm) }
+  let(:form) { instance_double(ImageForm) }
   let(:template1) { FactoryGirl.build(:form_template, :with_title, :with_desc) }
   let(:template2) { FactoryGirl.build(:form_template, :with_title) }
   let(:templates) { [template1, template2] }
+  let(:template_class) { class_double(FormTemplate) }
 
   before do
+    allow(controller).to receive(:template_class).and_return(template_class)
     sign_in FactoryGirl.create(:user, :admin)
-    allow(template1).to receive(:id).and_return(1)
-    allow(template2).to receive(:id).and_return(2)
-    allow(FormTemplate).to receive(:all).and_return(templates)
-    allow(FormTemplate).to receive(:find).with(1).and_return(template1)
-    allow(controller).to receive(:build_form).and_return(form)
   end
 
   describe "#ingest_options" do
+    before do
+      allow(template_class).to receive(:all).and_return(templates)
+    end
+
     it "should offer all templates' names and ids" do
       get :ingest_options
       expect(assigns[:templates]).to include([template1.title, template1.id], [template2.title, template2.id])
@@ -29,6 +30,9 @@ RSpec.describe RecordsController do
 
   describe "#new" do
     before do
+      allow(ImageForm).to receive(:new).and_return(form)
+      allow(template_class).to receive(:find_by_id).and_return(nil)
+      allow(form).to receive(:template=).with(nil)
       @routes = HydraEditor::Engine.routes
     end
 
@@ -48,6 +52,10 @@ RSpec.describe RecordsController do
     end
 
     context "with a template id" do
+      before do
+        allow(template_class).to receive(:find_by_id).with("1").and_return(template1)
+      end
+
       it "should attach template 1 to the form" do
         expect(form).to receive(:template=).with(template1)
         get :new, :type => "Image", :template_id => 1
@@ -56,10 +64,13 @@ RSpec.describe RecordsController do
   end
 
   describe "#edit" do
-    let(:obj) { double("Object") }
+    let(:obj) { Image.new }
     before do
       @routes = HydraEditor::Engine.routes
       allow(ActiveFedora::Base).to receive(:find).with("1").and_return(obj)
+      allow(ImageForm).to receive(:new).and_return(form)
+      allow(template_class).to receive(:find_by_id).and_return(nil)
+      allow(form).to receive(:template=).with(nil)
     end
 
     it "should render the edit form template" do
@@ -78,6 +89,10 @@ RSpec.describe RecordsController do
     end
 
     context "with a template id" do
+      before do
+        allow(template_class).to receive(:find_by_id).with("1").and_return(template1)
+      end
+
       it "should attach template 1 to the form" do
         expect(form).to receive(:template=).with(template1)
         get :edit, :template_id => 1, :id => 1
