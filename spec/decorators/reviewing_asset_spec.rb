@@ -32,30 +32,6 @@ RSpec.describe ReviewingAsset do
       end
     end
   end
-  describe "#unreview!" do
-    before do
-      subject.unreview!
-    end
-    context "when given an unreviewed asset" do
-      let(:asset) { build_asset(is_public: false, is_reviewed: false) }
-      it "should call save on the asset" do
-        expect(asset).to have_received(:save)
-      end
-      it "should set it to not reviewed" do
-        expect(asset).to have_received(:reviewed=).with(false)
-      end
-    end
-    context "when given a reviewed asset" do
-      let(:asset) { build_asset(is_public: true, is_reviewed: true) }
-      it "should call save on the asset" do
-        expect(asset).to have_received(:save)
-      end
-      it "should set it unreviewed" do
-        expect(asset).to have_received(:reviewed=).with(false)
-      end
-    end
-  end
- 
 
   describe "#class" do
     let(:asset) { GenericAsset.new }

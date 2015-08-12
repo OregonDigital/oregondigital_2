@@ -5,11 +5,6 @@ class ReviewingAsset < SimpleDelegator
     save
   end
 
-  def unreview!
-    self.reviewed = false
-    save
-  end
-
   def class
     __getobj__.class
   end
