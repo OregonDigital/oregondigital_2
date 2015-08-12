@@ -8,9 +8,9 @@ class RecordsController < ApplicationController
   protected
 
   def build_form
-    f = super
-    f.template = template_class.find_by_id(params[:template_id])
-    f
+    super.tap do |f|
+      f.template = template_class.find_by_id(params[:template_id])
+    end
   end
 
   def template_class
