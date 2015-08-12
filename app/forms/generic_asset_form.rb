@@ -2,7 +2,7 @@ class GenericAssetForm
   include HydraEditor::Form
   delegate :validators, :to => :model
 
-  attr_accessor :template
+  attr_writer :template
 
   # TODO: Put :workType back in once our editor can support URLs and/or we have
   # a "clean" graph from AF
@@ -21,11 +21,24 @@ class GenericAssetForm
     model.content.has_content?
   end
 
+  def template
+    @template ||= NullFormTemplate.new(self.class.terms)
+  end
+
   def template_terms
-    if template
-      template.visible_property_names
-    else
-      self.class.terms
-    end
+    template.visible_property_names
+  end
+end
+
+# Provides a compatible API for using forms that have no template
+class NullFormTemplate
+  pattr_initialize :property_names
+
+  def id
+    nil
+  end
+
+  def visible_property_names
+    property_names
   end
 end
