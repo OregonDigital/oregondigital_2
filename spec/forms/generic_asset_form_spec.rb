@@ -43,19 +43,14 @@ RSpec.describe ImageForm do
     end
 
     context "when there is a template" do
-      let(:template) { FactoryGirl.build(:form_template, :with_title, :with_desc) }
+      let(:template) { instance_double("FormTemplate") }
       before do
-        template.properties << FactoryGirl.build(:form_template_property, :name => "foo")
         generic_form.template = template
+        allow(template).to receive(:visible_property_names).and_return(["foo", "bar"])
       end
 
-      it "should return the template's fields" do
-        expect(generic_form.template_terms).to eq(["title", "description", "foo"])
-      end
-
-      it "shouldn't return hidden fields" do
-        template.properties.last.visible = false
-        expect(generic_form.template_terms).to eq(["title", "description"])
+      it "should return template.visible_property_names" do
+        expect(generic_form.template_terms).to eq(["foo", "bar"])
       end
     end
   end
