@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   include RecordsControllerBehavior
 
   def ingest_options
-    @templates = [["Raw (no template)", nil]] + template_class.all.collect {|t| [t.title, t.id]}
+    @templates = [["Raw (no template)", nil]] + template_select_options
   end
 
   protected
@@ -11,6 +11,10 @@ class RecordsController < ApplicationController
     super.tap do |f|
       f.template = template_class.find_by_id(params[:template_id])
     end
+  end
+
+  def template_select_options
+    template_class.pluck(:title, :id)
   end
 
   def template_class

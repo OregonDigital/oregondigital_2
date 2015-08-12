@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RecordsController do
   let(:form) { instance_double(ImageForm) }
-  let(:template1) { FactoryGirl.build(:form_template, :with_title, :with_desc) }
-  let(:template2) { FactoryGirl.build(:form_template, :with_title) }
-  let(:templates) { [template1, template2] }
+  let(:template) { FactoryGirl.build(:form_template, :with_title, :with_desc) }
   let(:template_class) { class_double(FormTemplate) }
 
   before do
@@ -13,13 +11,14 @@ RSpec.describe RecordsController do
   end
 
   describe "#ingest_options" do
+    let(:options) { [["title", 1], ["title 2", 2]] }
     before do
-      allow(template_class).to receive(:all).and_return(templates)
+      expect(controller).to receive(:template_select_options).and_return(options)
     end
 
     it "should offer all templates' names and ids" do
       get :ingest_options
-      expect(assigns[:templates]).to include([template1.title, template1.id], [template2.title, template2.id])
+      expect(assigns[:templates]).to include(options.first)
     end
 
     it "should include a 'raw' option for the template list" do
@@ -52,12 +51,13 @@ RSpec.describe RecordsController do
     end
 
     context "with a template id" do
+      let(:template) { instance_double(FormTemplate) }
       before do
-        allow(template_class).to receive(:find_by_id).with("1").and_return(template1)
+        allow(template_class).to receive(:find_by_id).with("1").and_return(template)
       end
 
       it "should attach template 1 to the form" do
-        expect(form).to receive(:template=).with(template1)
+        expect(form).to receive(:template=).with(template)
         get :new, :type => "Image", :template_id => 1
       end
     end
@@ -89,12 +89,13 @@ RSpec.describe RecordsController do
     end
 
     context "with a template id" do
+      let(:template) { instance_double(FormTemplate) }
       before do
-        allow(template_class).to receive(:find_by_id).with("1").and_return(template1)
+        allow(template_class).to receive(:find_by_id).with("1").and_return(template)
       end
 
       it "should attach template 1 to the form" do
-        expect(form).to receive(:template=).with(template1)
+        expect(form).to receive(:template=).with(template)
         get :edit, :template_id => 1, :id => 1
       end
     end
