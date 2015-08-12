@@ -11,7 +11,7 @@ class BlacklightConfig
     private
 
     def fields
-      [all_field] | normal_fields
+      [full_text] | [all_field] | normal_fields
     end
 
     def normal_fields
@@ -29,5 +29,10 @@ class BlacklightConfig
     def all_field
       SearchField.new("all_fields", :qf => "all_text_timv")
     end
+
+    def full_text
+      SearchField.new("full_text", :qf => "full_text_tsimv")
+    end
+ 
   end
 end
