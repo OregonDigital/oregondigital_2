@@ -20,9 +20,9 @@ class RecordsController < ApplicationController
     DecoratorList.new(
       AssetWithDerivativesFactory,
       HasContent,
-      EnrichesSolr
+      EnrichesSolr,
+      Reviewable
     )
   end
-
 
 end

@@ -12,6 +12,7 @@
         </p>
       <% end %>
       <%= render :partial => "records/edit_fields/default", :collection => f.object.terms, :as => :key, :locals => {:f => f} %>
+      <%= f.input :reviewed, :as => :boolean %>
     </div> <!-- /well -->
   </div>
   <%= hidden_field_tag :type, params[:type] %>
