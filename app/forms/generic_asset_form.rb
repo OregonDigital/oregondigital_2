@@ -1,6 +1,6 @@
 class GenericAssetForm
   include HydraEditor::Form
-  delegate :validators, :to => :model
+  delegate :validators,:reviewed, :to => :model
 
   attr_writer :template
 
