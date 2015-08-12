@@ -1,4 +1,5 @@
 <%= simple_form_for form, url: record_form_action_url(form), html: { class: 'editor' } do |f| %>
+  <%= f.error_notification %>
   <div id="descriptions_display">
 	<%= render 'records/form_header' %>
     <div class="well">
@@ -11,10 +12,15 @@
           derivatives based on that file.
         </p>
       <% end %>
-      <%= render :partial => "records/edit_fields/default", :collection => f.object.terms, :as => :key, :locals => {:f => f} %>
+      <%= render :partial => "records/edit_fields/default",
+                 :collection => f.object.template_terms,
+                 :as => :key,
+                 :locals => {:f => f}
+      %>
     </div> <!-- /well -->
   </div>
   <%= hidden_field_tag :type, params[:type] %>
+  <%= hidden_field_tag :template_id, f.object.template.id %>
 
   <div class="form-actions">
     <div class="primary-actions">

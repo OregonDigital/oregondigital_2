@@ -4,6 +4,31 @@ RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
   let(:admin) {FactoryGirl.create(:user, :admin)}
   let(:file) { Rails.root.join("spec", "fixtures", "fixture_image.jpg") }
 
+  context "When using a template" do
+    let(:template) { FactoryGirl.create(:form_template, :with_title, :with_desc) }
+    before do
+      as_user admin
+      template
+      navigate_to_admin_ingest_path
+      select("Image", :from => "type")
+      select(template.title, :from => "template_id")
+      find(:css, "input.btn-primary").click
+    end
+
+    it "should only show template fields" do
+      attrs = template.properties.collect {|t| t.name}
+      attrs.each {|attr| expect(page).to have_css("input#image_#{attr}") }
+      hidden_attrs = GenericAssetForm.terms.collect {|t| t.to_s} - attrs
+      hidden_attrs.each {|attr| expect(page).not_to have_css("input#image_#{attr}") }
+    end
+
+    it "should ingest properly" do
+      fill_in "image_title", :with => "John and Jane Doe, a portrait"
+      find(:css, "input.btn-primary").click
+      expect(page).to have_content("successfully created")
+    end
+  end
+
   it "should save an image" do
     as_user(admin) do
       navigate_to_new_image_path
@@ -108,14 +133,21 @@ RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
     end
   end
 
+  def navigate_to_admin_ingest_path
+    visit root_path
+    click_link "Admin Panel"
+    click_link "Ingest a New Record"
+  end
+
   def navigate_to_new_image_path
-    visit "/records/new"
-    page.select("Image", :from => "type")
+    navigate_to_admin_ingest_path
+    select("Image", :from => "type")
     find(:css, "input.btn-primary").click
   end
+
   def navigate_to_new_external_resource_path
-    visit "/records/new"
-    page.select("External Asset", :from => "type")
+    navigate_to_admin_ingest_path
+    select("External Asset", :from => "type")
     find(:css, "input.btn-primary").click
   end
 end
