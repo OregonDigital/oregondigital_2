@@ -9,16 +9,6 @@ RSpec.describe "records/_form" do
     Reviewable.new(ValidatedAssetRepository.new(Image).new)
   end
 
-  let(:saved_resource) do
-    resource.tap do |r|
-      r.save
-    end
-  end
-
-  let(:saved_resource_form) do
-    ImageForm.new(saved_resource)
-  end
- 
   let(:params) do
     {
       :type => "Image"
@@ -55,14 +45,20 @@ RSpec.describe "records/_form" do
   end
 
   context "When a new record is present" do
+    before do
+      allow(resource).to receive(:new_record?).and_return(false)
+    end
     it "should not display the check box" do
       render :partial => "form", :locals => {:form => form} 
       expect(rendered).to_not have_content("Mark this as needing review.")
     end
   end
   context "When an already saved record is present" do
+    before do
+      allow(resource).to receive(:new_record?).and_return(false)
+    end
     it "should display the check box" do
-      render :partial => "form", :locals => {:form => saved_resource_form} 
+      render :partial => "form", :locals => {:form => form} 
       expect(rendered).to have_content("Mark this as needing review.")
     end
   end 

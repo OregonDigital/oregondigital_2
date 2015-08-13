@@ -31,6 +31,6 @@ class Reviewable < SimpleDelegator
   end
 
   def needs_reviewed
-    reviewed?
+    !reviewed?
   end
 end
