@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Updating a record", :slow => true do
+RSpec.describe "Updating a record" do
   let(:asset) { Image.new(id) }
   let(:reviewable_asset) { Reviewable.new(asset) }
   let(:id) { "1" }

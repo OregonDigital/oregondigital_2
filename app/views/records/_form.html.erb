@@ -18,7 +18,7 @@
                  :locals => {:f => f}
       %>
     <% unless f.object.new_record? %>
-      <%= f.input :needs_reviewed, :as => :boolean, :label => "Mark this as needing review." %>
+      <%= f.input :needs_reviewed, :as => :boolean, :label => "Needs review." %>
     <% end %>
     </div> <!-- /well -->
   </div>
