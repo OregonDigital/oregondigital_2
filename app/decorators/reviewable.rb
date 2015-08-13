@@ -6,12 +6,12 @@ class Reviewable < SimpleDelegator
   end
 
   def attributes=(attributes)
-    if attributes["needs_review"] == "1"
+    if attributes["needs_reviewed"] == "1"
       self.reviewed = false
-    elsif attributes["needs_review"] == "0"
+    elsif attributes["needs_reviewed"] == "0"
       self.reviewed = true
     end
-    super(attributes.except("reviewed"))
+    super(attributes.except("needs_reviewed"))
   end
 
   def public?
@@ -30,7 +30,7 @@ class Reviewable < SimpleDelegator
     !!workflow_metadata.reviewed
   end
 
-  def needs_review
+  def needs_reviewed
     reviewed?
   end
 end

@@ -18,7 +18,7 @@ RSpec.describe "Updating a record", :slow => true do
     end
     context "and wanting it to be re-reviewed" do
       before do
-        check("Reviewed")
+        check("image[needs_reviewed]")
         click_button "Save"
       end
 
@@ -28,7 +28,7 @@ RSpec.describe "Updating a record", :slow => true do
     end
     context "and not wanting it to be re-reviewed" do
       before do
-        uncheck("Reviewed")
+        uncheck("image[needs_reviewed]")
         click_button "Save"
       end
 
@@ -46,7 +46,7 @@ RSpec.describe "Updating a record", :slow => true do
     end
     context "and wanting it to be re-reviewed" do
       before do
-        check("Reviewed")
+        check("image[needs_reviewed]")
         click_button "Save"
       end
 
