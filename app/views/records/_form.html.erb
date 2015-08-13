@@ -17,7 +17,9 @@
                  :as => :key,
                  :locals => {:f => f}
       %>
-      <%= f.input :reviewed, :as => :boolean %>
+    <% unless f.object.new_record? %>
+      <%= f.input :needs_review, :as => :boolean, :label => "Mark this as needing review." %>
+    <% end %>
     </div> <!-- /well -->
   </div>
   <% unless f.object.hidden_terms.empty? %>

@@ -8,6 +8,17 @@ RSpec.describe "records/_form" do
   let(:resource) do
     Reviewable.new(ValidatedAssetRepository.new(Image).new)
   end
+
+  let(:saved_resource) do
+    resource.tap do |r|
+      r.save
+    end
+  end
+
+  let(:saved_resource_form) do
+    ImageForm.new(saved_resource)
+  end
+ 
   let(:params) do
     {
       :type => "Image"
@@ -42,6 +53,19 @@ RSpec.describe "records/_form" do
       expect(rendered).to have_content("already has a file")
     end
   end
+
+  context "When a new record is present" do
+    it "should not display the check box" do
+      render :partial => "form", :locals => {:form => form} 
+      expect(rendered).to_not have_content("Mark this as needing review.")
+    end
+  end
+  context "When an already saved record is present" do
+    it "should display the check box" do
+      render :partial => "form", :locals => {:form => saved_resource_form} 
+      expect(rendered).to have_content("Mark this as needing review.")
+    end
+  end 
 
   context "when there are hidden terms" do
     it "should put them under a hidden field" do
