@@ -7,7 +7,7 @@ class Admin::FormTemplatesController < ApplicationController
 
   def new
     @template = template_class.new
-    terms.each {|term| @template.properties.build(:name => term)}
+    @template.property_names = terms
   end
 
   def create
@@ -23,6 +23,7 @@ class Admin::FormTemplatesController < ApplicationController
 
   def edit
     @template = find_template
+    @template.property_names = terms
   end
 
   def update
