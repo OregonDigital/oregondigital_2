@@ -3,3 +3,4 @@ jQuery ->
     e.preventDefault()
     field = $(this).attr("data-toggle-field")
     $("##{field}").toggleClass("hidden")
+    $(this).toggleClass("active")
