@@ -28,6 +28,10 @@ class GenericAssetForm
   def template_terms
     template.visible_property_names
   end
+
+  def hidden_terms
+    self.class.terms - template_terms.map(&:to_sym)
+  end
 end
 
 # Provides a compatible API for using forms that have no template
