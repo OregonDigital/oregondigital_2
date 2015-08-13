@@ -19,14 +19,16 @@
       %>
     </div> <!-- /well -->
   </div>
-  <button class="btn-default btn" data-toggle-field="hidden-fields">Show Hidden Fields</button>
-  <div id="hidden-fields" class="well hidden">
-      <%= render :partial => "records/edit_fields/default",
-                 :collection => f.object.hidden_terms,
-                 :as => :key,
-                 :locals => {:f => f}
-      %>
-  </div>
+  <% unless f.object.hidden_terms.empty? %>
+    <button class="btn-default btn" data-toggle-field="hidden-fields">Show Hidden Fields</button>
+    <div id="hidden-fields" class="well hidden">
+        <%= render :partial => "records/edit_fields/default",
+                   :collection => f.object.hidden_terms,
+                   :as => :key,
+                   :locals => {:f => f}
+        %>
+    </div>
+  <% end %>
   <%= hidden_field_tag :type, params[:type] %>
   <%= hidden_field_tag :template_id, f.object.template.id %>
 
