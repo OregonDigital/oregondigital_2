@@ -3,8 +3,17 @@
   <%= f.input :title %>
 
   <%= f.simple_fields_for :properties do |p| %>
-    <%= p.input :visible, :label => "Show #{p.object.name}" %>
-    <%= p.input :name, :as => :hidden %>
+    <div id="<%= p.object.name %>" class="panel panel-default template-property">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <%= p.object.name %>
+        </div>
+      </div>
+      <div class="panel-body">
+        <%= p.input :visible, :label => "Show", :wrapper => :inline %>
+        <%= p.input :name, :as => :hidden %>
+      </div>
+    </div>
   <% end %>
 
   <%= f.submit "Save Template" %>

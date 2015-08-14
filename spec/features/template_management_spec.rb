@@ -29,7 +29,7 @@ RSpec.describe "Template Management", :slow => true do
 
       before do
         fill_in "form_template_title", :with => template_name
-        check_fields.each {|field| check "Show %s" % field}
+        check_fields.each {|field| show_field field}
         click_button "Save Template"
       end
 
@@ -59,8 +59,8 @@ RSpec.describe "Template Management", :slow => true do
           let(:updated_template_name) { "Updated test template %d" % Random.rand(99999) }
           before do
             fill_in "form_template_title", :with => updated_template_name
-            check "Show creator"
-            uncheck "Show title"
+            show_field "creator"
+            hide_field "title"
             click_button "Save Template"
           end
 
@@ -101,9 +101,22 @@ end
 
 def checkbox_states
   checkboxes = HashWithIndifferentAccess.new
-  all('.form_template_properties_visible').each do |el|
-    checkboxes[el.find("label").text.sub("Show ", "")] = el.find("input[type=checkbox]")
+  all('.template-property').each do |el|
+    checkboxes[el.find(".panel-title").text] = el.find("input[type=checkbox]")
   end
 
   checkboxes
 end
+
+def show_field(field)
+  within "##{field}" do
+    check "Show"
+  end
+end
+
+def hide_field(field)
+  within "##{field}" do
+    uncheck "Show"
+  end
+end
+
