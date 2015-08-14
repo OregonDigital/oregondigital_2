@@ -24,6 +24,13 @@ RSpec.describe FormTemplate, :type => :model do
     end
   end
 
+  describe "#required_property_names" do
+    it "should return names of properties which are required" do
+      template = FactoryGirl.build(:form_template, :with_required_title, :with_desc)
+      expect(template.required_property_names).to contain_exactly("title")
+    end
+  end
+
   describe "#property_names=" do
     it "should build hidden properties" do
       template.property_names = ["foo", "bar"]

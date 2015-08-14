@@ -60,7 +60,7 @@ class Admin::FormTemplatesController < ApplicationController
   end
 
   def form_template_params
-    params.require(:form_template).permit(:title, {:properties_attributes => [:id, :name, :visible]})
+    params.require(:form_template).permit(:title, {:properties_attributes => [:id, :name, :visible, :required]})
   end
 
   def template_class

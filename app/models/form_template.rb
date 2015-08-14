@@ -21,6 +21,10 @@ class FormTemplate < ActiveRecord::Base
     properties.select {|property| property.visible?}.collect(&:name)
   end
 
+  def required_property_names
+    properties.select {|property| property.required?}.collect(&:name)
+  end
+
   def property_map
     @property_map || rebuild_property_map
   end
