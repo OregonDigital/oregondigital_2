@@ -70,7 +70,7 @@ RSpec.describe ImageForm do
       end
 
       it "should return template.visible_property_names" do
-        expect(generic_form.template_terms).to eq(["foo", "bar"])
+        expect(generic_form.template_terms).to eq([:foo, :bar])
       end
     end
   end
