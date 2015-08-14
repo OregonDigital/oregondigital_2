@@ -1,0 +1,5 @@
+#viewerContainer{
+	
+  height:800px; /*when this was set to 635, the pdf stopped loading mid process, did not finish until scollbar tweaked*/
+  overflow-y: auto;
+}

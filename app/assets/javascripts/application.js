@@ -21,4 +21,10 @@
 //= require blacklight/blacklight
 //= require hydra-editor/hydra-editor
 //= require best_in_place
+//= require pdf.combined.js
+//= require compatibility.js
+//= require pdf_viewer.js
+//= require pdf_find_controller.js
+//= require pdf_find_bar.js
+//= viewer.js
 //= require_tree .
