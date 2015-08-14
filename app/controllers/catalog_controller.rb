@@ -2,6 +2,7 @@
 require 'blacklight/catalog'
 
 class CatalogController < ApplicationController
+  before_filter :redirect301, :only => :show
 
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
@@ -26,4 +27,12 @@ class CatalogController < ApplicationController
       raise Hydra::AccessDenied.new("You do not have sufficient access privileges to read this document, which has been marked private.", :read, params[:id])
     end
   end
+
+  def redirect301
+    id = RecordID.new(params[:id])
+    if id.old?
+      redirect_to catalog_path(:id => id.value), :status => 301
+    end
+  end
+
 end
