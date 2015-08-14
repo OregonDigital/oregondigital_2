@@ -106,7 +106,7 @@ end
 def checkbox_states
   checkboxes = HashWithIndifferentAccess.new
   all('.template-property').each do |el|
-    checkboxes[el.find(".panel-title").text] = el.find(".form_template_properties_visible input[type=checkbox]")
+    checkboxes[el.find("legend").text] = el.find(".form_template_properties_visible input[type=checkbox]")
   end
 
   checkboxes

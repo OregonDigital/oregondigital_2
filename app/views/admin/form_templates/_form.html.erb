@@ -3,18 +3,12 @@
   <%= f.input :title %>
 
   <%= f.simple_fields_for :properties do |p| %>
-    <div id="<%= p.object.name %>" class="panel panel-default template-property">
-      <div class="panel-heading">
-        <div class="panel-title">
-          <%= p.object.name %>
-        </div>
-      </div>
-      <div class="panel-body">
-        <%= p.input :visible, :label => "Show" %>
-        <%= p.input :required %>
-        <%= p.input :name, :as => :hidden %>
-      </div>
-    </div>
+    <fieldset id="<%= p.object.name.underscore %>" class="template-property">
+      <legend><%= p.object.name %></legend>
+      <%= p.input :visible, :label => "Show" %>
+      <%= p.input :required %>
+      <%= p.input :name, :as => :hidden %>
+    </fieldset>
   <% end %>
 
   <%= f.submit "Save Template" %>
