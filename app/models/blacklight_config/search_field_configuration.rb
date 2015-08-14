@@ -11,7 +11,7 @@ class BlacklightConfig
     private
 
     def fields
-      [full_text] | [all_field] | normal_fields
+      [full_text, all_field] | normal_fields
     end
 
     def normal_fields
