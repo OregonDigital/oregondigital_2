@@ -41,9 +41,9 @@ RSpec.describe BlacklightConfig do
     describe "#search_fields" do
       it "should have all the search fields" do
         expect(subject.search_fields.keys).to eq [
-          "full_text",
           "all_fields",
-          "title",
+          "full_text", 
+          "title", 
           "description",
           "creator",
           "lcsubject",
