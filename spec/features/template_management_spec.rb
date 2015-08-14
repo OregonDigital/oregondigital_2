@@ -30,6 +30,7 @@ RSpec.describe "Template Management", :slow => true do
       before do
         fill_in "form_template_title", :with => template_name
         check_fields.each {|field| show_field field}
+        require_field :title
         click_button "Save Template"
       end
 
@@ -52,6 +53,9 @@ RSpec.describe "Template Management", :slow => true do
           check_fields.each {|field| expect(checkboxes[field]).to be_checked}
           (GenericAssetForm.terms - check_fields).each do |t|
             expect(checkboxes[t]).not_to be_checked
+          end
+          within "#title .form_template_properties_required" do
+            expect(find("input[type=checkbox]")).to be_checked
           end
         end
 
@@ -102,7 +106,7 @@ end
 def checkbox_states
   checkboxes = HashWithIndifferentAccess.new
   all('.template-property').each do |el|
-    checkboxes[el.find(".panel-title").text] = el.find("input[type=checkbox]")
+    checkboxes[el.find(".panel-title").text] = el.find(".form_template_properties_visible input[type=checkbox]")
   end
 
   checkboxes
@@ -117,6 +121,12 @@ end
 def hide_field(field)
   within "##{field}" do
     uncheck "Show"
+  end
+end
+
+def require_field(field)
+  within "##{field}" do
+    check "Required"
   end
 end
 

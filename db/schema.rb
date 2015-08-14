@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803175310) do
+ActiveRecord::Schema.define(version: 20150814174059) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id",       null: false
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150803175310) do
     t.integer "form_template_id"
     t.string  "name",                             null: false
     t.boolean "visible",          default: false
+    t.boolean "required"
   end
 
   create_table "form_templates", force: :cascade do |t|
