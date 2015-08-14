@@ -4,7 +4,6 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
-require 'capybara/rails' 
 require Rails.root.join("spec/support/webmock.rb")
 
 # Add additional requires below this line. Rails is not loaded until this point!

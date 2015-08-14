@@ -60,7 +60,7 @@ end
 def review_asset
   g = reviewable_asset
   g.reviewed = true
-  g.read_groups = ["public"]
+  g.public = true
   g.save
   g
 end
