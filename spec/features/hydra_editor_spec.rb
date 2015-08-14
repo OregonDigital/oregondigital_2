@@ -19,7 +19,12 @@ RSpec.describe "Hydra Editor", :slow => true, :perform_enqueued => true do
       attrs = template.properties.collect {|t| t.name}
       attrs.each {|attr| expect(page).to have_css("input#image_#{attr}") }
       hidden_attrs = GenericAssetForm.terms.collect {|t| t.to_s} - attrs
-      hidden_attrs.each {|attr| expect(page).not_to have_css("input#image_#{attr}") }
+      within "#displayed-fields" do
+        hidden_attrs.each {|attr| expect(page).not_to have_css("input#image_#{attr}") }
+      end
+      within "#hidden-fields" do
+        hidden_attrs.each {|attr| expect(page).to have_css("input#image_#{attr}") }
+      end
     end
 
     it "should ingest properly" do

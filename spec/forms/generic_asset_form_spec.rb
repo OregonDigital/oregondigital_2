@@ -35,6 +35,26 @@ RSpec.describe ImageForm do
     end
   end
 
+  describe "#hidden_terms" do
+    context "when there is no template" do
+      it "should be empty" do
+        expect(generic_form.hidden_terms).to be_empty
+      end
+    end
+    context "when there is a template" do
+      let(:template) { instance_double("FormTemplate") }
+      before do
+        generic_form.template = template
+        allow(described_class).to receive(:terms).and_return([:foo, :banana])
+        allow(template).to receive(:visible_property_names).and_return(["foo", "bar"])
+      end
+
+      it "should return the difference" do
+        expect(generic_form.hidden_terms).to eq([:banana])
+      end
+    end
+  end
+
   describe "#template_terms" do
     context "when there is no template" do
       it "should fall back to class-level terms" do

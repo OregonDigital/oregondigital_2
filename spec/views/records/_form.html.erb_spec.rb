@@ -42,4 +42,22 @@ RSpec.describe "records/_form" do
       expect(rendered).to have_content("already has a file")
     end
   end
+
+  context "when there are hidden terms" do
+    it "should put them under a hidden field" do
+      allow(form).to receive(:hidden_terms).and_return([:title])
+
+      render :partial => "form", :locals => {:form => form}
+
+      expect(rendered).to have_selector "#hidden-fields input[name='image[title][]']" 
+    end
+  end
+  context "when there are no hidden terms" do
+    it "should not display the hidden button" do
+      render :partial => "form", :locals => {:form => form}
+
+      expect(rendered).not_to have_selector "*[data-toggle-field=hidden-fields]"
+      expect(rendered).not_to have_content "Show Hidden Fields"
+    end
+  end
 end
