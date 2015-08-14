@@ -1,6 +1,6 @@
 class GenericAssetForm
   include HydraEditor::Form
-  delegate :validators, :to => :model
+  delegate :validators,:needs_reviewed, :new_record?, :to => :model
 
   attr_writer :template
 
@@ -10,7 +10,7 @@ class GenericAssetForm
   self.terms = ODDataModel.simple_properties.keys - skip_terms
 
   def self.permitted_params
-    super << :content
+    super + [:content, :needs_reviewed]
   end
 
   def property_hint(property)
@@ -59,4 +59,5 @@ class NullFormTemplate
   def required_property_names
     []
   end
+
 end

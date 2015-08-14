@@ -5,6 +5,15 @@ class Reviewable < SimpleDelegator
     __getobj__.class
   end
 
+  def attributes=(attributes)
+    if attributes["needs_reviewed"] == "1"
+      self.reviewed = false
+    elsif attributes["needs_reviewed"] == "0"
+      self.reviewed = true
+    end
+    super(attributes.except("needs_reviewed"))
+  end
+
   def public?
     read_groups.include?('public')
   end
@@ -21,4 +30,7 @@ class Reviewable < SimpleDelegator
     !!workflow_metadata.reviewed
   end
 
+  def needs_reviewed
+    !reviewed?
+  end
 end
