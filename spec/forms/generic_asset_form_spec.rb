@@ -42,7 +42,7 @@ RSpec.describe ImageForm do
       end
     end
     context "when there is a template" do
-      let(:template) { instance_double("FormTemplate") }
+      let(:template) { instance_double(FormTemplate) }
       before do
         generic_form.template = template
         allow(described_class).to receive(:terms).and_return([:foo, :banana])
@@ -63,7 +63,7 @@ RSpec.describe ImageForm do
     end
 
     context "when there is a template" do
-      let(:template) { instance_double("FormTemplate") }
+      let(:template) { instance_double(FormTemplate) }
       before do
         generic_form.template = template
         allow(template).to receive(:visible_property_names).and_return(["foo", "bar"])
@@ -71,6 +71,29 @@ RSpec.describe ImageForm do
 
       it "should return template.visible_property_names" do
         expect(generic_form.template_terms).to eq(["foo", "bar"])
+      end
+    end
+  end
+  
+  describe "#required_fields" do
+    context "when there is no template" do
+      it "should fall back to class-level required fields" do
+        expect(generic_form.required_fields).to eq GenericAssetForm.required_fields
+      end
+    end
+    context "when there is a template" do
+      let(:template) { instance_double(FormTemplate) }
+      before do
+        generic_form.template = template
+        allow(template).to receive(:required_property_names).and_return(["foo"])
+      end
+      it "should return the template's required properties" do
+        expect(generic_form.required_fields).to eq [:foo]
+        expect(generic_form.required?(:foo)).to eq true
+      end
+      it "should not lose the class' required fields" do
+        allow(generic_form.class).to receive(:required_fields).and_return([:bar])
+        expect(generic_form.required_fields).to eq [:bar, :foo]
       end
     end
   end

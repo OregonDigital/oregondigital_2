@@ -26,11 +26,21 @@ class GenericAssetForm
   end
 
   def template_terms
-    template.visible_property_names
+    template.visible_property_names.map(&:to_sym)
   end
 
   def hidden_terms
     self.class.terms - template_terms.map(&:to_sym)
+  end
+
+  def required_fields
+    self.class.required_fields | template_required_property_names
+  end
+
+  private
+
+  def template_required_property_names
+    template.required_property_names.map(&:to_sym)
   end
 end
 
@@ -44,5 +54,9 @@ class NullFormTemplate
 
   def visible_property_names
     property_names
+  end
+
+  def required_property_names
+    []
   end
 end
