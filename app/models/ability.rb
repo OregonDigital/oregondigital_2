@@ -7,4 +7,12 @@ class Ability
       can :manage, :all
     end
   end
+
+  def user_groups
+    super + ip_groups
+  end
+
+  def ip_groups
+    @ip_groups ||= IpBasedGroup.for_ip(current_user.current_sign_in_ip)
+  end
 end
