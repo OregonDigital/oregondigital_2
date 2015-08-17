@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :facets
     resources :form_templates
+    resources :ip_based_groups
   end
   resources :resource, :only => :show
   resources :downloads
