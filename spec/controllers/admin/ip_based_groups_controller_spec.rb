@@ -174,4 +174,30 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
       end
     end
   end
+
+  describe "#destroy" do
+    before do
+      expect(saved_group).to receive(:destroy).and_return(success)
+    end
+
+    context "when destroy succeeds" do
+      let(:success) { true }
+
+      it "should redirect with success notification" do
+        delete :destroy, :id => 1
+        expect(response).to be_redirect
+        expect(flash["success"]).not_to be_empty
+      end
+    end
+
+    context "when destroy fails" do
+      let(:success) { false }
+
+      it "should redirect with an error notification" do
+        delete :destroy, :id => 1
+        expect(response).to be_redirect
+        expect(flash["alert"]).not_to be_empty
+      end
+    end
+  end
 end

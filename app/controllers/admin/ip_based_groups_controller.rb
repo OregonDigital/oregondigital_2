@@ -39,6 +39,16 @@ class Admin::IpBasedGroupsController < ApplicationController
     end
   end
 
+  def destroy
+    if find_group.destroy
+      flash[:success] = t('admin.ip_based_groups.destroy.success')
+    else
+      flash[:alert] = t('admin.ip_based_groups.destroy.fail')
+    end
+
+    redirect_to admin_ip_based_groups_path
+  end
+
   private
 
   def all_roles

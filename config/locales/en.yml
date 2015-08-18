@@ -48,6 +48,9 @@ en:
       update:
         success: IP Group updated
         fail: Failed to update the IP Group
+      destroy:
+        success: IP Group deleted
+        fail: Failed to delete the IP Group
   hydra_editor:
     form:
       model_label:
