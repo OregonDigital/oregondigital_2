@@ -27,10 +27,10 @@ RSpec.describe Ability do
   end
 
   context "#user_groups" do
-    let(:user) { FactoryGirl.create(:user, :admin) }
+    subject { Ability.new(user, ip) }
+    let(:user) { FactoryGirl.build(:user, :admin) }
     let(:ip) { "192.168.0.100" }
     before do
-      allow(user).to receive(:current_sign_in_ip).and_return(ip)
       allow(IpBasedGroup).to receive(:for_ip).with(ip).and_return(["foo", "bar"])
     end
 

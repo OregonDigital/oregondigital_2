@@ -1,9 +1,16 @@
 class Ability
   include Hydra::Ability
+
+  attr_accessor :remote_ip
+
+  def initialize(user, remote_ip = nil)
+    @remote_ip = remote_ip
+    super(user)
+  end
   
   # Define any customized permissions here.
   def custom_permissions
-    if current_user.admin?
+    if user_groups.include?("admin")
       can :manage, :all
     end
   end
@@ -13,6 +20,6 @@ class Ability
   end
 
   def ip_groups
-    @ip_groups ||= IpBasedGroup.for_ip(current_user.current_sign_in_ip)
+    @ip_groups ||= IpBasedGroup.for_ip(remote_ip)
   end
 end
