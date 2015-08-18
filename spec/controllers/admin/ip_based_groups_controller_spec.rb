@@ -6,10 +6,21 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
   let(:groups) { [group, saved_group] }
   let(:roles) { [instance_double(Role)] }
   before do
+    sign_in FactoryGirl.create(:user, :admin)
     allow(IpBasedGroup).to receive(:all).and_return(groups)
     allow(IpBasedGroup).to receive(:new).and_return(group)
     allow(IpBasedGroup).to receive(:find).and_return(saved_group)
-    allow(Role).to receive(:all).and_return(roles)
+    allow(controller).to receive(:all_roles).and_return(roles)
+  end
+
+  context "when not an admin" do
+    it "should not be allowed" do
+      sign_in FactoryGirl.create(:user)
+      get :index
+
+      expect(response).to be_redirect
+      expect(flash["error"]).to eq "You do not have sufficient permissions to view this page"
+    end
   end
 
   describe "#index" do
