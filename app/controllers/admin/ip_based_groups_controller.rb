@@ -2,16 +2,16 @@ class Admin::IpBasedGroupsController < ApplicationController
   before_action :enforce_admin
 
   def index
-    @ip_based_groups = IpBasedGroup.all
+    @ip_based_groups = groups_factory.all
   end
 
   def new
-    @ip_based_group = IpBasedGroup.new
+    @ip_based_group = groups_factory.new
     @roles = all_roles
   end
 
   def create
-    @ip_based_group = IpBasedGroup.new(ip_based_group_params)
+    @ip_based_group = groups_factory.new(ip_based_group_params)
     if @ip_based_group.save
       redirect_to admin_ip_based_groups_path
     else
@@ -41,6 +41,14 @@ class Admin::IpBasedGroupsController < ApplicationController
     Role.all
   end
 
+  def groups_factory
+    IpBasedGroup
+  end
+
+  def groups_param_key
+    groups_factory.model_name.param_key
+  end
+
   def enforce_admin
     unless can?(:manage, IpBasedGroup)
       raise Hydra::AccessDenied.new("You do not have sufficient access privileges to access this.")
@@ -48,10 +56,10 @@ class Admin::IpBasedGroupsController < ApplicationController
   end
 
   def find_group
-    IpBasedGroup.find(params[:id])
+    groups_factory.find(params[:id])
   end
 
   def ip_based_group_params
-    params.require(:ip_based_group).permit(:title, :ip_start, :ip_end, :role_id)
+    params.require(groups_param_key).permit(:title, :ip_start, :ip_end, :role_id)
   end
 end

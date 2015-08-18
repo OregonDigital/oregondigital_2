@@ -5,12 +5,15 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
   let(:saved_group) { instance_double(IpBasedGroup) }
   let(:groups) { [group, saved_group] }
   let(:roles) { [instance_double(Role)] }
+  let(:groups_factory) { class_double(IpBasedGroup) }
   before do
     sign_in FactoryGirl.create(:user, :admin)
-    allow(IpBasedGroup).to receive(:all).and_return(groups)
-    allow(IpBasedGroup).to receive(:new).and_return(group)
-    allow(IpBasedGroup).to receive(:find).and_return(saved_group)
+    allow(controller).to receive(:groups_factory).and_return(groups_factory)
     allow(controller).to receive(:all_roles).and_return(roles)
+    allow(controller).to receive(:groups_param_key).and_return(:ip_based_group)
+    allow(groups_factory).to receive(:all).and_return(groups)
+    allow(groups_factory).to receive(:new).and_return(group)
+    allow(groups_factory).to receive(:find).and_return(saved_group)
   end
 
   context "when not an admin" do
@@ -25,7 +28,7 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
 
   describe "#index" do
     it "should assign groups" do
-      expect(IpBasedGroup).to receive(:all).once.and_return(groups)
+      expect(groups_factory).to receive(:all).once.and_return(groups)
       get :index
       expect(assigns[:ip_based_groups]).to eq(groups)
     end
@@ -38,7 +41,7 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
 
   describe "#new" do
     it "should build a group" do
-      expect(IpBasedGroup).to receive(:new).once
+      expect(groups_factory).to receive(:new).once
       get :new
     end
 
@@ -63,7 +66,7 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
     end
 
     it "should build a group from params" do
-      expect(IpBasedGroup).to receive(:new).with(:title => "foo")
+      expect(groups_factory).to receive(:new).with(:title => "foo")
       post :create, params
     end
 
@@ -96,7 +99,7 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
 
   describe "#edit" do
     it "should find a group" do
-      expect(IpBasedGroup).to receive(:find).once.with("1")
+      expect(groups_factory).to receive(:find).once.with("1")
       get :edit, :id => 1
     end
 
@@ -121,7 +124,7 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
     end
 
     it "should find the group" do
-      expect(IpBasedGroup).to receive(:find).with("1")
+      expect(groups_factory).to receive(:find).with("1")
       patch :update, params
     end
 
