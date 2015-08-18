@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
-  let(:group) { instance_double(IpBasedGroup) }
-  let(:saved_group) { instance_double(IpBasedGroup) }
-  let(:groups) { [group, saved_group] }
   let(:roles) { [instance_double(Role)] }
   let(:groups_factory) { class_double(IpBasedGroup) }
   before do
@@ -11,9 +8,6 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
     allow(controller).to receive(:groups_factory).and_return(groups_factory)
     allow(controller).to receive(:all_roles).and_return(roles)
     allow(controller).to receive(:groups_param_key).and_return(:ip_based_group)
-    allow(groups_factory).to receive(:all).and_return(groups)
-    allow(groups_factory).to receive(:new).and_return(group)
-    allow(groups_factory).to receive(:find).and_return(saved_group)
   end
 
   context "when not an admin" do
@@ -27,10 +21,14 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
   end
 
   describe "#index" do
+    before do
+      allow(groups_factory).to receive(:all)
+    end
+
     it "should assign groups" do
-      expect(groups_factory).to receive(:all).once.and_return(groups)
+      expect(groups_factory).to receive(:all).once.and_return(:groups)
       get :index
-      expect(assigns[:ip_based_groups]).to eq(groups)
+      expect(assigns[:ip_based_groups]).to eq(:groups)
     end
 
     it "should render the index" do
@@ -40,6 +38,11 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
   end
 
   describe "#new" do
+    let(:group) { instance_double(IpBasedGroup) }
+    before do
+      allow(groups_factory).to receive(:new).and_return(group)
+    end
+
     it "should build a group" do
       expect(groups_factory).to receive(:new).once
       get :new
@@ -57,11 +60,13 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
   end
 
   describe "#create" do
+    let(:group) { instance_double(IpBasedGroup) }
     let(:params) do
       { :ip_based_group => {:title => "foo"} }
     end
     let(:success) { true }
     before do
+      allow(groups_factory).to receive(:new).and_return(group)
       allow(group).to receive(:save).and_return(success)
     end
 
@@ -108,6 +113,11 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
   end
 
   describe "#edit" do
+    let(:group) { instance_double(IpBasedGroup) }
+    before do
+      allow(groups_factory).to receive(:find).with("1").and_return(group)
+    end
+
     it "should find a group" do
       expect(groups_factory).to receive(:find).once.with("1")
       get :edit, :id => 1
@@ -115,7 +125,7 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
 
     it "should assign the group" do
       get :edit, :id => 1
-      expect(assigns[:ip_based_group]).to eq(saved_group)
+      expect(assigns[:ip_based_group]).to eq(group)
     end
 
     it "should render the edit form" do
@@ -129,8 +139,10 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
       { :id => 1, :ip_based_group => {:title => "updated foo"} }
     end
     let(:success) { true }
+    let(:group) { instance_double(IpBasedGroup) }
     before do
-      allow(saved_group).to receive(:update_attributes).and_return(success)
+      allow(groups_factory).to receive(:find).and_return(group)
+      allow(group).to receive(:update_attributes).and_return(success)
     end
 
     it "should find the group" do
@@ -139,7 +151,7 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
     end
 
     it "should update the group from params" do
-      expect(saved_group).to receive(:update_attributes).with(:title => "updated foo")
+      expect(group).to receive(:update_attributes).with(:title => "updated foo")
       patch :update, params
     end
 
@@ -176,8 +188,10 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
   end
 
   describe "#destroy" do
+    let(:group) { instance_double(IpBasedGroup) }
     before do
-      expect(saved_group).to receive(:destroy).and_return(success)
+      allow(groups_factory).to receive(:find).with("1").and_return(group)
+      expect(group).to receive(:destroy).and_return(success)
     end
 
     context "when destroy succeeds" do
