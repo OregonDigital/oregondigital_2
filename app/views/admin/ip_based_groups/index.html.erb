@@ -1,3 +1,42 @@
 <h2>Manage IP Roles</h2>
 
 <%= link_to "Create New IP Role", new_admin_ip_based_group_path, :class => "btn btn-default" %>
+
+<% if @ip_based_groups.length > 0 %>
+<table class="table table-striped">
+  <caption class="sr-only">IP Roles</caption>
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">IP Start</th>
+      <th scope="col">IP End</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ip_based_groups.each do |ip_based_group| %>
+      <tr>
+        <td>
+          <a href="<%= edit_admin_ip_based_group_path(ip_based_group.id) %>">
+            <span class="sr-only">Edit</span>
+            <%= ip_based_group.title %>
+          </a>
+        </td>
+
+        <td>
+          <%= ip_based_group.ip_start %>
+        </td>
+
+        <td>
+          <%= ip_based_group.ip_end %>
+        </td>
+
+        <td>
+          <%= ip_based_group.role.name %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

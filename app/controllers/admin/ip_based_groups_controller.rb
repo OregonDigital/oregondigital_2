@@ -18,7 +18,26 @@ class Admin::IpBasedGroupsController < ApplicationController
     end
   end
 
+  def edit
+    @ip_based_group = find_group
+    @roles = Role.all
+  end
+
+  def update
+    @ip_based_group = find_group
+    if @ip_based_group.update_attributes(ip_based_group_params)
+      redirect_to admin_ip_based_groups_path
+    else
+      @roles = Role.all
+      render :edit
+    end
+  end
+
   private
+
+  def find_group
+    IpBasedGroup.find(params[:id])
+  end
 
   def ip_based_group_params
     params.require(:ip_based_group).permit(:title, :ip_start, :ip_end, :role_id)

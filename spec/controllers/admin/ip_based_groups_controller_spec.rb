@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
   let(:group) { instance_double(IpBasedGroup) }
-  let(:group2) { instance_double(IpBasedGroup) }
-  let(:groups) { [group, group2] }
+  let(:saved_group) { instance_double(IpBasedGroup) }
+  let(:groups) { [group, saved_group] }
   let(:roles) { [instance_double(Role)] }
   before do
     allow(IpBasedGroup).to receive(:all).and_return(groups)
     allow(IpBasedGroup).to receive(:new).and_return(group)
+    allow(IpBasedGroup).to receive(:find).and_return(saved_group)
     allow(Role).to receive(:all).and_return(roles)
   end
 
@@ -78,6 +79,64 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
       it "should render the new form" do
         post :create, params
         expect(response).to render_template "ip_based_groups/new"
+      end
+    end
+  end
+
+  describe "#edit" do
+    it "should find a group" do
+      expect(IpBasedGroup).to receive(:find).once.with("1")
+      get :edit, :id => 1
+    end
+
+    it "should assign the group" do
+      get :edit, :id => 1
+      expect(assigns[:ip_based_group]).to eq(saved_group)
+    end
+
+    it "should render the edit form" do
+      get :edit, :id => 1
+      expect(response).to render_template "ip_based_groups/edit"
+    end
+  end
+
+  describe "#update" do
+    let(:params) do
+      { :id => 1, :ip_based_group => {:title => "updated foo"} }
+    end
+    let(:success) { true }
+    before do
+      allow(saved_group).to receive(:update_attributes).and_return(success)
+    end
+
+    it "should find the group" do
+      expect(IpBasedGroup).to receive(:find).with("1")
+      patch :update, params
+    end
+
+    it "should update the group from params" do
+      expect(saved_group).to receive(:update_attributes).with(:title => "updated foo")
+      patch :update, params
+    end
+
+    context "when save succeeds" do
+      it "should redirect" do
+        patch :update, params
+        expect(response).to be_redirect
+      end
+    end
+
+    context "when save fails" do
+      let(:success) { false }
+
+      it "should repopulate roles" do
+        patch :update, params
+        expect(assigns[:roles]).to eq(roles)
+      end
+
+      it "should render the edit form" do
+        patch :update, params
+        expect(response).to render_template "ip_based_groups/edit"
       end
     end
   end
