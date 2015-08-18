@@ -41,6 +41,13 @@ en:
       destroy:
         success: Template deleted
         fail: Failed to delete the template
+    ip_based_groups:
+      create:
+        success: Created new IP Group
+        fail: Failed to create the IP Group
+      update:
+        success: IP Group updated
+        fail: Failed to update the IP Group
   hydra_editor:
     form:
       model_label:

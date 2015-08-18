@@ -13,8 +13,10 @@ class Admin::IpBasedGroupsController < ApplicationController
   def create
     @ip_based_group = groups_factory.new(ip_based_group_params)
     if @ip_based_group.save
+      flash[:success] = t('admin.ip_based_groups.create.success')
       redirect_to admin_ip_based_groups_path
     else
+      flash[:alert] = t('admin.ip_based_groups.create.fail')
       @roles = all_roles
       render :new
     end
@@ -28,8 +30,10 @@ class Admin::IpBasedGroupsController < ApplicationController
   def update
     @ip_based_group = find_group
     if @ip_based_group.update_attributes(ip_based_group_params)
+      flash[:success] = t('admin.ip_based_groups.update.success')
       redirect_to admin_ip_based_groups_path
     else
+      flash[:alert] = t('admin.ip_based_groups.update.fail')
       @roles = all_roles
       render :edit
     end

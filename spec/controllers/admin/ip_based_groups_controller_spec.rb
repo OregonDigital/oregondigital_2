@@ -80,6 +80,11 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
         post :create, params
         expect(response).to be_redirect
       end
+
+      it "should show a success message" do
+        post :create, params
+        expect(flash[:success]).not_to be_blank
+      end
     end
 
     context "when save fails" do
@@ -93,6 +98,11 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
       it "should render the new form" do
         post :create, params
         expect(response).to render_template "ip_based_groups/new"
+      end
+
+      it "should show an alert" do
+        post :create, params
+        expect(flash[:alert]).not_to be_blank
       end
     end
   end
@@ -138,6 +148,11 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
         patch :update, params
         expect(response).to be_redirect
       end
+
+      it "should show a success message" do
+        patch :update, params
+        expect(flash[:success]).not_to be_blank
+      end
     end
 
     context "when save fails" do
@@ -151,6 +166,11 @@ RSpec.describe Admin::IpBasedGroupsController, :type => :controller do
       it "should render the edit form" do
         patch :update, params
         expect(response).to render_template "ip_based_groups/edit"
+      end
+
+      it "should show an alert" do
+        patch :update, params
+        expect(flash[:alert]).not_to be_blank
       end
     end
   end
