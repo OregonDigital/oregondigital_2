@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 20150814184553) do
   end
 
   create_table "ip_based_groups", force: :cascade do |t|
-    t.string  "title",      null: false
-    t.integer "ip_start_i", null: false
-    t.integer "ip_end_i",   null: false
+    t.string  "title",                null: false
+    t.integer "ip_start_i", limit: 8, null: false
+    t.integer "ip_end_i",   limit: 8, null: false
     t.integer "role_id"
   end
 

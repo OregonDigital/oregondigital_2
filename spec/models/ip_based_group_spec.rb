@@ -91,8 +91,8 @@ RSpec.describe IpBasedGroup, :type => :model do
 
   describe "IP string validations" do
     let(:group) { FactoryGirl.build(:ip_based_group) }
-    let(:ip_start) { "127.0.0.1" }
-    let(:ip_end) { "127.0.0.255" }
+    let(:ip_start) { "223.0.0.1" }
+    let(:ip_end) { "223.0.0.255" }
     before do
       group.ip_start = ip_start
       group.ip_end = ip_end
