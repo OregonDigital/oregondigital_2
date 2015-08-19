@@ -2,6 +2,7 @@ class RecordsController < ApplicationController
   include RecordsControllerBehavior
 
   def ingest_options
+    authorize! :new, GenericAsset
     @templates = [["Raw (no template)", nil]] + template_select_options
   end
 
