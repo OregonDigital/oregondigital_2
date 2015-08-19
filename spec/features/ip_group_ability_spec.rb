@@ -9,6 +9,33 @@ RSpec.describe "IP-based Groups", :slow => true do
     allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return(ip)
   end
 
+  describe "Management" do
+    let(:ip) { "127.0.0.23" }
+    it "should allow an admin to do stuff" do
+      visit root_path
+      click_link admin_panel_link
+      click_link "Manage IP-based Roles"
+      click_link "Create New IP Group"
+      fill_in "Title", :with => "test title"
+      fill_in "Ip start", :with => "192.168.0.0"
+      fill_in "Ip end", :with => "192.168.255.255"
+      select "admin", :from => "Role"
+      click_button "Save IP Group"
+
+      expect(page).to have_content("Created new IP Group")
+      expect(page).to have_content("192.168.0.0")
+      expect(page).to have_content("192.168.255.255")
+      click_link "Edit test title"
+      click_button "Save IP Group"
+      expect(page).to have_content("IP Group updated")
+
+      click_link "Delete test title"
+      expect(page).to have_content("IP Group deleted")
+      expect(page).not_to have_content("192.168.0.0")
+      expect(page).not_to have_content("192.168.255.255")
+    end
+  end
+
   context "when a user's IP address sets admin" do
     let(:ip) { "127.0.0.23" }
     it "should show the admin panel" do
