@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/oregondigital/oregondigital_2.png?label=ready&title=Ready)](https://waffle.io/oregondigital/oregondigital_2)
 OregonDigital\_2
 ===============
 
