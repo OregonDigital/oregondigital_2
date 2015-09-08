@@ -17,8 +17,8 @@ RSpec.describe "IP-based Groups", :slow => true do
       click_link "Manage IP-based Roles"
       click_link "Create New IP Group"
       fill_in "Title", :with => "test title"
-      fill_in "Ip start", :with => "192.168.0.0"
-      fill_in "Ip end", :with => "192.168.255.255"
+      fill_in "IP Start", :with => "192.168.0.0"
+      fill_in "IP End", :with => "192.168.255.255"
       select "admin", :from => "Role"
       click_button "Save IP Group"
 
