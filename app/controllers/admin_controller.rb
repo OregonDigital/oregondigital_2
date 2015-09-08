@@ -7,7 +7,7 @@ class AdminController < ApplicationController
   private
 
   def authenticate
-    unless current_user && current_user.admin?
+    unless can? :manage, :all
       raise CanCan::AccessDenied
     end
   end

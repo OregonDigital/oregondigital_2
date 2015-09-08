@@ -20,6 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    attributes:
+      ip_based_group:
+        ip_start: IP Start
+        ip_end: IP End
+    errors:
+      models:
+        ip_based_group:
+          attributes:
+            ip_start:
+              invalid: "must be a valid IP address"
+            ip_end:
+              invalid: "must be a valid IP address"
+
   hello: "Hello world"
   sets:
     set_not_found: "Invalid set requested."
@@ -41,6 +55,16 @@ en:
       destroy:
         success: Template deleted
         fail: Failed to delete the template
+    ip_based_groups:
+      create:
+        success: Created new IP Group
+        fail: Failed to create the IP Group
+      update:
+        success: IP Group updated
+        fail: Failed to update the IP Group
+      destroy:
+        success: IP Group deleted
+        fail: Failed to delete the IP Group
   hydra_editor:
     form:
       model_label:

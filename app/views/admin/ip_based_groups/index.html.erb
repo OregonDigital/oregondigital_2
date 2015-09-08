@@ -1,0 +1,53 @@
+<h2>Manage IP Groups</h2>
+
+<%= link_to "Create New IP Group", new_admin_ip_based_group_path, :class => "btn btn-default" %>
+
+<% if @ip_based_groups.length > 0 %>
+<table class="table table-striped">
+  <caption class="sr-only">IP Groups</caption>
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">IP Start</th>
+      <th scope="col">IP End</th>
+      <th scope="col">Role</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ip_based_groups.each do |ip_based_group| %>
+      <tr>
+        <td>
+          <a href="<%= edit_admin_ip_based_group_path(ip_based_group.id) %>">
+            <span class="sr-only">Edit</span>
+            <%= ip_based_group.title %>
+          </a>
+        </td>
+
+        <td>
+          <%= ip_based_group.ip_start %>
+        </td>
+
+        <td>
+          <%= ip_based_group.ip_end %>
+        </td>
+
+        <td>
+          <%= ip_based_group.role.name %>
+        </td>
+
+        <td class="button-cell">
+          <a href="<%= admin_ip_based_group_path(ip_based_group.id) %>" data-method="delete"
+             data-confirm="Are you sure you want to remove '<%= ip_based_group.title %>'?">
+            <span class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+              Delete <span class="sr-only"><%= ip_based_group.title %></span>
+            </span>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

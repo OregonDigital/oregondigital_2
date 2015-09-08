@@ -31,6 +31,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'hydra-head', :github => "projecthydra/hydra-head"
 gem 'active-fedora', :github => "projecthydra/active_fedora"
 
+# IP help
+gem 'netaddr', '~> 1.5.0'
+
 # Blacklight
 gem 'blacklight'
 gem 'rsolr'

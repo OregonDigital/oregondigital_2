@@ -1,0 +1,9 @@
+<%= simple_form_for [:admin, @ip_based_group] do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title, :required => true %>
+  <%= f.input :ip_start, :required => true %>
+  <%= f.input :ip_end, :required => true %>
+  <%= f.association :role, :collection => @roles, :required => true %>
+
+  <%= f.submit "Save IP Group" %>
+<% end %>

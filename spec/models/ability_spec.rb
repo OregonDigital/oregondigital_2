@@ -25,4 +25,17 @@ RSpec.describe Ability do
       expect(subject).to be_able_to(:edit, SolrDocument.new)
     end
   end
+
+  context "#user_groups" do
+    subject { Ability.new(user, ip) }
+    let(:user) { FactoryGirl.build(:user, :admin) }
+    let(:ip) { "192.168.0.100" }
+    before do
+      allow(IpBasedGroup).to receive(:for_ip).with(ip).and_return(["foo", "bar"])
+    end
+
+    it "should combine user's roles with ip groups" do
+      expect(subject.user_groups).to include("admin", "foo", "bar")
+    end
+  end
 end
