@@ -1,7 +1,7 @@
 module OregonDigital::Derivatives::Processors
   class Processor
     def temporary_file
-      tempfile = Tempfile.new(["pyramidal_tmp","#{File.extname(file.path)}"])
+      tempfile = Tempfile.new(["derivative","#{File.extname(file.path)}"])
       tempfile.binmode
       begin
         tempfile.write(file.read)
