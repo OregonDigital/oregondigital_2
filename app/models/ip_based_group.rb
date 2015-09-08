@@ -31,11 +31,11 @@ class IpBasedGroup < ActiveRecord::Base
 
   def has_valid_ip_addresses
     if @ip_start && !ip_start_i
-      errors.add(:ip_start, "must be a valid IP address")
+      errors.add(:ip_start, :invalid)
     end
 
     if @ip_end && !ip_end_i
-      errors.add(:ip_end, "must be a valid IP address")
+      errors.add(:ip_end, :invalid)
     end
   end
 end
