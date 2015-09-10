@@ -77,6 +77,32 @@ RSpec.describe OregonDigital::DerivativeInjector do
     end
   end
 
+  describe "#ogg_runner" do
+    let(:ogg_runner) { instance_double(OregonDigital::Derivatives::Runners::OggDerivativeRunner) }
+    before do
+      allow(OregonDigital::Derivatives::Runners::OggDerivativeRunner).to receive(:new).with(resource.ogg_path(id), resource.derivative_callback_factory).and_return(ogg_runner)
+    end
+    context "when given an id" do
+      let(:result) { resource.ogg_runner(id) }
+      it "should create a ogg runner" do
+        expect(result).to eql ogg_runner
+      end
+    end
+  end
+
+  describe "#mp3_runner" do
+    let(:mp3_runner) { instance_double(OregonDigital::Derivatives::Runners::Mp3DerivativeRunner) }
+    before do
+      allow(OregonDigital::Derivatives::Runners::Mp3DerivativeRunner).to receive(:new).with(resource.mp3_path(id), resource.derivative_callback_factory).and_return(mp3_runner)
+    end
+    context "when given an id" do
+      let(:result) { resource.mp3_runner(id) }
+      it "should create a mp3 runner" do
+        expect(result).to eql mp3_runner
+      end
+    end
+  end
+
   describe "#thumbnail_path" do
     context "when given an id" do
       let(:result) { resource.thumbnail_path(id) }

@@ -20,6 +20,14 @@ module OregonDigital
       OregonDigital::Derivatives::Runners::OcrDerivativeRunner.new(ocr_path(id), derivative_callback_factory)
     end
 
+    def mp3_runner(id)
+      OregonDigital::Derivatives::Runners::Mp3DerivativeRunner.new(mp3_path(id), derivative_callback_factory)
+    end
+
+    def ogg_runner(id)
+      OregonDigital::Derivatives::Runners::OggDerivativeRunner.new(ogg_path(id), derivative_callback_factory)
+    end
+
     def ocr_path(id)
       pdf_path(id).join("ocr.html")
     end
@@ -43,6 +51,17 @@ module OregonDigital
       pdf_base = derivative_base.join("documents")
       distributor_path(id, '', pdf_base)
     end
+
+    def mp3_path(id)
+      mp3_base = derivative_base.join("audio/mp3")
+      distributor_path(id, '.mp3', mp3_base)
+    end
+
+    def ogg_path(id)
+      ogg_base = derivative_base.join("audio/ogg")
+      distributor_path(id, '.ogg', ogg_base)
+    end
+ 
 
     def derivative_base
       Rails.root.join("media")
