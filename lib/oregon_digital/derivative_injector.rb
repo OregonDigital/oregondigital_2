@@ -20,6 +20,18 @@ module OregonDigital
       OregonDigital::Derivatives::Runners::OcrDerivativeRunner.new(ocr_path(id), derivative_callback_factory)
     end
 
+    def webm_runner(id)
+      OregonDigital::Derivatives::Runners::WebMDerivativeRunner.new(webm_path(id), derivative_callback_factory)
+    end
+
+    def mp4_runner(id)
+      OregonDigital::Derivatives::Runners::Mp4DerivativeRunner.new(mp4_path(id), derivative_callback_factory)
+    end
+
+    def video_thumbnail_runner(id)
+      OregonDigital::Derivatives::Runners::VideoThumbnailDerivativeRunner.new(thumbnail_path(id), derivative_callback_factory)
+    end
+
     def ocr_path(id)
       pdf_path(id).join("ocr.html")
     end
@@ -42,6 +54,16 @@ module OregonDigital
     def pdf_path(id)
       pdf_base = derivative_base.join("documents")
       distributor_path(id, '', pdf_base)
+    end
+
+    def webm_path(id)
+      webm_base = derivative_base.join("video")
+      distributor_path(id, '.webm', webm_base)
+    end
+
+    def mp4_path(id)
+      mp4_base = derivative_base.join("video")
+      distributor_path(id, '.mp4', mp4_base)
     end
 
     def derivative_base
