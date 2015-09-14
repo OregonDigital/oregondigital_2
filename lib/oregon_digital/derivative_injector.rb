@@ -53,12 +53,12 @@ module OregonDigital
     end
 
     def mp3_path(id)
-      mp3_base = derivative_base.join("audio/mp3")
+      mp3_base = derivative_base.join("mp3")
       distributor_path(id, '.mp3', mp3_base)
     end
 
     def ogg_path(id)
-      ogg_base = derivative_base.join("audio/ogg")
+      ogg_base = derivative_base.join("ogg")
       distributor_path(id, '.ogg', ogg_base)
     end
  
