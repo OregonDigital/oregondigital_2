@@ -26,6 +26,7 @@ class ODDataModel < DataModel
   property :transcriber, :predicate => OregonDigital::Vocabularies::MARCREL.trc
   property :creatorDisplay, :predicate => OregonDigital::Vocabularies::OPAQUENAMESPACE['cco/creatorDisplay']
   property :collector, :predicate => OregonDigital::Vocabularies::MARCREL.col
+  property :uberCreator, :predicate => RDF::DC11.creator
 
   # Descriptions
   property :description, :predicate => RDF::DC.description

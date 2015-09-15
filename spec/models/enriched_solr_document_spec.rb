@@ -2,18 +2,18 @@ require 'rails_helper'
 require 'enriched_solr_document'
 
 RSpec.describe EnrichedSolrDocument do
-  subject { described_class.new(solr_document) }
+  subject { described_class.new(solr_document) }# create new solrdoc
   before do
     OregonDigital.marmotta.delete_all
   end
 
   describe "#to_solr" do
-    let(:document_result) { subject.to_solr }
-    let(:solr_document) { {"id" => "1", "lcsubject_ssim" => [uri.to_s]} }
+    let(:document_result) { subject.to_solr } # put solrdoc in solr
+    let(:solr_document) { {"id" => "1", "lcsubject_ssim" => [uri.to_s]} } #add info to solrdoc
     let(:uri) { "http://localhost:41/1" }
+    
     it "should be a good solr document to atomic update" do
       build_resource(uri: uri, label: "Test")
-
       expect(document_result).to eq (
         {
           "id" => "1",
@@ -92,6 +92,23 @@ RSpec.describe EnrichedSolrDocument do
         expect(document_result).to eq (
           {
             "lcsubject_preferred_label_ssim" => ["Test"]
+          }
+        )
+      end
+    end
+    context "when there are creator type fields" do
+      let(:solr_document) { {"id"=> 1, "creator_ssim"=>[uri1.to_s], "author_ssim"=>[uri2.to_s] } }
+      let(:uri1) { "http://localhost:41/1" }
+      let(:uri2) { "http://localhost:41/2" }
+      it "should populate ubercreator" do
+        build_resource(uri: uri1, label: "mycreator")
+        build_resource(uri: uri2, label: "myauthor")
+        expect(document_result).to eq (
+          {
+            "creator_preferred_label_ssim" => ["mycreator"],
+            "author_preferred_label_ssim" => ["myauthor"],
+            "ubercreator_preferred_label_ssim" => ["mycreator", "myauthor"],
+            "ubercreator_ssim" => ["http://localhost:41/1","http://localhost:41/2"]
           }
         )
       end

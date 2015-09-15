@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: vipsCC
+Description: deprecated C++ API for vips image processing library
+Version: 7.42.3
+Requires: vips = 7.42.3
+Libs: -L${libdir} -lvipsCC
