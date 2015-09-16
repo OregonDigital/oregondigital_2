@@ -73,6 +73,7 @@ RSpec.describe Admin::FacetsController do
       FacetField.create(:key => "hello", :label => "world")
       item = FacetItem.create(:value => "my set")
       patch :remove_item, id: item.id.to_s
+      expect(FacetItem.where(:id => item.id).first.visible).to eq false
       patch :add_item, id: item.id.to_s
       expect(response).to redirect_to admin_facets_path
       expect(flash[:success]).to eq I18n.t("admin.facets.field_item_added")

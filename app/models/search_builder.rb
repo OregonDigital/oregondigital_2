@@ -17,6 +17,13 @@ class SearchBuilder < Hydra::SearchBuilder
     end
   end
 
+  def only_unreviewed(solr_params)
+    solr_params[:fq] ||= []
+    solr_params[:fq] << "reviewed_bsi:false"
+  end
+
+  private
+
   def remove_items
     items ||= []
     FacetItem.all.each do |item|
@@ -27,8 +34,5 @@ class SearchBuilder < Hydra::SearchBuilder
     items
   end
 
-  def only_unreviewed(solr_params)
-    solr_params[:fq] ||= []
-    solr_params[:fq] << "reviewed_bsi:false"
-  end
+
 end

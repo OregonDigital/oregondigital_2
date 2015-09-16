@@ -27,4 +27,30 @@ RSpec.describe SearchBuilder do
     end
   end
 
+  describe "#filter_set_admin" do
+    let(:processor_chain) { [:filter_set_admin] }
+    let(:add_visible_item) { create :facet_item, :value => "banana", :visible => true }
+    let(:remove_first_item) { create :facet_item, :value => "hello", :visible => false }
+    let(:remove_second_item) { create :facet_item, :value => "world", :visible => false }
+
+    context "when there is no set" do
+      it "should not do anything" do
+        expect(subject.processed_parameters[:fq]).to eq []
+      end
+    end
+
+    context "when there is a set with multiple items" do
+      it "should display visible items" do
+        add_visible_item
+        expect(subject.processed_parameters[:fq].first).not_to match(/banana/)
+      end
+      it "should filter out removed items" do
+        add_visible_item
+        remove_first_item
+        remove_second_item
+        expect(subject.processed_parameters[:fq]).to eq ["set_ssim:(-\"hello\"-\"world\")"]
+        expect(subject.processed_parameters[:fq].first).not_to match(/banana/)
+      end
+    end
+  end
 end

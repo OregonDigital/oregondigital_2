@@ -1,6 +1,7 @@
 FactoryGirl.define do
+  sequence(:value) { |n| "MyString#{n}" }
   factory :facet_item do
-    value "MyString"
+    value
     visible true
   end
 
