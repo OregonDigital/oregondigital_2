@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end 
 
   get 'sets/:set_id', :to => "sets#index", :as => :sets_index
+  get '/sets', :to => 'sets#index', :as => :all_sets, :constraints => {:set => /[A-Za-z0-9\-]*/}, :as => :all_sets 
   get 'sets/:set_id/:id', :to => "sets#show", :as => :sets
   get 'sets/:set_id/facet/:id', :to => "sets#facet"
   [:email, :sms, :citation].each do |export_type|

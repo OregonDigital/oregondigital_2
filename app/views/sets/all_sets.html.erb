@@ -1,0 +1,22 @@
+<div id="sidebar" class="col-md-3 col-sm-4">
+</div>
+<div id="content" class="col-md-9 col-sm-8">
+  <h2>
+    Digital Collections
+  </h2>
+  <% if @sets.nil? %>
+    <p>
+      There are currently no collections.
+    </p>
+  <% else %>
+    <ul>
+      <% @sets.each do |set| %>
+        <li>
+          <a href="<%= sets_index_path(set.id) %>"> 
+            <%= set.title.first %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

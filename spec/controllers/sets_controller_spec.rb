@@ -3,12 +3,10 @@ require 'rails_helper'
 RSpec.describe SetsController do
   describe "#index" do
     context "when the set doesn't exist" do
-      it "set flash" do
-        visit_set_index(set: double("set", id: "BadID"))
-        
-        expect(response).not_to be_success
-        expect(flash[:error]).to eq I18n.t("sets.set_not_found")
-        expect(response).to redirect_to root_path
+      it "should render the all sets page" do
+        get :index
+
+        expect(response).to render_template("sets/all_sets.html.erb")
       end
     end
     context "when the set exists" do

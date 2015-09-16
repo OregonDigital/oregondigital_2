@@ -3,8 +3,17 @@ class SetsController < CatalogController
   self.search_params_logic += [:restrict_to_set]
 
   def index
-    @set = find_set(params[:set_id])
+    if params[:set_id]
+      @set = find_set(params[:set_id])
+    else
+      @sets = find_all_sets
+      render "sets/all_sets.html.erb"
+    end
     super
+  end
+
+  def all_sets
+    @sets = find_all_sets
   end
 
   # Overrides search_builder to allow for restricting to given set.
@@ -18,13 +27,21 @@ class SetsController < CatalogController
 
   private
 
+  def find_all_sets
+    GenericSet.all 
+  end
+
   def find_set(set_id)
     GenericSet.load_instance_from_solr(set_id)
   end
 
   def config_builder
-    @set_config ||= super.tap do |t|
-      t.set = find_set(params[:set_id])
+    if params[:set_id]
+      @set_config ||= super.tap do |t|
+        t.set = find_set(params[:set_id])
+      end
+    else
+      @set_config ||= super
     end
   end
 
