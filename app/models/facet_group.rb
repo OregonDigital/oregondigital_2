@@ -8,11 +8,12 @@ class FacetGroup < DataModel
   def simple_properties
   end
 
-  def pref_label(symbol)
+  def self.pref_label(symbol)
     symbol.to_s + "_preferred_label_ssim"
   end
 
-  def ssim(symbol)
+  def self.ssim(symbol)
     symbol.to_s + "_ssim"
   end
+
 end
