@@ -8,6 +8,7 @@ class CatalogController < ApplicationController
   include Hydra::Controller::ControllerBehavior
   # This applies appropriate access controls to all solr queries
   self.search_params_logic += [:add_access_controls_to_solr_params]
+  self.search_params_logic += [:filter_set_admin]
   # Apply access controls to show.
   before_filter :enforce_show_permissions, :only => :show
 

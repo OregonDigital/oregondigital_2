@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   devise_for :users
   mount Hydra::RoleManagement::Engine => '/'
 
-
   get '/admin', :to => 'admin#index', :as => "admin_index"
+  get '/admin/facets/:id/remove_item', :to => 'admin/facets#remove_item', :as => 'remove_item_admin_facet'
+  get '/admin/facets/:id/add_item', :to => 'admin/facets#add_item', :as => 'add_item_admin_facet'
+
   namespace :admin do
     resources :facets
     resources :form_templates
@@ -37,5 +39,4 @@ Rails.application.routes.draw do
     end
   end
 
-  
 end
