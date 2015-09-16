@@ -40,7 +40,7 @@ en:
   admin:
     facets:
       field_created: "Facet field configured"
-      field_item_created: "Facet field item created"
+      field_item_added: "Facet field item added"
       update:
         fail: 'Failed to update facet'
       destroy:

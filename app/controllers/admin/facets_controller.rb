@@ -56,7 +56,7 @@ class Admin::FacetsController < AdminController
       unless facet_item.visible
         facet_item.visible = true
         facet_item.save
-        flash[:success] = t('admin.facets.field_item_created')
+        flash[:success] = t('admin.facets.field_item_added')
       end
     rescue
       flash[:alert] = t('admin.facets.remove_item.fail')

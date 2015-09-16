@@ -11,16 +11,20 @@ class SearchBuilder < Hydra::SearchBuilder
 
   def filter_set_admin(solr_params)
     solr_params[:fq] ||= []
-    remove_items ||= []
-    FacetItem.all.each do |item|
-      unless item.visible?
-        remove_items << item.value
-      end
-    end
     if remove_items.any?
       filter = remove_items.map { |i| "-\"#{i}\"" }.join("")
       solr_params[:fq] << "set_ssim:("+filter+")"
     end
+  end
+
+  def remove_items
+    items ||= []
+    FacetItem.all.each do |item|
+      unless item.visible?
+        items << item.value
+      end
+    end
+    items
   end
 
   def only_unreviewed(solr_params)

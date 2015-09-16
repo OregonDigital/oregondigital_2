@@ -56,4 +56,29 @@ RSpec.describe Admin::FacetsController do
       end
     end
   end
+
+  describe "#remove_item" do
+    it "should remove item" do
+      FacetField.create(:key => "hello", :label => "world")
+      item = FacetItem.create(:value => "my set")
+      patch :remove_item, id: item.id.to_s
+      expect(response).to redirect_to admin_facets_path
+      expect(flash[:success]).to eq I18n.t("admin.facets.remove_item.success")
+      expect(FacetItem.where(:id => item.id).first.visible).to eq false
+    end
+  end
+
+  describe "#add_item" do
+    it "should add item" do
+      FacetField.create(:key => "hello", :label => "world")
+      item = FacetItem.create(:value => "my set")
+      patch :remove_item, id: item.id.to_s
+      patch :add_item, id: item.id.to_s
+      expect(response).to redirect_to admin_facets_path
+      expect(flash[:success]).to eq I18n.t("admin.facets.field_item_added")
+      expect(FacetItem.where(:id => item.id).first.visible).to eq true
+    end
+
+  end
+
 end
