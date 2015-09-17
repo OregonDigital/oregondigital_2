@@ -3,7 +3,7 @@ OregonDigital\_2
 ===============
 
 [![Circle CI](https://circleci.com/gh/OregonDigital/oregondigital_2.svg?style=svg)](https://circleci.com/gh/OregonDigital/oregondigital\_2)
-[![Coverage Status](https://coveralls.io/repos/osulp/oregondigital_2/badge.svg)](https://coveralls.io/r/osulp/oregondigital\_2)
+[![Coverage Status](https://coveralls.io/repos/OregonDigital/oregondigital_2/badge.svg)](https://coveralls.io/r/OregonDigital/oregondigital\_2)
 
 
 Local Development Setup
