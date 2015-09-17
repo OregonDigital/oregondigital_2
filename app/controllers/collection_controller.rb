@@ -1,4 +1,4 @@
-class CollectionController < CatalogController
+class CollectionController < ApplicationController
 
   def index
     @collections = find_all_collections
