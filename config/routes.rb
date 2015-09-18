@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end 
 
+  get 'sets/', :to => 'collection#index', :as => :a_to_z
   get 'sets/:set_id', :to => "sets#index", :as => :sets_index
   get 'sets/:set_id/:id', :to => "sets#show", :as => :sets
   get 'sets/:set_id/facet/:id', :to => "sets#facet"
