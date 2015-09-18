@@ -13,6 +13,7 @@ dependencies:
     - sudo add-apt-repository ppa:libreoffice/ppa -y
     - sudo apt-get update
     - sudo apt-get install poppler-utils poppler-data ghostscript libreoffice
+    - sudo apt-get install ffmpeg
   post:
     - RAILS_ENV=development bundle exec rake jetty:clean
     - bundle exec rake hydra:jetty:config
