@@ -89,5 +89,14 @@ RSpec.configure do |config|
     # test failures related to randomization by passing the same `--seed` value
     # as the one that triggered the failure.
     Kernel.srand config.seed
+    config.after(:suite) do
+      FileUtils.rm_rf(Rails.root.join('tmp', 'bags'))
+      FileUtils.rm_rf(Rails.root.join('tmp', 'upload-cache'))
+
+      # Apparently delete_all instantiates objects or something, so we need to be
+      # sure tests clean up after themselves - a datastream change will
+      # completely break testing otherwise
+      ActiveFedora::Base.delete_all
+    end
   end
 end

@@ -1,0 +1,8 @@
+<audio controls>
+  <% if document.derivative_paths[:ogg].present? %>
+    <source src="<%= document.derivative_paths[:ogg].relative_path %>" type="audio/ogg">
+  <% elsif document.derivative_paths[:mp3].present? %>
+    <source src="<%= document.derivative_paths[:mp3].relative_path %>" type="audio/mp3">
+  <% end %>
+  Audio formats not supported by your browser.
+</audio>

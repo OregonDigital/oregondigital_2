@@ -30,4 +30,10 @@ RSpec.describe ControlledSubject do
       end
     end
   end
+
+  describe "#label" do
+    it "should return Controlled Subject" do
+      expect(subject.label).to eq "Controlled Subject"
+    end
+  end
 end
