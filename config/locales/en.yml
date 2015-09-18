@@ -40,12 +40,14 @@ en:
   admin:
     facets:
       field_created: "Facet field configured"
-      field_item_added: "Facet field item added"
       update:
         fail: 'Failed to update facet'
       destroy:
         fail: "Failed to delete facet"
         success: "Deleted facet"
+      add_item:
+        fail: "Failed to add item"
+        success: "Added facet item"
       remove_item:
         fail: "Failed to delete item"
         success: "Deleted facet item"

@@ -58,28 +58,45 @@ RSpec.describe Admin::FacetsController do
   end
 
   describe "#remove_item" do
-    it "should remove item" do
-      FacetField.create(:key => "hello", :label => "world")
-      item = FacetItem.create(:value => "my set")
-      patch :remove_item, id: item.id.to_s
-      expect(response).to redirect_to admin_facets_path
-      expect(flash[:success]).to eq I18n.t("admin.facets.remove_item.success")
-      expect(FacetItem.where(:id => item.id).first.visible).to eq false
+    context "when the field doedn't exist" do
+      it "should redirect and show a flash" do
+        patch :remove_item, id: "1"
+        expect(response).to redirect_to admin_facets_path
+        expect(flash[:alert]).to eq I18n.t("admin.facets.remove_item.fail")
+      end
+    end
+    context "when the field exists" do
+      it "should remove item" do
+        FacetField.create(:key => "hello", :label => "world")
+        item = FacetItem.create(:value => "my set")
+        patch :remove_item, id: item.id.to_s
+        expect(response).to redirect_to admin_facets_path
+        expect(flash[:success]).to eq I18n.t("admin.facets.remove_item.success")
+        expect(FacetItem.where(:id => item.id).first.visible).to eq false
+      end
     end
   end
 
   describe "#add_item" do
-    it "should add item" do
-      FacetField.create(:key => "hello", :label => "world")
-      item = FacetItem.create(:value => "my set")
-      patch :remove_item, id: item.id.to_s
-      expect(FacetItem.where(:id => item.id).first.visible).to eq false
-      patch :add_item, id: item.id.to_s
-      expect(response).to redirect_to admin_facets_path
-      expect(flash[:success]).to eq I18n.t("admin.facets.field_item_added")
-      expect(FacetItem.where(:id => item.id).first.visible).to eq true
+    context "when the field doedn't exist" do
+      it "should redirect and show a flash" do
+        patch :add_item, id: "1"
+        expect(response).to redirect_to admin_facets_path
+        expect(flash[:alert]).to eq I18n.t("admin.facets.add_item.fail")
+      end
     end
-
+    context "when the field exists" do
+      it "should add item" do
+        FacetField.create(:key => "hello", :label => "world")
+        item = FacetItem.create(:value => "my set")
+        patch :remove_item, id: item.id.to_s
+        expect(FacetItem.where(:id => item.id).first.visible).to eq false
+        patch :add_item, id: item.id.to_s
+        expect(response).to redirect_to admin_facets_path
+        expect(flash[:success]).to eq I18n.t("admin.facets.add_item.success")
+        expect(FacetItem.where(:id => item.id).first.visible).to eq true
+      end
+    end
   end
 
 end

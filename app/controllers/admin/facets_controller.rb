@@ -49,9 +49,9 @@ class Admin::FacetsController < AdminController
   def add_item
     begin
       set_visibility
-      flash[:success] = t('admin.facets.field_item_added')
+      flash[:success] = t('admin.facets.add_item.success')
     rescue
-      flash[:alert] = t('admin.facets.remove_item.fail')
+      flash[:alert] = t('admin.facets.add_item.fail')
     end
     redirect_to admin_facets_path
 
