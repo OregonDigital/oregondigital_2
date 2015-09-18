@@ -84,13 +84,14 @@ RSpec.describe BlacklightConfig do
     it "should have facets for all the facet fields" do
       FacetField.create(:key => "title")
       FacetField.create(:key => "test", :label => "Power Rangers")
-
       keys = subject.facet_fields.values.map(&:key)
       labels = subject.facet_fields.values.map(&:label)
       expect(keys).to include "title_ssim"
       expect(labels).to include "Title"
       expect(keys).to include "test_ssim"
       expect(labels).to include "Power Rangers"
+      expect(keys).to include "ubercreator_ssim"
+      expect(labels).to include "All Creator types"
     end
 
     it "should have a tool config for edit" do

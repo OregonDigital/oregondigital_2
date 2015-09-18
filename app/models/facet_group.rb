@@ -3,8 +3,9 @@ class FacetGroup < DataModel
   property :creator, :uberfield => :ubercreator
   property :contributor, :uberfield => :ubercreator
   property :author, :uberfield => :ubercreator
+  property :spatial, :uberfield => :ubergeographic
 
-  #override?
+ 
   def simple_properties
   end
 
@@ -14,6 +15,15 @@ class FacetGroup < DataModel
 
   def self.ssim(symbol)
     symbol.to_s + "_ssim"
+  end
+
+
+  def self.uber_properties
+    uber_properties ||= []
+    properties.group_by{|property| property.uberfield}.each do |key, val|
+      uber_properties << Hash[key => "All " + key.to_s.gsub('uber',"").capitalize + " types"]
+    end
+    uber_properties
   end
 
 end
