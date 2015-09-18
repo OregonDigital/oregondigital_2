@@ -92,8 +92,6 @@ RSpec.configure do |config|
     config.after(:suite) do
       FileUtils.rm_rf(Rails.root.join('tmp', 'bags'))
       FileUtils.rm_rf(Rails.root.join('tmp', 'upload-cache'))
-      FileUtils.rm_rf(Rails.root.join('media', 'mp3')) 
-      FileUtils.rm_rf(Rails.root.join('media', 'ogg'))
 
       # Apparently delete_all instantiates objects or something, so we need to be
       # sure tests clean up after themselves - a datastream change will
