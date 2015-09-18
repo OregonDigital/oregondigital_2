@@ -77,10 +77,6 @@ class Admin::FacetsController < AdminController
     FacetField.find(id)
   end
 
-  def facet_item_params
-    params.require(:facet_item).permit(:value)
-  end
-
   def facet_field_params
     params.require(:facet_field).permit(:key, :label)
   end
