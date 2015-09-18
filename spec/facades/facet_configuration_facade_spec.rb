@@ -27,7 +27,8 @@ RSpec.describe FacetConfigurationFacade do
       },
       "set_ssim" =>
       {
-        "distinct" => 2
+        "distinct" => 2,
+        "topTerms" => ["collection1", 1, "collection2", 1]
       }
     }
   end
@@ -41,7 +42,6 @@ RSpec.describe FacetConfigurationFacade do
     context "when there are active facets" do
       it "should contain settings for them" do
         facet = FacetField.create(:key => "title")
-
         expect(subject.active.to_h.keys.first).to eq :title
         expect(subject.active.to_h.values.first.distinct).to eq 5
         expect(subject.active.to_h.values.first.facet).to eq facet
