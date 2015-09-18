@@ -37,12 +37,8 @@ class Admin::FacetsController < AdminController
 
   def remove_item
     begin
-      facet_item = find_item(params[:id])
-      if facet_item.visible
-        facet_item.visible = false
-        facet_item.save
-        flash[:success] = t('admin.facets.remove_item.success')
-      end
+      set_visibility
+      flash[:success] = t('admin.facets.remove_item.success')
     rescue
       flash[:alert] = t('admin.facets.remove_item.fail')
     end
@@ -52,12 +48,8 @@ class Admin::FacetsController < AdminController
 
   def add_item
     begin
-      facet_item = find_item(params[:id])
-      unless facet_item.visible
-        facet_item.visible = true
-        facet_item.save
-        flash[:success] = t('admin.facets.field_item_added')
-      end
+      set_visibility
+      flash[:success] = t('admin.facets.field_item_added')
     rescue
       flash[:alert] = t('admin.facets.remove_item.fail')
     end
@@ -66,6 +58,17 @@ class Admin::FacetsController < AdminController
   end
 
   private
+
+  def set_visibility
+    facet_item = find_item(params[:id])
+    if facet_item.visible
+      facet_item.visible = false
+    else
+      facet_item.visible = true
+    end
+    facet_item.save
+  end
+
   def find_item(id)
     FacetItem.find(id)
   end

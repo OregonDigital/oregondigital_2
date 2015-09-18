@@ -9,7 +9,7 @@ class SearchBuilder < Hydra::SearchBuilder
     end
   end
 
-  def filter_set_admin(solr_params)
+  def filter_sets(solr_params)
     solr_params[:fq] ||= []
     if remove_items.any?
       filter = remove_items.map { |i| "-\"#{i}\"" }.join("")
@@ -33,6 +33,5 @@ class SearchBuilder < Hydra::SearchBuilder
     end
     items
   end
-
 
 end

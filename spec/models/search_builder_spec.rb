@@ -27,8 +27,8 @@ RSpec.describe SearchBuilder do
     end
   end
 
-  describe "#filter_set_admin" do
-    let(:processor_chain) { [:filter_set_admin] }
+  describe "#filter_sets" do
+    let(:processor_chain) { [:filter_sets] }
     let(:add_visible_item) { create :facet_item, :value => "banana", :visible => true }
     let(:remove_first_item) { create :facet_item, :value => "hello", :visible => false }
     let(:remove_second_item) { create :facet_item, :value => "world", :visible => false }
