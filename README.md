@@ -5,6 +5,18 @@ OregonDigital\_2
 [![Circle CI](https://circleci.com/gh/OregonDigital/oregondigital_2.svg?style=svg)](https://circleci.com/gh/OregonDigital/oregondigital\_2)
 [![Coverage Status](https://coveralls.io/repos/OregonDigital/oregondigital_2/badge.svg)](https://coveralls.io/r/OregonDigital/oregondigital\_2)
 
+Overview
+-----
+
+Next version of Oregon Digital on Fedora 4 and Hydra 9. 
+Development site: http://od2-dev.library.oregonstate.edu
+
+New Features: 
+  - facets are configurable (on/off, label) (planned separate config for homepage, each Digital Collection)
+  - oEmbed support to use external viewers 
+  - enrichment of linked data, alternative titles fetched and indexed
+
+
 
 Local Development Setup
 -----
