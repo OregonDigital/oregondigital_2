@@ -85,14 +85,10 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 # Setup git profile
 RUN mkdir -p ~/.ssh
 COPY docker-key /root/.ssh/id_rsa
-COPY docker-key.pub /root/.ssh/id_rsa.pub
 RUN chmod 700 ~/.ssh/id_rsa
 RUN touch ~/.ssh/authorized_keys
 RUN chmod 600 ~/.ssh/authorized_keys
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-RUN cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-RUN touch ~/.ssh/known_hosts
-RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 RUN mkdir /oregondigital_2
 
 WORKDIR /oregondigital_2
@@ -101,10 +97,10 @@ COPY Rakefile Rakefile
 COPY Gemfile.lock Gemfile.lock
 COPY . .
 RUN bundle install
-RUN RAILS_ENV=development bundle exec rake db:migrate
-RUN RAILS_ENV=development bundle exec rake jetty:clean
-RUN RAILS_ENV=development bundle exec rake jetty:config
-RUN RAILS_ENV=development bundle exec rake jetty:start
+# RUN RAILS_ENV=development bundle exec rake db:migrate
+# RUN RAILS_ENV=development bundle exec rake jetty:clean
+# RUN RAILS_ENV=development bundle exec rake jetty:config
+# RUN RAILS_ENV=development bundle exec rake jetty:start
 ADD . /oregondigital_2
 WORKDIR /oregondigital_2
 # RUN RAILS_ENV=production bundle exec rake assets:precompile --trace
