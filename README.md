@@ -53,3 +53,16 @@ Set up a dev admin user:
     rake admin_user
 
 Log in to the app as "admin@example.org" with password "admin123".
+
+Development Environment with Docker
+-----
+    git clone git@github.com:OregonDigital/oregondigital_2.git
+	cd oregondigital_2
+	ssh-keygen -q -t rsa -N '' -f docker-key
+	cp ~/.ssh/docker-key .
+	docker-compose build
+	docker-compose up
+
+Run rails console:
+    docker-compose run web rails c
+
