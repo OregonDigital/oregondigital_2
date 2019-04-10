@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/oregondigital/oregondigital_2.png?label=ready&title=Ready)](https://waffle.io/oregondigital/oregondigital_2)
 OregonDigital\_2
 ===============
 
@@ -9,7 +8,6 @@ Overview
 -----
 
 Next version of Oregon Digital on Fedora 4 and Hydra 9. 
-Development site: http://od2-dev.library.oregonstate.edu
 
 New Features: 
   - facets are configurable (on/off, label) (planned separate config for homepage, each Digital Collection)
