@@ -9,8 +9,29 @@ class SearchBuilder < Hydra::SearchBuilder
     end
   end
 
+  def filter_sets(solr_params)
+    solr_params[:fq] ||= []
+    if remove_items.any?
+      filter = remove_items.map { |i| "-\"#{i}\"" }.join("")
+      solr_params[:fq] << "set_ssim:("+filter+")"
+    end
+  end
+
   def only_unreviewed(solr_params)
     solr_params[:fq] ||= []
     solr_params[:fq] << "reviewed_bsi:false"
   end
+
+  private
+
+  def remove_items
+    items ||= []
+    FacetItem.all.each do |item|
+      unless item.visible?
+        items << item.value
+      end
+    end
+    items
+  end
+
 end

@@ -27,8 +27,18 @@ class FacetConfigurationFacade
 
   def solr_field_iterator
     @solr_field_iterator ||= iterator_factory.new(all_solr_fields).map do |k, v|
+      setup_facet_item_set(v) if k == :set
       [k, HasFacetField.new(v, grouped_facets[k].try(:first) || FacetField.new(:key => k))]
     end
+  end
+
+  def setup_facet_item_set(value)
+    top_terms = value.topTerms.each_slice(2).to_a
+    top_terms.each { |item| facet_item item }
+  end
+
+  def facet_item(item)
+    FacetItem.where(:value => item.first).first_or_create
   end
 
   def iterator_factory

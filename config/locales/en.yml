@@ -45,6 +45,12 @@ en:
       destroy:
         fail: "Failed to delete facet"
         success: "Deleted facet"
+      add_item:
+        fail: "Failed to add item"
+        success: "Added facet item"
+      remove_item:
+        fail: "Failed to delete item"
+        success: "Deleted facet item"
     form_templates:
       create:
         success: Created new template

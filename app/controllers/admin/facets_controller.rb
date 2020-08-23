@@ -35,7 +35,43 @@ class Admin::FacetsController < AdminController
     redirect_to admin_facets_path
   end
 
+  def remove_item
+    begin
+      set_visibility
+      flash[:success] = t('admin.facets.remove_item.success')
+    rescue
+      flash[:alert] = t('admin.facets.remove_item.fail')
+    end
+    redirect_to admin_facets_path
+
+  end
+
+  def add_item
+    begin
+      set_visibility
+      flash[:success] = t('admin.facets.add_item.success')
+    rescue
+      flash[:alert] = t('admin.facets.add_item.fail')
+    end
+    redirect_to admin_facets_path
+
+  end
+
   private
+
+  def set_visibility
+    facet_item = find_item(params[:id])
+    if facet_item.visible
+      facet_item.visible = false
+    else
+      facet_item.visible = true
+    end
+    facet_item.save
+  end
+
+  def find_item(id)
+    FacetItem.find(id)
+  end
 
   def find_facet(id)
     FacetField.find(id)

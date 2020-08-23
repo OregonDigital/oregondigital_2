@@ -10,4 +10,11 @@ RSpec.describe "facet admin routing" do
   it "should route delete /admin/facet/1 to facets#destroy" do
     expect(delete '/admin/facets/1').to route_to :controller => "admin/facets", :action => "destroy", :id => "1"
   end
+  it "should route /admin/facets/1/remove_item to admin/facets#remove_item" do
+    expect(get '/admin/facets/1/remove_item').to route_to :controller => "admin/facets", :action  => "remove_item", :id=> "1"
+  end
+  it "should route /admin/facets/1/add_item to admin/facets#add_item" do
+    expect(get '/admin/facets/1/add_item').to route_to :controller => "admin/facets", :action  => "add_item", :id=> "1"
+  end
+
 end

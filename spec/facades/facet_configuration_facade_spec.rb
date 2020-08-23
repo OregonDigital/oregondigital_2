@@ -24,6 +24,11 @@ RSpec.describe FacetConfigurationFacade do
       "bad_key_ssim" =>
       {
         "distinct" => 3
+      },
+      "set_ssim" =>
+      {
+        "distinct" => 2,
+        "topTerms" => ["collection1", 1, "collection2", 1]
       }
     }
   end
@@ -37,7 +42,6 @@ RSpec.describe FacetConfigurationFacade do
     context "when there are active facets" do
       it "should contain settings for them" do
         facet = FacetField.create(:key => "title")
-
         expect(subject.active.to_h.keys.first).to eq :title
         expect(subject.active.to_h.values.first.distinct).to eq 5
         expect(subject.active.to_h.values.first.facet).to eq facet
@@ -48,15 +52,14 @@ RSpec.describe FacetConfigurationFacade do
   describe "#inactive" do
     context "when there are no active facets" do
       it "should have all the fields" do
-        expect(subject.inactive.to_h.keys).to eq [:workType, :alternative, :title]
+        expect(subject.inactive.to_h.keys).to eq [:workType, :alternative, :title, :set]
         expect(subject.inactive.to_h[:workType].facet).not_to be_persisted
       end
     end
     context "when there are active facets" do
       it "should have only the non-active fields" do
         FacetField.create(:key => "title")
-        
-        expect(subject.inactive.to_h.keys).to eq [:workType, :alternative]
+        expect(subject.inactive.to_h.keys).to eq [:workType, :alternative, :set]
       end
     end
   end
