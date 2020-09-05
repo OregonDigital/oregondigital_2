@@ -1,0 +1,33 @@
+version: '2'
+services:
+  redis:
+    image: redis:3.0.5
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/var/lib/redis/data
+  web:
+    build: . # look in the current directory for a Dockerfile
+    restart: always
+    volumes:
+      - .:/oregondigital_2
+    ports:
+      - "3000:3000"
+    command: ./docker-start-app.sh
+    env_file:
+      - .web.env
+    depends_on:
+      - redis
+  sidekiq:
+    build: . # look in the currect directory for a Dockerfile
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
+    depends_on:
+      - redis
+    env_file:
+      - .web.env
+    volumes:
+      - .:/web
+volumes:
+  redis-data:
+    driver: local
